@@ -1,0 +1,4 @@
+src/main/resources/files/web.xml.tpl
+src/main/resources/files/pom.xml.tpl
+src/main/resources/files/RestApplication.java.tpl
+src/main/resources/files/HelloController.java.tpl
