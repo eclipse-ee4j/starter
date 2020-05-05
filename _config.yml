@@ -1,1 +1,8 @@
-theme: jekyll-theme-cayman
+remote_theme: jakartaee/jekyll-theme-jakarta-ee
+
+title: [Starter for Jakarta EE]
+description: [Generate Jakarta EE Maven Project with Examples]
+
+links:
+  license: LICENSE
+  issues_url: site.github.issues_url
