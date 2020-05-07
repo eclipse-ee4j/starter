@@ -84,6 +84,8 @@ public class APIEndpointV1 {
 
         for (Map.Entry<String, String> specification : projectDTO.getSpecifications().entrySet()) {
 
+            boolean hasValidVersion = false;
+
             JakartaSpecOption jakartaSpecOption = JakartaSpecOption.getSpec(specification.getKey());
 
             if (jakartaSpecOption == null) {
@@ -94,17 +96,25 @@ public class APIEndpointV1 {
                 ).build();
             }
 
+            if("latest".equals(specification.getValue())){
+                continue;
+            }
+
             for (String version : jakartaSpecOption.getVersions()) {
                 if (version.equals(specification.getValue())) {
-                    return null;
+                    hasValidVersion = true;
+                    break;
                 }
             }
 
-            return Response.status(
-                    Response.Status.NOT_FOUND
-            ).entity(
-                    "No version found: " + specification.getValue() + " for specification " + specification.getKey()
-            ).build();
+            if(!hasValidVersion){
+                return Response.status(
+                        Response.Status.NOT_FOUND
+                ).entity(
+                        "No version found: " + specification.getValue() + " for specification " + specification.getKey()
+                ).build();
+            }
+
         }
 
         return null;
