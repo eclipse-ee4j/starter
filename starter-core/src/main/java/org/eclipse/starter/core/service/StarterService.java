@@ -121,7 +121,14 @@ public class StarterService {
             jakartaSpecification.setArtifactId(jakartaSpecOption.getArtifactId());
             jakartaSpecification.setGroupId(jakartaSpecOption.getGroupId());
             jakartaSpecification.setName(jakartaSpecOption.getName());
-            jakartaSpecification.setVersion(specification.getValue());
+
+            String version = specification.getValue();
+
+            if("latest".equals(specification.getValue())){
+                version = jakartaSpecOption.getVersions()[jakartaSpecOption.getVersions().length - 1];
+            }
+
+            jakartaSpecification.setVersion(version);
 
             project.addJakartaSpecification(jakartaSpecification);
 
