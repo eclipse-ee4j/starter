@@ -1,7 +1,21 @@
 
-# Starter for Jakarta EE
+# Try it out!
 
-This is the Starter for Jakarta EE.
+Download and unzip [Eclipse GlassFish Web Profile](https://www.eclipse.org/downloads/download.php?file=/glassfish/web-5.1.0.zip)
+
+```
+[glassfish-install-dir]$ ./bin/asadmin start-domain
+```
+
+Download and unzip [simple-hello.zip](samples/simple-hello.zip)
+
+```
+$ cd simple-hello
+$ mvn clean package
+$ cp target/simple-hello.war [glassfish-install-dir]/glassfish/domains/domain1/autodeploy
+```
+
+Then, go to [http://localhost:8080/simple-hello/hello](http://localhost:8080/simple-hello/hello)
 
 # Related Projects
 
