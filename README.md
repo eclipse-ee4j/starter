@@ -17,7 +17,7 @@ $ cp target/simple-hello.war [glassfish-install-dir]/glassfish/domains/domain1/a
 
 Then, go to [http://localhost:8080/simple-hello/hello](http://localhost:8080/simple-hello/hello)
 
-# Related Projects
+# Learn more!
 
 * [Your First Cup: An Introduction to the Jakarta EE Platform](https://eclipse-ee4j.github.io/jakartaee-firstcup/)
 
