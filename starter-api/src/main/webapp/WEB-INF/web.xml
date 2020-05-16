@@ -18,5 +18,5 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <display-name>Eclipse Starter for JakartaEE</display-name>
+    <display-name>Eclipse Starter for JakartaEE API</display-name>
 </web-app>
