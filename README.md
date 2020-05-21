@@ -15,14 +15,16 @@ $ mvn clean package
 $ cp target/simple-hello.war [glassfish-install-dir]/glassfish/domains/domain1/autodeploy
 ```
 
-Then, go to [http://localhost:8080/simple-hello/hello](http://localhost:8080/simple-hello/hello)
+Then, go to 
+
+```
+http://localhost:8080/simple-hello/hello
+```
 
 # Learn more!
 
-* [Your First Cup: An Introduction to the Jakarta EE Platform](https://eclipse-ee4j.github.io/jakartaee-firstcup/)
+Your first stop needs to be [Your First Cup: An Introduction to the Jakarta EE Platform](https://eclipse-ee4j.github.io/jakartaee-firstcup/).
 
-* [The Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial/)
+You can further explore [First Cup Examples](https://github.com/eclipse-ee4j/jakartaee-firstcup-examples).
 
-* [First Cup Examples](https://github.com/eclipse-ee4j/jakartaee-firstcup-examples)
-
-* [Jakarta EE Tutorial Examples](https://github.com/eclipse-ee4j/jakartaee-tutorial-examples)
+And then look into [The Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial/) and [Jakarta EE Tutorial Examples](https://github.com/eclipse-ee4j/jakartaee-tutorial-examples).
