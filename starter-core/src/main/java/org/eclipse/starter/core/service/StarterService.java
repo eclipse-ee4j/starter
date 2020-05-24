@@ -40,7 +40,7 @@ public class StarterService {
 
 
     public byte[] generateArchive(
-            String artifactId, String groupId, String packageName, String projectName, Map<String, String> specifications){
+            String artifactId, String groupId, String packageName, String projectName, String[] specifications){
 
         Project project = populateModel(artifactId, groupId, packageName, projectName, specifications);
 
@@ -84,7 +84,7 @@ public class StarterService {
     }
 
     private Project populateModel(
-            String artifactId, String groupId, String packageName, String projectName, Map<String, String> specifications) {
+            String artifactId, String groupId, String packageName, String projectName, String[] specifications) {
 
         Project project = new Project();
 
@@ -112,29 +112,9 @@ public class StarterService {
 
         project.setPackageName(packageName);
 
-        for(Map.Entry<String, String> specification : specifications.entrySet() ){
-
-            JakartaSpecOption jakartaSpecOption = JakartaSpecOption.getSpec(specification.getKey());
-
-            JakartaSpecification jakartaSpecification  = new JakartaSpecification();
-
-            jakartaSpecification.setArtifactId(jakartaSpecOption.getArtifactId());
-            jakartaSpecification.setGroupId(jakartaSpecOption.getGroupId());
-            jakartaSpecification.setName(jakartaSpecOption.getName());
-
-            String version = specification.getValue();
-
-            if("latest".equals(specification.getValue())){
-                version = jakartaSpecOption.getVersions()[jakartaSpecOption.getVersions().length - 1];
-            }
-
-            jakartaSpecification.setVersion(version);
-
-            project.addJakartaSpecification(jakartaSpecification);
-
+        for(String specification : specifications){
+            project.addJakartaSpecification(specification);
         }
-
-        addMandatoryDependency(project);
 
         return project;
 
@@ -144,32 +124,6 @@ public class StarterService {
         return "/" + packageName.replace(".", "/");
     }
 
-    private void addMandatoryDependency(Project project){
-
-        List<JakartaSpecification> jakartaSpecifications = project.getJakartaSpecifications();
-
-        Optional<JakartaSpecification> jakartaSpecificationOptional =
-            jakartaSpecifications.stream(
-        ).filter(jakartaSpecification -> jakartaSpecification.getName().equals(JakartaSpecOption.JAX_RS.getName())
-        ).findAny();
-
-        if(jakartaSpecificationOptional.isPresent()){
-            return;
-        }
-
-        JakartaSpecOption jakartaSpecOption = JakartaSpecOption.JAX_RS;
-
-        JakartaSpecification jakartaSpecification  = new JakartaSpecification();
-
-        jakartaSpecification.setArtifactId(jakartaSpecOption.getArtifactId());
-        jakartaSpecification.setGroupId(jakartaSpecOption.getGroupId());
-        jakartaSpecification.setName(jakartaSpecOption.getName());
-        jakartaSpecification.setVersion(jakartaSpecOption.getVersions()[0]);
-
-        project.addJakartaSpecification(jakartaSpecification);
-
-
-    }
 
 
 }
