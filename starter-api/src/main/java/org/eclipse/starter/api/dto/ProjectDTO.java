@@ -21,7 +21,7 @@ public class ProjectDTO {
     private String groupId;
     private String packageName;
     private String projectName;
-    private Map<String, String> specifications;
+    private String[] specifications;
 
     public String getArtifactId() {
         return artifactId;
@@ -59,11 +59,11 @@ public class ProjectDTO {
         this.artifactId = artifactId;
     }
 
-    public Map<String, String> getSpecifications() {
+    public String[] getSpecifications() {
         return specifications;
     }
 
-    public void setSpecifications(Map<String, String> specifications) {
+    public void setSpecifications(String[] specifications) {
         this.specifications = specifications;
     }
 }
