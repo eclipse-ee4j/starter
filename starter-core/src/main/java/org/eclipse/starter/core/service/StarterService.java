@@ -13,19 +13,15 @@
 
 package org.eclipse.starter.core.service;
 
-import org.eclipse.starter.core.JakartaSpecOption;
 import org.eclipse.starter.core.ThymeleafEngine;
 import org.eclipse.starter.core.ZipCreator;
-import org.eclipse.starter.core.model.JakartaSpecification;
 import org.eclipse.starter.core.model.Project;
 import org.thymeleaf.util.StringUtils;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @ApplicationScoped
 public class StarterService {

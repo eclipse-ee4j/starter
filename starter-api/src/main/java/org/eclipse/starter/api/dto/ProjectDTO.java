@@ -13,8 +13,6 @@
 
 package org.eclipse.starter.api.dto;
 
-import java.util.Map;
-
 public class ProjectDTO {
 
     private String artifactId;

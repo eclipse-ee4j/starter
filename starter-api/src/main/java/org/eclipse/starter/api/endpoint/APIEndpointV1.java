@@ -15,30 +15,17 @@ package org.eclipse.starter.api.endpoint;
 
 
 import org.eclipse.starter.api.dto.ProjectDTO;
-import org.eclipse.starter.core.*;
 import org.eclipse.starter.core.service.StarterService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.*;
 
 @Path("v1")
 public class APIEndpointV1 {
 
     @Inject
     private StarterService starterService;
-
-
-    @GET
-    @Path("/specifications")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAvailableSpecs() {
-        return Response.ok().entity(JakartaSpecOption.values()).build();
-
-    }
-
 
     @POST
     @Produces("application/zip")
