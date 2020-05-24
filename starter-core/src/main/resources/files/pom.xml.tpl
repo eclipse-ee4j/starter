@@ -8,14 +8,12 @@
    <packaging>war</packaging>
 
    <dependencies>
- [# th:each="dependency : ${dependencies}"]
-     <dependency>
-       <groupId>[# th:utext="${dependency.groupId}"/]</groupId>
-       <artifactId>[# th:utext="${dependency.artifactId}"/]</artifactId>
-       <version>[# th:utext="${dependency.version}"/]</version>
-       <scope>provided</scope>
-     </dependency>
- [/]
-   </dependencies>
+       <dependency>
+         <groupId>jakarta.platform</groupId>
+         <artifactId>jakarta.jakartaee-api</artifactId>
+         <version>8.0.0</version>
+         <scope>provided</scope>
+       </dependency>
+    </dependencies>
 
  </project>
