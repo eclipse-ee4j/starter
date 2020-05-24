@@ -44,12 +44,6 @@ public class APIEndpointV1 {
     @Produces("application/zip")
     public Response createArchive(ProjectDTO projectDTO) {
 
-        Response response = validateProject(projectDTO);
-
-        if (response != null) {
-            return response;
-        }
-
         byte[] archive = starterService.generateArchive(
                 projectDTO.getArtifactId(),
                 projectDTO.getGroupId(),
@@ -69,57 +63,7 @@ public class APIEndpointV1 {
     }
 
 
-    private Response validateProject(ProjectDTO projectDTO) {
 
-        Map<String, String> specifications = projectDTO.getSpecifications();
-
-        if (specifications == null || specifications.isEmpty()) {
-            return Response.status(
-                    Response.Status.BAD_REQUEST
-            ).entity(
-                    "No specifications informed"
-            ).build();
-
-        }
-
-        for (Map.Entry<String, String> specification : projectDTO.getSpecifications().entrySet()) {
-
-            boolean hasValidVersion = false;
-
-            JakartaSpecOption jakartaSpecOption = JakartaSpecOption.getSpec(specification.getKey());
-
-            if (jakartaSpecOption == null) {
-                return Response.status(
-                        Response.Status.NOT_FOUND
-                ).entity(
-                        "No specification found with name: " + specification.getKey()
-                ).build();
-            }
-
-            if("latest".equals(specification.getValue())){
-                continue;
-            }
-
-            for (String version : jakartaSpecOption.getVersions()) {
-                if (version.equals(specification.getValue())) {
-                    hasValidVersion = true;
-                    break;
-                }
-            }
-
-            if(!hasValidVersion){
-                return Response.status(
-                        Response.Status.NOT_FOUND
-                ).entity(
-                        "No version found: " + specification.getValue() + " for specification " + specification.getKey()
-                ).build();
-            }
-
-        }
-
-        return null;
-
-    }
 
 
 }
