@@ -21,16 +21,11 @@ import org.thymeleaf.templateresolver.AbstractConfigurableTemplateResolver;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.io.StringWriter;
 import java.util.Map;
 
 @ApplicationScoped
 public class ThymeleafEngine {
-
-    @Inject
-    private FilesLocator filesLocator;
-
 
     private TemplateEngine engine;
 
@@ -50,13 +45,7 @@ public class ThymeleafEngine {
             context.setVariable(variable.getKey(), variable.getValue());
         }
 
-        String fileIndication = filesLocator.findFile(file);
-
-        if (fileIndication == null) {
-            throw new RuntimeException("File not found");
-        }
-
-        engine.process(fileIndication, context, writer);
+        engine.process(file, context, writer);
 
         return writer.toString();
 

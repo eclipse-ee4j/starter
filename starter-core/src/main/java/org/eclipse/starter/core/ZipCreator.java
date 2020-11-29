@@ -53,10 +53,4 @@ public class ZipCreator implements Serializable {
         return baos.toByteArray();
     }
 
-    public void removeFilesFrom(String directoryPath) {
-        archiveContent.entrySet().removeIf(entry -> entry.getKey().startsWith(directoryPath));
-    }
-
-
-
 }
