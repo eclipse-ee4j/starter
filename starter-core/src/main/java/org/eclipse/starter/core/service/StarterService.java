@@ -13,8 +13,8 @@
 
 package org.eclipse.starter.core.service;
 
-import jakarta.annotation.PostConstruct;
 import org.eclipse.starter.core.specification.handler.JAXRSHandler;
+import org.eclipse.starter.core.specification.handler.JSONPHandler;
 import org.eclipse.starter.core.specification.handler.SpecificationHandler;
 import org.eclipse.starter.core.ThymeleafEngine;
 import org.eclipse.starter.core.ZipCreator;
@@ -32,6 +32,7 @@ public class StarterService {
         specificationHandlers = new HashMap<>();
 
         specificationHandlers.put("jax-rs", new JAXRSHandler());
+        specificationHandlers.put("json-p", new JSONPHandler());
     }
 
     @Inject
