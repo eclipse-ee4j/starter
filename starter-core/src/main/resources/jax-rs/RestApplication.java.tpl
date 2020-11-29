@@ -1,4 +1,4 @@
-package [# th:text="${packageName}"/];
+package [# th:text="${packageName}"/].jaxrs;
 
 
 import javax.ws.rs.ApplicationPath;
