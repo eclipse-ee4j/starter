@@ -13,10 +13,12 @@
 
 package org.eclipse.starter.core.service;
 
+import jakarta.annotation.PostConstruct;
+import org.eclipse.starter.core.specification.handler.JAXRSHandler;
+import org.eclipse.starter.core.specification.handler.SpecificationHandler;
 import org.eclipse.starter.core.ThymeleafEngine;
 import org.eclipse.starter.core.ZipCreator;
 import org.eclipse.starter.core.model.Project;
-import org.thymeleaf.util.StringUtils;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -26,14 +28,18 @@ import java.util.Map;
 @ApplicationScoped
 public class StarterService {
 
+    public StarterService(){
+        specificationHandlers = new HashMap<>();
+
+        specificationHandlers.put("jax-rs", new JAXRSHandler());
+    }
+
     @Inject
     private ThymeleafEngine thymeleafEngine;
     @Inject
     private ZipCreator zipCreator;
 
-    private static String JAVA_PATH = "/src/main/java";
-    private static String WEB_INF_PATH = "/src/main/webapp/WEB-INF";
-
+    private Map<String, SpecificationHandler> specificationHandlers;
 
     public byte[] generateArchive(
             String artifactId, String groupId, String packageName, String projectName, String[] specifications){
@@ -49,30 +55,24 @@ public class StarterService {
     }
 
     private void populateArchive(Project project, Map<String, Object> variables) {
-        zipCreator.writeContents(project.getProjectName(), "pom.xml", thymeleafEngine.processFile("pom.xml", variables) );
+        zipCreator.writeContents(project.getProjectName(), "pom.xml", thymeleafEngine.processFile("pom.xml.tpl", variables) );
 
-        populateMandatoryFiles(project, variables);
+        for(String specification : project.getSpecifications()){
+            SpecificationHandler specificationHandler = specificationHandlers.get(specification);
+
+            if(specificationHandler != null){
+                specificationHandler.handle(project, thymeleafEngine, variables, zipCreator);
+            }
+        }
     }
 
-    private void populateMandatoryFiles(Project project, Map<String, Object> variables) {
-        zipCreator.writeContents(
-                project.getProjectName() + JAVA_PATH + getPackageAsDirectory(project.getPackageName()),
-                StringUtils.capitalize(project.getProjectName()) + "RestApplication.java",
-                thymeleafEngine.processFile("RestApplication.java", variables));
-        zipCreator.writeContents(
-                project.getProjectName() + JAVA_PATH + getPackageAsDirectory(project.getPackageName()),
-                "HelloController.java",
-                thymeleafEngine.processFile("HelloController.java", variables));
-        zipCreator.writeContents(
-                project.getProjectName()  + WEB_INF_PATH  , "web.xml", thymeleafEngine.processFile("web.xml", variables) );
-    }
 
     private Map<String, Object> populateVariables(Project project) {
         Map<String, Object> variables = new HashMap<>();
 
         variables.put("artifactId", project.getArtifactId());
         variables.put("groupId", project.getGroupId());
-        variables.put("dependencies", project.getJakartaSpecifications());
+        variables.put("dependencies", project.getSpecifications());
         variables.put("packageName", project.getPackageName());
         variables.put("projectName", project.getProjectName());
 
@@ -109,17 +109,11 @@ public class StarterService {
         project.setPackageName(packageName);
 
         for(String specification : specifications){
-            project.addJakartaSpecification(specification);
+            project.addSpecification(specification);
         }
 
         return project;
 
     }
-
-    private String getPackageAsDirectory(String packageName){
-        return "/" + packageName.replace(".", "/");
-    }
-
-
 
 }
