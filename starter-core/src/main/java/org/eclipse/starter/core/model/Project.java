@@ -21,7 +21,7 @@ public class Project {
     private String groupId;
     private String packageName;
     private String projectName;
-    private List<String> jakartaSpecifications = new ArrayList<>();
+    private List<String> specifications = new ArrayList<>();
 
     public String getArtifactId() {
         return artifactId;
@@ -55,17 +55,17 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public List<String> getJakartaSpecifications() {
-        return jakartaSpecifications;
+    public List<String> getSpecifications() {
+        return specifications;
     }
 
-    public void setJakartaSpecifications(List<String> jakartaSpecifications) {
-        this.jakartaSpecifications = jakartaSpecifications;
+    public void setSpecifications(List<String> specifications) {
+        this.specifications = specifications;
     }
 
 
 
-    public void addJakartaSpecification(String jakartaSpecification){
-        jakartaSpecifications.add(jakartaSpecification);
+    public void addSpecification(String jakartaSpecification){
+        specifications.add(jakartaSpecification);
     }
 }
