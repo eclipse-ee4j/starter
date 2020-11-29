@@ -54,8 +54,4 @@ public class JAXRSHandler implements SpecificationHandler {
 
     }
 
-    private String getPackageAsDirectory(String packageName){
-        return "/" + packageName.replace(".", "/");
-    }
-
 }
