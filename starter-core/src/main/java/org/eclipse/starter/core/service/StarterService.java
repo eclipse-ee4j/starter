@@ -14,6 +14,7 @@
 package org.eclipse.starter.core.service;
 
 import org.eclipse.starter.core.specification.handler.JAXRSHandler;
+import org.eclipse.starter.core.specification.handler.JSONBHandler;
 import org.eclipse.starter.core.specification.handler.JSONPHandler;
 import org.eclipse.starter.core.specification.handler.SpecificationHandler;
 import org.eclipse.starter.core.ThymeleafEngine;
@@ -32,6 +33,7 @@ public class StarterService {
         specificationHandlers = new HashMap<>();
 
         specificationHandlers.put("jax-rs", new JAXRSHandler());
+        specificationHandlers.put("json-b", new JSONBHandler());
         specificationHandlers.put("json-p", new JSONPHandler());
     }
 
