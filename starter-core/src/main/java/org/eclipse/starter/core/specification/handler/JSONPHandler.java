@@ -13,6 +13,7 @@
 
 package org.eclipse.starter.core.specification.handler;
 
+import org.eclipse.starter.core.StringPool;
 import org.eclipse.starter.core.ThymeleafEngine;
 import org.eclipse.starter.core.ZipCreator;
 import org.eclipse.starter.core.model.Project;
@@ -21,7 +22,6 @@ import java.util.Map;
 
 public class JSONPHandler implements SpecificationHandler {
 
-    private static String JAVA_PATH = "/src/main/java";
     private static String JSONP_PACKAGE = "/jsonp";
 
     @Override
@@ -33,7 +33,7 @@ public class JSONPHandler implements SpecificationHandler {
                 sb.append(
                         project.getProjectName()
                 ).append(
-                        JAVA_PATH
+                        StringPool.JAVA_PATH
                 ).append(
                         getPackageAsDirectory(project.getPackageName())
                 ).append(
