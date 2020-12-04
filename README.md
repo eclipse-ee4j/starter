@@ -8,7 +8,7 @@ See [https://start.jakarta.ee](https://start.jakarta.ee).
 
 To create a specification example you need to do three things:
 
-- Create the templates that will serve as base for the example. We use thymeleaf to process the templates
+- Create the templates that will serve as base for the example. We use thymeleaf to process the templates.
 - Create a specification handler
 - Add the new specification handler to StarterService
 
@@ -20,7 +20,7 @@ To start the project using the tomee plugin, just run:
 
 `mvn install tomee:run`
 
-If you wat to createa new template project you can run:
+If you want to create a new template project you can run:
 
 ```
 curl --location --request POST 'http://localhost:8080/starterapi_war/starter/v1' \
