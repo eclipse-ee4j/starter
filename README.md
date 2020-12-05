@@ -18,7 +18,7 @@ We have a handler for the JSON-P specification. You can check the template file 
 
 To start the project using the tomee plugin, just run:
 
-`mvn install tomee:run`
+`mvn -o install tomee:run`
 
 If you want to create a new template project you can run:
 
