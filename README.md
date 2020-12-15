@@ -1,13 +1,13 @@
 
 # Try it out!
 
-Download and unzip [Eclipse GlassFish Web Profile](https://www.eclipse.org/downloads/download.php?file=/glassfish/web-5.1.0.zip)
+Download and unzip [Eclipse GlassFish](https://glassfish.org/download)
 
 ```
 [glassfish-install-dir]$ ./bin/asadmin start-domain
 ```
 
-Download and unzip [simple-hello.zip](samples/simple-hello.zip)
+Download and unzip [simple-hello.zip](https://github.com/eclipse-ee4j/starter/samples/simple-hello.zip)
 
 ```
 $ cd simple-hello
