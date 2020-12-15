@@ -7,7 +7,7 @@ Download and unzip [Eclipse GlassFish](https://glassfish.org/download)
 [glassfish-install-dir]$ ./bin/asadmin start-domain
 ```
 
-Download and unzip [simple-hello.zip](https://github.com/eclipse-ee4j/starter/samples/simple-hello.zip)
+Download and unzip [simple-hello.zip](https://eclipse-ee4j.github.io/starter/samples/simple-hello.zip)
 
 ```
 $ cd simple-hello
