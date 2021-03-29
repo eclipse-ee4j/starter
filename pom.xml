@@ -18,8 +18,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.eclipse</groupId>
-    <artifactId>starter</artifactId>
+    <groupId>org.eclipse.starter</groupId>
+    <artifactId>starter-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -42,6 +42,7 @@
         <module>starter-api</module>
         <module>starter-frontend</module>
         <module>starter-core</module>
+        <module>maven-archetype-jakartaee9</module>
     </modules>
 
     <build>
