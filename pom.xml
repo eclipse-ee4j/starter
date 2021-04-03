@@ -49,10 +49,11 @@
             <plugin>
                 <groupId>org.apache.tomee.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
-                <version>8.0.1</version>
+                <version>8.0.6</version>
                 <configuration>
-                    <tomeeClassifier>plus</tomeeClassifier>
+                    <tomeeClassifier>plume</tomeeClassifier>
                     <args>-Xmx512m -XX:PermSize=256m</args>
+                    <removeDefaultWebapps>false</removeDefaultWebapps>
                     <webapps>
                         <webapp>org.eclipse:starter-api:1.0-SNAPSHOT</webapp>
                         <webapp>org.eclipse:starter-frontend:1.0-SNAPSHOT</webapp>
@@ -61,7 +62,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>
