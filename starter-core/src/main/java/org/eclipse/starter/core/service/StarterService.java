@@ -29,7 +29,7 @@ import java.util.Map;
 @ApplicationScoped
 public class StarterService {
 
-    public StarterService(){
+    public StarterService() {
         specificationHandlers = new HashMap<>();
 
         specificationHandlers.put("jax-rs", new JAXRSHandler());
@@ -45,9 +45,9 @@ public class StarterService {
     private Map<String, SpecificationHandler> specificationHandlers;
 
     public byte[] generateArchive(
-            String artifactId, String groupId, String packageName, String projectName, String[] specifications){
+            String artifactId, String groupId, String projectName, String jakartaVersion) {
 
-        Project project = populateModel(artifactId, groupId, packageName, projectName, specifications);
+        Project project = populateModel(artifactId, groupId, projectName, jakartaVersion);
 
         Map<String, Object> variables = populateVariables(project);
 
@@ -58,15 +58,11 @@ public class StarterService {
     }
 
     private void populateArchive(Project project, Map<String, Object> variables) {
-        zipCreator.writeContents(project.getProjectName(), "pom.xml", thymeleafEngine.processFile("pom.xml.tpl", variables) );
+        zipCreator.writeContents(project.getProjectName(), "pom.xml", thymeleafEngine.processFile("pom.xml.tpl", variables));
 
-        for(String specification : project.getSpecifications()){
-            SpecificationHandler specificationHandler = specificationHandlers.get(specification);
+        SpecificationHandler specificationHandler = specificationHandlers.get("jax-rs");
 
-            if(specificationHandler != null){
-                specificationHandler.handle(project, thymeleafEngine, variables, zipCreator);
-            }
-        }
+        specificationHandler.handle(project, thymeleafEngine, variables, zipCreator);
     }
 
 
@@ -78,45 +74,39 @@ public class StarterService {
         variables.put("dependencies", project.getSpecifications());
         variables.put("packageName", project.getPackageName());
         variables.put("projectName", project.getProjectName());
+        variables.put("jakartaVersion", project.getJakartaVersion());
 
         return variables;
     }
 
     private Project populateModel(
-            String artifactId, String groupId, String packageName, String projectName, String[] specifications) {
+            String artifactId, String groupId, String projectName, String jakartaVersion) {
 
         Project project = new Project();
 
-        if(artifactId  == null|| artifactId.trim().equals("")){
+        if (artifactId == null || artifactId.trim().equals("")) {
             artifactId = "myproject";
         }
 
         project.setArtifactId(artifactId);
 
-        if(groupId == null || groupId.trim().equals("")){
+        if (groupId == null || groupId.trim().equals("")) {
             groupId = "com.myproject";
         }
 
         project.setGroupId(groupId);
 
-        if(projectName == null || projectName.trim().equals("")){
+        if (projectName == null || projectName.trim().equals("")) {
             projectName = "MyProject";
         }
 
         project.setProjectName(projectName);
 
-        if(packageName == null || packageName.trim().equals("")){
-            packageName = "myproject";
-        }
+        project.setPackageName(groupId + "." + artifactId);
 
-        project.setPackageName(packageName);
-
-        for(String specification : specifications){
-            project.addSpecification(specification);
-        }
+        project.setJakartaVersion(jakartaVersion);
 
         return project;
 
     }
-
 }

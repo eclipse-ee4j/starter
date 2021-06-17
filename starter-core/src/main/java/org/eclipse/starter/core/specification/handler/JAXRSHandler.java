@@ -27,17 +27,17 @@ public class JAXRSHandler implements SpecificationHandler {
     private static String JAXRS_PACKAGE = "/jaxrs";
 
 
-    public void handle(Project project, ThymeleafEngine thymeleafEngine, Map<String, Object> variables, ZipCreator zipCreator){
+    public void handle(Project project, ThymeleafEngine thymeleafEngine, Map<String, Object> variables, ZipCreator zipCreator) {
 
         StringBuilder sb = new StringBuilder(50);
 
         String javaDirectory =
                 sb.append(
-                        project.getProjectName()
+                        project.getArtifactId()
                 ).append(
                         StringPool.JAVA_PATH
                 ).append(
-                        getPackageAsDirectory(project.getPackageName())
+                        getCoordinateAsDirectory(project.getPackageName())
                 ).append(
                         JAXRS_PACKAGE
                 ).toString();
@@ -50,7 +50,7 @@ public class JAXRSHandler implements SpecificationHandler {
                 javaDirectory, StringUtils.capitalize(project.getProjectName()) + "RestApplication.java",
                 thymeleafEngine.processFile("jax-rs/RestApplication.java.tpl", variables));
         zipCreator.writeContents(
-                project.getProjectName()  + WEB_INF_PATH  , "web.xml", thymeleafEngine.processFile("jax-rs/web.xml.tpl", variables) );
+                project.getProjectName() + WEB_INF_PATH, "web.xml", thymeleafEngine.processFile("jax-rs/web.xml.tpl", variables));
 
     }
 

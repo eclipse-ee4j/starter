@@ -35,7 +35,7 @@ public class JSONBHandler implements SpecificationHandler {
                 ).append(
                         StringPool.JAVA_PATH
                 ).append(
-                        getPackageAsDirectory(project.getPackageName())
+                        getCoordinateAsDirectory(project.getPackageName())
                 ).append(
                         JSONB_PACKAGE
                 ).toString();

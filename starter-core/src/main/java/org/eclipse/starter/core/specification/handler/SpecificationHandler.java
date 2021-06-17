@@ -23,7 +23,7 @@ public interface SpecificationHandler {
 
     public void handle(Project project, ThymeleafEngine thymeleafEngine, Map<String, Object> variables, ZipCreator zipCreator);
 
-    public default String getPackageAsDirectory(String packageName){
-        return "/" + packageName.replace(".", "/");
+    public default String getCoordinateAsDirectory(String packageName) {
+        return packageName.replace(".", "/");
     }
 }
