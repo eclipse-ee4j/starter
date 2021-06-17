@@ -17,9 +17,9 @@ public class ProjectDTO {
 
     private String artifactId;
     private String groupId;
-    private String packageName;
     private String projectName;
     private String[] specifications;
+    private String jakartaVersion;
 
     public String getArtifactId() {
         return artifactId;
@@ -35,14 +35,6 @@ public class ProjectDTO {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
     }
 
     public String getProjectName() {
@@ -63,5 +55,13 @@ public class ProjectDTO {
 
     public void setSpecifications(String[] specifications) {
         this.specifications = specifications;
+    }
+
+    public String getJakartaVersion() {
+        return jakartaVersion;
+    }
+
+    public void setJakartaVersion(String jakartaVersion) {
+        this.jakartaVersion = jakartaVersion;
     }
 }

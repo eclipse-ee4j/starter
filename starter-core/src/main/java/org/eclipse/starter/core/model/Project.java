@@ -22,6 +22,7 @@ public class Project {
     private String packageName;
     private String projectName;
     private List<String> specifications = new ArrayList<>();
+    private String jakartaVersion;
 
     public String getArtifactId() {
         return artifactId;
@@ -59,13 +60,11 @@ public class Project {
         return specifications;
     }
 
-    public void setSpecifications(List<String> specifications) {
-        this.specifications = specifications;
+    public String getJakartaVersion() {
+        return jakartaVersion;
     }
 
-
-
-    public void addSpecification(String jakartaSpecification){
-        specifications.add(jakartaSpecification);
+    public void setJakartaVersion(String jakartaVersion) {
+        this.jakartaVersion = jakartaVersion;
     }
 }

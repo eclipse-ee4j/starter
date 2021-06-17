@@ -15,5 +15,5 @@ package org.eclipse.starter.core;
 
 public class StringPool {
 
-    public static String JAVA_PATH = "/src/main/java";
+    public static String JAVA_PATH = "/src/main/java/";
 }

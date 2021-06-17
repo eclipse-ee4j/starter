@@ -11,7 +11,7 @@
        <dependency>
          <groupId>jakarta.platform</groupId>
          <artifactId>jakarta.jakartaee-api</artifactId>
-         <version>8.0.0</version>
+         <version>[# th:utext="${jakartaVersion}"/]</version>
          <scope>provided</scope>
        </dependency>
     </dependencies>

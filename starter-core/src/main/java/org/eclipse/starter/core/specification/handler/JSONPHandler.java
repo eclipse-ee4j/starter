@@ -35,7 +35,7 @@ public class JSONPHandler implements SpecificationHandler {
                 ).append(
                         StringPool.JAVA_PATH
                 ).append(
-                        getPackageAsDirectory(project.getPackageName())
+                        getCoordinateAsDirectory(project.getPackageName())
                 ).append(
                         JSONP_PACKAGE
                 ).toString();

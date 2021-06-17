@@ -16,10 +16,12 @@ package org.eclipse.starter.api.endpoint;
 
 import org.eclipse.starter.api.dto.ProjectDTO;
 import org.eclipse.starter.core.service.StarterService;
+import org.thymeleaf.util.StringUtils;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.Objects;
 
 @Path("v1")
 public class APIEndpointV1 {
@@ -31,26 +33,28 @@ public class APIEndpointV1 {
     @Produces("application/zip")
     public Response createArchive(ProjectDTO projectDTO) {
 
+        if (!StringUtils.contains(projectDTO.getJakartaVersion(), "8.0.0") &&
+                !StringUtils.contains(projectDTO.getJakartaVersion(), "9.1.0")) {
+
+            return Response.status(400, "jakarta version must be 8.0.0 or 9.1.0").build();
+        }
+
         byte[] archive = starterService.generateArchive(
                 projectDTO.getArtifactId(),
                 projectDTO.getGroupId(),
-                projectDTO.getPackageName(),
                 projectDTO.getProjectName(),
-                projectDTO.getSpecifications()
+                projectDTO.getJakartaVersion()
         );
 
         return Response
                 .ok()
                 .header("Content-Length", archive.length)
-                .header("Content-Disposition", "attachment; filename=\"" + "test" + "\"")
+                .header("Content-Disposition", "attachment; filename=\"" + "project" + "\"")
                 .type("application/zip")
                 .entity(archive)
                 .build();
 
     }
-
-
-
 
 
 }
