@@ -33,10 +33,11 @@ public class APIEndpointV1 {
     @Produces("application/zip")
     public Response createArchive(ProjectDTO projectDTO) {
 
-        if (!StringUtils.contains(projectDTO.getJakartaVersion(), "8.0.0") &&
-                !StringUtils.contains(projectDTO.getJakartaVersion(), "9.1.0")) {
+        if (projectDTO.getJakartaVersion() ==  null ||
+                (!StringUtils.contains(projectDTO.getJakartaVersion(), "8.0.0") &&
+                !StringUtils.contains(projectDTO.getJakartaVersion(), "9.1.0"))) {
 
-            return Response.status(400, "jakarta version must be 8.0.0 or 9.1.0").build();
+            return Response.status(400).entity("jakarta version must be 8.0.0 or 9.1.0").build();
         }
 
         byte[] archive = starterService.generateArchive(
