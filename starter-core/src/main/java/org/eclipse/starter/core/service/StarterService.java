@@ -42,12 +42,12 @@ public class StarterService {
     @Inject
     private ZipCreator zipCreator;
 
-    private Map<String, SpecificationHandler> specificationHandlers;
+    private final Map<String, SpecificationHandler> specificationHandlers;
 
     public byte[] generateArchive(
             String artifactId, String groupId, String projectName, String jakartaVersion) {
 
-        Project project = populateModel(artifactId, groupId, projectName, jakartaVersion);
+        Project project = populateModel(artifactId, groupId, jakartaVersion);
 
         Map<String, Object> variables = populateVariables(project);
 
@@ -75,12 +75,13 @@ public class StarterService {
         variables.put("packageName", project.getPackageName());
         variables.put("projectName", project.getProjectName());
         variables.put("jakartaVersion", project.getJakartaVersion());
+        variables.put("jakartaPackage", project.getJakartaVersion().startsWith("9") ? "jakarta" : "javax");
 
         return variables;
     }
 
     private Project populateModel(
-            String artifactId, String groupId, String projectName, String jakartaVersion) {
+            String artifactId, String groupId, String jakartaVersion) {
 
         Project project = new Project();
 
@@ -96,11 +97,7 @@ public class StarterService {
 
         project.setGroupId(groupId);
 
-        if (projectName == null || projectName.trim().equals("")) {
-            projectName = "MyProject";
-        }
-
-        project.setProjectName(projectName);
+        project.setProjectName(artifactId);
 
         project.setPackageName(groupId + "." + artifactId);
 
