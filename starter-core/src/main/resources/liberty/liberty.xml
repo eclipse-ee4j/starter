@@ -1,0 +1,28 @@
+<plugin>
+    <groupId>io.openliberty.tools</groupId>
+    <artifactId>liberty-maven-plugin</artifactId>
+    <version>3.3.4</version>
+    <executions>
+        <execution>
+            <id>package-server</id>
+            <phase>package</phase>
+            <goals>
+                <goal>create</goal>
+                <goal>install-feature</goal>
+                <goal>deploy</goal>
+                <goal>package</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>target/wlp-package</outputDirectory>
+            </configuration>
+        </execution>
+    </executions>
+    <configuration>
+        <include>runnable</include>
+        <serverName>${final.name}</serverName>
+        <bootstrapProperties>
+            <project.name>${final.name}</project.name>
+            <jwt.issuer>https://server.example.com</jwt.issuer>
+        </bootstrapProperties>
+    </configuration>
+</plugin>

@@ -13,10 +13,15 @@
 
 package org.eclipse.starter.core.service;
 
-import org.eclipse.starter.core.specification.handler.JAXRSHandler;
-import org.eclipse.starter.core.specification.handler.JSONBHandler;
-import org.eclipse.starter.core.specification.handler.JSONPHandler;
-import org.eclipse.starter.core.specification.handler.SpecificationHandler;
+import org.eclipse.starter.core.dependency.JakartaEE8Dependency;
+import org.eclipse.starter.core.dependency.JakartaEE9Dependency;
+import org.eclipse.starter.core.plugin.JavaVersionPlugin;
+import org.eclipse.starter.core.plugin.LibertyPlugin;
+import org.eclipse.starter.core.plugin.PayaraPlugin;
+import org.eclipse.starter.core.template.generator.JAXRSTemplateGenerator;
+import org.eclipse.starter.core.template.generator.JSONBTemplateGenerator;
+import org.eclipse.starter.core.template.generator.JSONPTemplateGenerator;
+import org.eclipse.starter.core.template.generator.TemplateGenerator;
 import org.eclipse.starter.core.ThymeleafEngine;
 import org.eclipse.starter.core.ZipCreator;
 import org.eclipse.starter.core.model.Project;
@@ -24,6 +29,7 @@ import org.eclipse.starter.core.model.Project;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ApplicationScoped
@@ -32,9 +38,9 @@ public class StarterService {
     public StarterService() {
         specificationHandlers = new HashMap<>();
 
-        specificationHandlers.put("jax-rs", new JAXRSHandler());
-        specificationHandlers.put("json-b", new JSONBHandler());
-        specificationHandlers.put("json-p", new JSONPHandler());
+        specificationHandlers.put("jax-rs", new JAXRSTemplateGenerator());
+        specificationHandlers.put("json-b", new JSONBTemplateGenerator());
+        specificationHandlers.put("json-p", new JSONPTemplateGenerator());
     }
 
     @Inject
@@ -42,12 +48,12 @@ public class StarterService {
     @Inject
     private ZipCreator zipCreator;
 
-    private final Map<String, SpecificationHandler> specificationHandlers;
+    private final Map<String, TemplateGenerator> specificationHandlers;
 
     public byte[] generateArchive(
-            String artifactId, String groupId, String projectName, String jakartaVersion) {
+            String artifactId, String groupId, String jakartaVersion, String container) {
 
-        Project project = populateModel(artifactId, groupId, jakartaVersion);
+        Project project = populateModel(artifactId, groupId, jakartaVersion, container);
 
         Map<String, Object> variables = populateVariables(project);
 
@@ -58,11 +64,12 @@ public class StarterService {
     }
 
     private void populateArchive(Project project, Map<String, Object> variables) {
+
+        TemplateGenerator templateGenerator = specificationHandlers.get("jax-rs");
+
+        templateGenerator.generate(project, thymeleafEngine, variables, zipCreator);
+
         zipCreator.writeContents(project.getProjectName(), "pom.xml", thymeleafEngine.processFile("pom.xml.tpl", variables));
-
-        SpecificationHandler specificationHandler = specificationHandlers.get("jax-rs");
-
-        specificationHandler.handle(project, thymeleafEngine, variables, zipCreator);
     }
 
 
@@ -71,17 +78,18 @@ public class StarterService {
 
         variables.put("artifactId", project.getArtifactId());
         variables.put("groupId", project.getGroupId());
-        variables.put("dependencies", project.getSpecifications());
+        variables.put("dependencies",project.getDependencies());
         variables.put("packageName", project.getPackageName());
         variables.put("projectName", project.getProjectName());
         variables.put("jakartaVersion", project.getJakartaVersion());
         variables.put("jakartaPackage", project.getJakartaVersion().startsWith("9") ? "jakarta" : "javax");
+        variables.put("plugins", List.of(new JavaVersionPlugin(), new PayaraPlugin()));
 
         return variables;
     }
 
     private Project populateModel(
-            String artifactId, String groupId, String jakartaVersion) {
+            String artifactId, String groupId, String jakartaVersion, String container) {
 
         Project project = new Project();
 
@@ -94,6 +102,17 @@ public class StarterService {
         if (groupId == null || groupId.trim().equals("")) {
             groupId = "com.myproject";
         }
+
+        if(jakartaVersion.startsWith("8")){
+            project.addDependency(new JakartaEE8Dependency());
+        }else{
+            project.addDependency(new JakartaEE9Dependency());
+        }
+
+//        if ("payara".equals(container)) {
+//            project.addDependency(new PayaraContainerDependency());
+//            project.addAdditionalTemplateGenerator(new PayaraTemplateGenerator());
+//        }
 
         project.setGroupId(groupId);
 

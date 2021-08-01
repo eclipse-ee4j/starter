@@ -43,8 +43,8 @@ public class APIEndpointV1 {
         byte[] archive = starterService.generateArchive(
                 projectDTO.getArtifactId(),
                 projectDTO.getGroupId(),
-                projectDTO.getProjectName(),
-                projectDTO.getJakartaVersion()
+                projectDTO.getJakartaVersion(),
+                projectDTO.getContainer()
         );
 
         return Response

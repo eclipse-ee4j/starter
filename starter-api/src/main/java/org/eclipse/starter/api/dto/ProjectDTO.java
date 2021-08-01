@@ -20,6 +20,7 @@ public class ProjectDTO {
     private String projectName;
     private String[] specifications;
     private String jakartaVersion;
+    private String container;
 
     public String getArtifactId() {
         return artifactId;
@@ -63,5 +64,13 @@ public class ProjectDTO {
 
     public void setJakartaVersion(String jakartaVersion) {
         this.jakartaVersion = jakartaVersion;
+    }
+
+    public String getContainer() {
+        return container;
+    }
+
+    public void setContainer(String container) {
+        this.container = container;
     }
 }

@@ -7,13 +7,30 @@
    <version>1.0-SNAPSHOT</version>
    <packaging>war</packaging>
 
+   <properties>
+    <final.name>[# th:utext="${artifactId}"/</final.name>
+   </properties>
+
    <dependencies>
+       [# th:each="dependency : ${dependencies}"]
        <dependency>
-         <groupId>jakarta.platform</groupId>
-         <artifactId>jakarta.jakartaee-api</artifactId>
-         <version>[# th:utext="${jakartaVersion}"/]</version>
-         <scope>provided</scope>
+         <groupId>[# th:utext="${dependency.groupId}"/]</groupId>
+         <artifactId>[# th:utext="${dependency.artifactId}"/]</artifactId>
+         <version>[# th:utext="${dependency.version}"/]</version>
+         <scope>[# th:utext="${dependency.scope}"/]</scope>
+         <type>[# th:utext="${dependency.type}"/]</type>
        </dependency>
+        [/]
     </dependencies>
+
+    <build>
+        <finalName>[# th:utext="${artifactId}"/]</finalName>
+        <plugins>
+        [# th:each="plugin : ${plugins}"]
+            [# th:utext="${plugin.pluginDefinition}"/]
+        [/]
+        </plugins>
+
+    </build>
 
  </project>

@@ -13,6 +13,9 @@
 
 package org.eclipse.starter.core.model;
 
+import org.eclipse.starter.core.dependency.Dependency;
+import org.eclipse.starter.core.template.generator.TemplateGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,8 @@ public class Project {
     private String projectName;
     private List<String> specifications = new ArrayList<>();
     private String jakartaVersion;
+    private List<Dependency> dependencies = new ArrayList<>();
+    private List<TemplateGenerator> additionalTemplateGenerators = new ArrayList<>();
 
     public String getArtifactId() {
         return artifactId;
@@ -66,5 +71,21 @@ public class Project {
 
     public void setJakartaVersion(String jakartaVersion) {
         this.jakartaVersion = jakartaVersion;
+    }
+
+    public List<Dependency> getDependencies() {
+        return dependencies;
+    }
+
+    public void addDependency(Dependency dependency) {
+        this.dependencies.add(dependency);
+    }
+
+    public List<TemplateGenerator> getAdditionalTemplateGenerators() {
+        return additionalTemplateGenerators;
+    }
+
+    public void addAdditionalTemplateGenerator(TemplateGenerator additionalTemplateGenerator) {
+        this.additionalTemplateGenerators.add(additionalTemplateGenerator);
     }
 }
