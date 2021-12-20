@@ -27,4 +27,4 @@ Your first stop needs to be [Your First Cup: An Introduction to the Jakarta EE P
 
 You can further explore [First Cup Examples](https://github.com/eclipse-ee4j/jakartaee-firstcup-examples).
 
-And then look into [The Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial/toc.html) and [Jakarta EE Tutorial Examples](https://github.com/eclipse-ee4j/jakartaee-tutorial-examples).
+And then look into [The Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial) and [Jakarta EE Tutorial Examples](https://github.com/eclipse-ee4j/jakartaee-tutorial-examples).
