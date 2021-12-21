@@ -1,5 +1,3 @@
-# Jakarta EE Tutorial
-
 <p align="center">
     <a href="https://eclipse-ee4j.github.io/jakartaee-tutorial">
        <img src="assets/images/tutorial-logo.jpeg" width=400>
@@ -10,7 +8,7 @@
 developing enteriprise applications for the [Jakarta EE Platform](https://jakarta.ee).
 
 
-# Try it out!
+## Try it out!
 
 Download and unzip [Eclipse GlassFish](https://glassfish.org/download)
 
@@ -32,7 +30,7 @@ Then, go to
 http://localhost:8080/simple-hello/hello
 ```
 
-# Learn more!
+## Learn more!
 
 Your first stop needs to be [Your First Cup: An Introduction to the Jakarta EE Platform](https://eclipse-ee4j.github.io/jakartaee-firstcup/).
 
