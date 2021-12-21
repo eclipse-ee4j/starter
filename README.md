@@ -1,6 +1,14 @@
-# Learn
+# Jakarta EE Tutorial
 
-* **[The Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial)**
+<p align="center">
+    <a href="https://eclipse-ee4j.github.io/jakartaee-tutorial">
+       <img src="assets/images/tutorial-logo.jpeg" width=400>
+    </a>
+</p>
+
+**[The Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial)** is a comprehensive guide to 
+developing enteriprise applications for the [Jakarta EE Platform](https://jakarta.ee).
+
 
 # Try it out!
 
