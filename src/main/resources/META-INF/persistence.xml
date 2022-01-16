@@ -8,9 +8,9 @@
 		<properties>
 			<property
 				name="javax.persistence.schema-generation.database.action"
-				value="create" />
-			<property name="openjpa.jdbc.SynchronizeMappings"
-				value="buildSchema" />
+				value="drop-and-create" />
+			<property name="javax.persistence.sql-load-script-source"
+				value="META-INF/initital-data.sql" />
 			<property name="eclipselink.logging.level.sql" value="FINE" />
 			<property name="eclipselink.logging.parameters" value="true" />
 			<property name="hibernate.show_sql" value="true" />
