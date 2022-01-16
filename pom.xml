@@ -15,6 +15,7 @@
 	<properties>
 		<jakartaee.api.version>8.0.0</jakartaee.api.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<payara.version>5.2021.2</payara.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -58,6 +59,21 @@
 				<version>3.2.2</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven3-plugin</artifactId>
+				<version>1.9.9</version>
+				<configuration>
+					<container>
+						<containerId>payara</containerId>
+						<artifactInstaller>
+							<groupId>fish.payara.distributions</groupId>
+							<artifactId>payara</artifactId>
+							<version>${payara.version}</version>
+						</artifactInstaller>
+					</container>
 				</configuration>
 			</plugin>
 		</plugins>
