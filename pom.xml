@@ -1,68 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-  Copyright (c) 2020 Jeyvison Nascimento and others
-
-  This program and the accompanying materials are made available under the
-  terms of the Eclipse Public License 2.0 which is available at
-  http://www.eclipse.org/legal/epl-2.0.
-
-  SPDX-License-Identifier: EPL-2.0
-
-  Contributors:
-    Jeyvison Nascimento - initial API and implementation
-
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>jakartaee-cafe</artifactId>
+	<groupId>jakartaee-cafe</groupId>
+	<version>0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>${project.artifactId}</name>
+	<description>This is the basic Jakarta EE application used throughout the demos.
+        It is a simple CRUD application. It uses Maven and Jakarta EE 8 (Jakarta REST, Jakarta Enterprise Beans, 
+        Jakarta Context and Dependency Injection, Jakarta Persistence, Jakarta Faces, Jakarta Bean Validation). 
+    </description>
+	<properties>
+		<jakartaee.api.version>8.0.0</jakartaee.api.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
+			<version>${jakartaee.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
-    <groupId>org.eclipse</groupId>
-    <artifactId>starter</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>11</maven.compiler.target>
-        <maven.compiler.source>11</maven.compiler.source>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>8.0.0</version>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-
-    <modules>
-        <module>starter-api</module>
-        <module>starter-frontend</module>
-        <module>starter-core</module>
-    </modules>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.tomee.maven</groupId>
-                <artifactId>tomee-maven-plugin</artifactId>
-                <version>8.0.1</version>
-                <configuration>
-                    <tomeeClassifier>plus</tomeeClassifier>
-                    <args>-Xmx512m -XX:PermSize=256m</args>
-                    <webapps>
-                        <webapp>org.eclipse:starter-api:1.0-SNAPSHOT</webapp>
-                        <webapp>org.eclipse:starter-frontend:1.0-SNAPSHOT</webapp>
-                    </webapps>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-
-
+		<!-- Required for Java SE 9+ -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.3</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<inherited>true</inherited>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fc="http://xmlns.jcp.org/jsf/composite/components">
+<h:head>
+	<title>Jakarta EE Cafe</title>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		crossorigin="anonymous" />
+</h:head>
+<h:body>
+	<h:form>
+		<div class="container">
+			<h2>
+				<h:outputText value="#{messages.welcome}" />
+			</h2>
+			<h3>
+				<h:outputText value="#{messages.ourMenu}" />
+			</h3>
+			<h:dataTable id="coffeeList" value="#{cafe.coffeeList}" border="1"
+				var="coffee" styleClass="table">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.id}" />
+					</f:facet>
+					<h:outputText value="#{coffee.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.name}" />
+					</f:facet>
+					<h:outputText value="#{coffee.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{messages.price}" />
+					</f:facet>
+					<h:outputText value="#{coffee.price}" />
+				</h:column>
+				<h:column>
+					<h:commandLink value="#{messages.delete}"
+						action="#{cafe.removeCoffee(coffee.id)}" immediate="true" />
+				</h:column>
+			</h:dataTable>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h:outputText value="#{messages.addCoffee}" />
+				</div>
+				<div class="panel-body">
+					<h:outputText value="#{messages.name} " />
+					<h:inputText id="name" value="#{cafe.name}"
+						styleClass="form-control" />
+					<p />
+					<h:message for="name" style="color:red" />
+					<p />
+					<h:outputText value="#{messages.price} " />
+					<fc:inputPrice id="price" price="#{cafe.price}" />
+					<p />
+					<h:commandButton value="#{messages.submit}"
+						action="#{cafe.addCoffee}" styleClass="btn btn-default" />
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>
