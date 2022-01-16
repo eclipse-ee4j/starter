@@ -3,14 +3,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:fc="http://xmlns.jcp.org/jsf/composite/components">
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<title>Jakarta EE Cafe</title>
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-		crossorigin="anonymous" />
 </h:head>
 <h:body>
 	<h:form>
@@ -58,7 +53,6 @@
 					<h:message for="name" style="color:red" />
 					<p />
 					<h:outputText value="#{messages.price} " />
-					<fc:inputPrice id="price" price="#{cafe.price}" />
 					<p />
 					<h:commandButton value="#{messages.submit}"
 						action="#{cafe.addCoffee}" styleClass="btn btn-default" />
