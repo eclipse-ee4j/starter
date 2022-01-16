@@ -3,14 +3,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>jakartaee-cafe</artifactId>
-	<groupId>jakartaee-cafe</groupId>
+	<artifactId>jakarta-starter</artifactId>
+	<groupId>jakartaee-starter</groupId>
 	<version>0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>${project.artifactId}</name>
-	<description>This is the basic Jakarta EE application used throughout the demos.
-        It is a simple CRUD application. It uses Maven and Jakarta EE 8 (Jakarta REST, Jakarta Enterprise Beans, 
-        Jakarta Context and Dependency Injection, Jakarta Persistence, Jakarta Faces, Jakarta Bean Validation). 
+	<name>jakarta-starter</name>
+	<description>
+		This is the official Eclipse Foundation starter for Jakarta EE.
+		It generates code to help get started with Jakarta EE projects
+		using Maven. It is possible to do so either using Maven
+		archtypes or a web UI. 
     </description>
 	<properties>
 		<jakartaee.api.version>8.0.0</jakartaee.api.version>
@@ -33,7 +35,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>${project.artifactId}</finalName>
+		<finalName>jakarta-starter</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

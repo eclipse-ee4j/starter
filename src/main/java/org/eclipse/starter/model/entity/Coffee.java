@@ -1,4 +1,4 @@
-package cafe.model.entity;
+package org.eclipse.starter.model.entity;
 
 import java.io.Serializable;
 
@@ -6,9 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 @Entity
 @NamedQuery(name = "findAllCoffees", query = "SELECT o FROM Coffee o")
 public class Coffee implements Serializable {
@@ -71,6 +69,6 @@ public class Coffee implements Serializable {
 
   @Override
   public String toString() {
-    return "cafe.model.entity.Coffee[id=" + id + ", name=" + name + ", price=" + price + "]";
+    return "Coffee[id=" + id + ", name=" + name + ", price=" + price + "]";
   }
 }

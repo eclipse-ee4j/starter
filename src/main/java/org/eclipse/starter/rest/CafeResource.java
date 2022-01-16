@@ -1,4 +1,4 @@
-package cafe.web.rest;
+package org.eclipse.starter.rest;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -18,8 +18,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import cafe.model.CafeRepository;
-import cafe.model.entity.Coffee;
+import org.eclipse.starter.model.CafeRepository;
+import org.eclipse.starter.model.entity.Coffee;
 
 @Path("coffees")
 public class CafeResource {
@@ -30,13 +30,13 @@ public class CafeResource {
   @Inject private CafeRepository cafeRepository;
 
   @GET
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+  @Produces({MediaType.APPLICATION_JSON})
   public List<Coffee> getAllCoffees() {
     return this.cafeRepository.getAllCoffees();
   }
 
   @POST
-  @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+  @Consumes({MediaType.APPLICATION_JSON})
   public Coffee createCoffee(Coffee coffee) {
     try {
       return this.cafeRepository.persistCoffee(coffee);
@@ -48,7 +48,7 @@ public class CafeResource {
 
   @GET
   @Path("{id}")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+  @Produces({MediaType.APPLICATION_JSON})
   public Coffee getCoffeeById(@PathParam("id") Long coffeeId) {
     return this.cafeRepository.findCoffeeById(coffeeId);
   }
