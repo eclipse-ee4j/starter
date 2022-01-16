@@ -24,46 +24,44 @@ import org.eclipse.starter.model.entity.Coffee;
 @Path("coffees")
 public class CafeResource {
 
-  private static final Logger logger =
-      Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
+	private static final Logger logger = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
 
-  @Inject private CafeRepository cafeRepository;
+	@Inject
+	private CafeRepository cafeRepository;
 
-  @GET
-  @Produces({MediaType.APPLICATION_JSON})
-  public List<Coffee> getAllCoffees() {
-    return this.cafeRepository.getAllCoffees();
-  }
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Coffee> getAllCoffees() {
+		return this.cafeRepository.getAllCoffees();
+	}
 
-  @POST
-  @Consumes({MediaType.APPLICATION_JSON})
-  public Coffee createCoffee(Coffee coffee) {
-    try {
-      return this.cafeRepository.persistCoffee(coffee);
-    } catch (PersistenceException e) {
-      logger.log(Level.SEVERE, "Error creating coffee {0}: {1}.", new Object[] {coffee, e});
-      throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
-    }
-  }
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Coffee createCoffee(Coffee coffee) {
+		try {
+			return this.cafeRepository.persistCoffee(coffee);
+		} catch (PersistenceException e) {
+			logger.log(Level.SEVERE, "Error creating coffee {0}: {1}.", new Object[] { coffee, e });
+			throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-  @GET
-  @Path("{id}")
-  @Produces({MediaType.APPLICATION_JSON})
-  public Coffee getCoffeeById(@PathParam("id") Long coffeeId) {
-    return this.cafeRepository.findCoffeeById(coffeeId);
-  }
+	@GET
+	@Path("{id}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Coffee getCoffeeById(@PathParam("id") Long coffeeId) {
+		return this.cafeRepository.findCoffeeById(coffeeId);
+	}
 
-  @DELETE
-  @Path("{id}")
-  public void deleteCoffee(@PathParam("id") Long coffeeId) {
-    try {
-      this.cafeRepository.removeCoffeeById(coffeeId);
-    } catch (IllegalArgumentException ex) {
-      logger.log(
-          Level.SEVERE,
-          "Error calling deleteCoffee() for coffeeId {0}: {1}.",
-          new Object[] {coffeeId, ex});
-      throw new WebApplicationException(Response.Status.NOT_FOUND);
-    }
-  }
+	@DELETE
+	@Path("{id}")
+	public void deleteCoffee(@PathParam("id") Long coffeeId) {
+		try {
+			this.cafeRepository.removeCoffeeById(coffeeId);
+		} catch (IllegalArgumentException ex) {
+			logger.log(Level.SEVERE, "Error calling deleteCoffee() for coffeeId {0}: {1}.",
+					new Object[] { coffeeId, ex });
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+	}
 }
