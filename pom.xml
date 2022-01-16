@@ -15,7 +15,6 @@
 	<properties>
 		<jakartaee.api.version>8.0.0</jakartaee.api.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<payara.version>5.2021.2</payara.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -30,6 +29,14 @@
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
 			<version>2.3.3</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Embedded Jakarta EE runtime -->
+		<dependency>
+			<groupId>fish.payara.extras</groupId>
+			<artifactId>payara-micro</artifactId>
+			<version>5.2021.10</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -61,19 +68,26 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			<!-- Execute 'mvn clean install payara-micro:start' to run the application. -->
 			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven3-plugin</artifactId>
-				<version>1.9.9</version>
+				<groupId>fish.payara.maven.plugins</groupId>
+				<artifactId>payara-micro-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<container>
-						<containerId>payara</containerId>
-						<artifactInstaller>
-							<groupId>fish.payara.distributions</groupId>
-							<artifactId>payara</artifactId>
-							<version>${payara.version}</version>
-						</artifactInstaller>
-					</container>
+					<artifactItem>
+						<groupId>fish.payara.extras</groupId>
+						<artifactId>payara-micro</artifactId>
+						<version>5.2021.10</version>
+					</artifactItem>
+					<deployWar>true</deployWar>
+					<contextRoot>/</contextRoot>
 				</configuration>
 			</plugin>
 		</plugins>
