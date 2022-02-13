@@ -112,8 +112,15 @@
 			<version>2.4.1</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-transaction-jta</artifactId>
+			<version>1.0.5</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<finalName>jakarta-starter</finalName>
 		<plugins>
@@ -129,7 +136,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			
+
 			<!-- Execute 'mvn clean package payara-micro:start' to run the application. -->
 			<plugin>
 				<groupId>fish.payara.maven.plugins</groupId>

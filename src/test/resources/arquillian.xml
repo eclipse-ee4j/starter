@@ -14,7 +14,7 @@
 		<configuration>
 			<property name="randomHttpPort">false</property>
 			<property name="autoBindHttp">false</property>
-			<property name="extraMicroOptions">--port 9090 --contextroot test</property>
+			<property name="extraMicroOptions">--port 9090 --contextroot jakarta-starter-test</property>
 		</configuration>
 	</container>
 </arquillian>
