@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -17,6 +19,7 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.GenericType;
 
 import org.eclipse.starter.model.CafeRepository;
 import org.eclipse.starter.model.entity.Coffee;
@@ -91,6 +94,31 @@ public class CafeResourceTest {
 		assertNotNull(coffee);
 		assertEquals(coffee.getName(), "Test-2");
 		assertEquals(coffee.getPrice().doubleValue(), 5.99, 0);
+	}
+
+	@Test
+	public void testGetAllCoffees() throws NotSupportedException, SystemException, SecurityException,
+			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		transaction.begin();
+		Coffee coffee = new Coffee("Test-3", 4.75);
+		entityManager.persist(coffee);
+		coffee = new Coffee("Test-4", 1.99);
+		entityManager.persist(coffee);
+		coffee = new Coffee("Test-5", 2.95);
+		entityManager.persist(coffee);
+		transaction.commit();
+
+		List<Coffee> coffees = ClientBuilder.newClient().target(BASE_URI).request(MediaType.APPLICATION_JSON)
+				.get(new GenericType<List<Coffee>>() {
+				});
+
+		assertEquals(coffees.size(), 3);
+		assertEquals(coffees.get(0).getName(), "Test-3");
+		assertEquals(coffees.get(0).getPrice().doubleValue(), 4.75, 0);
+		assertEquals(coffees.get(1).getName(), "Test-4");
+		assertEquals(coffees.get(1).getPrice().doubleValue(), 1.99, 0);
+		assertEquals(coffees.get(2).getName(), "Test-5");
+		assertEquals(coffees.get(2).getPrice().doubleValue(), 2.95, 0);
 	}
 
 	@After

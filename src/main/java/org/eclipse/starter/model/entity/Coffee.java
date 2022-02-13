@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = "findAllCoffees", query = "SELECT o FROM Coffee o")
+@NamedQuery(name = "findAllCoffees", query = "SELECT o FROM Coffee o ORDER BY o.id")
 public class Coffee implements Serializable {
 
 	private static final long serialVersionUID = 1L;
