@@ -1,18 +1,4 @@
-FROM alpine:latest
+FROM payara/server-full
 
-EXPOSE 8080
-
-RUN apk add openjdk11 maven git
-
-RUN git clone https://github.com/eclipse-ee4j/starter.git /starter
-
-WORKDIR /starter
-
-RUN mvn install
-
-CMD mvn tomee:run
-
-
-
-
-
+COPY target/jakarta-starter.war /tmp
+COPY post-boot-commands.asadmin /opt/payara/config/

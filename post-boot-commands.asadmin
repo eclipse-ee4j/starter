@@ -1,0 +1,1 @@
+deploy --name jakarta-starter --contextroot / /tmp/jakarta-starter.war
