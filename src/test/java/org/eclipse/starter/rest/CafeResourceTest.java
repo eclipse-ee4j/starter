@@ -58,7 +58,7 @@ public class CafeResourceTest {
 
 		TypedQuery<Coffee> query = entityManager.createQuery("SELECT o FROM Coffee o WHERE o.name = :name",
 				Coffee.class);
-		query.setParameter("name", "Test-1");
+		query.setParameter("name", "Test-A");
 
 		try {
 			coffee = query.getSingleResult();
@@ -67,16 +67,16 @@ public class CafeResourceTest {
 			// Expected
 		}
 
-		coffee = new Coffee("Test-1", 7.25);
+		coffee = new Coffee("Test-A", 7.25);
 		ClientBuilder.newClient().target(BASE_URI).request(MediaType.APPLICATION_JSON).post(Entity.json(coffee));
 
 		query = entityManager.createQuery("SELECT o FROM Coffee o WHERE o.name = :name", Coffee.class);
-		query.setParameter("name", "Test-1");
+		query.setParameter("name", "Test-A");
 
 		coffee = query.getSingleResult();
 
 		assertNotNull(coffee);
-		assertEquals(coffee.getName(), "Test-1");
+		assertEquals(coffee.getName(), "Test-A");
 		assertEquals(coffee.getPrice().doubleValue(), 7.25, 0);
 	}
 
@@ -84,7 +84,7 @@ public class CafeResourceTest {
 	public void testGetCoffeeById() throws NotSupportedException, SystemException, SecurityException,
 			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		transaction.begin();
-		Coffee coffee = new Coffee("Test-2", 5.99);
+		Coffee coffee = new Coffee("Test-B", 5.99);
 		entityManager.persist(coffee);
 		transaction.commit();
 
@@ -92,7 +92,7 @@ public class CafeResourceTest {
 				.request(MediaType.APPLICATION_JSON).get(Coffee.class);
 
 		assertNotNull(coffee);
-		assertEquals(coffee.getName(), "Test-2");
+		assertEquals(coffee.getName(), "Test-B");
 		assertEquals(coffee.getPrice().doubleValue(), 5.99, 0);
 	}
 
@@ -100,11 +100,11 @@ public class CafeResourceTest {
 	public void testGetAllCoffees() throws NotSupportedException, SystemException, SecurityException,
 			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		transaction.begin();
-		Coffee coffee = new Coffee("Test-3", 4.75);
+		Coffee coffee = new Coffee("Test-C", 4.75);
 		entityManager.persist(coffee);
-		coffee = new Coffee("Test-4", 1.99);
+		coffee = new Coffee("Test-D", 1.99);
 		entityManager.persist(coffee);
-		coffee = new Coffee("Test-5", 2.95);
+		coffee = new Coffee("Test-E", 2.95);
 		entityManager.persist(coffee);
 		transaction.commit();
 
@@ -113,12 +113,34 @@ public class CafeResourceTest {
 				});
 
 		assertEquals(coffees.size(), 3);
-		assertEquals(coffees.get(0).getName(), "Test-3");
+		assertEquals(coffees.get(0).getName(), "Test-C");
 		assertEquals(coffees.get(0).getPrice().doubleValue(), 4.75, 0);
-		assertEquals(coffees.get(1).getName(), "Test-4");
+		assertEquals(coffees.get(1).getName(), "Test-D");
 		assertEquals(coffees.get(1).getPrice().doubleValue(), 1.99, 0);
-		assertEquals(coffees.get(2).getName(), "Test-5");
+		assertEquals(coffees.get(2).getName(), "Test-E");
 		assertEquals(coffees.get(2).getPrice().doubleValue(), 2.95, 0);
+	}
+
+	@Test
+	public void testDeleteCoffee() throws NotSupportedException, SystemException, SecurityException,
+			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
+		transaction.begin();
+		Coffee coffee = new Coffee("Test-Z", 7.77);
+		entityManager.persist(coffee);
+		transaction.commit();
+
+		ClientBuilder.newClient().target(BASE_URI).path(coffee.getId().toString()).request().delete();
+
+		TypedQuery<Coffee> query = entityManager.createQuery("SELECT o FROM Coffee o WHERE o.name = :name",
+				Coffee.class);
+		query.setParameter("name", "Test-Z");
+
+		try {
+			coffee = query.getSingleResult();
+			fail("No entity should have been found.");
+		} catch (NoResultException ne) {
+			// Expected
+		}
 	}
 
 	@After
