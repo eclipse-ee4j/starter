@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotBlank;
@@ -11,13 +12,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity
-@NamedQuery(name = "findAllCoffees", query = "SELECT o FROM Coffee o ORDER BY o.id")
+@NamedQuery(name = "findAllCoffees", query = "SELECT o FROM Coffee o ORDER BY o.name")
 public class Coffee implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotBlank(message = "Name cannot be blank.")
