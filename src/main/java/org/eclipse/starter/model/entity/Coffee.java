@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @NamedQuery(name = "findAllCoffees", query = "SELECT o FROM Coffee o ORDER BY o.id")
@@ -16,10 +19,16 @@ public class Coffee implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
+
+	@NotBlank(message = "Name cannot be blank.")
 	protected String name;
+
+	@NotNull(message = "Price must be set.")
+	@PositiveOrZero(message = "Price must be greater than or equal to zero.")
 	protected Double price;
 
 	public Coffee() {
+		// Required empty constructor.
 	}
 
 	public Coffee(String name, Double price) {
