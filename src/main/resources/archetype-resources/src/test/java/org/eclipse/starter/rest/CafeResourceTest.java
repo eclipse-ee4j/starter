@@ -36,7 +36,7 @@ import fish.payara.arquillian.ws.rs.core.MediaType;
 @RunWith(Arquillian.class)
 public class CafeResourceTest {
 
-	private static final String BASE_URI = "http://localhost:9090/jakarta-starter-test/rest/coffees";
+	private static final String BASE_URI = "http://localhost:9090/jakartaee-cafe-test/rest/coffees";
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -46,7 +46,7 @@ public class CafeResourceTest {
 
 	@Deployment
 	public static WebArchive createDeployment() {
-		return ShrinkWrap.create(WebArchive.class, "jakarta-starter-test.war").addClass(CafeResource.class)
+		return ShrinkWrap.create(WebArchive.class, "jakartaee-cafe-test.war").addClass(CafeResource.class)
 				.addClass(CafeRepository.class).addClass(Coffee.class)
 				.addAsResource("test-persistence.xml", "META-INF/persistence.xml")
 				.addAsWebInfResource("test-web.xml", "web.xml");

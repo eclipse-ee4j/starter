@@ -27,12 +27,19 @@
 		<url>https://github.com/eclipse-ee4j/starter/issues</url>
 	</issueManagement>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+
 	<build>
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.archetype</groupId>
 				<artifactId>archetype-packaging</artifactId>
-				<version>3.1.1</version>
+				<version>3.2.1</version>
 			</extension>
 		</extensions>
 	</build>

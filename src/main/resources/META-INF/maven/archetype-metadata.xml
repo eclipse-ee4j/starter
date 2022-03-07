@@ -10,7 +10,10 @@
 		</requiredProperty>
 		<requiredProperty key="artifactId">
 			<defaultValue>jakartaee-cafe</defaultValue>
-		</requiredProperty>		
+		</requiredProperty>
+		<requiredProperty key="version">
+			<defaultValue>0.1-SNAPSHOT</defaultValue>
+		</requiredProperty>
 	</requiredProperties>
 
 	<fileSets>

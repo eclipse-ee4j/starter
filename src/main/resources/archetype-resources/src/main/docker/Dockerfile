@@ -1,2 +1,2 @@
 FROM payara/server-full
-COPY ../../../target/jakarta-starter.war $DEPLOY_DIR
+COPY ../../../target/jakartaee-cafe.war $DEPLOY_DIR
