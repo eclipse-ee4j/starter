@@ -17,22 +17,22 @@
 	</requiredProperties>
 
 	<fileSets>
-		<fileSet>
+		<fileSet encoding="UTF-8">
 			<directory>src/main/java</directory>
 		</fileSet>
-		<fileSet>
+		<fileSet encoding="UTF-8">
 			<directory>src/main/resources</directory>
 		</fileSet>
-		<fileSet>
+		<fileSet encoding="UTF-8">
 			<directory>src/main/webapp</directory>
 		</fileSet>
-		<fileSet>
+		<fileSet encoding="UTF-8">
 			<directory>src/test/java</directory>
 		</fileSet>
-		<fileSet>
+		<fileSet encoding="UTF-8">
 			<directory>src/test/resources</directory>
 		</fileSet>
-		<fileSet>
+		<fileSet encoding="UTF-8">
 			<directory></directory>
 			<includes>
 				<include>Dockerfile</include>
