@@ -23,9 +23,10 @@ mvn clean package payara-micro:start
 
 Once Payara Micro starts, you can access the project at http://localhost:8080.
 
-You can also run the project via Docker. To build the Docker image, execute the following command from the `jakartaee-cafe` directory: 
+You can also run the project via Docker. To build the Docker image, execute the following commands from the `jakartaee-cafe` directory: 
 
 ```
+mvn clean package
 docker build -t jakartaee-cafe:v1 .
 ```
 
