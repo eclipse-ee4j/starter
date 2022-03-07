@@ -1,0 +1,36 @@
+<archetype-descriptor
+	xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 https://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd"
+	name="jakarta-starter">
+
+	<requiredProperties>
+		<requiredProperty key="groupId">
+			<defaultValue>org.eclipse.ee4j</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="artifactId">
+			<defaultValue>jakartaee-cafe</defaultValue>
+		</requiredProperty>		
+	</requiredProperties>
+
+	<fileSets>
+		<fileSet>
+			<directory>src/main/java</directory>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/resources</directory>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/webapp</directory>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/docker</directory>
+		</fileSet>
+		<fileSet>
+			<directory>src/test/java</directory>
+		</fileSet>
+		<fileSet>
+			<directory>src/test/resources</directory>
+		</fileSet>
+	</fileSets>
+</archetype-descriptor>
