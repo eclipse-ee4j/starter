@@ -27,13 +27,16 @@
 			<directory>src/main/webapp</directory>
 		</fileSet>
 		<fileSet>
-			<directory>src/main/docker</directory>
-		</fileSet>
-		<fileSet>
 			<directory>src/test/java</directory>
 		</fileSet>
 		<fileSet>
 			<directory>src/test/resources</directory>
 		</fileSet>
+		<fileSet>
+			<directory></directory>
+			<includes>
+				<include>Dockerfile</include>
+			</includes>
+		</fileSet>		
 	</fileSets>
 </archetype-descriptor>
