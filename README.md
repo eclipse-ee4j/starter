@@ -15,6 +15,8 @@ In order to run the Maven Archetype and generate a sample Jakarta EE project, pl
 mvn archetype:generate -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0
 ```
 
+If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
+
 If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-cafe`. You can then run the project by executing the following command from the `jakartaee-cafe` directory (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
 
 ```
@@ -37,3 +39,5 @@ docker run -it --rm -p 8080:8080 jakartaee-cafe:v1
 ```
 
 Once Payara starts, you can access the project at http://localhost:8080/jakartaee-cafe.
+
+The generated starter code is simply a Maven project. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
