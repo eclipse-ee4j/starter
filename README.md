@@ -2,7 +2,7 @@
 This is the official Eclipse Foundation starter for Jakarta EE. It generates code to help get started with Jakarta EE projects using Maven. It is possible to do so using a Maven Archetypes. In the future the Starter will include a Web UI.
 
 ## Building Maven Archetype from Source
-In order to build the Maven Archetype from source, please download this repository on your file system (the easiest way may be to [download as zip](archive/refs/heads/master.zip)). Then execute:
+In order to build the Maven Archetype from source, please download this repository on your file system (the easiest way may be to [download as zip](https://github.com/eclipse-ee4j/starter/archive/refs/heads/master.zip)). Then execute:
 
 ```
 mvn clean install
