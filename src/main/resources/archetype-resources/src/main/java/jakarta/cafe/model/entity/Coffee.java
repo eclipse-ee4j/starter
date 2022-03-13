@@ -1,4 +1,4 @@
-package org.eclipse.starter.model.entity;
+package ${package}.jakarta.cafe.model.entity;
 
 import java.io.Serializable;
 

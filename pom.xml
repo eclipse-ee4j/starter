@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.eclipse.ee4j</groupId>
+	<groupId>org.eclipse</groupId>
 	<artifactId>jakarta-starter</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>maven-archetype</packaging>
 
 	<name>jakarta-starter</name>
 	<description>
 		This is the official Eclipse Foundation starter for Jakarta EE.
 		It generates code to help get started with Jakarta EE projects
-		using Maven. It is possible to do so either using Maven
-		archtypes or a web UI. 
+		using Maven. It is possible to do so using Maven
+		archetypes. Support for a UI may be added at a later point. 
     </description>
 
 	<url>https://eclipse-ee4j.github.io/starter/</url>

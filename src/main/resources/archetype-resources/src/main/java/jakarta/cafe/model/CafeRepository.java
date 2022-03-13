@@ -1,4 +1,4 @@
-package org.eclipse.starter.model;
+package ${package}.jakarta.cafe.model;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.eclipse.starter.model.entity.Coffee;
+import ${package}.jakarta.cafe.model.entity.Coffee;
 
 @Stateless
 public class CafeRepository {
