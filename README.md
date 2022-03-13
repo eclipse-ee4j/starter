@@ -9,13 +9,13 @@ mvn clean install
 ```
 
 ## Generate Jakarta EE Project
-In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute:
+In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
 
 ```
 mvn archetype:generate -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0
 ```
 
-If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-cafe`. You can then run the project by executing the following command from the `jakartaee-cafe` directory:
+If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-cafe`. You can then run the project by executing the following command from the `jakartaee-cafe` directory (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
 
 ```
 mvn clean package payara-micro:start
@@ -23,7 +23,7 @@ mvn clean package payara-micro:start
 
 Once Payara Micro starts, you can access the project at http://localhost:8080.
 
-You can also run the project via Docker. To build the Docker image, execute the following commands from the `jakartaee-cafe` directory: 
+You can also run the project via Docker. To build the Docker image, execute the following commands from the `jakartaee-cafe` directory (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8), [Maven 3+](https://maven.apache.org/download.cgi) and Docker): 
 
 ```
 mvn clean package
