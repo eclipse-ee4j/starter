@@ -41,3 +41,12 @@ docker run -it --rm -p 8080:8080 jakartaee-cafe:v1
 Once Payara starts, you can access the project at http://localhost:8080/jakartaee-cafe.
 
 The generated starter code is simply a Maven project. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
+
+## Roadmap
+The following is a high level roadmap for the project. All contributions are welcome advancing any of this work.
+* Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as GlassFish, WildFly, Open Liberty and TomEE.
+* Add instructions for Eclipse IDE.
+* Improve look and feel.
+* Add starter UI capability.
+* Add support for generating a Faces UI instead of REST.
+* Transition to Jakarata EE 9.1.
