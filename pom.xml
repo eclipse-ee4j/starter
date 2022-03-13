@@ -27,6 +27,27 @@
 		<url>https://github.com/eclipse-ee4j/starter/issues</url>
 	</issueManagement>
 
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 2.0</name>
+			<url>https://www.eclipse.org/legal/epl-2.0/</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>m-reza-rahman</id>
+			<name>Reza Rahman</name>
+			<email>reza_rahman@lycos.com</email>
+		</developer>
+	</developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:eclipse-ee4j/starter.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:eclipse-ee4j/starter.git</developerConnection>
+        <url>https://eclipse-ee4j.github.io/starter/tree/main</url>
+    </scm>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
