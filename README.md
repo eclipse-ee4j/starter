@@ -44,7 +44,7 @@ The generated starter code is simply a Maven project. You can easily load, explo
 
 ## Roadmap
 The following is a high level roadmap for the project. All contributions are welcome advancing any of this work.
-* Setup GitHub Actions and nightly build.
+* Set up GitHub Actions and nightly build.
 * Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as GlassFish, WildFly, Open Liberty and TomEE.
 * Add instructions for Eclipse IDE.
 * Improve look and feel.
