@@ -1,0 +1,45 @@
+<archetype-descriptor
+	xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 https://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd"
+	name="jakarta-starter">
+
+	<requiredProperties>
+		<requiredProperty key="groupId">
+			<defaultValue>org.eclipse</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="artifactId">
+			<defaultValue>jakartaee-cafe</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="version">
+			<defaultValue>0.1-SNAPSHOT</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="package">
+			<defaultValue>org.eclipse</defaultValue>
+		</requiredProperty>
+	</requiredProperties>
+
+	<fileSets>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/main/java</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>src/main/resources</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>src/main/webapp</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/test/java</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>src/test/resources</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory></directory>
+			<includes>
+				<include>Dockerfile</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</archetype-descriptor>

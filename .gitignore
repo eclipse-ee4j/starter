@@ -85,4 +85,9 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-
+.classpath
+.project
+.settings/
+.DS_Store
+jakartaee-cafe-data
+jakartaee-cafe-test-data

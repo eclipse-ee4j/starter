@@ -1,38 +1,53 @@
 # Eclipse Starter for Jakarta EE
+This is the official Eclipse Foundation starter for Jakarta EE. It generates code to help get started with Jakarta EE projects using Maven. It is possible to do so using a Maven Archetypes. In the future the Starter will include a Web UI.
 
-The Eclipse Starter for Jakarta EE is a source code generator for Jakarta EE projects.
-
-See [https://start.jakarta.ee](https://start.jakarta.ee).
-
-## How to create a specification example?
-
-To create a specification example you need to do three things:
-
-- Create the templates that will serve as base for the example. We use thymeleaf to process the templates.
-- Create a specification handler
-- Add the new specification handler to StarterService
-
-For example: 
-
-We have a handler for the JSON-P specification. You can check the template file [here](https://github.com/eclipse-ee4j/starter/tree/master/starter-core/src/main/resources/json-p), the handler [here](https://github.com/eclipse-ee4j/starter/blob/master/starter-core/src/main/java/org/eclipse/starter/core/specification/handler/JSONPHandler.java) and the change in the StarterService [here](https://github.com/eclipse-ee4j/starter/blob/27f0c45cf6cc10327df0a0a606e6f7253e874029/starter-core/src/main/java/org/eclipse/starter/core/service/StarterService.java#L37).
-
-To start the project using the tomee plugin, just run:
-
-`mvn install`
-
-and then:
-
-`mvn -o tomee:run`
-
-If you want to create a new template project you can run:
+## Building Maven Archetype from Source
+In order to build the Maven Archetype from source, please download this repository on your file system (the easiest way may be to [download as zip](https://github.com/eclipse-ee4j/starter/archive/refs/heads/master.zip)). Then execute (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
 
 ```
-curl --location --request POST 'http://localhost:8080/starterapi_war/starter/v1' \
---header 'Content-Type: application/json' \
---header 'Cookie: JSESSIONID=70F001DFBBDAD72370C7414FE2ACA897; GUEST_LANGUAGE_ID=en_US' \
---data-raw '{
-    "packageName": "com.myproject",
-    "projectName": "myProject",
-    "specifications": ["jax-rs","json-b","json-p"]
-}' --output test.zip
+mvn clean install
 ```
+
+## Generate Jakarta EE Project
+In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
+
+```
+mvn archetype:generate -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0
+```
+
+If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
+
+If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-cafe`. You can then run the project by executing the following command from the `jakartaee-cafe` directory (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
+
+```
+mvn clean package payara-micro:start
+```
+
+Once Payara Micro starts, you can access the project at http://localhost:8080.
+
+You can also run the project via Docker. To build the Docker image, execute the following commands from the `jakartaee-cafe` directory (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8), [Maven 3+](https://maven.apache.org/download.cgi) and [Docker](https://docs.docker.com/get-docker/)): 
+
+```
+mvn clean package
+docker build -t jakartaee-cafe:v1 .
+```
+
+You can then run the Docker image by executing:
+
+```
+docker run -it --rm -p 8080:8080 jakartaee-cafe:v1
+```
+
+Once Payara starts, you can access the project at http://localhost:8080/jakartaee-cafe.
+
+The generated starter code is simply a Maven project. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
+
+## Roadmap
+The following is a high level roadmap for the project. All contributions are welcome advancing any of this work.
+* Set up GitHub Actions and nightly build.
+* Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as GlassFish, WildFly, Open Liberty and TomEE.
+* Add instructions for Eclipse IDE.
+* Improve look and feel.
+* Add starter UI capability.
+* Add support for generating a Faces UI instead of REST.
+* Transition to Jakarata EE 9.1.
