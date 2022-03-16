@@ -13,7 +13,7 @@
 		It generates code to help get started with Jakarta EE projects
 		using Maven. It is possible to do so using Maven
 		archetypes. Support for a UI may be added at a later point. 
-    </description>
+       </description>
 
 	<url>https://eclipse-ee4j.github.io/starter/</url>
 
@@ -35,6 +35,7 @@
 	</licenses>
 
 	<developers>
+		<!-- TODO: All active committers/contributors should be adding their information here. -->
 		<developer>
 			<id>m-reza-rahman</id>
 			<name>Reza Rahman</name>
