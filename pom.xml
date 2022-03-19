@@ -7,14 +7,13 @@
 	<version>1.0</version>
 	<packaging>maven-archetype</packaging>
 
-	<name>jakarta-starter</name>
+	<name>Jakarta EE Starter</name>
 	<description>
 		This is the official Eclipse Foundation starter for Jakarta EE.
 		It generates code to help get started with Jakarta EE projects
 		using Maven. It is possible to do so using Maven
 		archetypes. Support for a UI may be added at a later point. 
-       </description>
-
+    </description>
 	<url>https://eclipse-ee4j.github.io/starter/</url>
 
 	<organization>
@@ -35,7 +34,7 @@
 	</licenses>
 
 	<developers>
-		<!-- TODO: All active committers/contributors should be adding their information here. -->
+		<!-- TODO: All active committers/contributors should add their information here. -->
 		<developer>
 			<id>m-reza-rahman</id>
 			<name>Reza Rahman</name>
@@ -43,11 +42,11 @@
 		</developer>
 	</developers>
 
-    <scm>
-        <connection>scm:git:git@github.com:eclipse-ee4j/starter.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:eclipse-ee4j/starter.git</developerConnection>
-        <url>https://eclipse-ee4j.github.io/starter/tree/main</url>
-    </scm>
+	<scm>
+		<connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
+		<developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
+		<url>http://github.com/eclipse-ee4j/starter/tree/master</url>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
