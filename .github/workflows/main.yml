@@ -32,14 +32,12 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-
-      - name: Cleanup
-        run: rm -r jakaratee-cafe
-        continue-on-error: true
     
       - name: Build with Maven
         run: mvn clean install --file pom.xml
         
       - name: Run Maven Archetype
-        working-directory: ./app
-        run: mvn archetype:generate -B -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0 -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse
+        run: |
+          mkdir app
+          cd app
+          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0 -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse
