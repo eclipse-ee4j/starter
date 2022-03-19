@@ -33,7 +33,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
     
-      - name: Build with Maven
+      - name: Build Maven Archetype
         run: mvn clean install --file pom.xml
         
       - name: Run Maven Archetype
@@ -42,5 +42,5 @@ jobs:
           cd app
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0 -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse
           
-      - name: Run Application
+      - name: Run Application Maven Build
         run: mvn clean install --file app/jakartaee-cafe/pom.xml
