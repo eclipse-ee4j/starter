@@ -7,14 +7,13 @@
 	<version>1.0</version>
 	<packaging>maven-archetype</packaging>
 
-	<name>jakarta-starter</name>
+	<name>Jakarta EE Starter</name>
 	<description>
 		This is the official Eclipse Foundation starter for Jakarta EE.
 		It generates code to help get started with Jakarta EE projects
 		using Maven. It is possible to do so using Maven
 		archetypes. Support for a UI may be added at a later point. 
     </description>
-
 	<url>https://eclipse-ee4j.github.io/starter/</url>
 
 	<organization>
@@ -35,6 +34,7 @@
 	</licenses>
 
 	<developers>
+		<!-- TODO: All active committers/contributors should add their information here. -->
 		<developer>
 			<id>m-reza-rahman</id>
 			<name>Reza Rahman</name>
@@ -42,11 +42,22 @@
 		</developer>
 	</developers>
 
-    <scm>
-        <connection>scm:git:git@github.com:eclipse-ee4j/starter.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:eclipse-ee4j/starter.git</developerConnection>
-        <url>https://eclipse-ee4j.github.io/starter/tree/main</url>
-    </scm>
+	<scm>
+		<connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
+		<developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
+		<url>http://github.com/eclipse-ee4j/starter/tree/master</url>
+	</scm>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,6 +67,21 @@
 	</properties>
 
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.archetype</groupId>

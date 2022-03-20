@@ -1,0 +1,46 @@
+name: Main Build
+
+on:
+  push:
+    paths-ignore:
+      - "docs/**"
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  workflow_dispatch:
+
+jobs:      
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [1.8]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{matrix.java}}
+
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+    
+      - name: Build Maven Archetype
+        run: mvn clean install --file pom.xml
+        
+      - name: Run Maven Archetype
+        run: |
+          mkdir app
+          cd app
+          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0 -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse
+          
+      - name: Run Application Maven Build
+        run: mvn clean install --file app/jakartaee-cafe/pom.xml
