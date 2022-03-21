@@ -1,4 +1,4 @@
-package org.eclipse.jakarta.cafe.rest;
+package ${package}.jakarta.cafe.rest;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -18,8 +18,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.eclipse.jakarta.cafe.model.CafeRepository;
-import org.eclipse.jakarta.cafe.model.entity.Coffee;
+import ${package}.jakarta.cafe.model.CafeRepository;
+import ${package}.jakarta.cafe.model.entity.Coffee;
 
 @Path("coffees")
 public class CafeResource {

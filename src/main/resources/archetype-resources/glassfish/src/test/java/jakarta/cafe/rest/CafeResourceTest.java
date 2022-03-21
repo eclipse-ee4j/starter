@@ -1,4 +1,4 @@
-package org.eclipse.jakarta.cafe.rest;
+package ${package}.jakarta.cafe.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,8 +22,8 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
-import org.eclipse.jakarta.cafe.model.CafeRepository;
-import org.eclipse.jakarta.cafe.model.entity.Coffee;
+import ${package}.jakarta.cafe.model.CafeRepository;
+import ${package}.jakarta.cafe.model.entity.Coffee;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
