@@ -39,7 +39,7 @@ jobs:
         
       - name: Run Maven Archetype for Payara
         run: |
-          mkdir app/payara
+          mkdir -p app/payara
           cd app/payara
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0 -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=payara
           
@@ -48,7 +48,7 @@ jobs:
         
       - name: Run Maven Archetype for GlassFish
         run: |
-          mkdir app/glassfish
+          mkdir -p app/glassfish
           cd app/glassfish
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0 -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=glassfish
           
