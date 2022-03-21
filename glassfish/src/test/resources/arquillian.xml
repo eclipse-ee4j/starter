@@ -10,11 +10,11 @@
 		<property name="deploymentExportPath">target/</property>
 	</engine>
 
-	<container qualifier="payara" default="true">
+	<container qualifier="glassfish" default="true">
 		<configuration>
-			<property name="randomHttpPort">false</property>
-			<property name="autoBindHttp">false</property>
-			<property name="extraMicroOptions">--port 9090 --contextroot jakartaee-cafe-test</property>
+			<property name="glassFishHome">/tmp/glassfish5</property>
+			<property name="enableDerby">false</property>
+			<property name="outputToConsole">true</property>
 		</configuration>
 	</container>
 </arquillian>

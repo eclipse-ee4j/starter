@@ -20,6 +20,7 @@ import javax.transaction.UserTransaction;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
 
 import org.eclipse.jakarta.cafe.model.CafeRepository;
 import org.eclipse.jakarta.cafe.model.entity.Coffee;
@@ -31,12 +32,11 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import fish.payara.arquillian.ws.rs.core.MediaType;
 
-// @RunWith(Arquillian.class)
+@RunWith(Arquillian.class)
 public class CafeResourceTest {
 
-	private static final String BASE_URI = "http://localhost:9090/jakartaee-cafe-test/rest/coffees";
+	private static final String BASE_URI = "http://localhost:8080/jakartaee-cafe-test/rest/coffees";
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -44,7 +44,7 @@ public class CafeResourceTest {
 	@Resource
 	private UserTransaction transaction;
 
-	// @Deployment
+	@Deployment
 	public static WebArchive createDeployment() {
 		return ShrinkWrap.create(WebArchive.class, "jakartaee-cafe-test.war").addClass(CafeResource.class)
 				.addClass(CafeRepository.class).addClass(Coffee.class)
@@ -52,7 +52,7 @@ public class CafeResourceTest {
 				.addAsWebInfResource("test-web.xml", "web.xml");
 	}
 
-	// @Test
+	@Test
 	public void testCreateCoffee() {
 		Coffee coffee = null;
 
@@ -80,7 +80,7 @@ public class CafeResourceTest {
 		assertEquals(coffee.getPrice().doubleValue(), 7.25, 0);
 	}
 
-	// @Test
+	@Test
 	public void testGetCoffeeById() throws NotSupportedException, SystemException, SecurityException,
 			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		transaction.begin();
@@ -96,7 +96,7 @@ public class CafeResourceTest {
 		assertEquals(coffee.getPrice().doubleValue(), 5.99, 0);
 	}
 
-	// @Test
+	@Test
 	public void testGetAllCoffees() throws NotSupportedException, SystemException, SecurityException,
 			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		transaction.begin();
@@ -121,7 +121,7 @@ public class CafeResourceTest {
 		assertEquals(coffees.get(2).getPrice().doubleValue(), 2.95, 0);
 	}
 
-	// @Test
+	@Test
 	public void testDeleteCoffee() throws NotSupportedException, SystemException, SecurityException,
 			IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		transaction.begin();
@@ -143,7 +143,7 @@ public class CafeResourceTest {
 		}
 	}
 
-	// @After
+	@After
 	public void deleteCoffees() throws NotSupportedException, SystemException, SecurityException, IllegalStateException,
 			RollbackException, HeuristicMixedException, HeuristicRollbackException {
 		transaction.begin();

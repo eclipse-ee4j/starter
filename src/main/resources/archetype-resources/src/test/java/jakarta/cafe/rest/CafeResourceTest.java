@@ -20,6 +20,7 @@ import javax.transaction.UserTransaction;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
 
 import ${package}.jakarta.cafe.model.CafeRepository;
 import ${package}.jakarta.cafe.model.entity.Coffee;
@@ -30,8 +31,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import fish.payara.arquillian.ws.rs.core.MediaType;
 
 @RunWith(Arquillian.class)
 public class CafeResourceTest {
