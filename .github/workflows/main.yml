@@ -54,3 +54,12 @@ jobs:
           
       - name: Run GlassFish Application Maven Build
         run: mvn clean package --file app/glassfish/jakartaee-cafe/pom.xml
+
+      - name: Run Maven Archetype for WildFly
+        run: |
+          mkdir -p app/wildfly
+          cd app/wildfly
+          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0 -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=wildfly
+
+      - name: Run WildFly Application Maven Build
+        run: mvn clean package --DskipTests --file app/wildfly/jakartaee-cafe/pom.xml
