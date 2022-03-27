@@ -57,6 +57,9 @@ The generated starter code is simply a Maven project. You can easily load, explo
   ```
   mvn clean package cargo:run
   ```
+  
+  Once GlassFish starts, you can access the project at http://localhost:8080/jakartaee-cafe.
+  Note that GlassFish currently does not include an official Docker image.
 
 ## Roadmap
 The following is a high level roadmap for the project. All contributions are welcome advancing any of this work.
