@@ -32,10 +32,11 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+
 @RunWith(Arquillian.class)
 public class CafeResourceTest {
 
-	private static final String BASE_URI = "http://localhost:9090/jakartaee-cafe-test/rest/coffees";
+	private static final String BASE_URI = "http://localhost:8080/jakartaee-cafe-test/rest/coffees";
 
 	@PersistenceContext
 	private EntityManager entityManager;
