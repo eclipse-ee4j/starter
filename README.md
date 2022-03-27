@@ -15,7 +15,7 @@ In order to run the Maven Archetype and generate a sample Jakarta EE project, pl
 mvn archetype:generate -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT
 ```
 
-Note that by default the Archetype will use Payara as the Jakarta EE runtime. You can use GlassFish instead (please see the section below).
+Note that by default the Archetype will use Payara as the Jakarta EE runtime. You can use GlassFish instead (please see the section below for the commands to execute instead).
 
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
@@ -44,10 +44,18 @@ Once Payara starts, you can access the project at http://localhost:8080/jakartae
 
 The generated starter code is simply a Maven project. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
+## GlassFish
+
+* To generate a sample Jakarta EE project with GlassFish, please execute the following (please ensure you have installed a [Java SE 8 implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)). Please note that the generated application will only work with Java SE 8 for GlassFish.
+
+```
+mvn archetype:generate -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -Druntime=glassfish
+```
+
 ## Roadmap
 The following is a high level roadmap for the project. All contributions are welcome advancing any of this work.
 * Set up nightly build.
-* Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as GlassFish, WildFly, Open Liberty and TomEE.
+* Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as WildFly, Open Liberty and TomEE.
 * Add instructions for Eclipse IDE.
 * Improve look and feel.
 * Add starter UI capability.
