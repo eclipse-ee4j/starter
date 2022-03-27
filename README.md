@@ -53,11 +53,9 @@ The generated starter code is simply a Maven project. You can easily load, explo
   ```
 
 * To run the generated project with GlassFish, please execute the following from the project directory - named `jakartaee-cafe` by default. Please ensure you have installed a [Java SE 8 implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi).
-
   ```
   mvn clean package cargo:run
   ```
-  
   Once GlassFish starts, you can access the project at http://localhost:8080/jakartaee-cafe.
   Note that GlassFish currently does not include an official Docker image.
 
