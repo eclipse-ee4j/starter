@@ -15,7 +15,7 @@
 		</requiredProperty>
 		<requiredProperty key="runtime">
 			<defaultValue>payara</defaultValue>
-			<!-- <validationRegex>payara, glassfish</validationRegex> -->
+			<validationRegex>(?i)^(payara|glassfish)$</validationRegex>
 		</requiredProperty>
 	</requiredProperties>
 
