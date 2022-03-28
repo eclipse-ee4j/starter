@@ -12,7 +12,7 @@ mvn clean install
 In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
 
 ```
-mvn archetype:generate -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT
+mvn archetype:generate -DarchetypeGroupId="org.eclipse" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.1.0-SNAPSHOT"
 ```
 
 Note that by default the Archetype will use Payara as the Jakarta EE runtime. You can use GlassFish instead (please see the [section below](#glassfish) for the commands to execute instead).
@@ -49,7 +49,7 @@ The generated starter code is simply a Maven project. You can easily load, explo
 * To generate a sample Jakarta EE project with GlassFish, please execute the following (please ensure you have installed a [Java SE 8 implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)). Please note that the generated application will only work with Java SE 8 for GlassFish 5.
 
   ```
-  mvn archetype:generate -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -Druntime=glassfish
+  mvn archetype:generate -DarchetypeGroupId="org.eclipse" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.1.0-SNAPSHOT" -Druntime="glassfish"
   ```
 
 * To run the generated project with GlassFish, please execute the following from the project directory - named `jakartaee-cafe` by default. Please ensure you have installed a [Java SE 8 implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi).
