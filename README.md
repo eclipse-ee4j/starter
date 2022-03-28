@@ -51,3 +51,4 @@ The following is a high level roadmap for the project. All contributions are wel
 * Add starter UI capability.
 * Add support for generating a Faces UI instead of REST.
 * Transition to Jakarata EE 9.1.
+
