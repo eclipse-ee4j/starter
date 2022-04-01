@@ -40,9 +40,6 @@ The generated starter code is simply a Maven project. You can easily load, explo
 
 We hope you enjoy your Jakarta EE journey!
 
-**[The Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial)** is a comprehensive guide to 
-developing enteriprise applications for the [Jakarta EE Platform](https://jakarta.ee).
-
 ## Learn more!
 There are many free resources to learn Jakarta EE! The following are some that you should begin exploring alongside the starter.
 
