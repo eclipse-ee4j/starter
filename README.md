@@ -41,7 +41,7 @@ The generated starter code is simply a Maven project. You can easily load, explo
 We hope you enjoy your Jakarta EE journey!
 
 ## Learn more!
-There are many free resources to learn Jakarta EE! The following are some that you should begin exploring alongside the starter.
+There are many excellent free resources to learn Jakarta EE! The following are some that you should begin exploring alongside the starter.
 
 * The [Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial) is a comprehensive reference for developing applications with Jakarta EE.
 * The [First Cup](https://eclipse-ee4j.github.io/jakartaee-firstcup/) is part of the Tutorial and is a gentle hands-on introduction to Jakarta EE.
