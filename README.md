@@ -47,4 +47,4 @@ There are many excellent free resources to learn Jakarta EE! The following are s
 * The [First Cup](https://eclipse-ee4j.github.io/jakartaee-firstcup/) is part of the Tutorial and is a gentle hands-on introduction to Jakarta EE.
 * You can further explore the [First Cup Examples](https://github.com/eclipse-ee4j/jakartaee-firstcup-examples) to get a feel for how Jakarta EE applications look like.
 * The [Jakarta EE Tutorial Examples](https://github.com/eclipse-ee4j/jakartaee-tutorial-examples) is a very comprehensive resource showing you how to use many Jakarta EE APIs and features.
-* The [Cargo Tracker](https://eclipse-ee4j.github.io/cargotracker/) project demonstrates fist-hand how you can develop applications with Jakarta EE using widely adopted architectural best practices like Domain-Driven Design (DDD).
+* The [Cargo Tracker](https://eclipse-ee4j.github.io/cargotracker/) project demonstrates first-hand how you can develop applications with Jakarta EE using widely adopted architectural best practices like Domain-Driven Design (DDD).
