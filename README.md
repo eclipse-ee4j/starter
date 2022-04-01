@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="images/jakartaee-logo.jpg" width="800">
+    <img src="images/jakartaee_logo.jpg" width="800">
 </p>
 
 # Eclipse Starter for Jakarta EE
