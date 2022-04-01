@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="images/jakartaee-logo.jpg" width="800">
+</p>
+
 # Eclipse Starter for Jakarta EE
 This is the official Eclipse Foundation starter for Jakarta EE. It generates code to help get started with Jakarta EE projects using Maven. It is possible to do so using a Maven Archetypes. In the future the Starter will include a Web UI.
 
@@ -41,13 +45,6 @@ docker run -it --rm -p 8080:8080 jakartaee-cafe:v1
 Once Payara starts, you can access the project at http://localhost:8080/jakartaee-cafe.
 
 The generated starter code is simply a Maven project. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
-
-
-<p align="center">
-    <a href="https://eclipse-ee4j.github.io/jakartaee-tutorial">
-       <img src="assets/images/tutorial-logo.jpeg" width=400>
-    </a>
-</p>
 
 **[The Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial)** is a comprehensive guide to 
 developing enteriprise applications for the [Jakarta EE Platform](https://jakarta.ee).
