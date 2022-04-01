@@ -1,7 +1,7 @@
 remote_theme: jakartaee/jekyll-theme-jakarta-ee
 
-title: [Starter for Jakarta EE]
-description: [Generate Jakarta EE Maven Project with Examples]
+title: [Eclipse Starter for Jakarta EE]
+description: [Generates code to help get started with Jakarta EE projects using Maven]
 
 links:
   license: LICENSE
