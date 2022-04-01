@@ -2,21 +2,13 @@
     <img src="images/jakartaee_logo.jpg" width="800">
 </p>
 
-# Eclipse Starter for Jakarta EE
-This is the official Eclipse Foundation starter for Jakarta EE. It generates code to help get started with Jakarta EE projects using Maven. It is possible to do so using a Maven Archetypes. In the future the Starter will include a Web UI.
-
-## Building Maven Archetype from Source
-In order to build the Maven Archetype from source, please download this repository on your file system (the easiest way may be to [download as zip](https://github.com/eclipse-ee4j/starter/archive/refs/heads/master.zip)). Then execute (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
-
-```
-mvn clean install
-```
+Welcome to the official Eclipse Foundation starter for Jakarta EE. The starter is a Maven Archetype that generates sample code to get you going quickly with simple Jakarta EE microservices projects.
 
 ## Generate Jakarta EE Project
 In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
 
 ```
-mvn archetype:generate -DarchetypeGroupId="org.eclipse" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.0.0-SNAPSHOT"
+mvn archetype:generate -DarchetypeGroupId="org.eclipse" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.0.0"
 ```
 
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
@@ -46,36 +38,16 @@ Once Payara starts, you can access the project at http://localhost:8080/jakartae
 
 The generated starter code is simply a Maven project. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
+We hope you enjoy your Jakarta EE journey!
+
 **[The Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial)** is a comprehensive guide to 
 developing enteriprise applications for the [Jakarta EE Platform](https://jakarta.ee).
 
-
-## Try it out!
-
-Download and unzip [Eclipse GlassFish](https://glassfish.org/download)
-
-```
-[glassfish-install-dir]$ ./bin/asadmin start-domain
-```
-
-Download and unzip [simple-hello.zip](https://eclipse-ee4j.github.io/starter/samples/simple-hello.zip)
-
-```
-$ cd simple-hello
-$ mvn clean package
-$ cp target/simple-hello.war [glassfish-install-dir]/glassfish/domains/domain1/autodeploy
-```
-
-Then, go to 
-
-```
-http://localhost:8080/simple-hello/hello
-```
-
 ## Learn more!
+There are many free resources to learn Jakarta EE! The following are some that you should begin exploring alongside the starter.
 
-Your first stop needs to be [Your First Cup: An Introduction to the Jakarta EE Platform](https://eclipse-ee4j.github.io/jakartaee-firstcup/).
-
-You can further explore [First Cup Examples](https://github.com/eclipse-ee4j/jakartaee-firstcup-examples).
-
-And then look at the [Jakarta EE Tutorial Examples](https://github.com/eclipse-ee4j/jakartaee-tutorial-examples).
+* The [Jakarta EE Tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial) is a comprehensive reference for developing applications with Jakarta EE.
+* The [First Cup](https://eclipse-ee4j.github.io/jakartaee-firstcup/) is part of the Tutorial and is a gentle introduction to Jakarta EE.
+* You can further explore the [First Cup Examples](https://github.com/eclipse-ee4j/jakartaee-firstcup-examples) to get a feel for how Jakarta EE applications look like.
+* The [Jakarta EE Tutorial Examples](https://github.com/eclipse-ee4j/jakartaee-tutorial-examples) is a very comprehensive resource showing you how to use many Jakarta EE APIs and features.
+* The [Cargo Tracker](https://eclipse-ee4j.github.io/cargotracker/) project demonstrates fist-hand how you can develop applications with Jakarta EE using widely adopted architectural best practices like Domain-Driven Design (DDD).
