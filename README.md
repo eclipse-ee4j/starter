@@ -48,7 +48,6 @@ Once Payara starts, you can access the project at http://localhost:8080/jakartae
 The generated starter code is simply a Maven project. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
 ## GlassFish
-
 * To generate a sample Jakarta EE project with GlassFish, please execute the following (please ensure you have installed a [Java SE 8 implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)). Please note that the generated application will only work with Java SE 8 for GlassFish 5.
 
   ```
@@ -63,11 +62,36 @@ The generated starter code is simply a Maven project. You can easily load, explo
  
   Once GlassFish starts, you can access the project at http://localhost:8080/jakartaee-cafe.
   Note that GlassFish currently does not include an official Docker image.
+  
+## TomEE
+* To generate a sample Jakarta EE project with TomEE, please execute the following (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)).
+
+  ```
+  mvn archetype:generate -DarchetypeGroupId="org.eclipse" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.1.0-SNAPSHOT" -Druntime="tomee"
+  ```
+
+* To run the generated project with TomEE, please execute the following from the project directory - named `jakartaee-cafe` by default. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi).
+
+  ```
+  mvn clean package tomee:run
+  ```
+ 
+  Once TomEE starts, you can access the project at http://localhost:8080/jakartaee-cafe.
+
+* To run the generated project with TomEE and Docker, execute the following commands from the `jakartaee-cafe` directory (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8), [Maven 3+](https://maven.apache.org/download.cgi) and [Docker](https://docs.docker.com/get-docker/)).
+
+  ```
+  mvn clean package
+  docker build -t jakartaee-cafe:v1 .
+  docker run -it --rm -p 8080:8080 jakartaee-cafe:v1
+  ```
+  
+  Once TomEE starts, you can access the project at http://localhost:8080/jakartaee-cafe.
 
 ## Roadmap
 The following is a high level roadmap for the project. All contributions are welcome advancing any of this work.
 * Set up nightly build.
-* Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as WildFly, Open Liberty and TomEE.
+* Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as WildFly and Open Liberty.
 * Add instructions for Eclipse IDE.
 * Improve look and feel.
 * Add starter UI capability.
