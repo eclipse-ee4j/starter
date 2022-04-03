@@ -13,7 +13,7 @@
 		Starter. It is a simple RESTful CRUD service that uses a
 		representative set of Jakarta EE technologies such as REST, Enterprise
 		Beans, CDI, Persistence, JSON Binding and Bean Validation.
-    </description>
+        </description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -53,6 +53,7 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Embedded database -->
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
