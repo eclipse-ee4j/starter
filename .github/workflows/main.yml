@@ -53,3 +53,12 @@ jobs:
           
       - name: Run GlassFish Application Maven Build
         run: mvn clean install --file app/glassfish/jakartaee-cafe/pom.xml
+        
+      - name: Run Maven Archetype for TomEE
+        run: |
+          mkdir -p app/tomee
+          cd app/tomee
+          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=tomee
+          
+      - name: Run TomEE Application Maven Build
+        run: mvn clean install --file app/tomee/jakartaee-cafe/pom.xml
