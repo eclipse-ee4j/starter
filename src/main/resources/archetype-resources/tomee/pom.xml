@@ -52,6 +52,15 @@
 			<version>2.3.6</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Embedded Jakarta EE runtime -->
+		<dependency>
+			<groupId>org.apache.tomee</groupId>
+			<artifactId>apache-tomee</artifactId>
+			<version>8.0.10</version>
+			<classifier>plume</classifier>
+			<type>zip</type>
+		</dependency>		
 
 		<!-- Embedded database -->
 		<dependency>
@@ -92,14 +101,6 @@
 			<version>8.0.10</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.apache.tomee</groupId>
-			<artifactId>apache-tomee</artifactId>
-			<version>8.0.10</version>
-			<classifier>plume</classifier>
-			<type>zip</type>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -127,6 +128,8 @@
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
+			
+			<!-- Execute 'mvn clean package tomee:run' to run the application. -->
 			<plugin>
 				<groupId>org.apache.tomee.maven</groupId>
 				<artifactId>tomee-maven-plugin</artifactId>
