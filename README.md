@@ -18,7 +18,7 @@ In order to run the Maven Archetype and generate a sample Jakarta EE project, pl
 mvn archetype:generate -DarchetypeGroupId="org.eclipse" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.1.0-SNAPSHOT"
 ```
 
-Note that by default the Archetype will use Payara as the Jakarta EE runtime. You can use GlassFish instead (please see the sections below for the commands to execute instead).
+Note that by default the Archetype will use Payara as the Jakarta EE runtime. You can use GlassFish instead (please see the section below for the commands to execute instead).
 
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
