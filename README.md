@@ -1,5 +1,8 @@
 # Eclipse Starter for Jakarta EE
-This is the official Eclipse Foundation starter for Jakarta EE. It generates code to help get started with Jakarta EE projects using Maven. It is possible to do so using a Maven Archetypes. In the future the Starter will include a Web UI.
+This is the official Eclipse Foundation starter for Jakarta EE. It generates code to help get started with Jakarta EE projects using Maven. It is possible to do so using a Maven Archetype. In the future the Starter will include a Web UI.
+
+## Current Release
+Please note that this is a development version of the starter. For the current release, please visit the [project website](https://eclipse-ee4j.github.io/starter/). This code will allow you to use features that are not yet released. It will also allow you to build the starter from source.
 
 ## Building Maven Archetype from Source
 In order to build the Maven Archetype from source, please download this repository on your file system (the easiest way may be to [download as zip](https://github.com/eclipse-ee4j/starter/archive/refs/heads/master.zip)). Then execute (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
@@ -12,7 +15,7 @@ mvn clean install
 In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
 
 ```
-mvn archetype:generate -DarchetypeGroupId=org.eclipse -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.0
+mvn archetype:generate -DarchetypeGroupId="org.eclipse" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.0.0-SNAPSHOT"
 ```
 
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
@@ -51,3 +54,4 @@ The following is a high level roadmap for the project. All contributions are wel
 * Add starter UI capability.
 * Add support for generating a Faces UI instead of REST.
 * Transition to Jakarata EE 9.1.
+
