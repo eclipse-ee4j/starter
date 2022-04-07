@@ -67,7 +67,7 @@ The generated starter code is simply a Maven project. You can easily load, explo
 * To generate a sample Jakarta EE project with TomEE, please execute the following (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)).
 
   ```
-  mvn archetype:generate -DarchetypeGroupId="org.eclipseorg.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.1.0-SNAPSHOT" -Druntime="tomee"
+  mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.1.0-SNAPSHOT" -Druntime="tomee"
   ```
 
 * To run the generated project with TomEE, please execute the following from the project directory - named `jakartaee-cafe` by default. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi).
