@@ -1,8 +1,4 @@
-<archetype-descriptor
-	xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 https://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd"
-	name="jakarta-starter">
+<archetype-descriptor xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 https://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="jakarta-starter">
 
 	<requiredProperties>
 		<requiredProperty key="groupId">
@@ -17,9 +13,14 @@
 		<requiredProperty key="package">
 			<defaultValue>org.eclipse</defaultValue>
 		</requiredProperty>
+		<requiredProperty key="runtime">
+			<defaultValue>payara</defaultValue>
+			<validationRegex>(?i)^(payara|glassfish|tomee)$</validationRegex>
+		</requiredProperty>
 	</requiredProperties>
 
 	<fileSets>
+		<!-- Default/Payara -->
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
 			<directory>src/main/java</directory>
 		</fileSet>
@@ -41,5 +42,43 @@
 				<include>Dockerfile</include>
 			</includes>
 		</fileSet>
+
+		<!-- GlassFish -->
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>glassfish/src/main/java</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>glassfish/src/main/webapp</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>glassfish/src/test/java</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>glassfish/src/test/resources</directory>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>glassfish</directory>
+			<includes>
+				<include>pom.xml</include>
+			</includes>
+		</fileSet>
+		
+		<!-- TomEE -->
+		<fileSet encoding="UTF-8">
+			<directory>tomee/src/main/webapp</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>tomee/src/test/java</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>tomee/src/test/resources</directory>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>tomee</directory>
+			<includes>
+				<include>pom.xml</include>
+				<include>Dockerfile</include>
+			</includes>
+		</fileSet>		
 	</fileSets>
 </archetype-descriptor>
