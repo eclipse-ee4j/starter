@@ -2,10 +2,10 @@
     <img src="images/jakartaee_logo.jpg" width="100%">
 </p>
 
-Welcome to the official Eclipse Foundation starter for Jakarta EE. The starter is a Maven Archetype that generates sample code to get you going quickly with simple Jakarta EE microservices projects.
+Welcome to the official Eclipse Foundation starter for Jakarta EE. The starter is a Maven Archetype that generates sample code to get you going quickly with simple Jakarta EE microservices projects. The starter will include a web UI in a subsequent release.
 
 ## Generate Jakarta EE Project
-In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
+In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute the following. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
 
 ```
 mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.0.0"
@@ -13,7 +13,7 @@ mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtif
 
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
-If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-cafe`. You can then run the project by executing the following command from the `jakartaee-cafe` directory (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi)):
+If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-cafe`. You can then run the project by executing the following command from the `jakartaee-cafe` directory. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
 
 ```
 mvn clean package payara-micro:start
@@ -21,7 +21,7 @@ mvn clean package payara-micro:start
 
 Once Payara Micro starts, you can access the project at http://localhost:8080.
 
-You can also run the project via Docker. To build the Docker image, execute the following commands from the `jakartaee-cafe` directory (please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8), [Maven 3+](https://maven.apache.org/download.cgi) and [Docker](https://docs.docker.com/get-docker/)): 
+You can also run the project via Docker. To build the Docker image, execute the following commands from the `jakartaee-cafe` directory. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8), [Maven 3+](https://maven.apache.org/download.cgi) and [Docker](https://docs.docker.com/get-docker/) (we have tested with Java SE 8, Java SE 11 and Java SE 17). 
 
 ```
 mvn clean package
