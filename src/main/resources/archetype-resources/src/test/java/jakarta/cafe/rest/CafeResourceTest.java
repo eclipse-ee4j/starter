@@ -75,8 +75,8 @@ public class CafeResourceTest {
 		coffee = query.getSingleResult();
 
 		assertNotNull(coffee);
-		assertEquals(coffee.getName(), "Test-A");
-		assertEquals(coffee.getPrice().doubleValue(), 7.25, 0);
+		assertEquals("Test-A", coffee.getName());
+		assertEquals(7.25, coffee.getPrice(), 0);
 	}
 
 	@Test
@@ -91,8 +91,8 @@ public class CafeResourceTest {
 				.request(MediaType.APPLICATION_JSON).get(Coffee.class);
 
 		assertNotNull(coffee);
-		assertEquals(coffee.getName(), "Test-B");
-		assertEquals(coffee.getPrice().doubleValue(), 5.99, 0);
+		assertEquals("Test-B", coffee.getName());
+		assertEquals(5.99, coffee.getPrice(), 0);
 	}
 
 	@Test
@@ -111,13 +111,13 @@ public class CafeResourceTest {
 				.get(new GenericType<List<Coffee>>() {
 				});
 
-		assertEquals(coffees.size(), 3);
-		assertEquals(coffees.get(0).getName(), "Test-C");
-		assertEquals(coffees.get(0).getPrice().doubleValue(), 4.75, 0);
-		assertEquals(coffees.get(1).getName(), "Test-D");
-		assertEquals(coffees.get(1).getPrice().doubleValue(), 1.99, 0);
-		assertEquals(coffees.get(2).getName(), "Test-E");
-		assertEquals(coffees.get(2).getPrice().doubleValue(), 2.95, 0);
+		assertEquals(3, coffees.size());
+		assertEquals("Test-C", coffees.get(0).getName());
+		assertEquals(4.75, coffees.get(0).getPrice(), 0);
+		assertEquals("Test-D", coffees.get(1).getName());
+		assertEquals(1.99, coffees.get(1).getPrice(), 0);
+		assertEquals("Test-E", coffees.get(2).getName());
+		assertEquals(2.95, coffees.get(2).getPrice(), 0);
 	}
 
 	@Test
