@@ -96,3 +96,6 @@ The following is a high level roadmap for the project. All contributions are wel
 * Add starter UI capability.
 * Add support for generating a Faces UI instead of REST.
 * Improve look and feel.
+
+## Known Issues
+* Note that Payara does not yet work on the Apple M1 chip. If you are on an M1 chip, we suggest you use GlassFish or TomEE for the time being.
