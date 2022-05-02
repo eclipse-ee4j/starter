@@ -20,7 +20,7 @@
 		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-		<jakartaee-api.version>8.0.0</jakartaee-api.version>
+		<jakartaee-api.version>9.1.0</jakartaee-api.version>
 	</properties>
 
 	<dependencyManagement>
