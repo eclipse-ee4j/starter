@@ -97,8 +97,8 @@
 		<fileSet encoding="UTF-8">
 			<directory>jee9/src/test/resources</directory>
 		</fileSet>
-		<fileSet encoding="UTF-8">
-			<directory></directory>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>jee9</directory>
 			<includes>
 				<include>Dockerfile</include>
 				<include>pom.xml</include>
