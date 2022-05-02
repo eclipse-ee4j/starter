@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+	<servlet>
+		<servlet-name>javax.ws.rs.core.Application</servlet-name>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>javax.ws.rs.core.Application</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<data-source>
+		<name>java:app/jdbc/JakartaEECafeDB</name>
+		<class-name>org.h2.jdbcx.JdbcDataSource</class-name>
+		<url>jdbc:h2:file:./jakartaee-cafe-data/jakartaee-cafe-data;create=true</url>
+		<max-pool-size>32</max-pool-size>
+		<min-pool-size>2</min-pool-size>
+	</data-source>
+</web-app>
