@@ -31,13 +31,13 @@
 		<fileSet encoding="UTF-8">
 			<directory>src/main/resources</directory>
 		</fileSet>
-		<fileSet encoding="UTF-8">
+		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/main/webapp</directory>
 		</fileSet>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
 			<directory>src/test/java</directory>
 		</fileSet>
-		<fileSet encoding="UTF-8">
+		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/test/resources</directory>
 		</fileSet>
 		<fileSet encoding="UTF-8">

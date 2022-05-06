@@ -5,9 +5,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+#if( ${jakartaVersion} == '8')
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+#else
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+#end
 
 import ${package}.jakarta.cafe.model.entity.Coffee;
 

@@ -6,9 +6,15 @@
 	<persistence-unit name="coffees">
 		<jta-data-source>java:app/jdbc/JakartaEECafeDB</jta-data-source>
 		<properties>
+#if( ${jakartaVersion} == '8')
 			<property
 				name="javax.persistence.schema-generation.database.action"
 				value="drop-and-create" />
+#else
+			<property
+				name="jakarta.persistence.schema-generation.database.action"
+				value="drop-and-create" />
+#end
 			<property name="eclipselink.logging.level.sql" value="FINE" />
 			<property name="eclipselink.logging.parameters" value="true" />
 			<property name="hibernate.show_sql" value="true" />

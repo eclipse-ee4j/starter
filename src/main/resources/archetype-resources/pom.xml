@@ -18,9 +18,15 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
+#if( ${jakartaVersion} == '8')
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<jakartaee-api.version>8.0.0</jakartaee-api.version>
+#else
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<jakartaee-api.version>9.1.0</jakartaee-api.version>
+#end
 	</properties>
 
 	<dependencyManagement>
@@ -57,7 +63,11 @@
 		<dependency>
 			<groupId>fish.payara.extras</groupId>
 			<artifactId>payara-micro</artifactId>
+#if( ${jakartaVersion} == '8')
 			<version>5.2021.10</version>
+#else
+			<version>6.2021.1.Alpha1</version>
+#end
 			<scope>test</scope>
 		</dependency>
 
@@ -94,13 +104,22 @@
 			<scope>test</scope>
 		</dependency>
 
+#if( ${jakartaVersion} == '8')
 		<dependency>
 			<groupId>fish.payara.arquillian</groupId>
 			<artifactId>arquillian-payara-micro-managed</artifactId>
 			<version>2.4.1</version>
 			<scope>test</scope>
 		</dependency>
+#else
+		<dependency>
+			<groupId>fish.payara.arquillian</groupId>
+			<artifactId>arquillian-payara-micro-managed</artifactId>
+			<version>3.0.alpha3</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+#end
 
 	<build>
 		<finalName>jakartaee-cafe</finalName>
@@ -134,7 +153,11 @@
 					<artifactItem>
 						<groupId>fish.payara.extras</groupId>
 						<artifactId>payara-micro</artifactId>
+#if( ${jakartaVersion} == '8')
 						<version>5.2021.10</version>
+#else
+						<version>6.2021.1.Alpha1</version>
+#end
 					</artifactItem>
 					<deployWar>true</deployWar>
 					<contextRoot>/</contextRoot>
