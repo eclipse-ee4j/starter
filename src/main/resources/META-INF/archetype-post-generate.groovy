@@ -1,5 +1,8 @@
 import org.apache.commons.io.FileUtils
 
+import java.nio.file.Files
+import java.nio.file.attribute.PosixFilePermission
+
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 def glassFishDirectory = new File(outputDirectory, "glassfish")
 def tomEEDirectory = new File(outputDirectory, "tomee")
@@ -22,3 +25,14 @@ switch (runtime)
 
 FileUtils.forceDelete(glassFishDirectory)
 FileUtils.forceDelete(tomEEDirectory)
+
+// make mvnw executable
+makeExecutable(outputDirectory.toPath().resolve("mvnw").toFile())
+
+static def makeExecutable(File file) {
+    Files.setPosixFilePermissions(file.toPath(), [PosixFilePermission.OWNER_READ,
+                                                  PosixFilePermission.OWNER_WRITE,
+                                                  PosixFilePermission.OWNER_EXECUTE,
+                                                  PosixFilePermission.GROUP_READ,
+                                                  PosixFilePermission.OTHERS_READ].toSet())
+}
