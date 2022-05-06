@@ -17,6 +17,10 @@
 			<defaultValue>payara</defaultValue>
 			<validationRegex>(?i)^(payara|glassfish|tomee)$</validationRegex>
 		</requiredProperty>
+		<requiredProperty key="jakartaVersion">
+			<defaultValue>8</defaultValue>
+			<validationRegex>8|9</validationRegex>
+		</requiredProperty>
 	</requiredProperties>
 
 	<fileSets>
