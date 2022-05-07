@@ -18,9 +18,15 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
+		#if( ${jakartaVersion} == '8')
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<jakartaee-api.version>8.0.0</jakartaee-api.version>
+		#else
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<jakartaee-api.version>9.1.0</jakartaee-api.version>
+		#end
 	</properties>
 
 	<dependencyManagement>
