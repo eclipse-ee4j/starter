@@ -6,6 +6,8 @@
                 http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 #if( ${jakartaVersion} == '8')
 	<defaultProtocol type="Servlet 3.0" />
+#else
+	<defaultProtocol type="Servlet 5.0" />
 #end
 	<engine>
 		<property name="deploymentExportPath">target/</property>
