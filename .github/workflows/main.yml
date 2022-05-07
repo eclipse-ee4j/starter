@@ -43,7 +43,7 @@ jobs:
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter-minimal -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-hello-world -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=payara
           
       - name: Run Payara Minimal Application Maven Build
-        run: mvn clean install --file app/minimal/payara/jakartaee-hello-world/pom.xml
+        run: mvn clean package --file app/minimal/payara/jakartaee-hello-world/pom.xml
         
       - name: Run Maven Minimal Archetype for GlassFish
         run: |
@@ -52,7 +52,7 @@ jobs:
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter-minimal -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-hello-world -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=glassfish
           
       - name: Run GlassFish Minimal Application Maven Build
-        run: mvn clean install --file app/minimal/glassfish/jakartaee-hello-world/pom.xml
+        run: mvn clean package --file app/minimal/glassfish/jakartaee-hello-world/pom.xml
         
       - name: Run Maven Minimal Archetype for TomEE
         run: |
@@ -61,7 +61,7 @@ jobs:
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter-minimal -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-hello-world -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=tomee
           
       - name: Run TomEE Minimal Application Maven Build
-        run: mvn clean install --file app/minimal/tomee/jakartaee-hello-world/pom.xml        
+        run: mvn clean package --file app/minimal/tomee/jakartaee-hello-world/pom.xml        
         
       - name: Run Maven REST Archetype for Payara
         run: |
@@ -70,7 +70,7 @@ jobs:
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=payara
           
       - name: Run Payara REST Application Maven Build
-        run: mvn clean install --file app/rest/payara/jakartaee-cafe/pom.xml
+        run: mvn clean package --file app/rest/payara/jakartaee-cafe/pom.xml
         
       - name: Run Maven REST Archetype for GlassFish
         run: |
@@ -79,7 +79,7 @@ jobs:
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=glassfish
           
       - name: Run GlassFish REST Application Maven Build
-        run: mvn clean install --file app/rest/glassfish/jakartaee-cafe/pom.xml
+        run: mvn clean package --file app/rest/glassfish/jakartaee-cafe/pom.xml
         
       - name: Run Maven REST Archetype for TomEE
         run: |
@@ -88,4 +88,4 @@ jobs:
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=tomee
           
       - name: Run TomEE REST Application Maven Build
-        run: mvn clean install --file app/rest/tomee/jakartaee-cafe/pom.xml
+        run: mvn clean package --file app/rest/tomee/jakartaee-cafe/pom.xml
