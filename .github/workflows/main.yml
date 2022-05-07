@@ -33,7 +33,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
     
-      - name: Build Maven Archetype
+      - name: Build Maven Archetypes
         run: mvn clean install --file pom.xml
         
       - name: Run Maven REST Archetype for Payara
