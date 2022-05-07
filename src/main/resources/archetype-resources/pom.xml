@@ -118,8 +118,8 @@
 			<version>3.0.alpha3</version>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
 #end
+	</dependencies>
 
 	<build>
 		<finalName>jakartaee-cafe</finalName>
