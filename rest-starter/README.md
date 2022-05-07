@@ -1,15 +1,5 @@
-# Eclipse Starter for Jakarta EE
-This is the official Eclipse Foundation starter for Jakarta EE. It generates code to help get started with Jakarta EE projects using Maven. It is possible to do so using a Maven Archetype. In the future the starter will include a Web UI.
-
-## Current Release
-Please note that this is a development version of the starter. For the current release, please visit the [project website](https://eclipse-ee4j.github.io/starter/). This code will allow you to use features that are not yet released. It will also allow you to build the starter from source.
-
-## Building Maven Archetype from Source
-In order to build the Maven Archetype from source, please download this repository on your file system (the easiest way may be to [download as zip](https://github.com/eclipse-ee4j/starter/archive/refs/heads/master.zip)). Then execute the following. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
-
-```
-mvn clean install
-```
+# Eclipse Starter for Jakarta EE (REST/CRUD)
+This Eclipse Foundation starter for Jakarta EE Maven Archetype generates simple REST CRUD code.
 
 ## Generate Jakarta EE Project
 In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute the following. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
@@ -19,8 +9,6 @@ mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtif
 ```
 
 Note that by default the Archetype will use Payara as the Jakarta EE runtime. You can use GlassFish or TomEE instead (please see the sections below for the commands to execute instead).
-
-If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
 If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-cafe`. You can then run the project by executing the following command from the `jakartaee-cafe` directory. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
 
@@ -44,8 +32,6 @@ docker run -it --rm -p 8080:8080 jakartaee-cafe:v1
 ```
 
 Once Payara starts, you can access the project at http://localhost:8080/jakartaee-cafe.
-
-The generated starter code is simply a Maven project. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
 ## GlassFish
 * To generate a sample Jakarta EE project with GlassFish, please execute the following. Please ensure you have installed a [Java SE 8 implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi). Please note that the generated application will only work with Java SE 8 for GlassFish 5.
@@ -87,15 +73,3 @@ The generated starter code is simply a Maven project. You can easily load, explo
   ```
   
   Once TomEE starts, you can access the project at http://localhost:8080/jakartaee-cafe.
-
-## Roadmap
-The following is a high level roadmap for the project. All contributions are welcome advancing any of this work.
-* Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as WildFly and Open Liberty.
-* Transition to Jakarta EE 9.1.
-* Add instructions for Eclipse IDE.
-* Add starter UI capability.
-* Add support for generating a Faces UI instead of REST.
-* Improve look and feel.
-
-## Known Issues
-* Note that Payara does not yet work on the Apple M1 chip. If you are on an M1 chip, we suggest you use GlassFish or TomEE for the time being.
