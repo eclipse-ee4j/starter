@@ -1,5 +1,5 @@
 # Eclipse Starter for Jakarta EE (Minimal)
-This is Eclipse Foundation starter for Jakarta EE Maven Archetype generates minimal getting started code.
+This Eclipse Foundation starter for Jakarta EE Maven Archetype generates minimal getting started code.
 
 ## Generate Jakarta EE Project
 In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute the following. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
