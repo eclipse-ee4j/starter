@@ -36,29 +36,29 @@ jobs:
       - name: Build Maven Archetype
         run: mvn clean install --file pom.xml
         
-      - name: Run Maven Archetype for Payara
+      - name: Run Maven REST Archetype for Payara
         run: |
-          mkdir -p app/payara
-          cd app/payara
+          mkdir -p app/rest/payara
+          cd app/rest/payara
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=payara
           
-      - name: Run Payara Application Maven Build
-        run: mvn clean install --file app/payara/jakartaee-cafe/pom.xml
+      - name: Run Payara REST Application Maven Build
+        run: mvn clean install --file app/rest/payara/jakartaee-cafe/pom.xml
         
-      - name: Run Maven Archetype for GlassFish
+      - name: Run Maven REST Archetype for GlassFish
         run: |
-          mkdir -p app/glassfish
-          cd app/glassfish
+          mkdir -p app/rest/glassfish
+          cd app/rest/glassfish
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=glassfish
           
-      - name: Run GlassFish Application Maven Build
-        run: mvn clean install --file app/glassfish/jakartaee-cafe/pom.xml
+      - name: Run GlassFish REST Application Maven Build
+        run: mvn clean install --file app/rest/glassfish/jakartaee-cafe/pom.xml
         
-      - name: Run Maven Archetype for TomEE
+      - name: Run Maven REST Archetype for TomEE
         run: |
-          mkdir -p app/tomee
-          cd app/tomee
+          mkdir -p app/rest/tomee
+          cd app/rest/tomee
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=tomee
           
-      - name: Run TomEE Application Maven Build
-        run: mvn clean install --file app/tomee/jakartaee-cafe/pom.xml
+      - name: Run TomEE REST Application Maven Build
+        run: mvn clean install --file app/rest/tomee/jakartaee-cafe/pom.xml
