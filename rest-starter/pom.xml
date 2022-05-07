@@ -7,12 +7,13 @@
 	<version>1.1.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 
-	<name>Eclipse Starter for Jakarta EE</name>
+	<name>Eclipse Starter for Jakarta EE (REST/CRUD)</name>
 	<description>
 		This is the official Eclipse Foundation starter for Jakarta EE.
 		It generates code to help get started with Jakarta EE projects
 		using Maven. It is possible to do so using Maven
-		archetypes. Support for a UI may be added at a later point. 
+		archetypes. This archetype generates REST/CRUD code.
+		Support for a UI will be added at a later point. 
         </description>
 	<url>https://eclipse-ee4j.github.io/starter/</url>
 
@@ -40,7 +41,7 @@
 	</licenses>
 
 	<developers>
-		<!-- TODO: All active committers/contributors should add their information here. -->
+		<!-- All active committers/contributors should add their information here. -->
 		<developer>
 			<id>m-reza-rahman</id>
 			<name>Reza Rahman</name>
