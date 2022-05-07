@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>org.eclipse.starter</groupId>
+		<artifactId>jakarta-starter-modules</artifactId>
+		<version>1.1.0-SNAPSHOT</version>
+	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.eclipse.starter</groupId>
@@ -15,88 +22,4 @@
 		archetypes. This archetype generates REST/CRUD code.
 		Support for a UI will be added at a later point. 
         </description>
-	<url>https://eclipse-ee4j.github.io/starter/</url>
-
-	<parent>
-		<groupId>org.eclipse.ee4j</groupId>
-		<artifactId>project</artifactId>
-		<version>1.0.7</version>
-	</parent>
-
-	<organization>
-		<name>Eclipse Foundation</name>
-		<url>https://www.eclipse.org/org/foundation/</url>
-	</organization>
-
-	<issueManagement>
-		<system>github</system>
-		<url>https://github.com/eclipse-ee4j/starter/issues</url>
-	</issueManagement>
-
-	<licenses>
-		<license>
-			<name>Eclipse Public License - v 2.0</name>
-			<url>https://www.eclipse.org/legal/epl-2.0/</url>
-		</license>
-	</licenses>
-
-	<developers>
-		<!-- All active committers/contributors should add their information here. -->
-		<developer>
-			<id>m-reza-rahman</id>
-			<name>Reza Rahman</name>
-			<email>reza_rahman@lycos.com</email>
-		</developer>
-		<developer>
-			<id>ivargrimstad</id>
-			<name>Ivar Grimstad</name>
-			<email>ivar.grimstad@eclipse-foundation.org</email>
-		</developer>
-	</developers>
-
-	<scm>
-		<connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
-		<developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
-		<url>http://github.com/eclipse-ee4j/starter/tree/master</url>
-	</scm>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.2.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.archetype</groupId>
-				<artifactId>archetype-packaging</artifactId>
-				<version>3.2.1</version>
-			</extension>
-		</extensions>
-	</build>
 </project>
