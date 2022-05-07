@@ -37,12 +37,9 @@
 			<directory>src/test/resources</directory>
 		</fileSet>
 		<fileSet encoding="UTF-8">
-			<directory/>
+			<directory></directory>
 			<includes>
 				<include>Dockerfile</include>
-				<include>mvnw</include>
-				<include>mvnw.cmd</include>
-				<include>.mvn/**</include>
 			</includes>
 		</fileSet>
 
