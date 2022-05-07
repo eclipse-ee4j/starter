@@ -1,8 +1,5 @@
 import org.apache.commons.io.FileUtils
 
-import java.nio.file.Files
-import java.nio.file.attribute.PosixFilePermission
-
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 def glassFishDirectory = new File(outputDirectory, "glassfish")
 def tomEEDirectory = new File(outputDirectory, "tomee")
@@ -26,13 +23,18 @@ switch (runtime)
 FileUtils.forceDelete(glassFishDirectory)
 FileUtils.forceDelete(tomEEDirectory)
 
-// make mvnw shell script executable
-makeExecutable(outputDirectory.toPath().resolve("mvnw").toFile())
+def pomFile = new File(outputDirectory, "pom.xml")
+def isWindows = System.properties['os.name'].toLowerCase().contains('windows')
+def starter = isWindows ? "cmd.exe" : "/bin/sh"
+def switcher = isWindows ? "/c" : "-c"
+def command = "mvn -f \"${pomFile.getAbsolutePath()}\" wrapper:wrapper"
 
-static def makeExecutable(File file) {
-    Files.setPosixFilePermissions(file.toPath(), [PosixFilePermission.OWNER_READ,
-                                                  PosixFilePermission.OWNER_WRITE,
-                                                  PosixFilePermission.OWNER_EXECUTE,
-                                                  PosixFilePermission.GROUP_READ,
-                                                  PosixFilePermission.OTHERS_READ].toSet())
+def output = new StringBuilder()
+def proc = [starter, switcher, command].execute();
+proc.consumeProcessOutput(output, output)
+proc.waitFor()
+
+if (proc.exitValue() != 0 || output == null || !output.contains("BUILD SUCCESS")) {
+    println("${output}")
+    throw new RuntimeException("Failed to generate code from archetype")
 }
