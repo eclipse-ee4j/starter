@@ -6,11 +6,19 @@
 	<persistence-unit name="coffees">
 		<jta-data-source>java:app/jdbc/JakartaEECafeDB</jta-data-source>
 		<properties>
+#if( ${jakartaVersion} == '8')
 			<property
 				name="javax.persistence.schema-generation.database.action"
 				value="drop-and-create" />
 			<property name="javax.persistence.sql-load-script-source"
 				value="META-INF/initial-data.sql" />
+#else
+			<property
+					name="jakarta.persistence.schema-generation.database.action"
+					value="drop-and-create" />
+			<property name="jakarta.persistence.sql-load-script-source"
+					  value="META-INF/initial-data.sql" />
+#end
 			<property name="eclipselink.logging.level.sql" value="FINE" />
 			<property name="eclipselink.logging.parameters" value="true" />
 			<property name="hibernate.show_sql" value="true" />
