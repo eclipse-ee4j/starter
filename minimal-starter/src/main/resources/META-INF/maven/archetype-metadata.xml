@@ -15,38 +15,20 @@
 		</requiredProperty>
 		<requiredProperty key="runtime">
 			<defaultValue>payara</defaultValue>
-			<validationRegex>(?i)^(payara|glassfish|tomee)$</validationRegex>
+			<validationRegex>^(payara|glassfish|tomee)$</validationRegex>
 		</requiredProperty>
 	</requiredProperties>
 
 	<fileSets>
-		<!-- Default/Payara -->
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
 			<directory>src/main/java</directory>
 		</fileSet>
 		<fileSet encoding="UTF-8">
 			<directory>src/main/webapp</directory>
 		</fileSet>
-		<fileSet encoding="UTF-8">
+		<fileSet filtered="true" encoding="UTF-8">
 			<directory></directory>
 			<includes>
-				<include>Dockerfile</include>
-			</includes>
-		</fileSet>
-
-		<!-- GlassFish -->
-		<fileSet filtered="true" encoding="UTF-8">
-			<directory>glassfish</directory>
-			<includes>
-				<include>pom.xml</include>
-			</includes>
-		</fileSet>
-		
-		<!-- TomEE -->
-		<fileSet filtered="true" encoding="UTF-8">
-			<directory>tomee</directory>
-			<includes>
-				<include>pom.xml</include>
 				<include>Dockerfile</include>
 			</includes>
 		</fileSet>		
