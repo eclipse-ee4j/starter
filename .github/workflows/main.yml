@@ -88,7 +88,7 @@ jobs:
         run: |
           mkdir -p app/payara
           cd app/payara
-          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=payara
+          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=payara -DjakartaVersion=9
 
       - name: Run Payara Application Maven Build
         run: mvn clean install --file app/payara/jakartaee-cafe/pom.xml
