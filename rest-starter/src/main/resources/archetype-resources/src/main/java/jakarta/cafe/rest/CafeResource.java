@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+#if (${runtime} == 'glassfish')
+import javax.ejb.EJB;
+#else
 import javax.inject.Inject;
+#end
 import javax.persistence.PersistenceException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -26,7 +30,11 @@ public class CafeResource {
 
 	private static final Logger logger = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
 
+	#if (${runtime} == 'glassfish')
+	@EJB
+	#else
 	@Inject
+	#end
 	private CafeRepository cafeRepository;
 
 	@GET
