@@ -2,25 +2,15 @@ package ${package}.jakarta.cafe.model.entity;
 
 import java.io.Serializable;
 
-#if( ${jakartaVersion} == '8')
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
-#else
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
-#end
+import ${jeePackage}.persistence.Entity;
+import ${jeePackage}.persistence.GeneratedValue;
+import ${jeePackage}.persistence.GenerationType;
+import ${jeePackage}.persistence.Id;
+import ${jeePackage}.persistence.NamedQuery;
+import ${jeePackage}.validation.constraints.NotBlank;
+import ${jeePackage}.validation.constraints.NotNull;
+import ${jeePackage}.validation.constraints.PositiveOrZero;
+
 
 @Entity
 @NamedQuery(name = "findAllCoffees", query = "SELECT o FROM Coffee o ORDER BY o.name")

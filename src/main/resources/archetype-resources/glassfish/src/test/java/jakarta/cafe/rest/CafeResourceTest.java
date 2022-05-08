@@ -5,40 +5,21 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.List;
-#if( ${jakartaVersion} == '8')
-import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-#else
-import jakarta.annotation.Resource;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-import jakarta.transaction.HeuristicMixedException;
-import jakarta.transaction.HeuristicRollbackException;
-import jakarta.transaction.NotSupportedException;
-import jakarta.transaction.RollbackException;
-import jakarta.transaction.SystemException;
-import jakarta.transaction.UserTransaction;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Entity;
-import jakarta.ws.rs.core.GenericType;
-import jakarta.ws.rs.core.MediaType;
-#end
-
+import ${jeePackage}.annotation.Resource;
+import ${jeePackage}.persistence.EntityManager;
+import ${jeePackage}.persistence.NoResultException;
+import ${jeePackage}.persistence.PersistenceContext;
+import ${jeePackage}.persistence.TypedQuery;
+import ${jeePackage}.transaction.HeuristicMixedException;
+import ${jeePackage}.transaction.HeuristicRollbackException;
+import ${jeePackage}.transaction.NotSupportedException;
+import ${jeePackage}.transaction.RollbackException;
+import ${jeePackage}.transaction.SystemException;
+import ${jeePackage}.transaction.UserTransaction;
+import ${jeePackage}.ws.rs.client.ClientBuilder;
+import ${jeePackage}.ws.rs.client.Entity;
+import ${jeePackage}.ws.rs.core.GenericType;
+import ${jeePackage}.ws.rs.core.MediaType;
 
 import ${package}.jakarta.cafe.model.CafeRepository;
 import ${package}.jakarta.cafe.model.entity.Coffee;
