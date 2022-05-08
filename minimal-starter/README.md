@@ -10,7 +10,7 @@ mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtif
 
 Note that by default the Archetype will use Payara as the Jakarta EE runtime. You can use GlassFish or TomEE instead (please see the sections below for the commands to execute instead).
 
-If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-hello-world`. You can then run the project by executing the following command from the `jakartaee-hello-world` directory. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project.
+If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-hello-world`. You can then run the project by executing the following command from the `jakartaee-hello-world` directory. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
 
 ```
 ./mvnw clean package payara-micro:start
