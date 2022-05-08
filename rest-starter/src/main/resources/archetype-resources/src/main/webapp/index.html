@@ -70,9 +70,12 @@
 	</ul>
 	<p>
 		You should be able to easily exercise the end-point using a tool such
-		as Postman or curl. There is also a generated OpenAPI document
+		as Postman or curl.
+		#if (${runtime} == 'payara')
+		There is also a generated OpenAPI document
 		available at <a href="/openapi">/openapi</a> (you should be able to
 		explore the document using a tool such as Swagger UI).
+		#end
 	</p>
 	<p>
 		<b>We hope you enjoy your Jakarta EE journey!</b>

@@ -1,3 +1,13 @@
+#if (${runtime} == 'glassfish')
+#set ($dbDriver = "org.apache.derby.jdbc.EmbeddedDriver")
+#set ($dbUrl = "jdbc:derby:/tmp/jakartaee-cafe-data;create=true")
+#elseif (${runtime} == 'tomee')
+#set ($dbDriver = "org.hsqldb.jdbcDriver")
+#set ($dbUrl = "jdbc:hsqldb:file:jakartaee-cafe-data;shutdown=true")
+#else
+#set ($dbDriver = "org.h2.jdbcx.JdbcDataSource")
+#set ($dbUrl = "jdbc:h2:file:./jakartaee-cafe-data/jakartaee-cafe-data;create=true")
+#end
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
@@ -15,8 +25,8 @@
 	</welcome-file-list>
 	<data-source>
 		<name>java:app/jdbc/JakartaEECafeDB</name>
-		<class-name>org.h2.jdbcx.JdbcDataSource</class-name>
-		<url>jdbc:h2:file:./jakartaee-cafe-data/jakartaee-cafe-data;create=true</url>
+		<class-name>$dbDriver</class-name>
+		<url>$dbUrl</url>
 		<max-pool-size>32</max-pool-size>
 		<min-pool-size>2</min-pool-size>
 	</data-source>

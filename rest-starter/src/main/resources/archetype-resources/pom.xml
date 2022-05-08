@@ -53,6 +53,32 @@
 			<scope>provided</scope>
 		</dependency>
 
+                #if (${runtime} == 'glassfish')
+		<!-- Embedded database -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.15.2.0</version>
+			<scope>runtime</scope>
+		</dependency>
+                #elseif (${runtime} == 'tomee')
+		<!-- Embedded Jakarta EE runtime -->
+		<dependency>
+			<groupId>org.apache.tomee</groupId>
+			<artifactId>apache-tomee</artifactId>
+			<version>8.0.10</version>
+			<classifier>plume</classifier>
+			<type>zip</type>
+		</dependency>		
+
+		<!-- Embedded database -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.6.1</version>
+			<scope>runtime</scope>
+		</dependency>		
+                #else
 		<!-- Embedded Jakarta EE runtime -->
 		<dependency>
 			<groupId>fish.payara.extras</groupId>
@@ -68,6 +94,7 @@
 			<version>2.1.210</version>
 			<scope>runtime</scope>
 		</dependency>
+		#end
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -94,12 +121,28 @@
 			<scope>test</scope>
 		</dependency>
 
+		#if (${runtime} == 'glassfish')
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-glassfish-managed-3.1</artifactId>
+			<version>1.0.2</version>
+			<scope>test</scope>
+		</dependency>		
+		#elseif (${runtime} == 'tomee')
+		<dependency>
+			<groupId>org.apache.tomee</groupId>
+			<artifactId>arquillian-tomee-remote</artifactId>
+			<version>8.0.10</version>
+			<scope>test</scope>
+		</dependency>		
+		#else
 		<dependency>
 			<groupId>fish.payara.arquillian</groupId>
 			<artifactId>arquillian-payara-micro-managed</artifactId>
 			<version>2.4.1</version>
 			<scope>test</scope>
 		</dependency>
+		#end
 	</dependencies>
 
 	<build>
@@ -118,6 +161,72 @@
 				</configuration>
 			</plugin>
 
+			#if (${runtime} == 'glassfish')
+			<!--Download GlassFish for Aquillian -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>unpack</id>
+						<phase>generate-test-resources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.glassfish.main.distributions</groupId>
+									<artifactId>glassfish</artifactId>
+									<version>5.1.0</version>
+									<type>zip</type>
+									<overWrite>false</overWrite>
+									<outputDirectory>/tmp</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Execute 'mvn clean package cargo:run' to run the application. -->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven3-plugin</artifactId>
+				<version>1.9.10</version>
+				<configuration>
+					<container>
+						<containerId>glassfish5x</containerId>
+						<zipUrlInstaller>
+							<url>https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip</url>
+						</zipUrlInstaller>
+					</container>
+				</configuration>
+			</plugin>					
+			#elseif (${runtime} == 'tomee')
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<systemPropertyVariables>
+						<tomee.classifier>plume</tomee.classifier>
+						<tomee.version>8.0.10</tomee.version>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+			
+			<!-- Execute 'mvn clean package tomee:run' to run the application. -->
+			<plugin>
+				<groupId>org.apache.tomee.maven</groupId>
+				<artifactId>tomee-maven-plugin</artifactId>
+				<version>8.0.10</version>
+				<configuration>
+					<tomeeClassifier>plume</tomeeClassifier>
+					<removeDefaultWebapps>false</removeDefaultWebapps>
+				</configuration>
+			</plugin>				
+			#else
 			<!-- Execute 'mvn clean package payara-micro:start' to run the application. -->
 			<plugin>
 				<groupId>fish.payara.maven.plugins</groupId>
@@ -140,6 +249,7 @@
 					<contextRoot>/</contextRoot>
 				</configuration>
 			</plugin>
+			#end
 		</plugins>
 	</build>
 </project>

@@ -15,68 +15,38 @@
 		</requiredProperty>
 		<requiredProperty key="runtime">
 			<defaultValue>payara</defaultValue>
-			<validationRegex>(?i)^(payara|glassfish|tomee)$</validationRegex>
+			<validationRegex>^(payara|glassfish|tomee)$</validationRegex>
 		</requiredProperty>
 	</requiredProperties>
 
 	<fileSets>
-		<!-- Default/Payara -->
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
 			<directory>src/main/java</directory>
 		</fileSet>
 		<fileSet encoding="UTF-8">
 			<directory>src/main/resources</directory>
 		</fileSet>
-		<fileSet encoding="UTF-8">
+		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/main/webapp</directory>
+			<excludes>
+			    <exclude>images/jakartaee_logo.jpg</exclude>
+                        </excludes>
 		</fileSet>
+		<fileSet filtered="false" encoding="UTF-8">
+			<directory>src/main/webapp</directory>
+			<includes>
+				<include>images/jakartaee_logo.jpg</include>
+			</includes>			
+		</fileSet>		
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
 			<directory>src/test/java</directory>
 		</fileSet>
-		<fileSet encoding="UTF-8">
+		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/test/resources</directory>
 		</fileSet>
-		<fileSet encoding="UTF-8">
+		<fileSet filtered="true" encoding="UTF-8">
 			<directory></directory>
 			<includes>
-				<include>Dockerfile</include>
-			</includes>
-		</fileSet>
-
-		<!-- GlassFish -->
-		<fileSet filtered="true" packaged="true" encoding="UTF-8">
-			<directory>glassfish/src/main/java</directory>
-		</fileSet>
-		<fileSet encoding="UTF-8">
-			<directory>glassfish/src/main/webapp</directory>
-		</fileSet>
-		<fileSet filtered="true" packaged="true" encoding="UTF-8">
-			<directory>glassfish/src/test/java</directory>
-		</fileSet>
-		<fileSet encoding="UTF-8">
-			<directory>glassfish/src/test/resources</directory>
-		</fileSet>
-		<fileSet filtered="true" encoding="UTF-8">
-			<directory>glassfish</directory>
-			<includes>
-				<include>pom.xml</include>
-			</includes>
-		</fileSet>
-		
-		<!-- TomEE -->
-		<fileSet encoding="UTF-8">
-			<directory>tomee/src/main/webapp</directory>
-		</fileSet>
-		<fileSet filtered="true" packaged="true" encoding="UTF-8">
-			<directory>tomee/src/test/java</directory>
-		</fileSet>
-		<fileSet encoding="UTF-8">
-			<directory>tomee/src/test/resources</directory>
-		</fileSet>
-		<fileSet filtered="true" encoding="UTF-8">
-			<directory>tomee</directory>
-			<includes>
-				<include>pom.xml</include>
 				<include>Dockerfile</include>
 			</includes>
 		</fileSet>		
