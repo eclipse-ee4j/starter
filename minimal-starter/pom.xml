@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>org.eclipse.starter</groupId>
+		<artifactId>jakarta-starter-modules</artifactId>
+		<version>1.1.0-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.eclipse.starter</groupId>
+	<artifactId>jakarta-starter-minimal</artifactId>
+	<version>1.1.0-SNAPSHOT</version>
+	<packaging>maven-archetype</packaging>
+
+	<name>Eclipse Starter for Jakarta EE (Minimal)</name>
+	<description>
+		This is the official Eclipse Foundation starter for Jakarta EE.
+		It generates code to help get started with Jakarta EE projects
+		using Maven. It is possible to do so using Maven
+		archetypes. This archetype generates minimal Jakarta EE code.
+		Support for a UI will be added at a later point. 
+        </description>
+</project>
