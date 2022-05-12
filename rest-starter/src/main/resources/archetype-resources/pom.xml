@@ -1,3 +1,7 @@
+#set ($jakartaApiVersion = "8.0.0")
+#if (${jakartaVersion} == '9')
+#set ($jakartaApiVersion = "9.1.0")
+#end
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -20,7 +24,7 @@
 		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-		<jakartaee-api.version>8.0.0</jakartaee-api.version>
+		<jakartaee-api.version>$jakartaApiVersion</jakartaee-api.version>
 	</properties>
 
 	<dependencyManagement>
@@ -52,8 +56,8 @@
 			<version>2.3.6</version>
 			<scope>provided</scope>
 		</dependency>
-
-                #if (${runtime} == 'glassfish')
+#if (${jakartaVersion} == '8.0.0')
+		#if (${runtime} == 'glassfish')
 		<!-- Embedded database -->
 		<dependency>
 			<groupId>org.apache.derby</groupId>
@@ -61,7 +65,7 @@
 			<version>10.15.2.0</version>
 			<scope>runtime</scope>
 		</dependency>
-                #elseif (${runtime} == 'tomee')
+		#elseif (${runtime} == 'tomee')
 		<!-- Embedded Jakarta EE runtime -->
 		<dependency>
 			<groupId>org.apache.tomee</groupId>
@@ -78,7 +82,7 @@
 			<version>2.6.1</version>
 			<scope>runtime</scope>
 		</dependency>		
-                #else
+		#else
 		<!-- Embedded Jakarta EE runtime -->
 		<dependency>
 			<groupId>fish.payara.extras</groupId>
@@ -95,6 +99,23 @@
 			<scope>runtime</scope>
 		</dependency>
 		#end
+#else
+		<!-- Embedded Jakarta EE runtime -->
+		<dependency>
+			<groupId>fish.payara.extras</groupId>
+			<artifactId>payara-micro</artifactId>
+			<version>5.2021.10</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Embedded database -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>2.1.210</version>
+			<scope>runtime</scope>
+		</dependency>
+#end
 
 		<dependency>
 			<groupId>junit</groupId>
