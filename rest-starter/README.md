@@ -8,7 +8,17 @@ In order to run the Maven Archetype and generate a sample Jakarta EE project, pl
 mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.1.0-SNAPSHOT"
 ```
 
-Note that by default the Archetype will use Payara as the Jakarta EE runtime. You can use GlassFish or TomEE instead (please see the sections below for the commands to execute instead).
+Note that by default the Archetype will use Payara as the Jakarta EE runtime And Jakarta 8 as version. You can use GlassFish or TomEE instead (please see the sections below for the commands to execute instead)
+
+If you want to specify the Jakarta version you can run the following command:
+
+```
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.1.0-SNAPSHOT" -DjakartaVersion=9
+```
+
+For now, only Payara supports Jakarta 9.
+
+<span style="color:yellow">WARNING:</span> For now , only the generation for the **Payara** runtime supports Jakarta 9.
 
 If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-cafe`. You can then run the project by executing the following command from the `jakartaee-cafe` directory. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
 

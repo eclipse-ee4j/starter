@@ -6,21 +6,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 #if (${runtime} == 'glassfish')
-import javax.ejb.EJB;
+import ${jeePackage}.ejb.EJB;
 #else
-import javax.inject.Inject;
+import ${jeePackage}.inject.Inject;
 #end
-import javax.persistence.PersistenceException;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import ${jeePackage}.persistence.PersistenceException;
+import ${jeePackage}.ws.rs.Consumes;
+import ${jeePackage}.ws.rs.DELETE;
+import ${jeePackage}.ws.rs.GET;
+import ${jeePackage}.ws.rs.POST;
+import ${jeePackage}.ws.rs.Path;
+import ${jeePackage}.ws.rs.PathParam;
+import ${jeePackage}.ws.rs.Produces;
+import ${jeePackage}.ws.rs.WebApplicationException;
+import ${jeePackage}.ws.rs.core.MediaType;
+import ${jeePackage}.ws.rs.core.Response;
 
 import ${package}.jakarta.cafe.model.CafeRepository;
 import ${package}.jakarta.cafe.model.entity.Coffee;
