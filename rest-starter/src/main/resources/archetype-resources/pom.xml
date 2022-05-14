@@ -1,6 +1,8 @@
 #set ($jakartaApiVersion = "8.0.0")
+#set ($javaVersion = "1.8")
 #if (${jakartaVersion} == '9')
 #set ($jakartaApiVersion = "9.1.0")
+#set ($javaVersion = "11")
 #end
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -22,8 +24,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>$javaVersion</maven.compiler.target>
+		<maven.compiler.source>$javaVersion</maven.compiler.source>
 		<jakartaee-api.version>$jakartaApiVersion</jakartaee-api.version>
 	</properties>
 
@@ -56,7 +58,7 @@
 			<version>2.3.6</version>
 			<scope>provided</scope>
 		</dependency>
-#if (${jakartaVersion} == '8.0.0')
+#if (${jakartaVersion} == '8')
 		#if (${runtime} == 'glassfish')
 		<!-- Embedded database -->
 		<dependency>
@@ -104,7 +106,7 @@
 		<dependency>
 			<groupId>fish.payara.extras</groupId>
 			<artifactId>payara-micro</artifactId>
-			<version>5.2021.10</version>
+			<version>6.2021.1.Alpha1</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -141,7 +143,7 @@
 			<artifactId>slf4j-simple</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+#if (${jakartaVersion} == '8')
 		#if (${runtime} == 'glassfish')
 		<dependency>
 			<groupId>org.jboss.arquillian.container</groupId>
@@ -164,6 +166,15 @@
 			<scope>test</scope>
 		</dependency>
 		#end
+#else
+		<dependency>
+			<groupId>fish.payara.arquillian</groupId>
+			<artifactId>arquillian-payara-micro-managed</artifactId>
+			<version>3.0.alpha3</version>
+			<scope>test</scope>
+		</dependency>
+
+#end
 	</dependencies>
 
 	<build>
@@ -181,7 +192,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-
+#if (${jakartaVersion} == '8')
 			#if (${runtime} == 'glassfish')
 			<!--Download GlassFish for Aquillian -->
 			<plugin>
@@ -271,6 +282,29 @@
 				</configuration>
 			</plugin>
 			#end
+#else
+			<plugin>
+				<groupId>fish.payara.maven.plugins</groupId>
+				<artifactId>payara-micro-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<artifactItem>
+						<groupId>fish.payara.extras</groupId>
+						<artifactId>payara-micro</artifactId>
+						<version>6.2021.1.Alpha1</version>
+					</artifactItem>
+					<deployWar>true</deployWar>
+					<contextRoot>/</contextRoot>
+				</configuration>
+			</plugin>
+#end
 		</plugins>
 	</build>
 </project>

@@ -7,9 +7,9 @@
 		<jta-data-source>java:app/jdbc/JakartaEECafeDB</jta-data-source>
 		<properties>
 			<property
-				name="javax.persistence.schema-generation.database.action"
+				name="${jeePackage}.persistence.schema-generation.database.action"
 				value="drop-and-create" />
-			<property name="javax.persistence.sql-load-script-source"
+			<property name="${jeePackage}.persistence.sql-load-script-source"
 				value="META-INF/initial-data.sql" />
 			<property name="eclipselink.logging.level.sql" value="FINE" />
 			<property name="eclipselink.logging.parameters" value="true" />
