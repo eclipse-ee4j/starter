@@ -89,3 +89,34 @@ jobs:
           
       - name: Run TomEE REST Application Maven Build
         run: mvn clean package --file app/rest/tomee/jakartaee-cafe/pom.xml
+  build-jakarta9:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ 11 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{matrix.java}}
+
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Build Maven Archetype
+        run: mvn clean install --file pom.xml
+
+      - name: Run Maven Archetype for Payara
+        run: |
+          mkdir -p app/payara
+          cd app/payara
+          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=payara -DjakartaVersion=9
+      - name: Run Payara Application Maven Build
+        run: mvn clean install --file app/payara/jakartaee-cafe/pom.xml
+
+
