@@ -42,6 +42,16 @@
 	<developers>
 		<!-- All active committers/contributors should add their information here. -->
 		<developer>
+			<id>rokon12</id>
+			<name>A N M Bazlur Rahman</name>
+			<email>bazlur@jugbd.org</email>
+		</developer>
+		<developer>
+			<id>jeyvison</id>
+			<name>Jeyvison Nascimento</name>
+			<email>jeynoronha@gmail.com</email>
+		</developer>
+		<developer>
 			<id>m-reza-rahman</id>
 			<name>Reza Rahman</name>
 			<email>reza_rahman@lycos.com</email>
