@@ -21,12 +21,12 @@ Please look at the documentation for the respective archetypes on how to use the
 
 ## Roadmap
 The following is a high level roadmap for the project. All contributions are welcome advancing any of this work.
-* Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as WildFly and Open Liberty.
-* Transition to Jakarta EE 9.1.
-* Add starter UI capability.
-* Add instructions for Eclipse IDE.
-* Add support for generating a Faces UI instead of REST.
-* Improve look and feel.
+* Add support for other [Jakarta EE compatible runtimes](https://jakarta.ee/compatibility) such as [WildFly](https://github.com/eclipse-ee4j/starter/issues/113) and [Open Liberty](https://github.com/eclipse-ee4j/starter/issues/112).
+* [Transition to Jakarta EE 9.1](https://github.com/eclipse-ee4j/starter/issues/111).
+* [Add starter UI capability](https://github.com/eclipse-ee4j/starter/issues/67).
+* [Add instructions for Eclipse IDE](https://github.com/eclipse-ee4j/starter/issues/116).
+* [Add support for generating a Faces UI instead of REST](https://github.com/eclipse-ee4j/starter/issues/114).
+* [Improve look and feel](https://github.com/eclipse-ee4j/starter/issues/117).
 
 ## Known Issues
 * Note that Payara does not yet work on the Apple M1 chip. If you are on an M1 chip, we suggest you use GlassFish or TomEE for the time being with the archetypes.
