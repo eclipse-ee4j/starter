@@ -79,7 +79,8 @@
 	<modules>
 		<module>minimal-starter</module>
 		<module>rest-starter</module>
-	</modules>
+    <module>starter-ui</module>
+  </modules>
 
 	<dependencies>
 		<dependency>
