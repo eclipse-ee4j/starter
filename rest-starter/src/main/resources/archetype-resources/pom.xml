@@ -102,6 +102,7 @@
 		</dependency>
 		#end
 #else
+		#if (${runtime} == 'payara')
 		<!-- Embedded Jakarta EE runtime -->
 		<dependency>
 			<groupId>fish.payara.extras</groupId>
@@ -109,6 +110,7 @@
 			<version>6.2021.1.Alpha1</version>
 			<scope>test</scope>
 		</dependency>
+		#end
 
 		<!-- Embedded database -->
 		<dependency>
@@ -167,12 +169,14 @@
 		</dependency>
 		#end
 #else
+		#if (${runtime} == 'payara')
 		<dependency>
 			<groupId>fish.payara.arquillian</groupId>
 			<artifactId>arquillian-payara-micro-managed</artifactId>
 			<version>3.0.alpha3</version>
 			<scope>test</scope>
 		</dependency>
+		#end
 
 #end
 	</dependencies>
@@ -283,6 +287,21 @@
 			</plugin>
 			#end
 #else
+			#if (${runtime} == 'tomee')
+			<plugin>
+				<groupId>org.apache.tomee.maven</groupId>
+				<artifactId>tomee-maven-plugin</artifactId>
+				<version>8.0.10</version>
+				<configuration>
+
+					<tomeeVersion>9.0.0-M3</tomeeVersion>
+					<tomeeArtifactId>apache-tomee</tomeeArtifactId>
+
+					<tomeeGroupId>org.apache.tomee.jakarta</tomeeGroupId>
+					<tomeeClassifier>plume</tomeeClassifier>
+				</configuration>
+			</plugin>
+			#else
 			<plugin>
 				<groupId>fish.payara.maven.plugins</groupId>
 				<artifactId>payara-micro-maven-plugin</artifactId>
@@ -304,6 +323,7 @@
 					<contextRoot>/</contextRoot>
 				</configuration>
 			</plugin>
+			#end
 #end
 		</plugins>
 	</build>
