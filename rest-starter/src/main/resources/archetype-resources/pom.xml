@@ -300,10 +300,10 @@
 				<version>8.0.10</version>
 				<configuration>
 
-					<tomeeVersion>9.0.0-M7</tomeeVersion>
+					<tomeeVersion>9.0.0-M3</tomeeVersion>
 					<tomeeArtifactId>apache-tomee</tomeeArtifactId>
 
-					<tomeeGroupId>org.apache.tomee</tomeeGroupId>
+					<tomeeGroupId>org.apache.tomee.jakarta</tomeeGroupId>
 					<tomeeClassifier>plume</tomeeClassifier>
 				</configuration>
 			</plugin>
