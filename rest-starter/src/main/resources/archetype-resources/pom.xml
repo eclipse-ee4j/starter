@@ -253,7 +253,7 @@
 				<configuration>
 					<systemPropertyVariables>
 						<tomee.classifier>plume</tomee.classifier>
-						<tomee.version>8.0.10</tomee.version>
+						<tomee.version>9.0.0-M7</tomee.version>
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
@@ -300,10 +300,10 @@
 				<version>8.0.10</version>
 				<configuration>
 
-					<tomeeVersion>9.0.0-M3</tomeeVersion>
+					<tomeeVersion>9.0.0-M7</tomeeVersion>
 					<tomeeArtifactId>apache-tomee</tomeeArtifactId>
 
-					<tomeeGroupId>org.apache.tomee.jakarta</tomeeGroupId>
+					<tomeeGroupId>org.apache.tomee</tomeeGroupId>
 					<tomeeClassifier>plume</tomeeClassifier>
 				</configuration>
 			</plugin>
