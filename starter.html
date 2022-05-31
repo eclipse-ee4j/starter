@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <style >
+    <style>
         .jumbotron {
             background-color: #072D3C;
             color: white;
@@ -22,7 +22,7 @@
 <div id="app">
     <div class="container">
         <div class="jumbotron">
-            <h1>Java EE /Jakarta EE - Initializr</h1>
+            <h1>Jakarta EE - Initializr</h1>
             <p>Bootstrap your application in mere seconds...</p>
         </div>
 
@@ -120,14 +120,9 @@
                 return this.versions[this.selectedArchetype]
             },
             mvnArchetypeGenerate: function () {
-                return `mvn archetype:generate -DarchetypeGroupId=org.eclipse.starter
- -DarchetypeArtifactId=${this.selectedArchetype}
- -DarchetypeVersion=${this.selectedVersion}
- -DgroupId=${this.groupId}
- -DartifactId=${this.artifactId}
- -Dversion=${this.projectVersion}
- -Darchetype.interactive=false
- --batch-mode -U`
+                return `mvn archetype:generate -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=${this.selectedArchetype} -DarchetypeVersion=${this.selectedVersion}
+ -DgroupId=${this.groupId} -DartifactId=${this.artifactId} -Dversion=${this.projectVersion}
+ -Darchetype.interactive=false --batch-mode -U`
             },
             show: function () {
                 return this.groupId &&
@@ -142,13 +137,12 @@
                 testingCodeToCopy.select();
 
                 try {
-                    var successful = document.execCommand('copy');
-                    var msg = successful ? 'successfully' : 'unsuccessfully';
-                    // alert('Maven Archetype command was copied to clipboard ' + msg);
+                    const successful = document.execCommand('copy');
+                    const msg = successful ? 'successfully' : 'unsuccessfully';
                     console.log('Maven Archetype command was copied to clipboard ' + msg);
                     this.tooltip = "Copied!";
                 } catch (err) {
-                    console.log("Could not copy to clipbaord.");
+                    console.log("Could not copy to clipboard.");
                     alert('Oops, unable to copy');
                 }
 
