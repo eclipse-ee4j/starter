@@ -1,15 +1,11 @@
-<p align="center">
-    <img src="images/jakartaee_logo.jpg" width="100%">
-</p>
-
 Welcome to the official Eclipse Foundation starter for Jakarta EE. The starter is a Maven Archetype that generates sample code to get you going quickly with simple Jakarta EE microservices projects. The starter will include a web UI in a subsequent release.
 
 ## Generate Jakarta EE Project
 In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute the following. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
 
-```
-mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="1.0.0"
-```
+
+- [Generate maven command](./starter.html)
+
 
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 

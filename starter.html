@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>JakartaEE Initializr</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style >
+        .jumbotron {
+            background-color: #072D3C;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Java EE /Jakarta EE - Initializr</h1>
+            <p>Bootstrap your application in mere seconds...</p>
+        </div>
+
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-10">
+                    <label for="mavenArchetype">Archetype</label>
+                    <select class="form-control" id="mavenArchetype" v-model="selectedArchetype" required>
+                        <option v-for="(value, key, i) in archetypes" :value="key">{{value}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="archetypeVersion">Version</label>
+                    <select class="form-control" id="archetypeVersion" v-model="selectedVersion" required>
+                        <option v-for="value in archetypeVersions" :value="value">{{value}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="groupId">Group</label>
+                    <input type="text" class="form-control" id="groupId" placeholder="com.example" v-model="groupId"
+                           required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="artifactId">Artifact</label>
+                    <input type="text" class="form-control" id="artifactId" v-model="artifactId" required>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="projectVersion">Version</label>
+                    <input type="text" class="form-control" id="projectVersion" v-model="projectVersion" required>
+                </div>
+            </div>
+            <div class="form-group" v-show="show">
+                <label for="mvnArchetypeGenerate">
+                    Just copy this command as is in a terminal where you want to start your project and press enter...
+                </label>
+                <textarea class="form-control"
+                          id="mvnArchetypeGenerate"
+                          rows="11"
+                          readonly
+                          :value="mvnArchetypeGenerate"
+                          @click.stop.prevent="copyMvnArchetypeCommand"
+                          aria-describedby="mvnCommandHelp"
+                          data-toggle="tooltip" data-placement="top"
+                          data-delay='{"show":"0", "hide":"3000"}'
+                          :title="tooltip"
+                          @mouseleave="resetTooltip">
+                </textarea>
+                <small id="mvnCommandHelp" class="form-text text-muted">By clicking on the text it will be copied to the
+                    clipboard
+                </small>
+            </div>
+        </form>
+        <input type="hidden" id="copy-code" :value="mvnArchetypeGenerate">
+        <div class="fixed-bottom text-center">Copyright &copy; 2022 - Ivo Woltring - <a href="https://www.ivonet.nl">www.ivonet.nl</a>
+            - Eclipse Public License - v 2.0
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<script lang="JavaScript">
+    "use strict";
+
+    new Vue({
+        el: '#app',
+        data: {
+            visible: false,
+            selectedArchetype: 'jakarta-starter',
+            selectedVersion: '1.0.0',
+            groupId: '',
+            artifactId: 'demo',
+            projectVersion: '1.0-SNAPSHOT',
+            tooltip: "Click to copy to clipboard...",
+            archetypes: {
+                'jakarta-starter': 'JakartaEE 8 quickstart Archetype '
+            },
+            versions: {
+                'jakarta-starter': ['1.0.0']
+            }
+        },
+        computed: {
+            archetypeVersions: function () {
+                this.selectedVersion = this.versions[this.selectedArchetype][0];
+                return this.versions[this.selectedArchetype]
+            },
+            mvnArchetypeGenerate: function () {
+                return `mvn archetype:generate -DarchetypeGroupId=org.eclipse.starter
+ -DarchetypeArtifactId=${this.selectedArchetype}
+ -DarchetypeVersion=${this.selectedVersion}
+ -DgroupId=${this.groupId}
+ -DartifactId=${this.artifactId}
+ -Dversion=${this.projectVersion}
+ -Darchetype.interactive=false
+ --batch-mode -U`
+            },
+            show: function () {
+                return this.groupId &&
+                    this.artifactId &&
+                    this.projectVersion
+            }
+        },
+        methods: {
+            copyMvnArchetypeCommand() {
+                let testingCodeToCopy = document.querySelector('#copy-code');
+                testingCodeToCopy.setAttribute('type', 'text');
+                testingCodeToCopy.select();
+
+                try {
+                    var successful = document.execCommand('copy');
+                    var msg = successful ? 'successfully' : 'unsuccessfully';
+                    // alert('Maven Archetype command was copied to clipboard ' + msg);
+                    console.log('Maven Archetype command was copied to clipboard ' + msg);
+                    this.tooltip = "Copied!";
+                } catch (err) {
+                    console.log("Could not copy to clipbaord.");
+                    alert('Oops, unable to copy');
+                }
+
+                /* unselect the range */
+                testingCodeToCopy.setAttribute('type', 'hidden');
+                window.getSelection().removeAllRanges()
+            },
+            resetTooltip: function () {
+                this.tooltip = 'Click to copy to clipboard...'
+            }
+        }
+    });
+</script>
+</body>
+</html>
