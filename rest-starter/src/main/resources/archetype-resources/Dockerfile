@@ -11,4 +11,4 @@
 #set ($deployDirectory = "/usr/local/tomee/webapps/")
 #end
 FROM $baseImage
-COPY target/jakartaee-hello-world.war $deployDirectory
+COPY target/jakartaee-cafe.war $deployDirectory
