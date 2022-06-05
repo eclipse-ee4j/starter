@@ -110,6 +110,12 @@
 			<version>6.2021.1.Alpha1</version>
 			<scope>test</scope>
 		</dependency>
+		#elseif (${runtime} == 'tomee')
+		<dependency>
+			<groupId>com.fasterxml.jackson.jakarta.rs</groupId>
+			<artifactId>jackson-jakarta-rs-json-provider</artifactId>
+			<version>2.13.0</version>
+		</dependency>
 		#end
 
 		<!-- Embedded database -->
