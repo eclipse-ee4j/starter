@@ -16,7 +16,6 @@ switch (request.properties["runtime"])
     case "tomee":     println "Generating code for TomEE"
                       if ( jakartaVersion != '8') {
                           FileUtils.deleteDirectory(new File(outputDirectory, "src/test"))
-                          FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                       }
                       break
 
