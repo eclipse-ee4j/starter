@@ -10,7 +10,6 @@ switch (request.properties["runtime"])
 {
     case "glassfish": println "Generating code for GlassFish"
                       FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
-                      if ( jakartaVersion != '8')  throw new RuntimeException("Jakarta version not available for this runtime yet")
                       break
                       
     case "tomee":     println "Generating code for TomEE"
