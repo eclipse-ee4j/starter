@@ -73,3 +73,30 @@ Once Payara starts, you can access the project at http://localhost:8080/jakartae
   ```
   
   Once TomEE starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
+
+
+## JBoss WildFly
+
+* To generate a sample Jakarta EE project with **WildFly**, please execute the following. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
+
+  ```
+  mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter-minimal" -DarchetypeVersion="1.1.0-SNAPSHOT" -Druntime="wildfly"
+  ```
+
+* To run the generated project with **WildFly**, please execute the following from the project directory - named `jakartaee-hello-world` by default. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
+
+  ```
+  ./mvnw clean package wildfly-jar:run
+  ```
+
+  Once **WildFly** starts, you can access the project at http://localhost:8080/.
+
+* To run the generated project with **WildFly** and Docker, execute the following commands from the `jakartaee-hello-world` directory. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Docker](https://docs.docker.com/get-docker/) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
+
+  ```
+  ./mvnw clean package
+  docker build -t jakartaee-hello-world:v1 .
+  docker run -it --rm -p 8080:8080 jakartaee-hello-world:v1
+  ```
+
+  Once **WildFly** starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
