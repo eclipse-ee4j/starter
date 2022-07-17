@@ -73,3 +73,18 @@ Once Payara starts, you can access the project at http://localhost:8080/jakartae
   ```
   
   Once TomEE starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
+
+## OpenLiberty
+* To generate a sample Jakarta EE project with OpenLiberty, please execute the following. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
+
+  ```
+  mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter-minimal" -DarchetypeVersion="1.1.0-SNAPSHOT" -Druntime="liberty"
+  ```
+
+* To run the generated project with OpenLiberty, please execute the following from the project directory - named `jakartaee-hello-world` by default. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
+
+  ```
+  ./mvnw clean package liberty:run
+  ```
+
+  Once OpenLiberty starts, you can access the project at http://localhost::9080/.

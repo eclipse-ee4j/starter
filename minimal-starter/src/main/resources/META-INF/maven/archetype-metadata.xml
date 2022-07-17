@@ -31,6 +31,23 @@
 			<includes>
 				<include>Dockerfile</include>
 			</includes>
-		</fileSet>		
+		</fileSet>
+
+		<!-- OpenLiberty -->
+		<fileSet encoding="UTF-8">
+			<directory>liberty/src/main/webapp</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>liberty/src/main/liberty/config</directory>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>liberty/src/test/resources</directory>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>liberty</directory>
+			<includes>
+				<include>pom.xml</include>
+			</includes>
+		</fileSet>
 	</fileSets>
 </archetype-descriptor>

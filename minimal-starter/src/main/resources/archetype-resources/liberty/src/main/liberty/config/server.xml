@@ -1,0 +1,16 @@
+<server description="Jakarta Cafe Liberty server">
+  <featureManager>
+    <feature>jaxrs-2.1</feature>
+  </featureManager>
+
+  <variable name="default.http.port" defaultValue="9080"/>
+  <variable name="default.https.port" defaultValue="9443"/>
+
+  <webApplication location="jakartaee-hello-world.war" contextRoot="/"/>
+  <mpMetrics authentication="false"/>
+  <logging traceSpecification="com.ibm.ws.microprofile.health.*=all"/>
+
+  <httpEndpoint host="*" httpPort="${default.http.port}"
+    httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
+
+</server>

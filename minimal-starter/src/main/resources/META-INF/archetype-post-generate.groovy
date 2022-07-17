@@ -2,18 +2,26 @@ import org.apache.commons.io.FileUtils
 
 // Processing target runtime specific code.
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
+def libertyDirectory = new File(outputDirectory, "liberty")
 
-switch (request.properties["runtime"])
-{
+switch (request.properties["runtime"]) {
     case "glassfish": println "Generating code for GlassFish"
-                      FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
-                      break
-                      
-    case "tomee":     println "Generating code for TomEE"
-                      break                      
-                      
-    default:          println "Generating code for Payara"
+        FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+        break
+
+    case "tomee": println "Generating code for TomEE"
+        break
+
+    case "liberty": println "Generating code for OpenLiberty"
+        FileUtils.copyDirectory(libertyDirectory, outputDirectory)
+        FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+        break
+
+    default: println "Generating code for Payara"
 }
+
+FileUtils.forceDelete(new File(outputDirectory, "liberty"))
+
 
 // Adding Maven Wrapper
 println "Adding Maven Wrapper"
