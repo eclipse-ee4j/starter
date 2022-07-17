@@ -62,7 +62,16 @@ jobs:
           
       - name: Run TomEE Minimal Application Maven Build
         run: mvn clean package --file app/minimal/tomee/jakartaee-hello-world/pom.xml        
-        
+
+      - name: Run WildFly Minimal Application Maven Build
+        run: mvn clean package --file app/minimal/wildfly/jakartaee-hello-world/pom.xml
+
+      - name: Run Maven Minimal Archetype for WildFly
+        run: |
+          mkdir -p app/minimal/wildfly
+          cd app/minimal/wildfly
+          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter-minimal -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-hello-world -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=wildfly
+
       - name: Run Maven REST Archetype for Payara
         run: |
           mkdir -p app/rest/payara
