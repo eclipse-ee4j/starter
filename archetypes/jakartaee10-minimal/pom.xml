@@ -14,25 +14,52 @@
 ********************************************************************************/-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.eclipse.starter</groupId>
+    <artifactId>jakartaee10-minimal</artifactId>
+    <packaging>maven-archetype</packaging>
+    <version>1.1.0-SNAPSHOT</version>
+
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
         <version>1.0.7</version>
     </parent>
 
-    <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>jakartaee10-minimal</artifactId>
-    <packaging>jar</packaging>
-    <version>1.0.0-SNAPSHOT</version>
     <name>Jakarta EE 10 Minimal Archetype</name>
-    <description>Jakarta EE 10 Minimal Maven Archetype</description>
-    <developers>
-        <developer>
-            <name>Josh Juneau</name>
-            <email>juneau001@gmail.com</email>
-            <organization>javajuneau</organization>
-        </developer>
-    </developers>
 
+    <description>Jakarta EE 10 Minimal Maven Archetype</description>
+
+    <scm>
+        <connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
+        <developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
+        <url>http://github.com/eclipse-ee4j/starter/tree/master</url>
+    </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.archetype</groupId>
+                <artifactId>archetype-packaging</artifactId>
+                <version>3.2.1</version>
+            </extension>
+        </extensions>
+
+    </build>
 </project>
