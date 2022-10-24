@@ -14,10 +14,6 @@
  ********************************************************************************/
 package ${package}.resources;
 
-/**
- *
- * @author Juneau
- */
 public record HelloRecord(String text) {
 
 }
