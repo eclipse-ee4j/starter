@@ -1,0 +1,14 @@
+<archetype xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0 http://maven.apache.org/xsd/archetype-1.0.0.xsd">
+    <id>jakartaee91-archetype</id>
+    <sources>
+        <source>src/main/java/${groupId}/${artifactId}/JakartaRestConfiguration.java</source>
+        <source>src/main/java/${groupId}/${artifactId}/resources/JakartaEE10Resource.java</source>
+    </sources>
+    <resources>
+        <resource>src/main/webapp/WEB-INF/beans.xml</resource>
+        <resource>src/main/webapp/WEB-INF/web.xml</resource>
+        <resource>src/main/webapp/index.html</resource>
+    </resources>
+ 
+</archetype>
