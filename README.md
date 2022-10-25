@@ -10,7 +10,6 @@ and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java 
 
 
 ## Generate an archetype
-(This is work in progress, as of 2022-10-22, the Jakarta EE 8 and 10 Minimal Archetypes have been released)
 
 <script>
 function generateMvnCommand() {
