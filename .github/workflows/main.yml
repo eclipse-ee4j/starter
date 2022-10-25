@@ -13,7 +13,7 @@ on:
       - reopened
   workflow_dispatch:
 
-jobs:      
+jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
@@ -32,61 +32,70 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-    
+
       - name: Build Maven Archetypes
         run: mvn clean install --file pom.xml
-        
+
       - name: Run Maven Minimal Archetype for Payara
         run: |
           mkdir -p app/minimal/payara
           cd app/minimal/payara
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter-minimal -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-hello-world -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=payara
-          
+
       - name: Run Payara Minimal Application Maven Build
         run: mvn clean package --file app/minimal/payara/jakartaee-hello-world/pom.xml
-        
+
       - name: Run Maven Minimal Archetype for GlassFish
         run: |
           mkdir -p app/minimal/glassfish
           cd app/minimal/glassfish
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter-minimal -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-hello-world -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=glassfish
-          
+
       - name: Run GlassFish Minimal Application Maven Build
         run: mvn clean package --file app/minimal/glassfish/jakartaee-hello-world/pom.xml
-        
+
       - name: Run Maven Minimal Archetype for TomEE
         run: |
           mkdir -p app/minimal/tomee
           cd app/minimal/tomee
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter-minimal -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-hello-world -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=tomee
-          
+
       - name: Run TomEE Minimal Application Maven Build
-        run: mvn clean package --file app/minimal/tomee/jakartaee-hello-world/pom.xml        
-        
+        run: mvn clean package --file app/minimal/tomee/jakartaee-hello-world/pom.xml
+
+      - name: Run Maven Minimal Archetype for WildFly
+        run: |
+          mkdir -p app/minimal/wildfly
+          cd app/minimal/wildfly
+          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter-minimal -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-hello-world -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=wildfly
+
+      - name: Run WildFly Minimal Application Maven Build
+        run: mvn clean package --file app/minimal/wildfly/jakartaee-hello-world/pom.xml
+
       - name: Run Maven REST Archetype for Payara
         run: |
           mkdir -p app/rest/payara
           cd app/rest/payara
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=payara
-          
+
       - name: Run Payara REST Application Maven Build
         run: mvn clean package --file app/rest/payara/jakartaee-cafe/pom.xml
-        
+
       - name: Run Maven REST Archetype for GlassFish
         run: |
           mkdir -p app/rest/glassfish
           cd app/rest/glassfish
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=glassfish
-          
+
       - name: Run GlassFish REST Application Maven Build
         run: mvn clean package --file app/rest/glassfish/jakartaee-cafe/pom.xml
-        
+
       - name: Run Maven REST Archetype for TomEE
         run: |
           mkdir -p app/rest/tomee
           cd app/rest/tomee
           mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=tomee
-          
+
       - name: Run TomEE REST Application Maven Build
         run: mvn clean package --file app/rest/tomee/jakartaee-cafe/pom.xml
   build-jakarta9:
