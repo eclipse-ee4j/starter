@@ -1,5 +1,7 @@
 import org.apache.commons.io.FileUtils
 
+import java.nio.file.Files
+
 // Processing target runtime specific code.
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 def jakartaVersion = request.properties["jakartaVersion"].trim()
@@ -12,9 +14,11 @@ switch (request.properties["runtime"])
                       break
                       
     case "tomee":     println "Generating code for TomEE"
-                      if ( jakartaVersion != '8')  throw new RuntimeException("Jakarta version not available for this runtime yet")
-                      break                      
-                      
+                      if ( jakartaVersion != '8') {
+                          FileUtils.deleteDirectory(new File(outputDirectory, "src/test"))
+                      }
+                      break
+
     default:          println "Generating code for Payara"
                       if ( jakartaVersion != '8') {
                           println "WARNING: Generating a non-production ready project with an alpha version of Payara"
