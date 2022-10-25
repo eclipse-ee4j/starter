@@ -48,7 +48,7 @@ function copyMvnCommand() {
             <label for="mavenArchetype">Archetype</label>
             <select class="form-control" id="mavenArchetype" onchange="generateMvnCommand()">
                 <option value="org.eclipse.starter,jakartaee10-minimal,1.0.1">Jakarta EE 10 Minimal Archetype</option>
-                <option value="org.eclipse.starter,jakartaee9.1-minimal,1.0.0">Jakarta EE 9 Minimal Archetype</option>
+                <option value="org.eclipse.starter,jakartaee9.1-minimal,1.0.0">Jakarta EE 9.1 Minimal Archetype</option>
                 <option value="org.eclipse.starter,jakartaee8-minimal,1.0.0">Jakarta EE 8 Minimal Archetype</option>
             </select>
         </div>
