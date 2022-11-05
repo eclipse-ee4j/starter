@@ -48,7 +48,7 @@ function copyMvnCommand() {
         <div class="form-group" >
             <label for="mavenArchetype">Jakarta EE version</label>
             <select class="form-control" id="mavenArchetype" onchange="generateMvnCommand()">
-                <option value="org.eclipse.starter,jakartaee10-minimal,1.0.1">Jakarta EE 10</option>
+                <option value="org.eclipse.starter,jakartaee10-minimal,1.1.0">Jakarta EE 10</option>
                 <option value="org.eclipse.starter,jakartaee9.1-minimal,1.0.0">Jakarta EE 9.1</option>
                 <option value="org.eclipse.starter,jakartaee8-minimal,1.0.0">Jakarta EE 8</option>
             </select>
