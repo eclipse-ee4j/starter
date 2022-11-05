@@ -19,12 +19,7 @@ function generateMvnCommand() {
     const mvnArchetypeArtifactId = mvnArchetypeArray[1];
     const mvnArchetypeVersion = mvnArchetypeArray[2];
 
-    const selectedProfile = document.getElementById("profile").value;
-    let generatedProfile = "";
-
-    if(selectedProfile && selectedProfile.length > 0){
-       generatedProfile = `-Dprofile=${selectedProfile}`;
-     }
+    const profile = document.getElementById("profile").value;
 
     const groupId = document.getElementById("groupId").value;
     const artifactId = document.getElementById("artifactId").value;
@@ -36,7 +31,7 @@ function generateMvnCommand() {
         return;
     }
 
-    mvnArchetypeGenerate.value = `mvn archetype:generate -DarchetypeGroupId=${mvnArchetypeGroupId} -DarchetypeArtifactId=${mvnArchetypeArtifactId} -DarchetypeVersion=${mvnArchetypeVersion} -DgroupId=${groupId} -DartifactId=${artifactId} ${generatedProfile} -Dversion=${projectVersion} -DinteractiveMode=false`;
+    mvnArchetypeGenerate.value = `mvn archetype:generate -DarchetypeGroupId=${mvnArchetypeGroupId} -DarchetypeArtifactId=${mvnArchetypeArtifactId} -DarchetypeVersion=${mvnArchetypeVersion} -DgroupId=${groupId} -DartifactId=${artifactId} -Dprofile=${profile} -Dversion=${projectVersion} -DinteractiveMode=false`;
 }
 
 function copyMvnCommand() {
