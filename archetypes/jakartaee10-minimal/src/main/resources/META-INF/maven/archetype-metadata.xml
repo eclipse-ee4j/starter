@@ -46,5 +46,8 @@
         <requiredProperty key="package">
             <defaultValue>${groupId}.${artifactId}</defaultValue>
         </requiredProperty>
+        <requiredProperty key="profile">
+                <defaultValue>api</defaultValue>
+        </requiredProperty>
     </requiredProperties>
 </archetype-descriptor>
