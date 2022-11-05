@@ -37,6 +37,10 @@
         <url>http://github.com/eclipse-ee4j/starter/tree/master</url>
     </scm>
 
+    <properties>
+        <project.build.outputTimestamp>10</project.build.outputTimestamp>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -50,6 +54,11 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <version>3.2.1</version>
             </plugin>
         </plugins>
 
