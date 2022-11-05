@@ -22,7 +22,7 @@ function generateMvnCommand() {
     const selectedProfile = document.getElementById("profile").value;
     let generatedProfile = "";
 
-    if(selectedProfile.length === 0){
+    if(selectedProfile && selectedProfile.length > 0){
        generatedProfile = `-Dprofile=${selectedProfile}`;
      }
 
