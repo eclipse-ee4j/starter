@@ -19,7 +19,7 @@ function generateMvnCommand() {
     const mvnArchetypeArtifactId = mvnArchetypeArray[1];
     const mvnArchetypeVersion = mvnArchetypeArray[2];
 
-    const selectedProfile = document.getElementById("profiles").value;
+    const selectedProfile = document.getElementById("profile").value;
     let generatedProfile = "";
 
     if(selectedProfile.length === 0){
