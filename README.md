@@ -9,7 +9,7 @@ ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?va
 and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
 
 
-## Generate an archetype
+## Generate a Jakarta EE Project
 
 <script>
 function generateMvnCommand() {
@@ -18,6 +18,8 @@ function generateMvnCommand() {
     const mvnArchetypeGroupId = mvnArchetypeArray[0];
     const mvnArchetypeArtifactId = mvnArchetypeArray[1];
     const mvnArchetypeVersion = mvnArchetypeArray[2];
+
+    const profile = document.getElementById("profile").value;
 
     const groupId = document.getElementById("groupId").value;
     const artifactId = document.getElementById("artifactId").value;
@@ -29,7 +31,7 @@ function generateMvnCommand() {
         return;
     }
 
-    mvnArchetypeGenerate.value = `mvn archetype:generate -DarchetypeGroupId=${mvnArchetypeGroupId} -DarchetypeArtifactId=${mvnArchetypeArtifactId} -DarchetypeVersion=${mvnArchetypeVersion} -DgroupId=${groupId} -DartifactId=${artifactId} -Dversion=${projectVersion} -DinteractiveMode=false`;
+    mvnArchetypeGenerate.value = `mvn archetype:generate -DarchetypeGroupId=${mvnArchetypeGroupId} -DarchetypeArtifactId=${mvnArchetypeArtifactId} -DarchetypeVersion=${mvnArchetypeVersion} -DgroupId=${groupId} -DartifactId=${artifactId} -Dprofile=${profile} -Dversion=${projectVersion} -DinteractiveMode=false`;
 }
 
 function copyMvnCommand() {
@@ -44,11 +46,19 @@ function copyMvnCommand() {
 <form onchange="generateMvnCommand()">
     <div class="form-row">
         <div class="form-group" >
-            <label for="mavenArchetype">Archetype</label>
+            <label for="mavenArchetype">Jakarta EE version</label>
             <select class="form-control" id="mavenArchetype" onchange="generateMvnCommand()">
-                <option value="org.eclipse.starter,jakartaee10-minimal,1.0.1">Jakarta EE 10 Minimal Archetype</option>
-                <option value="org.eclipse.starter,jakartaee9.1-minimal,1.0.0">Jakarta EE 9.1 Minimal Archetype</option>
-                <option value="org.eclipse.starter,jakartaee8-minimal,1.0.0">Jakarta EE 8 Minimal Archetype</option>
+                <option value="org.eclipse.starter,jakartaee10-minimal,1.1.0">Jakarta EE 10</option>
+                <option value="org.eclipse.starter,jakartaee9.1-minimal,1.0.0">Jakarta EE 9.1</option>
+                <option value="org.eclipse.starter,jakartaee8-minimal,1.0.0">Jakarta EE 8</option>
+            </select>
+        </div>
+        <div class="form-group" >
+            <label for="profile">Profile</label>
+            <select class="form-control" id="profile" onchange="generateMvnCommand()">
+                <option value="api">Platform</option>
+                <option value="web-api">Web Profile</option>
+                <option value="core-api">Core Profile</option>
             </select>
         </div>
     </div>
