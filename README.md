@@ -61,9 +61,9 @@ function copyMvnCommand() {
         <div class="form-group" >
             <label for="profile">Profile</label>
             <select class="form-control" id="profile" onchange="generateMvnCommand()">
-                <option value="">Platform</option>
-                <option value="web">Web Profile</option>
-                <option value="core">Core Profile</option>
+                <option value="api">Platform</option>
+                <option value="web-api">Web Profile</option>
+                <option value="core-api">Core Profile</option>
             </select>
         </div>
     </div>
