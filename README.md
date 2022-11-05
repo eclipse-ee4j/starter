@@ -9,7 +9,7 @@ ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?va
 and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11 and Java SE 17).
 
 
-## Generate an archetype
+## Generate a Jakarta EE Project
 
 <script>
 function generateMvnCommand() {
@@ -51,15 +51,15 @@ function copyMvnCommand() {
 <form onchange="generateMvnCommand()">
     <div class="form-row">
         <div class="form-group" >
-            <label for="mavenArchetype">Archetype</label>
+            <label for="mavenArchetype">Jakarta EE version</label>
             <select class="form-control" id="mavenArchetype" onchange="generateMvnCommand()">
-                <option value="org.eclipse.starter,jakartaee10-minimal,1.0.1">Jakarta EE 10 Minimal Archetype</option>
-                <option value="org.eclipse.starter,jakartaee9.1-minimal,1.0.0">Jakarta EE 9.1 Minimal Archetype</option>
-                <option value="org.eclipse.starter,jakartaee8-minimal,1.0.0">Jakarta EE 8 Minimal Archetype</option>
+                <option value="org.eclipse.starter,jakartaee10-minimal,1.0.1">Jakarta EE 10</option>
+                <option value="org.eclipse.starter,jakartaee9.1-minimal,1.0.0">Jakarta EE 9.1</option>
+                <option value="org.eclipse.starter,jakartaee8-minimal,1.0.0">Jakarta EE 8</option>
             </select>
         </div>
         <div class="form-group" >
-            <label for="profile">Profiles</label>
+            <label for="profile">Profile</label>
             <select class="form-control" id="profile" onchange="generateMvnCommand()">
                 <option value="">Platform</option>
                 <option value="web">Web Profile</option>
