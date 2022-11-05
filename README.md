@@ -19,6 +19,13 @@ function generateMvnCommand() {
     const mvnArchetypeArtifactId = mvnArchetypeArray[1];
     const mvnArchetypeVersion = mvnArchetypeArray[2];
 
+    const selectedProfile = document.getElementById("profiles").value;
+    let generatedProfile = "";
+
+    if(selectedProfile.length === 0){
+       generatedProfile = `-Dprofile=${selectedProfile}`;
+     }
+
     const groupId = document.getElementById("groupId").value;
     const artifactId = document.getElementById("artifactId").value;
     const projectVersion = document.getElementById("projectVersion").value;
@@ -29,7 +36,7 @@ function generateMvnCommand() {
         return;
     }
 
-    mvnArchetypeGenerate.value = `mvn archetype:generate -DarchetypeGroupId=${mvnArchetypeGroupId} -DarchetypeArtifactId=${mvnArchetypeArtifactId} -DarchetypeVersion=${mvnArchetypeVersion} -DgroupId=${groupId} -DartifactId=${artifactId} -Dversion=${projectVersion} -DinteractiveMode=false`;
+    mvnArchetypeGenerate.value = `mvn archetype:generate -DarchetypeGroupId=${mvnArchetypeGroupId} -DarchetypeArtifactId=${mvnArchetypeArtifactId} -DarchetypeVersion=${mvnArchetypeVersion} -DgroupId=${groupId} -DartifactId=${artifactId} ${generatedProfile} -Dversion=${projectVersion} -DinteractiveMode=false`;
 }
 
 function copyMvnCommand() {
@@ -49,6 +56,14 @@ function copyMvnCommand() {
                 <option value="org.eclipse.starter,jakartaee10-minimal,1.0.1">Jakarta EE 10 Minimal Archetype</option>
                 <option value="org.eclipse.starter,jakartaee9.1-minimal,1.0.0">Jakarta EE 9.1 Minimal Archetype</option>
                 <option value="org.eclipse.starter,jakartaee8-minimal,1.0.0">Jakarta EE 8 Minimal Archetype</option>
+            </select>
+        </div>
+        <div class="form-group" >
+            <label for="profile">Profiles</label>
+            <select class="form-control" id="profile" onchange="generateMvnCommand()">
+                <option value="">Platform</option>
+                <option value="web">Web Profile</option>
+                <option value="core">Core Profile</option>
             </select>
         </div>
     </div>
