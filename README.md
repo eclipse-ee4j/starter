@@ -65,15 +65,15 @@ function copyMvnCommand() {
     <div class="form-row">
         <div class="form-group">
             <label for="groupId">Group</label>
-            <input class="form-control" type="text" id="groupId" value="com.example" onchange="generateMvnCommand()">
+            <input class="form-control" type="text" id="groupId" placeholder="com.example" onchange="generateMvnCommand()">
         </div>
         <div class="form-group">
             <label for="artifactId">Artifact</label>
-            <input type="text" class="form-control" id="artifactId" value="demo" onchange="generateMvnCommand()">
+            <input type="text" class="form-control" id="artifactId" placeholder="demo" onchange="generateMvnCommand()">
         </div>
         <div class="form-group">
             <label for="projectVersion">Version</label>
-            <input type="text" class="form-control" id="projectVersion" value="1.0-SNAPSHOT" onchange="generateMvnCommand()">
+            <input type="text" class="form-control" id="projectVersion" value="1.0.0-SNAPSHOT" onchange="generateMvnCommand()">
         </div>
     </div>
     <div class="form-group">
@@ -152,3 +152,25 @@ alongside the starter.
   comprehensive resource showing you how to use many Jakarta EE APIs and features.
 * The [Cargo Tracker](https://eclipse-ee4j.github.io/cargotracker/) project demonstrates first-hand how you can develop
   applications with Jakarta EE using widely adopted architectural best practices like Domain-Driven Design (DDD).
+
+# Contribute
+
+We welcome contributions to the Jakarta EE Starter project. Please see the [Contributing](CONTRIBUTING.md) page for more information.
+
+# Run locally
+
+To run the website locally, you need to have [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) installed.
+
+Read more about it on the [Jekyll-theme-jakarta-ee](https://jakartaee.github.io/jekyll-theme-jakarta-ee/) pages.
+
+Then, run the following commands:
+
+```shell
+# Once only to install dependencies
+bundle install
+```
+
+```shell
+# Every time you want to run the website locally
+bundle exec jekyll serve
+```
