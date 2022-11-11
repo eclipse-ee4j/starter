@@ -4,7 +4,7 @@ This is the official Eclipse Foundation starter for Jakarta EE. It generates cod
 
 ## Current Release
 
-Please note that this is a development version of the starter. For the current release, please visit the [project website](https://eclipse-ee4j.github.io/starter/). This code will allow you to use features that are not yet released. It will also allow you to build the starter from source.
+Please note that this is a development version of the starter. For the current release, please visit the [project website](https://start.jakarta.ee). This code will allow you to use features that are not yet released. It will also allow you to build the starter from source.
 
 ## Building from Source
 
