@@ -153,24 +153,3 @@ alongside the starter.
 * The [Cargo Tracker](https://eclipse-ee4j.github.io/cargotracker/) project demonstrates first-hand how you can develop
   applications with Jakarta EE using widely adopted architectural best practices like Domain-Driven Design (DDD).
 
-# Contribute
-
-We welcome contributions to the Jakarta EE Starter project. Please see the [Contributing](CONTRIBUTING.md) page for more information.
-
-# Run locally
-
-To run the website locally, you need to have [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) installed.
-
-Read more about it on the [Jekyll-theme-jakarta-ee](https://jakartaee.github.io/jekyll-theme-jakarta-ee/) pages.
-
-Then, run the following commands:
-
-```shell
-# Once only to install dependencies
-bundle install
-```
-
-```shell
-# Every time you want to run the website locally
-bundle exec jekyll serve
-```
