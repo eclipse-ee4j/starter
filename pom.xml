@@ -89,6 +89,7 @@
         <module>rest-starter</module>
         <module>starter-ui</module>
         <module>archetypes/jakartaee10-minimal</module>
+        <module>maven-project-generator</module>
     </modules>
 
     <dependencies>
