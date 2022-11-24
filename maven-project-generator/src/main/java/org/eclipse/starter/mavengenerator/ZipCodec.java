@@ -2,6 +2,7 @@ package org.eclipse.starter.mavengenerator;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -24,11 +25,11 @@ public class ZipCodec {
         return this;
     }
 
-    public void addDirToZipArchive(Path dirToZip, ZipOutputStream zos) throws Exception {
+    public void addDirToZipArchive(Path dirToZip, ZipOutputStream zos) throws IOException {
         addDirToZipArchive(dirToZip, zos, null);
     }
 
-    private void addDirToZipArchive(Path dirToZip, ZipOutputStream zos, String parrentDirectoryName) throws Exception {
+    private void addDirToZipArchive(Path dirToZip, ZipOutputStream zos, String parrentDirectoryName) throws IOException {
         if (dirToZip == null || ! Files.exists(dirToZip)) {
             return;
         }
@@ -47,14 +48,14 @@ public class ZipCodec {
         } else {
             entryListener.ifPresent(listener -> listener.accept(new EntryEvent(false, entryListenerEntry)));
             byte[] buffer = new byte[1024];
-            FileInputStream fis = new FileInputStream(dirToZip.toFile());
-            zos.putNextEntry(new ZipEntry(zipEntryName));
-            int length;
-            while ((length = fis.read(buffer)) > 0) {
-                zos.write(buffer, 0, length);
+            try (FileInputStream fis = new FileInputStream(dirToZip.toFile())) {
+                zos.putNextEntry(new ZipEntry(zipEntryName));
+                int length;
+                while ((length = fis.read(buffer)) > 0) {
+                    zos.write(buffer, 0, length);
+                }
+                zos.closeEntry();
             }
-            zos.closeEntry();
-            fis.close();
         }
     }
     

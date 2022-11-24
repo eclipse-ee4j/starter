@@ -3,7 +3,6 @@ package org.eclipse.starter.mavengenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.apache.maven.cli.CliRequest;
 import org.apache.maven.cli.MavenCli;
 
 public class CliMavenContext extends MavenContext<CliMavenContext> {
@@ -23,7 +22,7 @@ public class CliMavenContext extends MavenContext<CliMavenContext> {
         }
         if (0 != cli.doMain(args.toArray(new String[0]),
                 workingDir.toAbsolutePath().toString(),
-                System.out, System.err) ) {
+                null, null) ) {
             throw new RuntimeException("Maven CLI didn't complete successfully");
         }
     }
