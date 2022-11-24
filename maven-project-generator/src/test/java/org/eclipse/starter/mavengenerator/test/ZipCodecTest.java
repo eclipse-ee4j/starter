@@ -28,7 +28,7 @@ public class ZipCodecTest implements UnitTestCommons {
                     .addDirToZipArchive(testDir, zipOutStream);
         }
         
-        Files.write(getTestDir(testInfo).toPath().resolve(getTestMethodName(testInfo) + ".zip"), 
+        Files.write(getTestDir(testInfo).resolve(getTestMethodName(testInfo) + ".zip"), 
                 bytesOutputStream.toByteArray(), StandardOpenOption.CREATE);
     }
 }
