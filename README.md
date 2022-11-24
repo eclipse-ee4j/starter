@@ -12,26 +12,31 @@ and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java 
 ## Generate a Jakarta EE Project
 
 <script>
-function generateMvnCommand() {
+function getFormData() {
     const mavenArchetype = document.getElementById("mavenArchetype").value;
     const mvnArchetypeArray = mavenArchetype.split(",");
-    const mvnArchetypeGroupId = mvnArchetypeArray[0];
-    const mvnArchetypeArtifactId = mvnArchetypeArray[1];
-    const mvnArchetypeVersion = mvnArchetypeArray[2];
+    return {
+        mavenArchetype: mavenArchetype,
+        mvnArchetypeGroupId: mvnArchetypeArray[0],
+        mvnArchetypeArtifactId: mvnArchetypeArray[1],
+        mvnArchetypeVersion:  mvnArchetypeArray[2],
+        profile: document.getElementById("profile").value,
+        groupId: document.getElementById("groupId").value,
+        artifactId: document.getElementById("artifactId").value,
+        projectVersion: document.getElementById("projectVersion").value,
+    };
+}
+function generateMvnCommand() {
+    const formData = getFormData();
 
-    const profile = document.getElementById("profile").value;
-
-    const groupId = document.getElementById("groupId").value;
-    const artifactId = document.getElementById("artifactId").value;
-    const projectVersion = document.getElementById("projectVersion").value;
     const mvnArchetypeGenerate = document.getElementById("mvnArchetypeGenerate");
 
-    if (!mavenArchetype || !groupId || !artifactId || !projectVersion) {
+    if (!formData.mavenArchetype || !formData.groupId || !formData.artifactId || !formData.projectVersion) {
         mvnArchetypeGenerate.value = "Please fill in all fields";
         return;
     }
 
-    mvnArchetypeGenerate.value = `mvn archetype:generate -DarchetypeGroupId=${mvnArchetypeGroupId} -DarchetypeArtifactId=${mvnArchetypeArtifactId} -DarchetypeVersion=${mvnArchetypeVersion} -DgroupId=${groupId} -DartifactId=${artifactId} -Dprofile=${profile} -Dversion=${projectVersion} -DinteractiveMode=false`;
+    mvnArchetypeGenerate.value = `mvn archetype:generate -DarchetypeGroupId=${formData.mvnArchetypeGroupId} -DarchetypeArtifactId=${formData.mvnArchetypeArtifactId} -DarchetypeVersion=${formData.mvnArchetypeVersion} -DgroupId=${formData.groupId} -DartifactId=${formData.artifactId} -Dprofile=${formData.profile} -Dversion=${formData.projectVersion} -DinteractiveMode=false`;
 }
 
 function copyMvnCommand() {
@@ -40,6 +45,26 @@ function copyMvnCommand() {
     mvnArchetypeGenerate.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(document.getElementById("mvnArchetypeGenerate").value);
 }
+
+function download() {
+    const path = "http://localhost:8080/starter-ui/download.zip";
+    const filename = "jakartaee-cafe.zip";
+    const formData = getFormData();
+
+    // Create a new link
+    const anchor = document.createElement('a');
+    anchor.href = path + `?archetypeGroupId=${formData.mvnArchetypeGroupId}&archetypeArtifactId=${formData.mvnArchetypeArtifactId}&archetypeVersion=${formData.mvnArchetypeVersion}&groupId=${formData.groupId}&artifactId=${formData.artifactId}&profile=${formData.profile}&version=${formData.projectVersion}`;
+    anchor.download = filename;
+
+    // Append to the DOM
+    document.body.appendChild(anchor);
+
+    // Trigger `click` event
+    anchor.click();
+
+    // Remove element from DOM
+    document.body.removeChild(anchor);
+}; 
 
 </script>
 
@@ -76,10 +101,14 @@ function copyMvnCommand() {
             <input type="text" class="form-control" id="projectVersion" value="1.0.0-SNAPSHOT" onchange="generateMvnCommand()">
         </div>
     </div>
+    <div class="form-row">
+        <button onclick="download();">Generate ZIP</button>
+    </div>
     <div class="form-group">
         <label for="mvnArchetypeGenerate">
-            Just copy this command as is in a terminal where you want to start your project and press enter...
+            Generate the project using Maven on command line
         </label>
+        <p>Just copy this command as is into a terminal where you want to start your project and press Enter...</p>
         <textarea class="form-control"
                   id="mvnArchetypeGenerate"
                   rows="11"
