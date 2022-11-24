@@ -9,7 +9,7 @@ import org.apache.maven.cli.MavenCli;
 public class CliMavenContext extends MavenContext<CliMavenContext> {
 
     @Override
-    public boolean run() {
+    public void run() {
         System.setProperty(MavenCli.MULTIMODULE_PROJECT_DIRECTORY, workingDir.toAbsolutePath().toString()); // for newer maven versions
         MavenCli cli = new MavenCli();
         List<String> args = new ArrayList<>(opts);
@@ -21,9 +21,11 @@ public class CliMavenContext extends MavenContext<CliMavenContext> {
                 args.add("-D" + prop.getKey());
             }
         }
-        return 0 == cli.doMain(args.toArray(new String[0]),
+        if (0 != cli.doMain(args.toArray(new String[0]),
                 workingDir.toAbsolutePath().toString(),
-                System.out, System.err);
+                System.out, System.err) ) {
+            throw new RuntimeException("Maven CLI didn't complete successfully");
+        }
     }
 }
 

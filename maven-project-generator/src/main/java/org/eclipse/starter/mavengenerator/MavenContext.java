@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-public abstract class MavenContext<THIS extends MavenContext> {
+public abstract class MavenContext<THIS extends MavenContext> implements Runnable {
 
     protected Path workingDir = Paths.get(System.getProperty("java.io.tmpdir", "noWorkingDir"));
     protected Properties properties = new Properties();
@@ -41,7 +41,5 @@ public abstract class MavenContext<THIS extends MavenContext> {
         this.properties.putAll(properties);
         return (THIS)this;
     }
-    
-    abstract public boolean run();
     
 }

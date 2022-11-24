@@ -16,7 +16,7 @@ public class RunArchetypePluginTest implements UnitTestCommons {
         String newArtifactName = getTestMethodName(testInfo);
         Path testDir = getTestDir(testInfo);
 
-        boolean result = new ArchetypeGenerateParameters()
+        new ArchetypeGenerateParameters()
                 .archetypeGroupId("org.eclipse.starter")
                 .archetypeArtifactId("jakartaee10-minimal")
                 .archetypeVersion("1.1.0")
@@ -31,9 +31,6 @@ public class RunArchetypePluginTest implements UnitTestCommons {
                 )
                 .run();
 
-        assertThat(result)
-                .as("Result of Maven execution")
-                .isTrue();
         assertThat(new File(testDir.toFile(), newArtifactName + File.separator + "pom.xml"))
                 .as("Generated pom.xml file")
                 .exists();
