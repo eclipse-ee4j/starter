@@ -2,8 +2,11 @@ package org.eclipse.starter.mavengenerator;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -21,30 +24,30 @@ public class ZipCodec {
         return this;
     }
 
-    public void addDirToZipArchive(File dirToZip, ZipOutputStream zos) throws Exception {
+    public void addDirToZipArchive(Path dirToZip, ZipOutputStream zos) throws Exception {
         addDirToZipArchive(dirToZip, zos, null);
     }
 
-    private void addDirToZipArchive(File dirToZip, ZipOutputStream zos, String parrentDirectoryName) throws Exception {
-        if (dirToZip == null || !dirToZip.exists()) {
+    private void addDirToZipArchive(Path dirToZip, ZipOutputStream zos, String parrentDirectoryName) throws Exception {
+        if (dirToZip == null || ! Files.exists(dirToZip)) {
             return;
         }
 
-        String zipEntryName = dirToZip.getName();
+        String zipEntryName = dirToZip.getFileName().toString();
         if (parrentDirectoryName != null && !parrentDirectoryName.isEmpty()) {
-            zipEntryName = parrentDirectoryName + "/" + dirToZip.getName();
+            zipEntryName = parrentDirectoryName + File.separator + zipEntryName;
         }
 
         final String entryListenerEntry = zipEntryName;
-        if (dirToZip.isDirectory()) {
+        if (dirToZip.toFile().isDirectory()) {
             entryListener.ifPresent(listener -> listener.accept(new EntryEvent(true, entryListenerEntry)));
-            for (File file : dirToZip.listFiles()) {
+            for (Path file : Files.list(dirToZip).collect(Collectors.toList())) {
                 addDirToZipArchive(file, zos, zipEntryName);
             }
         } else {
             entryListener.ifPresent(listener -> listener.accept(new EntryEvent(false, entryListenerEntry)));
             byte[] buffer = new byte[1024];
-            FileInputStream fis = new FileInputStream(dirToZip);
+            FileInputStream fis = new FileInputStream(dirToZip.toFile());
             zos.putNextEntry(new ZipEntry(zipEntryName));
             int length;
             while ((length = fis.read(buffer)) > 0) {
