@@ -3,6 +3,9 @@ package org.eclipse.starter.mavengenerator;
 import java.util.Optional;
 import java.util.Properties;
 
+/**
+ * Parameters to execute the archetype:generate Maven goal
+ */
 public class ArchetypeGenerateParameters extends MavenParameters {
 
     private Optional<String> archetypeGroupId = Optional.empty();

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
+/**
+ * General Maven parameters for any command
+ */
 public class MavenParameters {
 
     protected Optional<Boolean> interactiveMode = Optional.empty();
