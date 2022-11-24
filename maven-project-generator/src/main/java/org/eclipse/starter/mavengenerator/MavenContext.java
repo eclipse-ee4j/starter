@@ -1,6 +1,7 @@
 package org.eclipse.starter.mavengenerator;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Properties;
 
 public abstract class MavenContext<THIS extends MavenContext> {
 
-    protected String workingDir = System.getProperty("java.io.tmpdir", "noWorkingDir");
+    protected Path workingDir = Paths.get(System.getProperty("java.io.tmpdir", "noWorkingDir"));
     protected Properties properties = new Properties();
     protected List<String> goals = new ArrayList<>();
     protected List<String> opts = new ArrayList<>();
@@ -16,8 +17,8 @@ public abstract class MavenContext<THIS extends MavenContext> {
     public MavenContext() {
     }
 
-    public THIS workingDirectory(File workingDir) {
-        this.workingDir = workingDir.getAbsolutePath();
+    public THIS workingDirectory(Path workingDir) {
+        this.workingDir = workingDir;
         return (THIS)this;
     }
     

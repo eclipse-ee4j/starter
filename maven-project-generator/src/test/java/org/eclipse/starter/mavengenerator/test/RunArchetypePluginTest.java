@@ -1,7 +1,8 @@
 package org.eclipse.starter.mavengenerator.test;
 
-import org.eclipse.starter.mavengenerator.test.commons.UnitTestCommons;
 import java.io.File;
+import org.eclipse.starter.mavengenerator.test.commons.UnitTestCommons;
+import java.nio.file.Path;
 import org.eclipse.starter.mavengenerator.ArchetypeGenerateParameters;
 import org.eclipse.starter.mavengenerator.CliMavenContext;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +14,7 @@ public class RunArchetypePluginTest implements UnitTestCommons {
     @Test
     void canRunCliArchetypePluginFromParams(TestInfo testInfo) {
         String newArtifactName = getTestMethodName(testInfo);
-        File testDir = getTestDir(testInfo);
+        Path testDir = getTestDir(testInfo);
 
         boolean result = new ArchetypeGenerateParameters()
                 .archetypeGroupId("org.eclipse.starter")
@@ -30,7 +31,11 @@ public class RunArchetypePluginTest implements UnitTestCommons {
                 )
                 .run();
 
-        assertThat(result).as("Result of Maven execution").isTrue();
-        assertThat(new File(testDir, newArtifactName + File.separator + "pom.xml")).as("Generated pom.xml file").exists();
+        assertThat(result)
+                .as("Result of Maven execution")
+                .isTrue();
+        assertThat(new File(testDir.toFile(), newArtifactName + File.separator + "pom.xml"))
+                .as("Generated pom.xml file")
+                .exists();
     }
 }

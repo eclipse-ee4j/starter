@@ -10,7 +10,7 @@ public class CliMavenContext extends MavenContext<CliMavenContext> {
 
     @Override
     public boolean run() {
-        System.setProperty(MavenCli.MULTIMODULE_PROJECT_DIRECTORY, workingDir); // for newer maven versions
+        System.setProperty(MavenCli.MULTIMODULE_PROJECT_DIRECTORY, workingDir.toAbsolutePath().toString()); // for newer maven versions
         MavenCli cli = new MavenCli();
         List<String> args = new ArrayList<>(opts);
         args.addAll(goals);
@@ -22,7 +22,7 @@ public class CliMavenContext extends MavenContext<CliMavenContext> {
             }
         }
         return 0 == cli.doMain(args.toArray(new String[0]),
-                workingDir,
+                workingDir.toAbsolutePath().toString(),
                 System.out, System.err);
     }
 }

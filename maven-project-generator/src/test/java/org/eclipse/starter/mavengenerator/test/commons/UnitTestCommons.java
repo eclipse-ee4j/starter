@@ -28,10 +28,10 @@ public interface UnitTestCommons {
         return System.getProperty("test.temp.dir", System.getProperty("java.io.tmpdir", "noDefaultTempDir"));
     }
     
-    default File getTestDir(TestInfo testInfo) {
-        File testDir = new File(getRootTestTempDir(), getTestMethodName(testInfo));
+    default Path getTestDir(TestInfo testInfo) {
+        Path testDir = Paths.get(getRootTestTempDir(), getTestMethodName(testInfo));
         try {
-            Files.createDirectories(testDir.toPath());
+            Files.createDirectories(testDir);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
