@@ -18,16 +18,16 @@
         </dependency>
         
         <!-- for Cli -->
-<dependency>
-  <groupId>org.apache.maven.resolver</groupId>
-  <artifactId>maven-resolver-connector-basic</artifactId>
-  <version>1.6.3</version>
-</dependency>
-<dependency>
-  <groupId>org.apache.maven.resolver</groupId>
-  <artifactId>maven-resolver-transport-http</artifactId>
-  <version>1.6.3</version>
-</dependency>
+        <dependency>
+            <groupId>org.apache.maven.resolver</groupId>
+            <artifactId>maven-resolver-connector-basic</artifactId>
+            <version>1.6.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.resolver</groupId>
+            <artifactId>maven-resolver-transport-http</artifactId>
+            <version>1.6.3</version>
+        </dependency>
         <!-- this compat artifact is needed for Maven 3.8 -->
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -76,5 +76,8 @@
             </plugins>
         </pluginManagement>
     </build>
-    
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
 </project>
