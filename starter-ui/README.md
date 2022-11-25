@@ -4,16 +4,14 @@ The following instruction works on `*nix` environment.
 ### Generate the war
 Following maven command will generate the war.
 ```
-mvn clean compile war:war
+mvn clean package
 ```
-The command will generate `jakarta-starter-ui-1.1.0-SNAPSHOT.war` in the `/target` folder. Rename it to `ROOT.war`
-
-```a
-mv target/jakarta-starter-ui-1.1.0-SNAPSHOT.war ROOT.war 
-```
+The command will generate `jakarta-starter-ui-1.1.0-SNAPSHOT.war` in the `/target` folder. 
 
 ### Deployment & Running the UI
-This war would expect tomcat 10, as this servlet was written with the Jakarta EE specification.
+This war would expect a Server 5+ or Jakarta EE 9+ runtime (such as tomcat 10 or Eclipse GlassFish 6).
+
+### Deployment on Tomcat 10
 Download Tomcat 10 from the following URL-
 
 `https://tomcat.apache.org/download-10.cgi`
@@ -24,8 +22,14 @@ Unzip it, and put it in a folder. It can be at any location. Then, remove all th
 cd ~/apache-tomcat-10.0.21/webapps
 rm -rf . 
 ```
+Rename the applicatoin WAR to `ROOT.war`
 
-Copy the `ROOT.war` and paste it into this `webapps` folder. For example, the following command will run the tomcat.
+```a
+mv target/jakarta-starter-ui-1.1.0-SNAPSHOT.war ROOT.war 
+```
+Copy the `ROOT.war` and paste it into this `webapps` folder. 
+
+The following command will run Tomcat.
 
 ```
 cd ~/apache-tomcat-10.0.21/bin 
