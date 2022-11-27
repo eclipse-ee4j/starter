@@ -132,13 +132,13 @@
         </extensions>
 
     </build>
-    
+
     <profiles>
         <profile>
-            <!-- modules that require building with Java 11 -->
-            <id>jdk11plus</id>
+            <!-- modules that require building with Java 17 -->
+            <id>jdk17plus</id>
             <activation>
-                <jdk>[11,)</jdk>
+                <jdk>[17,)</jdk>
             </activation>
             <modules>
                 <module>starter-ui</module>

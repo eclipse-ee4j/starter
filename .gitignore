@@ -92,3 +92,5 @@ buildNumber.properties
 jakartaee-cafe-data
 jakartaee-cafe-test-data
 .vscode/settings.json
+
+artifact/
