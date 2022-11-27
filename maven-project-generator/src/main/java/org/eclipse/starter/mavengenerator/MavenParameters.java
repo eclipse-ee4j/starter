@@ -13,6 +13,7 @@ public class MavenParameters {
     protected Optional<Boolean> interactiveMode = Optional.empty();
     protected Optional<Integer> numberOfThreads = Optional.empty();
     protected List<String> goals = new ArrayList<>();
+    protected boolean guessNumberOfThreads = false;
 
     public MavenParameters interactiveMode(final Boolean value) {
         this.interactiveMode = Optional.ofNullable(value);
@@ -21,6 +22,11 @@ public class MavenParameters {
 
     public MavenParameters numberOfThreads(final Integer i) {
         this.numberOfThreads = Optional.ofNullable(i);
+        return this;
+    }
+    
+    public MavenParameters guessNumberOfThreads() {
+        this.guessNumberOfThreads = true;
         return this;
     }
 
@@ -43,11 +49,17 @@ public class MavenParameters {
 
     protected List<String> getOptions() {
         List<String> options = new ArrayList<>();
-        Integer finalNumberOfThreads = numberOfThreads
-                .orElseGet(() -> {
-                    return Runtime.getRuntime().availableProcessors() / 2;
+        Optional<Integer> finalNumberOfThreads = numberOfThreads
+                .or(() -> {
+                    if (guessNumberOfThreads) {
+                        return Optional.of(Runtime.getRuntime().availableProcessors() / 2 + 1);
+                    } else {
+                        return Optional.empty();
+                    }
                 });
-        options.add("-T" + finalNumberOfThreads);
+        finalNumberOfThreads.ifPresent( numberOfThreads -> {
+            options.add("-T" + numberOfThreads);
+        });
         return options;
     }
 
