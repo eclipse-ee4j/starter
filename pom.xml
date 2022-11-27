@@ -87,7 +87,6 @@
     <modules>
         <module>minimal-starter</module>
         <module>rest-starter</module>
-        <module>starter-ui</module>
         <module>archetypes/jakartaee10-minimal</module>
     </modules>
 
@@ -133,4 +132,18 @@
         </extensions>
 
     </build>
+    
+    <profiles>
+        <profile>
+            <!-- modules that require building with Java 11 -->
+            <id>jdk11plus</id>
+            <activation>
+                <jdk>[11,)</jdk>
+            </activation>
+            <modules>
+                <module>starter-ui</module>
+                <module>maven-project-generator</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
