@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>jakarta-starter-modules</artifactId>
@@ -9,14 +10,23 @@
     <artifactId>maven-project-generator</artifactId>
     <packaging>jar</packaging>
     <name>Maven Project Generator</name>
-    
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <junit.jupiter.version>5.3.1</junit.jupiter.version>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-embedder</artifactId>
             <version>3.8.6</version>
         </dependency>
-        
+
         <!-- for Cli -->
         <dependency>
             <groupId>org.apache.maven.resolver</groupId>
@@ -41,7 +51,7 @@
         </dependency>
 
         <!-- end for Cli -->
-        
+
         <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -55,11 +65,11 @@
             <scope>test</scope>
             <version>3.23.1</version>
         </dependency>
-        
+
         <!-- end for Testing -->
 
     </dependencies>
-    
+
     <build>
         <pluginManagement>
             <plugins>
@@ -76,8 +86,4 @@
             </plugins>
         </pluginManagement>
     </build>
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
 </project>
