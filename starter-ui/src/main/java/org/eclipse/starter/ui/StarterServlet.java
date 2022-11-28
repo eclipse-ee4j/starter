@@ -15,7 +15,6 @@ import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
-import java.util.function.Function;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.zip.ZipOutputStream;
@@ -23,12 +22,10 @@ import java.util.zip.ZipOutputStream;
 @WebServlet(urlPatterns = {"/download.zip"}, name = "StarterServlet")
 public class StarterServlet extends HttpServlet {
 
-
-    private static final Function<String, Boolean> IS_EMPTY = (String s) -> s == null || s.isEmpty();
-
     private static final Logger logger = Logger.getLogger(
             MethodHandles.lookup().lookupClass().getName());
     private static final String DOWNLOADABLE_FILE_NAME = "jakartaee-project.zip";
+    private static final String ZIP_EXTENSION = ".zip";
 
 
     @Override
@@ -44,9 +41,9 @@ public class StarterServlet extends HttpServlet {
                 parametersFromrequest.archetypeVersion, parametersFromrequest.profile,
                 parametersFromrequest.groupId, parametersFromrequest.artifactId, parametersFromrequest.version));
 
-        final var downloadableFileName = IS_EMPTY.apply(parametersFromrequest.artifactId)
+        final var downloadableFileName = this.isEmpty(parametersFromrequest.artifactId)
                 ? DOWNLOADABLE_FILE_NAME
-                : parametersFromrequest.artifactId + ".zip";
+                : parametersFromrequest.artifactId + ZIP_EXTENSION;
 
         this.prepareResponse(resp, downloadableFileName);
         final Path generatedDirectory = this.generateProjectFromArchetype(parametersFromrequest);
@@ -84,6 +81,10 @@ public class StarterServlet extends HttpServlet {
                 .run();
 
         return targetDirectory;
+    }
+
+    private boolean isEmpty(final String input) {
+        return input == null || input.isEmpty();
     }
 
     private Parameters parametersFromrequest(final HttpServletRequest req) {

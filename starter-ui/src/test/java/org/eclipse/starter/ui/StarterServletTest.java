@@ -19,7 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -62,7 +62,7 @@ class StarterServletTest {
         // Verify mock interactions
         verify(this.httpServletResponseMock).setContentType("application/zip");
         verify(this.httpServletResponseMock).setHeader("Content-Disposition", "attachment;filename=\"hello_world.zip\"");
-        verify(this.httpServletResponseMock, times(1)).getOutputStream();
+        verify(this.httpServletResponseMock, atLeastOnce()).getOutputStream();
 
         // Verify the zip file
         final StubServletOutputStream stubServletOutputStream = ((StubServletOutputStream) this.servletOutputStreamStub);

@@ -6,7 +6,7 @@ The following instruction works on `*nix` environment.
 
 ## Pre-requisites
 
-- Docker installed or Tomcat 10 installed
+- Docker or a servlet container (e.g. Tomcat) that supports servlet 5.0.
 
 ## Generate the war
 
