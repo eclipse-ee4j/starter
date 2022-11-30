@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.zip.ZipOutputStream;
 
-@WebServlet(urlPatterns = {"/download.zip"}, name = "StarterServlet")
+@WebServlet(urlPatterns = {"/download.zip"}, name = "StarterServlet", loadOnStartup = 1)
 public class StarterServlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(
