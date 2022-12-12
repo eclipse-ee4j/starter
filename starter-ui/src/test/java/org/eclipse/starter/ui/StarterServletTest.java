@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -35,7 +36,6 @@ class StarterServletTest {
     private HttpServletResponse httpServletResponseMock;
 
     private ServletOutputStream servletOutputStreamStub;
-
 
     @BeforeEach
     void setUp() {
@@ -83,14 +83,14 @@ class StarterServletTest {
             return null;
         }).takeWhile(Objects::nonNull).map(ZipEntry::getName).toArray(String[]::new);
 
-        assertThat(zipFilenames).containsAll(() -> Stream.of("hello_world/pom.xml",
-                        "hello_world/src/main/resources/META-INF/beans.xml",
-                        "hello_world/src/main/java/com/sample/hello_world/ApplicationConfig.java",
-                        "hello_world/src/main/java/com/sample/hello_world/resources/HelloRecord.java",
-                        "hello_world/src/main/java/com/sample/hello_world/resources/RestResource.java")
+        String ps = File.separator;
+        assertThat(zipFilenames).containsAll(() -> Stream.of(String.join(ps, "hello_world", "pom.xml"),
+                String.join(ps, "hello_world", "src", "main", "resources", "META-INF", "beans.xml"),
+                String.join(ps, "hello_world", "src", "main", "java", "com", "sample", "hello_world", "ApplicationConfig.java"),
+                String.join(ps, "hello_world", "src", "main", "java", "com", "sample", "hello_world", "resources", "HelloRecord.java"),
+                String.join(ps, "hello_world", "src", "main", "java", "com", "sample", "hello_world", "resources", "RestResource.java"))
                 .iterator());
     }
-
 
     private static class StubServletOutputStream extends ServletOutputStream {
 
