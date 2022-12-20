@@ -61,7 +61,7 @@ With Docker you can deploy without having to install Tomcat 10 on your local mac
 from the `starter-ui` folder, run the following command to build the image.
 
 ```shell
-docker build -t eclise/starter-ui .
+docker build -t eclipse/starter-ui .
 ```
 
 ### Run the container
