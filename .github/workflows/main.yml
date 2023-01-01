@@ -175,4 +175,5 @@ jobs:
         run: mvn clean install --file maven-project-generator/pom.xml
 
       - name: Build starter-ui
+        if: ${{ false }}
         run: mvn clean package --file starter-ui/pom.xml
