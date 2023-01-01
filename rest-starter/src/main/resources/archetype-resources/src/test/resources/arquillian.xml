@@ -1,6 +1,8 @@
 #set ($arquillianServlet = "Servlet 3.0")
+#set ($glassfishPath = "/tmp/glassfish5")
 #if (${jakartaVersion} == '9')
 #set ($arquillianServlet = "Servlet 5.0")
+#set ($glassfishPath = "/tmp/glassfish6")
 #end
 <?xml version="1.0"?>
 <arquillian
@@ -19,7 +21,7 @@
         #if (${runtime} == 'glassfish')
         <container qualifier="glassfish" default="true">
 	    <configuration>
-		    <property name="glassFishHome">/tmp/glassfish5</property>
+		    <property name="glassFishHome">$glassfishPath</property>
 		    <property name="enableDerby">false</property>
 		    <property name="outputToConsole">true</property>
 	    </configuration>

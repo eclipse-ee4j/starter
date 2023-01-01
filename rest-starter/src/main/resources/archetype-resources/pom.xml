@@ -110,14 +110,6 @@
 			<version>6.2021.1.Alpha1</version>
 			<scope>test</scope>
 		</dependency>
-		#elseif (${runtime} == 'tomee')
-		<dependency>
-			<groupId>com.fasterxml.jackson.jakarta.rs</groupId>
-			<artifactId>jackson-jakarta-rs-json-provider</artifactId>
-			<version>2.13.0</version>
-		</dependency>
-		#end
-
 		<!-- Embedded database -->
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -125,6 +117,33 @@
 			<version>2.1.210</version>
 			<scope>runtime</scope>
 		</dependency>
+		#elseif (${runtime} == 'tomee')
+		<dependency>
+			<groupId>com.fasterxml.jackson.jakarta.rs</groupId>
+			<artifactId>jackson-jakarta-rs-json-provider</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		<!-- Embedded database -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>2.1.210</version>
+			<scope>runtime</scope>
+		</dependency>
+		#else
+		<dependency>
+			<groupId>org.glassfish.hk2</groupId>
+			<artifactId>hk2-locator</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+		<!-- Embedded database -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.15.2.0</version>
+			<scope>runtime</scope>
+		</dependency>
+		#end
 #end
 
 		<dependency>
@@ -182,8 +201,14 @@
 			<version>3.0.alpha3</version>
 			<scope>test</scope>
 		</dependency>
+		#elseif (${runtime} == 'glassfish')
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-glassfish-managed-6</artifactId>
+			<version>1.0.0.Alpha1</version>
+			<scope>test</scope>
+		</dependency>
 		#end
-
 #end
 	</dependencies>
 
@@ -305,6 +330,49 @@
 
 					<tomeeGroupId>org.apache.tomee</tomeeGroupId>
 					<tomeeClassifier>plume</tomeeClassifier>
+				</configuration>
+			</plugin>
+			#elseif (${runtime} == 'glassfish')
+			<!--Download GlassFish for Aquillian -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>unpack</id>
+						<phase>generate-test-resources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.glassfish.main.distributions</groupId>
+									<artifactId>glassfish</artifactId>
+									<version>6.2.5</version>
+									<type>zip</type>
+									<overWrite>false</overWrite>
+									<outputDirectory>/tmp</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Execute 'mvn clean package cargo:run' to run the application. -->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven3-plugin</artifactId>
+				<version>1.9.10</version>
+				<configuration>
+					<container>
+						<containerId>glassfish6x</containerId>
+						<zipUrlInstaller>
+							<url>https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip</url>
+						</zipUrlInstaller>
+					</container>
 				</configuration>
 			</plugin>
 			#else

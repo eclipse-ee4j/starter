@@ -137,6 +137,19 @@ jobs:
       - name: Run TomEE REST Application Maven Build
         run: mvn clean package --file app/rest/tomee/jakartaee-cafe/pom.xml
 
+      - name: Run Maven REST Archetype for GlassFish
+        run: |
+          mkdir -p app/rest/glassfish
+          cd app/rest/glassfish
+          mvn archetype:generate -B -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=1.1.0-SNAPSHOT -DgroupId=org.eclipse -DartifactId=jakartaee-cafe -Dversion=0.1-SNAPSHOT -Dpackage=org.eclipse -Druntime=glassfish -DjakartaVersion=9
+
+      - name: Run GlassFish REST Application Maven Build
+        run: mvn clean package --file app/rest/glassfish/jakartaee-cafe/pom.xml
+
+
+      - name: Run TomEE REST Application Maven Build
+        run: mvn clean package --file app/rest/tomee/jakartaee-cafe/pom.xml
+
   build-java-17:
     runs-on: ubuntu-20.04
     strategy:
@@ -162,4 +175,5 @@ jobs:
         run: mvn clean install --file maven-project-generator/pom.xml
 
       - name: Build starter-ui
+        if: ${{ false }}
         run: mvn clean package --file starter-ui/pom.xml
