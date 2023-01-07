@@ -5,16 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.eclipse.starter</groupId>
     <artifactId>jakarta-starter-modules</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Eclipse Starter for Jakarta EE</name>
 
     <description>
         This is the official Eclipse Foundation starter for Jakarta EE.
-        It generates code to help get started with Jakarta EE projects
-        using Maven. It is possible to do so using Maven
-        archetypes. Support for a UI will be added at a later point.
+        It generates code to help get started with Jakarta EE projects. 
+        It is possible to do so using Maven archetypes. Support 
+        for a UI will be added at a later point.
     </description>
     <url>https://eclipse-ee4j.github.io/starter/</url>
 
@@ -85,9 +85,7 @@
     </properties>
 
     <modules>
-        <module>minimal-starter</module>
-        <module>rest-starter</module>
-        <module>archetypes/jakartaee10-minimal</module>
+        <module>starter</module>
     </modules>
 
     <dependencies>
