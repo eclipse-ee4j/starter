@@ -3,7 +3,6 @@ import org.apache.commons.io.FileUtils
 
 // Processing target runtime specific code.
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
-def wildflyDirectory = new File(outputDirectory, "wildfly")
 
 switch (request.properties["runtime"]) {
     case "glassfish": println "Generating code for GlassFish"
@@ -13,15 +12,8 @@ switch (request.properties["runtime"]) {
     case "tomee": println "Generating code for TomEE"
         break
 
-    case "wildfly": println "Generating code for WildFly"
-        FileUtils.copyDirectory(wildflyDirectory, outputDirectory)
-        break
-
     default: println "Generating code for Payara"
 }
-
-// We no longer need the wildfly directory, let's delete it.
-FileUtils.forceDelete(new File(outputDirectory, "wildfly"))
 
 // Jakarta version specific processing
 def jakartaVersion = request.properties["jakartaVersion"].trim()

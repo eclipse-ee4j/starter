@@ -18,20 +18,29 @@
 		</requiredProperty>
 		<requiredProperty key="jakartaVersion">
 			<defaultValue>10</defaultValue>
-			<validationRegex>^(8|9|10)$</validationRegex>
+			<validationRegex>^(8|9|9.1|10)$</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="profile">
+			<defaultValue>core</defaultValue>
+			<validationRegex>^(core|web|full)$</validationRegex>
 		</requiredProperty>		
+		<requiredProperty key="javaVersion">
+			<defaultValue>17</defaultValue>
+			<validationRegex>^(8|11|17)$</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="docker">
+			<defaultValue>no</defaultValue>
+			<validationRegex>^(no|yes)$</validationRegex>
+		</requiredProperty>
 		<requiredProperty key="runtime">
-			<defaultValue>payara</defaultValue>
-			<validationRegex>^(payara|glassfish|tomee|wildfly)$</validationRegex>
+			<defaultValue>none</defaultValue>
+			<validationRegex>^(none|payara|glassfish|tomee)$</validationRegex>
 		</requiredProperty>
 	</requiredProperties>
 
 	<fileSets>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
 			<directory>src/main/java</directory>
-		</fileSet>
-		<fileSet filtered="true" encoding="UTF-8">
-			<directory>src/main/resources</directory>
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/main/webapp</directory>
@@ -50,21 +59,6 @@
 			<includes>
 				<include>Dockerfile</include>
 				<include>README.md</include>
-			</includes>
-		</fileSet>
-
-		<!-- WildFly -->
-		<fileSet encoding="UTF-8">
-			<directory>wildfly/src/main/webapp</directory>
-		</fileSet>
-		<fileSet encoding="UTF-8">
-			<directory>wildfly/src/test/resources</directory>
-		</fileSet>
-		<fileSet filtered="true" encoding="UTF-8">
-			<directory>wildfly</directory>
-			<includes>
-				<include>pom.xml</include>
-				<include>Dockerfile</include>
 			</includes>
 		</fileSet>
 	</fileSets>

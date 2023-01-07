@@ -22,4 +22,9 @@
 		It generates code to help get started with Jakarta EE projects. 
 		It is possible to do so using Maven archetypes. 
     </description>
+
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>	
 </project>

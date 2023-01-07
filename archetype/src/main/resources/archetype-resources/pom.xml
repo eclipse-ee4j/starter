@@ -80,7 +80,7 @@
 					<removeDefaultWebapps>false</removeDefaultWebapps>
 				</configuration>
 			</plugin>
-			#else
+			#elseif (${runtime} == 'payara')
 			<!-- Execute 'mvn clean package payara-micro:start' to run the application. -->
 			<plugin>
 				<groupId>fish.payara.maven.plugins</groupId>
