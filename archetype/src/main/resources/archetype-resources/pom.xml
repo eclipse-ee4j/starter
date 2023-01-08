@@ -54,8 +54,8 @@
 				</configuration>
 			</plugin>
 
-      #if (${runtime} == 'glassfish')
-      <!-- Execute 'mvn clean package cargo:run' to run the application. -->
+            #if (${runtime} == 'glassfish')
+            <!-- Execute 'mvn clean package cargo:run' to run the application. -->
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven3-plugin</artifactId>
@@ -69,7 +69,7 @@
 					</container>
 				</configuration>
 			</plugin>
-      #elseif (${runtime} == 'tomee')
+            #elseif (${runtime} == 'tomee')
 			<!-- Execute 'mvn clean package tomee:run' to run the application. -->
 			<plugin>
 				<groupId>org.apache.tomee.maven</groupId>

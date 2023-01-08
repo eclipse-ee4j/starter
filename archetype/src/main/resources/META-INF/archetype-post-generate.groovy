@@ -16,17 +16,23 @@ switch (request.properties["runtime"]) {
     case "tomee": println "Generating code for TomEE"
         break
 
-    default: println "Generating code for Payara"
+    case "payara": println "Generating code for Payara"
+        break
+
+    default: println "No runtime will be included in the sample"
 }
 
 // Jakarta version specific processing
 def jakartaVersion = request.properties["jakartaVersion"].trim()
 bindEEPackage(jakartaVersion, outputDirectory)
 
-// Remove Dockerfile if not requested
+// Remove Dockerfile if not requested or possible
 if (request.properties["docker"].equalsIgnoreCase("no")) {
     println "Docker support was not requested"
     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+} else if (request.properties["runtime"].equalsIgnoreCase("none")) {
+    println "WARNING: Docker support is not possible without choosing a runtime"
+    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))    
 }
 
 // Adding Maven Wrapper
@@ -47,6 +53,8 @@ if (proc.exitValue() != 0 || output == null || !output.contains("BUILD SUCCESS")
     println("${output}")
     throw new RuntimeException("Failed to generate code from archetype.")
 }
+
+println "The README.md file in the " + request.properties["artifactId"] + " directory explains how to run the generated application"
 
 private bindEEPackage(jakartaVersion, File outputDirectory) {
     def eePackage = 'javax';
