@@ -2,21 +2,38 @@ import java.nio.file.Files
 import org.apache.commons.io.FileUtils
 
 def jakartaVersion = request.properties["jakartaVersion"].trim()
-def docker = request.properties["docker"].trim()
+def profile = request.properties["profile"].trim()
+def javaVersion = request.properties["javaVersion"].trim()
 def runtime = request.properties["runtime"].trim()
+def docker = request.properties["docker"].trim()
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 
-validateInput(jakartaVersion, outputDirectory)
+validateInput(jakartaVersion, javaVersion, runtime, profile, outputDirectory)
 generateRuntime(runtime, jakartaVersion, docker, outputDirectory)
 bindEEPackage(jakartaVersion, outputDirectory)
 generateDocker(docker, runtime, outputDirectory)
 generateMavenWrapper(outputDirectory)
 printSummary()
 
-private validateInput(jakartaVersion, File outputDirectory){
-    if (request.properties["profile"].equalsIgnoreCase("core") && jakartaVersion != '10') {
+private validateInput(jakartaVersion, javaVersion, runtime, profile, File outputDirectory){
+    if (profile.equalsIgnoreCase("core") && jakartaVersion != '10') {
        FileUtils.forceDelete(outputDirectory)
        throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10")
+    }
+
+    if (runtime.equalsIgnoreCase("payara") && (jakartaVersion != '8') && (javaVersion == '8')) {
+       FileUtils.forceDelete(outputDirectory)
+       throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
+    }    
+
+    if (runtime.equalsIgnoreCase("glassfish") && profile.equalsIgnoreCase("core")) {
+       FileUtils.forceDelete(outputDirectory)
+       throw new RuntimeException("Failed, GlassFish does not support the Core Profile")
+    }
+
+    if (runtime.equalsIgnoreCase("glassfish") && (jakartaVersion != '8') && (javaVersion == '8')) {
+       FileUtils.forceDelete(outputDirectory)
+       throw new RuntimeException("Failed, GlassFish 7 does not support Java SE 8")
     }
 }
 

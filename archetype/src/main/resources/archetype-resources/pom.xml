@@ -19,6 +19,21 @@
 #else
 #set ($payaraVersion = "6.2022.2")
 #end
+#if (${jakartaVersion} == '8')
+#set ($glassfishContainerId = "glassfish5x")
+#if (${profile} == 'web')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/5.1.0/web-5.1.0.zip")
+#else
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
+#end
+#else
+#set ($glassfishContainerId = "glassfish7x")
+#if (${profile} == 'web')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.0/web-7.0.0.zip")
+#else
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.0/glassfish-7.0.0.zip")
+#end
+#end
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -84,12 +99,12 @@
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven3-plugin</artifactId>
-				<version>1.9.10</version>
+				<version>1.10.4</version>
 				<configuration>
 					<container>
-						<containerId>glassfish5x</containerId>
+						<containerId>${glassfishContainerId}</containerId>
 						<zipUrlInstaller>
-							<url>https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip</url>
+							<url>${glassfishUrl}</url>
 						</zipUrlInstaller>
 					</container>
 				</configuration>
@@ -134,7 +149,7 @@
 			    <plugin>
 		            <groupId>org.codehaus.cargo</groupId>
 				    <artifactId>cargo-maven3-plugin</artifactId>
-				    <version>1.9.10</version>
+				    <version>1.10.4</version>
 				    <configuration>
 					    <container>
 						    <containerId>payara</containerId>
