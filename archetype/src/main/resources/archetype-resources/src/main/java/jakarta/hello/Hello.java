@@ -8,7 +8,7 @@ public class Hello {
         this.name = name;
 	}
 
-	public String getName(){
+	public String getHello(){
 		return name;
 	}
 }
