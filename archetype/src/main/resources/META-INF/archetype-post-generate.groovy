@@ -2,23 +2,29 @@ import java.nio.file.Files
 import org.apache.commons.io.FileUtils
 
 def jakartaVersion = request.properties["jakartaVersion"].trim()
+def docker = request.properties["docker"].trim()
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 
 validateInput(jakartaVersion, outputDirectory);
 
 switch (request.properties["runtime"]) {
     case "glassfish": println "Generating code for GlassFish"
-        if (request.properties["docker"].equalsIgnoreCase("yes")) {
+        if (docker.equalsIgnoreCase("yes")) {
            println "WARNING: GlassFish does not support Docker"
+           FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))           
         }
         
-        FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
         break
 
     case "tomee": println "Generating code for TomEE"
         break
 
     case "payara": println "Generating code for Payara"
+        if ((jakartaVersion != '8') && docker.equalsIgnoreCase("yes")) {
+           println "WARNING: Payara does not yet support Docker for this Jakarta EE version"
+           FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+        }
+            
         break
 
     default: println "No runtime will be included in the sample"
@@ -28,7 +34,7 @@ switch (request.properties["runtime"]) {
 bindEEPackage(jakartaVersion, outputDirectory)
 
 // Remove Dockerfile if not requested or possible
-if (request.properties["docker"].equalsIgnoreCase("no")) {
+if (docker.equalsIgnoreCase("no")) {
     println "Docker support was not requested"
     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
 } else if (request.properties["runtime"].equalsIgnoreCase("none")) {

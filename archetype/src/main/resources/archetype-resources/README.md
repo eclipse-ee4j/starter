@@ -19,7 +19,7 @@ Once Payara Micro starts, you can access the project at http://localhost:8080.
 Once Payara starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
 #end
 
-#if (${docker} == 'yes')
+#if ((${docker} == 'yes') and (${jakartaVersion} == '8'))
 You can also run the project via Docker. To build the Docker image, execute the following commands from the directory where this file resides. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Docker](https://docs.docker.com/get-docker/) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
 
 ```

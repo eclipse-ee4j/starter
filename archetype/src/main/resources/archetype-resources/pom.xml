@@ -5,6 +5,20 @@
 #else
 #set ($eeArtifactId = "jakarta.jakartaee-api")
 #end
+#if (${jakartaVersion} == '10')
+#set ($eeApiVersion = "10.0.0")
+#elseif (${jakartaVersion} == '9.1')
+#set ($eeApiVersion = "9.1.0")
+#elseif (${jakartaVersion} == '9')
+#set ($eeApiVersion = "9.0.0")
+#else
+#set ($eeApiVersion = "8.0.0")
+#end
+#if (${jakartaVersion} == '8')
+#set ($payaraVersion = "5.2022.5")
+#else
+#set ($payaraVersion = "6.2022.2")
+#end
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -28,7 +42,7 @@
 		#else
 		<maven.compiler.release>${javaVersion}</maven.compiler.release>
 		#end
-		<jakartaee-api.version>8.0.0</jakartaee-api.version>
+		<jakartaee-api.version>${eeApiVersion}</jakartaee-api.version>
 	</properties>
 
 	<dependencies>
@@ -43,7 +57,7 @@
 		<dependency>
 			<groupId>fish.payara.extras</groupId>
 			<artifactId>payara-micro</artifactId>
-			<version>5.2022.5</version>
+			<version>${payaraVersion}</version>
 			<scope>provided</scope>
 		</dependency>		
 		#end
@@ -109,7 +123,7 @@
 					    <artifactItem>
 						    <groupId>fish.payara.extras</groupId>
 						    <artifactId>payara-micro</artifactId>
-						    <version>5.2022.5</version>
+						    <version>${payaraVersion}</version>
 					    </artifactItem>
 					    <deployWar>true</deployWar>
 					    <contextRoot>/</contextRoot>
@@ -125,7 +139,7 @@
 					    <container>
 						    <containerId>payara</containerId>
 						    <zipUrlInstaller>
-							    <url>https://repo1.maven.org/maven2/fish/payara/distributions/payara/5.2022.5/payara-5.2022.5.zip</url>
+							    <url>https://repo1.maven.org/maven2/fish/payara/distributions/payara/5.2022.5/payara-${payaraVersion}.zip</url>
 						    </zipUrlInstaller>
 					    </container>
 				    </configuration>
