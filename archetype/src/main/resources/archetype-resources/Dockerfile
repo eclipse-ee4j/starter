@@ -1,6 +1,12 @@
 #if (${jakartaVersion} == '8')
     #if (${runtime} == 'tomee')
-        #set ($baseImage = "tomee:17-jdk-8.0.10-plume")
+        #if (${javaVersion} == '8')
+           #set ($baseImage = "tomee:8.0.13-jre8-alpine-plume")
+        #elseif (${javaVersion} == '11')
+           #set ($baseImage = "tomee:8.0.13-jre11-alpine-plume")
+        #else
+           #set ($baseImage = "tomee:8.0.13-jre17-alpine-plume")
+        #end
         #set ($deployDirectory = "/usr/local/tomee/webapps/")
     #elseif (${runtime} == 'payara')
         #if (${javaVersion} == '17')
@@ -25,7 +31,11 @@
         #set ($deployDirectory = "$DEPLOY_DIR")
     #end
 #else
-    #set ($baseImage = "tomee:9.0.0-M7-jre11-alpine-plume")
+    #if (${javaVersion} == '11')
+        #set ($baseImage = "tomee:9.0-jre11-alpine-plume")
+    #else
+        #set ($baseImage = "tomee:9.0-jre17-alpine-plume")
+    #end
     #set ($deployDirectory = "/usr/local/tomee/webapps/")
 #end
 FROM $baseImage

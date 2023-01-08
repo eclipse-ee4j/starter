@@ -15,11 +15,8 @@
 #set ($eeApiVersion = "8.0.0")
 #end
 #if (${jakartaVersion} == '8')
+#set ($tomeeVersion = "8.0.13")
 #set ($payaraVersion = "5.2022.5")
-#else
-#set ($payaraVersion = "6.2022.2")
-#end
-#if (${jakartaVersion} == '8')
 #set ($glassfishContainerId = "glassfish5x")
 #if (${profile} == 'web')
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/5.1.0/web-5.1.0.zip")
@@ -27,6 +24,8 @@
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
 #end
 #else
+#set ($payaraVersion = "6.2022.2")
+#set ($tomeeVersion = "9.0.0.RC1")
 #set ($glassfishContainerId = "glassfish7x")
 #if (${profile} == 'web')
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.0/web-7.0.0.zip")
@@ -114,8 +113,9 @@
 			<plugin>
 				<groupId>org.apache.tomee.maven</groupId>
 				<artifactId>tomee-maven-plugin</artifactId>
-				<version>8.0.10</version>
+				<version>9.0.0.RC1</version>
 				<configuration>
+					<tomeeVersion>${tomeeVersion}</tomeeVersion>
 					<tomeeClassifier>plume</tomeeClassifier>
 					<removeDefaultWebapps>false</removeDefaultWebapps>
 				</configuration>

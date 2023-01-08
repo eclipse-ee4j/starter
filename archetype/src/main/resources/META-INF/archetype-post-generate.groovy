@@ -35,6 +35,21 @@ private validateInput(jakartaVersion, javaVersion, runtime, profile, File output
        FileUtils.forceDelete(outputDirectory)
        throw new RuntimeException("Failed, GlassFish 7 does not support Java SE 8")
     }
+
+    if (runtime.equalsIgnoreCase("tomee") && (jakartaVersion == '10')) {
+       FileUtils.forceDelete(outputDirectory)
+       throw new RuntimeException("Failed, TomEE does not support Jakarta EE 10")
+    }
+
+    if (runtime.equalsIgnoreCase("tomee") && !profile.equalsIgnoreCase("web")) {
+       FileUtils.forceDelete(outputDirectory)
+       throw new RuntimeException("Failed, TomEE does not support the full and Core Profiles")
+    }
+
+    if (runtime.equalsIgnoreCase("tomee") && (jakartaVersion != '8') && (javaVersion == '8')) {
+       FileUtils.forceDelete(outputDirectory)
+       throw new RuntimeException("Failed, TomEE 9 does not support Java SE 8")
+    }    
 }
 
 private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
@@ -48,6 +63,10 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
             break
 
         case "tomee": println "Generating code for TomEE"
+            if (jakartaVersion != '8') {
+                println "WARNING: TomEE 9 is not yet a production ready release"
+            }
+
             break
 
         case "payara": println "Generating code for Payara"
