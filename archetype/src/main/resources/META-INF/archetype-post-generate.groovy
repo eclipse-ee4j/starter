@@ -1,8 +1,10 @@
 import java.nio.file.Files
 import org.apache.commons.io.FileUtils
 
-// Processing target runtime specific code.
+def jakartaVersion = request.properties["jakartaVersion"].trim()
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
+
+validateInput(jakartaVersion, outputDirectory);
 
 switch (request.properties["runtime"]) {
     case "glassfish": println "Generating code for GlassFish"
@@ -23,7 +25,6 @@ switch (request.properties["runtime"]) {
 }
 
 // Jakarta version specific processing
-def jakartaVersion = request.properties["jakartaVersion"].trim()
 bindEEPackage(jakartaVersion, outputDirectory)
 
 // Remove Dockerfile if not requested or possible
@@ -51,10 +52,18 @@ proc.waitFor()
 
 if (proc.exitValue() != 0 || output == null || !output.contains("BUILD SUCCESS")) {
     println("${output}")
+    FileUtils.forceDelete(outputDirectory)    
     throw new RuntimeException("Failed to generate code from archetype.")
 }
 
 println "The README.md file in the " + request.properties["artifactId"] + " directory explains how to run the generated application"
+
+private validateInput(jakartaVersion, File outputDirectory){
+    if (request.properties["profile"].equalsIgnoreCase("core") && jakartaVersion != '10') {
+       FileUtils.forceDelete(outputDirectory)
+       throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10")
+    }
+}
 
 private bindEEPackage(jakartaVersion, File outputDirectory) {
     def eePackage = 'javax';

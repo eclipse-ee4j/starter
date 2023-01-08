@@ -4,11 +4,23 @@
         #set ($deployDirectory = "/usr/local/tomee/webapps/")
     #elseif (${runtime} == 'payara')
         #if (${javaVersion} == '17')
-            #set ($baseImage = "payara/server-full:5.2022.5-jdk17")
+            #if (${profile} == 'full')
+                #set ($baseImage = "payara/server-full:5.2022.5-jdk17")
+            #elseif (${profile} == 'web')
+                #set ($baseImage = "payara/server-web:5.2022.5-jdk17")
+            #end
         #elseif (${javaVersion} == '11')
-            #set ($baseImage = "payara/server-full:5.2022.5-jdk11")
+            #if (${profile} == 'full')
+                #set ($baseImage = "payara/server-full:5.2022.5-jdk11")
+            #elseif (${profile} == 'web')
+                #set ($baseImage = "payara/server-web:5.2022.5-jdk11")
+            #end        
         #else
-            #set ($baseImage = "payara/server-full:5.2022.5")
+            #if (${profile} == 'full')
+                #set ($baseImage = "payara/server-full:5.2022.5")
+            #elseif (${profile} == 'web')
+                #set ($baseImage = "payara/server-web:5.2022.5")
+            #end        
         #end
         #set ($deployDirectory = "$DEPLOY_DIR")
     #end

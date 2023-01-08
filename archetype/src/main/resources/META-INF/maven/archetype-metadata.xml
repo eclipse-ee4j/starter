@@ -23,7 +23,7 @@
 		<requiredProperty key="profile">
 			<defaultValue>core</defaultValue>
 			<validationRegex>^(core|web|full)$</validationRegex>
-		</requiredProperty>		
+		</requiredProperty>
 		<requiredProperty key="javaVersion">
 			<defaultValue>17</defaultValue>
 			<validationRegex>^(8|11|17)$</validationRegex>

@@ -1,3 +1,10 @@
+#if (${profile} == 'core')
+#set ($eeArtifactId = "jakarta.jakartaee-core-api")
+#elseif (${profile} == 'web')
+#set ($eeArtifactId = "jakarta.jakartaee-web-api")
+#else
+#set ($eeArtifactId = "jakarta.jakartaee-api")
+#end
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -27,11 +34,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>jakarta.platform</groupId>
-			<artifactId>jakarta.jakartaee-api</artifactId>
+			<artifactId>${eeArtifactId}</artifactId>
 			<version>${jakartaee-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		#if (${runtime} == 'payara')
+		#if ((${runtime} == 'payara') and (${profile} != 'full'))
 		<!-- Embedded Jakarta EE runtime -->
 		<dependency>
 			<groupId>fish.payara.extras</groupId>
@@ -85,28 +92,45 @@
 				</configuration>
 			</plugin>
 			#elseif (${runtime} == 'payara')
-			<!-- Execute 'mvn clean package payara-micro:start' to run the application. -->
-			<plugin>
-				<groupId>fish.payara.maven.plugins</groupId>
-				<artifactId>payara-micro-maven-plugin</artifactId>
-				<version>1.4.0</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<artifactItem>
-						<groupId>fish.payara.extras</groupId>
-						<artifactId>payara-micro</artifactId>
-						<version>5.2022.5</version>
-					</artifactItem>
-					<deployWar>true</deployWar>
-					<contextRoot>/</contextRoot>
-				</configuration>
-			</plugin>
+			    #if (${profile} != 'full')
+			    <!-- Execute 'mvn clean package payara-micro:start' to run the application. -->
+			    <plugin>
+				    <groupId>fish.payara.maven.plugins</groupId>
+				    <artifactId>payara-micro-maven-plugin</artifactId>
+				    <version>1.4.0</version>
+				    <executions>
+					    <execution>
+						    <goals>
+							    <goal>start</goal>
+						    </goals>
+					    </execution>
+				    </executions>
+				    <configuration>
+					    <artifactItem>
+						    <groupId>fish.payara.extras</groupId>
+						    <artifactId>payara-micro</artifactId>
+						    <version>5.2022.5</version>
+					    </artifactItem>
+					    <deployWar>true</deployWar>
+					    <contextRoot>/</contextRoot>
+				    </configuration>
+			    </plugin>
+				#else
+                <!-- Execute 'mvn clean package cargo:run' to run the application. -->
+			    <plugin>
+		            <groupId>org.codehaus.cargo</groupId>
+				    <artifactId>cargo-maven3-plugin</artifactId>
+				    <version>1.9.10</version>
+				    <configuration>
+					    <container>
+						    <containerId>payara</containerId>
+						    <zipUrlInstaller>
+							    <url>https://repo1.maven.org/maven2/fish/payara/distributions/payara/5.2022.5/payara-5.2022.5.zip</url>
+						    </zipUrlInstaller>
+					    </container>
+				    </configuration>
+			    </plugin>				
+				#end
 			#end
 		</plugins>
 	</build>
