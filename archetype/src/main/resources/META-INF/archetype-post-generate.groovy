@@ -6,6 +6,10 @@ def outputDirectory = new File(request.getOutputDirectory(), request.getArtifact
 
 switch (request.properties["runtime"]) {
     case "glassfish": println "Generating code for GlassFish"
+        if (request.properties["docker"].equalsIgnoreCase("yes")) {
+           println "WARNING: GlassFish does not support Docker"
+        }
+        
         FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
         break
 
@@ -18,6 +22,12 @@ switch (request.properties["runtime"]) {
 // Jakarta version specific processing
 def jakartaVersion = request.properties["jakartaVersion"].trim()
 bindEEPackage(jakartaVersion, outputDirectory)
+
+// Remove Dockerfile if not requested
+if (request.properties["docker"].equalsIgnoreCase("no")) {
+    println "Docker support was not requested"
+    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+}
 
 // Adding Maven Wrapper
 println "Adding Maven Wrapper"
@@ -43,6 +53,8 @@ private bindEEPackage(jakartaVersion, File outputDirectory) {
     if (jakartaVersion != '8') {
         eePackage = 'jakarta'
     }
+
+    println "Binding EE package: " + eePackage
 
     def binding = ["eePackage": eePackage]
     def engine = new groovy.text.SimpleTemplateEngine()
