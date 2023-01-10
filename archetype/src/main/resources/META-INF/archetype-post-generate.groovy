@@ -26,29 +26,33 @@ private validateInput(jakartaVersion, javaVersion, runtime, profile, File output
        throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
     }    
 
-    if (runtime.equalsIgnoreCase("glassfish") && profile.equalsIgnoreCase("core")) {
-       FileUtils.forceDelete(outputDirectory)
-       throw new RuntimeException("Failed, GlassFish does not support the Core Profile")
+    if (runtime.equalsIgnoreCase("glassfish")) {
+        if (profile.equalsIgnoreCase("core")) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, GlassFish does not support the Core Profile")
+        }
+
+        if ((jakartaVersion != '8') && (javaVersion == '8')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, GlassFish 7 does not support Java SE 8")
+        }
     }
 
-    if (runtime.equalsIgnoreCase("glassfish") && (jakartaVersion != '8') && (javaVersion == '8')) {
-       FileUtils.forceDelete(outputDirectory)
-       throw new RuntimeException("Failed, GlassFish 7 does not support Java SE 8")
-    }
+    if (runtime.equalsIgnoreCase("tomee")) {
+        if (jakartaVersion == '10') {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, TomEE does not yet support Jakarta EE 10")
+        }
 
-    if (runtime.equalsIgnoreCase("tomee") && (jakartaVersion == '10')) {
-       FileUtils.forceDelete(outputDirectory)
-       throw new RuntimeException("Failed, TomEE does not support Jakarta EE 10")
-    }
+        if (!profile.equalsIgnoreCase("web")) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, TomEE does not support the full and Core Profiles")
+        }
 
-    if (runtime.equalsIgnoreCase("tomee") && !profile.equalsIgnoreCase("web")) {
-       FileUtils.forceDelete(outputDirectory)
-       throw new RuntimeException("Failed, TomEE does not support the full and Core Profiles")
-    }
-
-    if (runtime.equalsIgnoreCase("tomee") && (jakartaVersion != '8') && (javaVersion == '8')) {
-       FileUtils.forceDelete(outputDirectory)
-       throw new RuntimeException("Failed, TomEE 9 does not support Java SE 8")
+        if ((jakartaVersion != '8') && (javaVersion == '8')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, TomEE 9 does not support Java SE 8")
+        }
     }    
 }
 
@@ -82,9 +86,9 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
 }
 
 private bindEEPackage(jakartaVersion, File outputDirectory) {
-    def eePackage = 'javax';
-    if (jakartaVersion != '8') {
-        eePackage = 'jakarta'
+    def eePackage = 'jakarta';
+    if (jakartaVersion == '8') {
+        eePackage = 'javax'
     }
 
     println "Binding EE package: " + eePackage
