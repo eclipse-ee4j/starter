@@ -56,8 +56,21 @@
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")    
     #end
 #end
+#if (${runtime} == 'open-liberty')
+    #if (${javaVersion} == '17')
+        #set ($baseImage = "openliberty/open-liberty:22.0.0.9-full-java17-openj9-ubi")
+    #elseif (${javaVersion} == '11')
+        #set ($baseImage = "openliberty/open-liberty:22.0.0.9-full-java11-openj9-ubi")
+    #else
+        #set ($baseImage = "openliberty/open-liberty:22.0.0.9-full-java8-openj9-ubi")
+    #end
+    #set ($deployDirectory = "/config/dropins/")    
+#end
 FROM $baseImage
+#if (${runtime} == 'open-liberty')
+COPY src/main/liberty/config/server.xml /config/server.xml
+#end
 COPY target/jakartaee-hello-world.war $deployDirectory
-#if ((${runtime} == 'wildfly') && ${profile} == 'full')
+#if ((${runtime} == 'wildfly') && (${profile} == 'full'))
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c","standalone-full.xml"]
 #end
