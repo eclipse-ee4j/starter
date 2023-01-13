@@ -4,12 +4,10 @@
     </featureManager>
 
     <basicRegistry id="basic" realm="BasicRealm">
-        <user name="admin" password="admin123" />
+        <user name="admin" password="admin" />
     </basicRegistry>
 
-    <keyStore id="defaultKeyStore" password="admin123" />
+    <keyStore id="defaultKeyStore" password="password" />
 
-    <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint" />
-
-    <applicationManager autoExpand="true" />    
+    <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint" /> 
 </server>
