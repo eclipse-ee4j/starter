@@ -53,7 +53,19 @@ private validateInput(jakartaVersion, javaVersion, runtime, profile, File output
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, TomEE 9 does not support Java SE 8")
         }
-    }    
+    }
+
+    if (runtime.equalsIgnoreCase("wildfly")) {
+        if ((jakartaVersion == '9') || (jakartaVersion == '9.1')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1")
+        }
+
+        if ((jakartaVersion == '10') && (javaVersion == '8')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, WildFly 27 does not support Java SE 8")
+        }                
+    }
 }
 
 private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
@@ -80,6 +92,9 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
             }
             
             break
+
+        case "wildfly": println "Generating code for WildFly"
+            break            
 
         default: println "No runtime will be included in the sample"
     }

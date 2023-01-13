@@ -1,9 +1,12 @@
 #if (${profile} == 'core')
 #set ($eeArtifactId = "jakarta.jakartaee-core-api")
+#set ($wildflyConfiguration = "standalone")
 #elseif (${profile} == 'web')
 #set ($eeArtifactId = "jakarta.jakartaee-web-api")
+#set ($wildflyConfiguration = "standalone")
 #else
 #set ($eeArtifactId = "jakarta.jakartaee-api")
+#set ($wildflyConfiguration = "standalone-full")
 #end
 #if (${jakartaVersion} == '10')
 #set ($eeApiVersion = "10.0.0")
@@ -32,6 +35,11 @@
 #else
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.0/glassfish-7.0.0.zip")
 #end
+#end
+#if (${jakartaVersion} == '10')
+#set ($wildflyVersion = "27.0.1.Final")
+#else
+#set ($wildflyVersion = "26.1.2.Final")
 #end
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
@@ -65,6 +73,9 @@
 		#if (${runtime} == 'tomee')
 		<tomee.version>${tomeeVersion}</tomee.version>
 		#end
+		#if (${runtime} == 'wildfly')
+		<wildfly.version>${wildflyVersion}</wildfly.version>
+        #end
 		<compiler-plugin.version>3.8.0</compiler-plugin.version>
 		<war-plugin.version>3.2.2</war-plugin.version>
 		#if ((${runtime} == 'glassfish') || ((${runtime} == 'payara') && (${profile} == 'full')))
@@ -76,6 +87,9 @@
 		#if ((${runtime} == 'payara') && (${profile} != 'full'))
 		<payara-micro-plugin.version>1.4.0</payara-micro-plugin.version>
 		#end
+		#if (${runtime} == 'wildfly')
+		<wildfly-plugin.version>4.0.0.Final</wildfly-plugin.version>
+        #end
 	</properties>
 
 	<dependencies>
@@ -179,6 +193,16 @@
 				    </configuration>
 			    </plugin>				
 				#end
+			#elseif (${runtime} == 'wildfly')
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>${wildfly-plugin.version}</version>
+				<configuration>
+					<version>${wildfly.version}</version>
+					<server-config>${wildflyConfiguration}.xml</server-config>
+				</configuration>
+			</plugin>
 			#end
 		</plugins>
 	</build>

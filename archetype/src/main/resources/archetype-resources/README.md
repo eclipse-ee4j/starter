@@ -10,8 +10,10 @@ You can run the application by executing the following command from the director
 ./mvnw clean package payara-micro:start
 #elseif ((${runtime} == 'payara') || (${runtime} == 'glassfish'))
 ./mvnw clean package cargo:run
-#else
+#elseif (${runtime} == 'tomee')
 ./mvnw clean package tomee:run
+#else
+./mvnw clean package wildfly:run
 #end
 ```
 
@@ -21,7 +23,7 @@ Once the runtime starts, you can access the project at http://localhost:8080.
 Once the runtime starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
 #end
 
-#if ((${docker} == 'yes') and ((${runtime} == 'tomee') or ((${runtime} == 'payara') and (${jakartaVersion} == '8'))))
+#if ((${docker} == 'yes') and ((${runtime} == 'tomee') or (${runtime} == 'wildfly') or ((${runtime} == 'payara') and (${jakartaVersion} == '8'))))
 You can also run the project via Docker. To build the Docker image, execute the following commands from the directory where this file resides. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Docker](https://docs.docker.com/get-docker/) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
 
 ```
