@@ -1,6 +1,18 @@
 <server description="defaultServer">
     <featureManager>
-        <feature>jakartaee-8.0</feature>
+        #if (${jakartaVersion} == '8')
+            #if (${profile} == 'full')
+            <feature>jakartaee-8.0</feature>
+            #else
+            <feature>webProfile-8.0</feature>
+            #end
+        #else
+            #if (${profile} == 'full')
+            <feature>jakartaee-9.1</feature>
+            #else
+            <feature>webProfile-9.1</feature>
+            #end
+        #end
     </featureManager>
 
     <basicRegistry id="basic" realm="BasicRealm">
