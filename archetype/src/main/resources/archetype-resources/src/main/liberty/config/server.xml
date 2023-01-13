@@ -15,11 +15,11 @@
         #end
     </featureManager>
 
-    <basicRegistry id="basic" realm="BasicRealm">
-        <user name="admin" password="admin" />
+    <basicRegistry id="defaultBasicRegistry" realm="BasicRealm">
+        <user name="username" password="password" />
     </basicRegistry>
 
     <keyStore id="defaultKeyStore" password="password" />
 
-    <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint" /> 
+    <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="9080" httpsPort="9443" /> 
 </server>
