@@ -34,7 +34,7 @@
 		</requiredProperty>
 		<requiredProperty key="runtime">
 			<defaultValue>none</defaultValue>
-			<validationRegex>^(none|payara|glassfish|tomee|wildfly)$</validationRegex>
+			<validationRegex>^(none|payara|glassfish|tomee|wildfly|open-liberty)$</validationRegex>
 		</requiredProperty>
 	</requiredProperties>
 
@@ -42,6 +42,9 @@
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
 			<directory>src/main/java</directory>
 		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/liberty/config</directory>
+		</fileSet>		
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/main/webapp</directory>
 			<excludes>

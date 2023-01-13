@@ -1,0 +1,15 @@
+<server description="defaultServer">
+    <featureManager>
+        <feature>jakartaee-8.0</feature>
+    </featureManager>
+
+    <basicRegistry id="basic" realm="BasicRealm">
+        <user name="admin" password="admin123" />
+    </basicRegistry>
+
+    <keyStore id="defaultKeyStore" password="admin123" />
+
+    <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint" />
+
+    <applicationManager autoExpand="true" />    
+</server>

@@ -66,6 +66,11 @@ private validateInput(jakartaVersion, javaVersion, runtime, profile, File output
             throw new RuntimeException("Failed, WildFly 27 does not support Java SE 8")
         }                
     }
+
+    if (runtime.equalsIgnoreCase("open-liberty") && (jakartaVersion == '10')) {
+       FileUtils.forceDelete(outputDirectory)
+       throw new RuntimeException("Failed, Open Liberty does not yet support Jakarta EE 10")
+    }    
 }
 
 private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
@@ -94,9 +99,17 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
             break
 
         case "wildfly": println "Generating code for WildFly"
-            break            
+            break
+
+        case "open-liberty": println "Generating code for Open Liberty"
+            break 
 
         default: println "No runtime will be included in the sample"
+    }
+
+    if (!runtime.equalsIgnoreCase("open-liberty")) {
+        // We do not need the liberty configuration directory, let's delete it.
+        FileUtils.forceDelete(new File(outputDirectory, "src/main/liberty"))
     }
 }
 
