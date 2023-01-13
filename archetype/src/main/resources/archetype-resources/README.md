@@ -12,18 +12,22 @@ You can run the application by executing the following command from the director
 ./mvnw clean package cargo:run
 #elseif (${runtime} == 'tomee')
 ./mvnw clean package tomee:run
-#else
+#elseif (${runtime} == 'wildfly')
 ./mvnw clean package wildfly:run
+#elseif (${runtime} == 'open-liberty')
+./mvnw clean package liberty:run
 #end
 ```
 
 #if ((${runtime} == 'payara') && (${profile} != 'full'))
 Once the runtime starts, you can access the project at http://localhost:8080.
+#elseif (${runtime} == 'open-liberty')
+Once the runtime starts, you can access the project at http://localhost:9080/jakartaee-hello-world.
 #else
 Once the runtime starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
 #end
 
-#if ((${docker} == 'yes') and ((${runtime} == 'tomee') or (${runtime} == 'wildfly') or ((${runtime} == 'payara') and (${jakartaVersion} == '8'))))
+#if ((${docker} == 'yes') and ((${runtime} == 'tomee') or (${runtime} == 'wildfly') or (${runtime} == 'open-liberty') or ((${runtime} == 'payara') and (${jakartaVersion} == '8'))))
 You can also run the project via Docker. To build the Docker image, execute the following commands from the directory where this file resides. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Docker](https://docs.docker.com/get-docker/) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
 
 ```
@@ -34,10 +38,18 @@ docker build -t jakartaee-hello-world:v1 .
 You can then run the Docker image by executing:
 
 ```
+#if (${runtime} != 'open-liberty')
 docker run -it --rm -p 8080:8080 jakartaee-hello-world:v1
+#else
+docker run -it --rm -p 9080:9080 jakartaee-hello-world:v1
+#end
 ```
 
+#if (${runtime} != 'open-liberty')
 Once the runtime starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
+#else
+Once the runtime starts, you can access the project at http://localhost:9080/jakartaee-hello-world.
+#end
 #end
 #else
 * You can build the application by executing the following command from the directory where this file resides. Please ensure you have installed a [Java SE 8 implementation](https://adoptium.net/?variant=openjdk8). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
