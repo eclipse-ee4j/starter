@@ -1,0 +1,25 @@
+<server description="defaultServer">
+    <featureManager>
+        #if (${jakartaVersion} == '8')
+            #if (${profile} == 'full')
+            <feature>jakartaee-8.0</feature>
+            #else
+            <feature>webProfile-8.0</feature>
+            #end
+        #else
+            #if (${profile} == 'full')
+            <feature>jakartaee-9.1</feature>
+            #else
+            <feature>webProfile-9.1</feature>
+            #end
+        #end
+    </featureManager>
+
+    <basicRegistry id="defaultBasicRegistry" realm="BasicRealm">
+        <user name="username" password="password" />
+    </basicRegistry>
+
+    <keyStore id="defaultKeyStore" password="password" />
+
+    <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="9080" httpsPort="9443" /> 
+</server>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+  name="jakarta-starter">
+
+	<requiredProperties>
+		<requiredProperty key="groupId">
+			<defaultValue>org.eclipse</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="artifactId">
+			<defaultValue>jakartaee-hello-world</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="version">
+			<defaultValue>0.1-SNAPSHOT</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="package">
+			<defaultValue>org.eclipse</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="jakartaVersion">
+			<defaultValue>10</defaultValue>
+			<validationRegex>^(8|9|9.1|10)$</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="profile">
+			<defaultValue>core</defaultValue>
+			<validationRegex>^(core|web|full)$</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="javaVersion">
+			<defaultValue>17</defaultValue>
+			<validationRegex>^(8|11|17)$</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="docker">
+			<defaultValue>no</defaultValue>
+			<validationRegex>^(no|yes)$</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="runtime">
+			<defaultValue>none</defaultValue>
+			<validationRegex>^(none|payara|glassfish|tomee|wildfly|open-liberty)$</validationRegex>
+		</requiredProperty>
+	</requiredProperties>
+
+	<fileSets>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/main/java</directory>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/liberty/config</directory>
+		</fileSet>		
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/webapp</directory>
+			<excludes>
+			    <exclude>images/jakartaee_logo.jpg</exclude>
+            </excludes>
+		</fileSet>
+		<fileSet filtered="false" encoding="UTF-8">
+			<directory>src/main/webapp</directory>
+			<includes>
+				<include>images/jakartaee_logo.jpg</include>
+			</includes>			
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory></directory>
+			<includes>
+				<include>Dockerfile</include>
+				<include>README.md</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</archetype-descriptor>
