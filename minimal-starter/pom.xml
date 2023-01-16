@@ -1,25 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-	<parent>
-		<groupId>org.eclipse.starter</groupId>
-		<artifactId>jakarta-starter-modules</artifactId>
-		<version>1.1.0-SNAPSHOT</version>
-	</parent>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.eclipse.starter</groupId>
 	<artifactId>jakarta-starter-minimal</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>2.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 
-	<name>Eclipse Starter for Jakarta EE (Minimal)</name>
+	<name>Eclipse Starter for Jakarta EE (Minimal) - Deprecated!</name>
 	<description>
 		This is the official Eclipse Foundation starter for Jakarta EE.
 		It generates code to help get started with Jakarta EE projects
 		using Maven. It is possible to do so using Maven
-		archetypes. This archetype generates minimal Jakarta EE code.
-		Support for a UI will be added at a later point. 
-        </description>
+		archetypes. This archetype generates minimal Jakarta EE code. 
+    </description>
+
+	<properties>
+	    <maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
+        <project.build.outputTimestamp>10</project.build.outputTimestamp>		
+	</properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+    </dependencies>	
+	
+	<build>
+	    <extensions>
+		  <extension>
+			<groupId>org.apache.maven.archetype</groupId>
+			<artifactId>archetype-packaging</artifactId>
+			<version>3.2.1</version>
+		  </extension>
+		</extensions>
+	</build>	
 </project>
