@@ -34,7 +34,7 @@
 		</requiredProperty>
 		<requiredProperty key="runtime">
 			<defaultValue>none</defaultValue>
-			<validationRegex>^(none|payara|glassfish|tomee|wildfly|open-liberty)$</validationRegex>
+			<validationRegex>^(none|glassfish|open-liberty|payara|tomee|wildfly)$</validationRegex>
 		</requiredProperty>
 	</requiredProperties>
 
