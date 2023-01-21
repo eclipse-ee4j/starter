@@ -56,6 +56,3 @@ jobs:
 
       - name: Build maven-project-generator
         run: mvn clean install --file maven-project-generator/pom.xml
-
-      - name: Build Starter UI
-        run: mvn clean package --file ui/pom.xml
