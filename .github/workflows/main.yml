@@ -34,10 +34,25 @@ jobs:
       - name: Build Archetype
         run: mvn clean install --file archetype/pom.xml
 
-      - name: Run Archetype for Payara
+      - name: Run Archetype for EE 8 platform, SE 8
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/payara -Dgoals="clean package"
-          rm -rf app/payara
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
+          rm -rf app
+          
+      - name: Run Archetype for EE 8 Web Profile, SE 8
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
+          rm -rf app    
+
+      - name: Run Archetype for EE 8 platform, SE 8, GlassFish 
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+          rm -rf app/glassfish
+  
+      - name: Run Archetype for EE 8 Web Profile, SE 8, GlassFish 
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+          rm -rf app/glassfish
   
   build-ui:
     runs-on: ubuntu-20.04
