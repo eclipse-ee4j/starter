@@ -28,6 +28,14 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
+  <dependencies>
+      <dependency>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+          <version>2.11.0</version>
+      </dependency>
+  </dependencies>   
+
   <build>
     <extensions>
       <extension>
