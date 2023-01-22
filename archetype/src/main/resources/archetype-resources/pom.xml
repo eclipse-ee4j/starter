@@ -39,7 +39,7 @@
 #if (${jakartaVersion} == '10')
 #set ($wildflyVersion = "27.0.1.Final")
 #else
-#set ($wildflyVersion = "26.1.2.Final")
+#set ($wildflyVersion = "26.1.3.Final")
 #end
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
@@ -193,7 +193,7 @@
 					    <container>
 						    <containerId>payara</containerId>
 						    <zipUrlInstaller>
-							    <url>https://repo1.maven.org/maven2/fish/payara/distributions/payara/5.2022.5/payara-${payaraVersion}.zip</url>
+							    <url>https://repo1.maven.org/maven2/fish/payara/distributions/payara/${payaraVersion}/payara-${payaraVersion}.zip</url>
 						    </zipUrlInstaller>
 					    </container>
 				    </configuration>

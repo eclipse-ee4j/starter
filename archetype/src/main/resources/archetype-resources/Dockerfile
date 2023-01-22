@@ -31,9 +31,9 @@
         #set ($deployDirectory = "$DEPLOY_DIR")
     #elseif (${runtime} == 'wildfly')
         #if (${javaVersion} == '17')
-            #set ($baseImage = "quay.io/wildfly/wildfly:26.1.2.Final-jdk17")
+            #set ($baseImage = "quay.io/wildfly/wildfly:26.1.3.Final-jdk17")
         #elseif (${javaVersion} == '11')
-            #set ($baseImage = "quay.io/wildfly/wildfly:26.1.2.Final-jdk11")
+            #set ($baseImage = "quay.io/wildfly/wildfly:26.1.3.Final-jdk11")
         #else
             #set ($baseImage = "quay.io/wildfly/wildfly:26.1.2.Final")
         #end
