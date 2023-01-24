@@ -92,11 +92,6 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
             break
 
         case "payara": println "Generating code for Payara"
-            if ((jakartaVersion != '8') && docker.equalsIgnoreCase("yes")) {
-                println "WARNING: Payara does not yet support Docker for this Jakarta EE version"
-                FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
-            }
-            
             break
 
         case "wildfly": println "Generating code for WildFly"

@@ -27,7 +27,7 @@
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
 #end
 #else
-#set ($payaraVersion = "6.2022.2")
+#set ($payaraVersion = "6.2023.1")
 #set ($tomeeVersion = "9.0.0.RC1")
 #set ($glassfishContainerId = "glassfish7x")
 #if (${profile} == 'web')

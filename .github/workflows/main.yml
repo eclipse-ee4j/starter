@@ -77,7 +77,7 @@ jobs:
           
       - name: Run Archetype for EE 9.1 Web Profile, SE 11, Payara
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -DoutputDirectory="app/payara" -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
           rm -rf app/payara
           
       - name: Run Archetype for EE 9.1 Web Profile, SE 11, TomEE
@@ -103,7 +103,7 @@ jobs:
           
       - name: Run Archetype for EE 10 Core Profile, SE 17, Payara
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
   
   build-ui:

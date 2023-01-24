@@ -27,7 +27,7 @@ Once the runtime starts, you can access the project at http://localhost:9080/jak
 Once the runtime starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
 #end
 
-#if ((${docker} == 'yes') and ((${runtime} == 'tomee') or (${runtime} == 'wildfly') or (${runtime} == 'open-liberty') or ((${runtime} == 'payara') and (${jakartaVersion} == '8'))))
+#if ((${docker} == 'yes') and (${runtime} != 'glassfish'))
 You can also run the project via Docker. To build the Docker image, execute the following commands from the directory where this file resides. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) appropriate for your Jakarta EE version/runtime choice and [Docker](https://docs.docker.com/get-docker/) (we have tested with Java SE 8, Java SE 11 and Java SE 17). Note, the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in the project, so a Maven install is not actually needed.
 
 ```
