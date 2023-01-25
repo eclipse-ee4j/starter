@@ -6,15 +6,23 @@
   xmlns:p="http://primefaces.org/ui">
 <p:importEnum type="org.eclipse.starter.ui.JakartaEEVersion"/>
 <p:importEnum type="org.eclipse.starter.ui.Profile"/>
+<p:importEnum type="org.eclipse.starter.ui.JavaSEVersion"/>
+<p:importEnum type="org.eclipse.starter.ui.ApplicationType"/>
+<p:importEnum type="org.eclipse.starter.ui.JakartaRuntime"/>
+<p:importEnum type="org.eclipse.starter.ui.ApplicationFeature"/>
+
+<h:head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Eclipse Starter for Jakarta EE</title>
+</h:head>
+
 <style>
   .text-align-left {
     text-align: left;
   }
 </style>
-
-<h:head>
-
-</h:head>
 <h:body>
   <p>Welcome to the official Eclipse Foundation starter for Jakarta EE. The starter is a Maven
     Archetype that generates sample code to get you going quickly with simple Jakarta EE
@@ -35,46 +43,92 @@
   <p:panel header="Generate a Jakarta EE Project">
     <div class="card">
       <h:form>
-        <p:panelGrid columns="4" layout="grid" styleClass="text-align-left">
+        <p:panelGrid columnClasses="ui-grid-col-2, ui-grid-col-6, ui-grid-col-2, ui-grid-col-2"
+                     columns="4"
+                     layout="grid"
+                     styleClass="text-align-left">
+
           <p:outputLabel for="@next"
                          value="Jakarta EE Version"/>
-          <p:selectOneMenu value="#{project.jakartaEEVersion}" required="true">
-            <f:selectItems value="#{JakartaEEVersion.ALL_VALUES}"
-                           itemLabel="#{element.displayName}" itemValue="#{element}" var="element"/>
-          </p:selectOneMenu>
+          <p:selectOneRadio required="true" value="#{project.jakartaEEVersion}">
+            <f:selectItems itemLabel="#{element.displayName}"
+                           itemValue="#{element}" value="#{JakartaEEVersion.ALL_VALUES}"
+                           var="element"/>
+          </p:selectOneRadio>
           <p:message for="@previous"/>
           <h:outputText/>
+
 
           <p:outputLabel for="@next" value="Profile"/>
-          <p:selectOneMenu value="#{project.profile}" required="true">
-            <f:selectItems value="#{Profile.ALL_VALUES}"
-                           itemLabel="#{element.displayName}" itemValue="#{element}" var="element"/>
-
-          </p:selectOneMenu>
+          <p:selectOneRadio required="true" value="#{project.profile}">
+            <f:selectItems itemLabel="#{element.displayName}"
+                           itemValue="#{element}" value="#{Profile.ALL_VALUES}" var="element"/>
+          </p:selectOneRadio>
           <p:message for="@previous"/>
           <h:outputText/>
 
-          <p:outputLabel for="@next" value="groupId"/>
-          <p:inputText value="#{project.groupId}" required="true"
-                       requiredMessage="groupId is required.">
+          <p:outputLabel for="@next" value="Java SE version"/>
+          <p:selectOneRadio required="true" value="#{project.javaSEVersion}">
+            <f:selectItems itemLabel="#{element.displayName}"
+                           itemValue="#{element}" value="#{JavaSEVersion.ALL_VALUES}"
+                           var="element"/>
+          </p:selectOneRadio>
+          <p:message for="@previous"/>
+          <h:outputText/>
+
+
+          <p:outputLabel for="@next" value="Please choose the type of application"/>
+          <p:selectOneRadio required="true" value="#{project.applicationType}">
+            <f:selectItems itemLabel="#{element.displayName}"
+                           itemValue="#{element}" value="#{ApplicationType.ALL_VALUES}"
+                           var="element"/>
+          </p:selectOneRadio>
+          <p:message for="@previous"/>
+          <h:outputText/>
+
+
+          <p:outputLabel for="@next" value="Please choose features to include"/>
+          <p:selectManyCheckbox converter="featuresConverter"
+                                value="#{project.applicationFeatures}">
+            <f:selectItems itemLabel="#{element.displayName}"
+                           itemValue="#{element}" value="#{ApplicationFeature.ALL_VALUES}"
+                           var="element"/>
+          </p:selectManyCheckbox>
+          <p:message for="@previous"/>
+          <h:outputText/>
+
+          <p:outputLabel for="@next" value="Runtime"/>
+          <p:selectOneRadio required="true" value="#{project.jakartaRuntime}">
+            <f:selectItems itemLabel="#{element.displayName}"
+                           itemValue="#{element}" value="#{JakartaRuntime.ALL_VALUES}"
+                           var="element"/>
+          </p:selectOneRadio>
+          <p:message for="@previous"/>
+          <h:outputText/>
+
+          <p:outputLabel for="@next" value="Group"/>
+          <p:inputText required="true" requiredMessage="groupId is required."
+                       value="#{project.groupId}">
           </p:inputText>
           <p:message for="@previous"/>
           <h:outputText/>
 
-          <p:outputLabel for="@next" value="artifactId"/>
-          <p:inputText value="#{project.artifactId}"
-                       required="true"
-                       requiredMessage="artifactId is required.">
+
+          <p:outputLabel for="@next" value="Artifact"/>
+          <p:inputText required="true"
+                       requiredMessage="artifactId is required."
+                       value="#{project.artifactId}">
           </p:inputText>
           <p:message for="@previous"/>
           <h:outputText/>
 
-          <p:outputLabel for="@next" value="version"/>
-          <p:inputText value="#{project.version}" required="true"
-                       requiredMessage="version is required.">
+          <p:outputLabel for="@next" value="Version"/>
+          <p:inputText required="true" requiredMessage="version is required."
+                       value="#{project.version}">
           </p:inputText>
           <p:message for="@previous"/>
           <h:outputText/>
+
         </p:panelGrid>
 
         <p:commandButton value="GENERATE" ajax="false"
@@ -86,4 +140,5 @@
   </p:panel>
 
 </h:body>
+
 </html>
