@@ -19,7 +19,7 @@
     <groupId>org.eclipse.starter</groupId>
     <artifactId>jakartaee8-minimal</artifactId>
     <packaging>maven-archetype</packaging>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
 
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
@@ -27,9 +27,8 @@
         <version>1.0.7</version>
     </parent>
 
-    <name>Jakarta EE 10 Minimal Archetype</name>
-
-    <description>Jakarta EE 10 Minimal Maven Archetype</description>
+    <name>Jakarta EE 8 Minimal Archetype - Deprecated!</name>
+    <description>Jakarta EE 8 Minimal Maven Archetype</description>
 
     <scm>
         <connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
@@ -40,6 +39,14 @@
     <properties>
         <project.build.outputTimestamp>10</project.build.outputTimestamp>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+    </dependencies>  
 
     <build>
         <plugins>

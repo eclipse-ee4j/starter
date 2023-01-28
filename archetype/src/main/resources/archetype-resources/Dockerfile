@@ -12,28 +12,28 @@
         #if (${javaVersion} == '17')
             #if (${profile} == 'full')
                 #set ($baseImage = "payara/server-full:5.2022.5-jdk17")
-            #elseif (${profile} == 'web')
+            #else
                 #set ($baseImage = "payara/server-web:5.2022.5-jdk17")
             #end
         #elseif (${javaVersion} == '11')
             #if (${profile} == 'full')
                 #set ($baseImage = "payara/server-full:5.2022.5-jdk11")
-            #elseif (${profile} == 'web')
+            #else
                 #set ($baseImage = "payara/server-web:5.2022.5-jdk11")
-            #end        
+            #end
         #else
             #if (${profile} == 'full')
                 #set ($baseImage = "payara/server-full:5.2022.5")
-            #elseif (${profile} == 'web')
+            #else
                 #set ($baseImage = "payara/server-web:5.2022.5")
             #end        
         #end
         #set ($deployDirectory = "$DEPLOY_DIR")
     #elseif (${runtime} == 'wildfly')
         #if (${javaVersion} == '17')
-            #set ($baseImage = "quay.io/wildfly/wildfly:26.1.2.Final-jdk17")
+            #set ($baseImage = "quay.io/wildfly/wildfly:26.1.3.Final-jdk17")
         #elseif (${javaVersion} == '11')
-            #set ($baseImage = "quay.io/wildfly/wildfly:26.1.2.Final-jdk11")
+            #set ($baseImage = "quay.io/wildfly/wildfly:26.1.3.Final-jdk11")
         #else
             #set ($baseImage = "quay.io/wildfly/wildfly:26.1.2.Final")
         #end
@@ -47,6 +47,21 @@
             #set ($baseImage = "tomee:9.0-jre17-alpine-plume")
         #end
         #set ($deployDirectory = "/usr/local/tomee/webapps/")
+    #elseif (${runtime} == 'payara')
+        #if (${javaVersion} == '17')
+            #if (${profile} == 'full')
+                #set ($baseImage = "payara/server-full:6.2023.1-jdk17")
+            #else
+                #set ($baseImage = "payara/server-web:6.2023.1-jdk17")
+            #end
+        #else
+            #if (${profile} == 'full')
+                #set ($baseImage = "payara/server-full:6.2023.1")
+            #else
+                #set ($baseImage = "payara/server-web:6.2023.1")
+            #end        
+        #end
+        #set ($deployDirectory = "$DEPLOY_DIR")   
     #elseif (${runtime} == 'wildfly')
         #if (${javaVersion} == '17')
             #set ($baseImage = "quay.io/wildfly/wildfly:27.0.1.Final-jdk17")

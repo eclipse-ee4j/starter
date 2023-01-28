@@ -6,16 +6,17 @@ def profile = request.properties["profile"].trim()
 def javaVersion = request.properties["javaVersion"].trim()
 def runtime = request.properties["runtime"].trim()
 def docker = request.properties["docker"].trim()
+
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 
-validateInput(jakartaVersion, javaVersion, runtime, profile, outputDirectory)
+validateInput(jakartaVersion, profile, javaVersion, runtime, outputDirectory)
 generateRuntime(runtime, jakartaVersion, docker, outputDirectory)
 bindEEPackage(jakartaVersion, outputDirectory)
 generateDocker(docker, runtime, outputDirectory)
 generateMavenWrapper(outputDirectory)
 printSummary()
 
-private validateInput(jakartaVersion, javaVersion, runtime, profile, File outputDirectory){
+private validateInput(jakartaVersion, profile, javaVersion, runtime, File outputDirectory){
     if (profile.equalsIgnoreCase("core") && jakartaVersion != '10') {
        FileUtils.forceDelete(outputDirectory)
        throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10")
@@ -64,7 +65,7 @@ private validateInput(jakartaVersion, javaVersion, runtime, profile, File output
         if ((jakartaVersion == '10') && (javaVersion == '8')) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, WildFly 27 does not support Java SE 8")
-        }                
+        }
     }
 
     if (runtime.equalsIgnoreCase("open-liberty") && (jakartaVersion == '10')) {
@@ -91,11 +92,6 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
             break
 
         case "payara": println "Generating code for Payara"
-            if ((jakartaVersion != '8') && docker.equalsIgnoreCase("yes")) {
-                println "WARNING: Payara does not yet support Docker for this Jakarta EE version"
-                FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
-            }
-            
             break
 
         case "wildfly": println "Generating code for WildFly"
