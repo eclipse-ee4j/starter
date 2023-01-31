@@ -73,13 +73,13 @@
 #end
 #if (${runtime} == 'open-liberty')
     #if (${javaVersion} == '17')
-        #set ($baseImage = "openliberty/open-liberty:22.0.0.9-full-java17-openj9-ubi")
+        #set ($baseImage = "icr.io/appcafe/open-liberty:full-java17-openj9-ubi")
     #elseif (${javaVersion} == '11')
-        #set ($baseImage = "openliberty/open-liberty:22.0.0.9-full-java11-openj9-ubi")
+        #set ($baseImage = "icr.io/appcafe/open-liberty:full-java11-openj9-ubi")
     #else
-        #set ($baseImage = "openliberty/open-liberty:22.0.0.9-full-java8-openj9-ubi")
+        #set ($baseImage = "icr.io/appcafe/open-liberty:full-java8-openj9-ubi")
     #end
-    #set ($deployDirectory = "/config/dropins/")    
+    #set ($deployDirectory = "/config/apps/")    
 #end
 FROM $baseImage
 #if (${runtime} == 'open-liberty')
