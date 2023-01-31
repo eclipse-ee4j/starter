@@ -214,20 +214,9 @@
 				<groupId>io.openliberty.tools</groupId>
 				<artifactId>liberty-maven-plugin</artifactId>
 				<version>${liberty-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>package-server</id>
-						<phase>package</phase>
-						<goals>
-							<goal>create</goal>
-							<goal>install-feature</goal>
-							<goal>deploy</goal>
-						</goals>
-						<configuration>
-							<libertyRuntimeVersion>${open-liberty.version}</libertyRuntimeVersion>
-						</configuration>
-					</execution>
-				</executions>
+				<configuration>
+					<libertyRuntimeVersion>${open-liberty.version}</libertyRuntimeVersion>
+				</configuration>
 			</plugin>			
 			#end			
 		</plugins>

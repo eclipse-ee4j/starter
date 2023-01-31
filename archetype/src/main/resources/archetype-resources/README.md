@@ -15,14 +15,14 @@ You can run the application by executing the following command from the director
 #elseif (${runtime} == 'wildfly')
 ./mvnw clean package wildfly:run
 #elseif (${runtime} == 'open-liberty')
-./mvnw clean package liberty:run
+./mvnw clean package liberty:dev
 #end
 ```
 
 #if ((${runtime} == 'payara') && (${profile} != 'full'))
 Once the runtime starts, you can access the project at http://localhost:8080.
 #elseif (${runtime} == 'open-liberty')
-Once the runtime starts, you can access the project at http://localhost:9080/jakartaee-hello-world.
+Once the runtime starts, you can access the project at http://localhost:9080.
 #else
 Once the runtime starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
 #end
@@ -48,7 +48,7 @@ docker run -it --rm -p 9080:9080 jakartaee-hello-world:v1
 #if (${runtime} != 'open-liberty')
 Once the runtime starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
 #else
-Once the runtime starts, you can access the project at http://localhost:9080/jakartaee-hello-world.
+Once the runtime starts, you can access the project at http://localhost:9080/.
 #end
 #end
 #else
