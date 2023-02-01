@@ -22,4 +22,6 @@
     <keyStore id="defaultKeyStore" password="password" />
 
     <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="9080" httpsPort="9443" /> 
+
+    <webApplication location="jakartaee-hello-world.war" contextRoot="/"/>
 </server>
