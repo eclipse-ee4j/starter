@@ -31,9 +31,9 @@
 #set ($tomeeVersion = "9.0.0.RC1")
 #set ($glassfishContainerId = "glassfish7x")
 #if (${profile} == 'web')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.0/web-7.0.0.zip")
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.1/web-7.0.1.zip")
 #else
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.0/glassfish-7.0.0.zip")
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.1/glassfish-7.0.1.zip")
 #end
 #end
 #if (${jakartaVersion} == '10')
