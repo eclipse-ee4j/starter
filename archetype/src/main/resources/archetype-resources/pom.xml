@@ -18,7 +18,7 @@
 #set ($eeApiVersion = "8.0.0")
 #end
 #if (${jakartaVersion} == '8')
-#set ($tomeeVersion = "8.0.13")
+#set ($tomeeVersion = "8.0.14")
 #set ($payaraVersion = "5.2022.5")
 #set ($glassfishContainerId = "glassfish5x")
 #if (${profile} == 'web')
@@ -28,7 +28,7 @@
 #end
 #else
 #set ($payaraVersion = "6.2023.1")
-#set ($tomeeVersion = "9.0.0.RC1")
+#set ($tomeeVersion = "9.0.0")
 #set ($glassfishContainerId = "glassfish7x")
 #if (${profile} == 'web')
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.1/web-7.0.1.zip")
