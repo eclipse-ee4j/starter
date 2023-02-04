@@ -18,7 +18,7 @@
 #set ($eeApiVersion = "8.0.0")
 #end
 #if (${jakartaVersion} == '8')
-#set ($tomeeVersion = "8.0.13")
+#set ($tomeeVersion = "8.0.14")
 #set ($payaraVersion = "5.2022.5")
 #set ($glassfishContainerId = "glassfish5x")
 #if (${profile} == 'web')
@@ -28,7 +28,7 @@
 #end
 #else
 #set ($payaraVersion = "6.2023.1")
-#set ($tomeeVersion = "9.0.0.RC1")
+#set ($tomeeVersion = "9.0.0")
 #set ($glassfishContainerId = "glassfish7x")
 #if (${profile} == 'web')
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.1/web-7.0.1.zip")
@@ -76,9 +76,6 @@
 		#if (${runtime} == 'wildfly')
 		<wildfly.version>${wildflyVersion}</wildfly.version>
         #end
-		#if (${runtime} == 'open-liberty')
-		<open-liberty.version>RELEASE</open-liberty.version>
-        #end
 		<compiler-plugin.version>3.10.1</compiler-plugin.version>
 		<war-plugin.version>3.3.2</war-plugin.version>
 		#if ((${runtime} == 'glassfish') || ((${runtime} == 'payara') && (${profile} == 'full')))
@@ -95,7 +92,7 @@
         #end
 		#if (${runtime} == 'open-liberty')
 		<liberty-plugin.version>3.7.1</liberty-plugin.version>
-        #end		
+        #end
 	</properties>
 
 	<dependencies>
@@ -112,7 +109,7 @@
 			<artifactId>payara-micro</artifactId>
 			<version>${payara.version}</version>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
 		#end
 	</dependencies>
 
@@ -200,6 +197,7 @@
 			    </plugin>				
 				#end
 			#elseif (${runtime} == 'wildfly')
+			<!-- Execute 'mvn clean package wildfly:run' to run the application. -->
 			<plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
@@ -210,15 +208,16 @@
 				</configuration>
 			</plugin>
 			#elseif (${runtime} == 'open-liberty')
+			<!-- Execute 'mvn clean package liberty:dev' to run the application. -->
 			<plugin>
 				<groupId>io.openliberty.tools</groupId>
 				<artifactId>liberty-maven-plugin</artifactId>
 				<version>${liberty-plugin.version}</version>
 				<configuration>
-					<libertyRuntimeVersion>${open-liberty.version}</libertyRuntimeVersion>
+					<libertyRuntimeVersion>RELEASE</libertyRuntimeVersion>
 				</configuration>
 			</plugin>			
-			#end			
+			#end
 		</plugins>
 	</build>
 </project>

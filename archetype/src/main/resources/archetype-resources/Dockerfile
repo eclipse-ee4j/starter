@@ -1,11 +1,11 @@
 #if (${jakartaVersion} == '8')
     #if (${runtime} == 'tomee')
         #if (${javaVersion} == '8')
-           #set ($baseImage = "tomee:8.0.13-jre8-alpine-plume")
+           #set ($baseImage = "tomee:jre8-alpine-plume")
         #elseif (${javaVersion} == '11')
-           #set ($baseImage = "tomee:8.0.13-jre11-alpine-plume")
+           #set ($baseImage = "tomee:jre11-alpine-plume")
         #else
-           #set ($baseImage = "tomee:8.0.13-jre17-alpine-plume")
+           #set ($baseImage = "tomee:alpine-plume")
         #end
         #set ($deployDirectory = "/usr/local/tomee/webapps/")
     #elseif (${runtime} == 'payara')
@@ -42,9 +42,9 @@
 #else
     #if (${runtime} == 'tomee')
         #if (${javaVersion} == '11')
-            #set ($baseImage = "tomee:9.0-jre11-alpine-plume")
+            #set ($baseImage = "tomee:9-jre11-alpine-plume")
         #else
-            #set ($baseImage = "tomee:9.0-jre17-alpine-plume")
+            #set ($baseImage = "tomee:9-alpine-plume")
         #end
         #set ($deployDirectory = "/usr/local/tomee/webapps/")
     #elseif (${runtime} == 'payara')
@@ -56,17 +56,17 @@
             #end
         #else
             #if (${profile} == 'full')
-                #set ($baseImage = "payara/server-full:6.2023.1")
+                #set ($baseImage = "payara/server-full")
             #else
-                #set ($baseImage = "payara/server-web:6.2023.1")
+                #set ($baseImage = "payara/server-web")
             #end        
         #end
         #set ($deployDirectory = "$DEPLOY_DIR")   
     #elseif (${runtime} == 'wildfly')
         #if (${javaVersion} == '17')
-            #set ($baseImage = "quay.io/wildfly/wildfly:27.0.1.Final-jdk17")
+            #set ($baseImage = "quay.io/wildfly/wildfly")
         #else
-            #set ($baseImage = "quay.io/wildfly/wildfly:27.0.1.Final-jdk11")
+            #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk11")
         #end
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")    
     #end
