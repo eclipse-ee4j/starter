@@ -77,10 +77,10 @@
 		<wildfly.version>${wildflyVersion}</wildfly.version>
         #end
 		#if (${runtime} == 'open-liberty')
-		<open-liberty.version>22.0.0.13</open-liberty.version>
+		<open-liberty.version>RELEASE</open-liberty.version>
         #end
 		<compiler-plugin.version>3.10.1</compiler-plugin.version>
-		<war-plugin.version>3.2.2</war-plugin.version>
+		<war-plugin.version>3.3.2</war-plugin.version>
 		#if ((${runtime} == 'glassfish') || ((${runtime} == 'payara') && (${profile} == 'full')))
 		<cargo.version>1.10.4</cargo.version>
 		#end
@@ -214,20 +214,9 @@
 				<groupId>io.openliberty.tools</groupId>
 				<artifactId>liberty-maven-plugin</artifactId>
 				<version>${liberty-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>package-server</id>
-						<phase>package</phase>
-						<goals>
-							<goal>create</goal>
-							<goal>install-feature</goal>
-							<goal>deploy</goal>
-						</goals>
-						<configuration>
-							<libertyRuntimeVersion>${open-liberty.version}</libertyRuntimeVersion>
-						</configuration>
-					</execution>
-				</executions>
+				<configuration>
+					<libertyRuntimeVersion>${open-liberty.version}</libertyRuntimeVersion>
+				</configuration>
 			</plugin>			
 			#end			
 		</plugins>
