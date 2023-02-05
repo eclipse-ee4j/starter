@@ -67,7 +67,7 @@
 		<maven.compiler.release>${javaVersion}</maven.compiler.release>
 		#end
 		<jakartaee-api.version>${eeApiVersion}</jakartaee-api.version>
-		#if ((${runtime} == 'payara') && (${profile} != 'full'))
+		#if (${runtime} == 'payara')
 		<payara.version>${payaraVersion}</payara.version>
 		#end
 		#if (${runtime} == 'tomee')
@@ -189,9 +189,11 @@
 				    <configuration>
 					    <container>
 						    <containerId>payara</containerId>
-						    <zipUrlInstaller>
-							    <url>https://repo1.maven.org/maven2/fish/payara/distributions/payara/${payaraVersion}/payara-${payaraVersion}.zip</url>
-						    </zipUrlInstaller>
+							<artifactInstaller>
+								<groupId>fish.payara.distributions</groupId>
+								<artifactId>payara</artifactId>
+								<version>${payara.version}</version>
+							</artifactInstaller>
 					    </container>
 				    </configuration>
 			    </plugin>				
