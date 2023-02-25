@@ -4,25 +4,9 @@
 <html xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:h="http://xmlns.jcp.org/jsf/html"
 	  xmlns:p="http://primefaces.org/ui">
-<p:importEnum type="org.eclipse.starter.ui.JakartaEEVersion" />
-<p:importEnum type="org.eclipse.starter.ui.Profile" />
-<p:importEnum type="org.eclipse.starter.ui.JavaSEVersion" />
-<p:importEnum type="org.eclipse.starter.ui.ApplicationType" />
-<p:importEnum type="org.eclipse.starter.ui.JakartaRuntime" />
-<p:importEnum type="org.eclipse.starter.ui.ApplicationFeature" />
-
 <h:head>
-	<meta charset="utf-8" />
-	<meta content="IE=edge" http-equiv="X-UA-Compatible" />
-	<meta content="width=device-width, initial-scale=1" name="viewport" />
 	<title>Eclipse Starter for Jakarta EE</title>
 </h:head>
-
-<style>
-.text-align-left {
-	text-align: left;
-}
-</style>
 <h:body>
 	<h1>Generate Jakarta EE Project</h1>
 	<p:panel header="Generate a Jakarta EE Project">
@@ -31,7 +15,6 @@
 				<p:panelGrid
 					columnClasses="ui-grid-col-2, ui-grid-col-6, ui-grid-col-2, ui-grid-col-2"
 					columns="4" layout="grid" styleClass="text-align-left">
-
 					<p:outputLabel for="@next" value="Jakarta EE version" />
 					<p:selectOneRadio required="true"
 						value="#{project.jakartaEEVersion}">
