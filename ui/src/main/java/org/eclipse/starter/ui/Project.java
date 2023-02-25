@@ -23,11 +23,11 @@ public class Project {
 			entry("Open Liberty", "open-liberty"), entry("Payara", "payara"), entry("TomEE", "tomee"),
 			entry("WildFly", "wildfly"));
 
-	private double jakartaVersion;
-	private String profile;
-	private int javaVersion;
-	private boolean docker;
-	private String runtime;
+	private double jakartaVersion = 10;
+	private String profile = "core";
+	private int javaVersion = 17;
+	private boolean docker = false;
+	private String runtime = "none";
 
 	public double getJakartaVersion() {
 		return jakartaVersion;

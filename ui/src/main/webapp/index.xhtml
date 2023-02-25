@@ -2,13 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://xmlns.jcp.org/jsf/html"
-	  xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Eclipse Starter for Jakarta EE</title>
 </h:head>
 <h:body>
-	<h1>Generate Jakarta EE Project</h1>
 	<p:panel header="Generate a Jakarta EE Project">
 		<div class="card">
 			<h:form>
@@ -16,53 +15,52 @@
 					columnClasses="ui-grid-col-2, ui-grid-col-6, ui-grid-col-2, ui-grid-col-2"
 					columns="4" layout="grid" styleClass="text-align-left">
 					<p:outputLabel for="@next" value="Jakarta EE version" />
-					<p:selectOneRadio required="true"
-						value="#{project.jakartaEEVersion}">
-						<f:selectItems itemLabel="#{element.displayName}"
-							itemValue="#{element}" value="#{JakartaEEVersion.ALL_VALUES}"
-							var="element" />
+					<p:selectOneRadio required="true" value="#{project.jakartaVersion}"
+						converter="javax.faces.Double">
+						<f:selectItem itemValue="8" itemLabel="Jakarta EE 8" />
+						<f:selectItem itemValue="9" itemLabel="Jakarta EE 9" />
+						<f:selectItem itemValue="9.1" itemLabel="Jakarta EE 9.1" />
+						<f:selectItem itemValue="10" itemLabel="Jakarta EE 10" />
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
 
 					<p:outputLabel for="@next" value="Jakarta EE profile" />
 					<p:selectOneRadio required="true" value="#{project.profile}">
-						<f:selectItems itemLabel="#{element.displayName}"
-							itemValue="#{element}" value="#{Profile.ALL_VALUES}"
-							var="element" />
+						<f:selectItem itemValue="core" itemLabel="Core Profile" />
+						<f:selectItem itemValue="web" itemLabel="Web Profile" />
+						<f:selectItem itemValue="full" itemLabel="Full platform" />
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
 
 					<p:outputLabel for="@next" value="Java SE version" />
-					<p:selectOneRadio required="true" value="#{project.javaSEVersion}">
-						<f:selectItems itemLabel="#{element.displayName}"
-							itemValue="#{element}" value="#{JavaSEVersion.ALL_VALUES}"
-							var="element" />
+					<p:selectOneRadio required="true" value="#{project.javaVersion}">
+						<f:selectItem itemValue="8" itemLabel="Java SE 8" />
+						<f:selectItem itemValue="11" itemLabel="Java SE 11" />
+						<f:selectItem itemValue="17" itemLabel="Java SE 17" />
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
-					
+
 					<p:outputLabel for="@next" value="Docker support" />
 					<p:selectOneRadio required="true" value="#{project.docker}">
-                       <f:selectItem itemValue = "false" itemLabel = "No" /> 
-                       <f:selectItem itemValue = "true" itemLabel = "Yes" />					
-					</p:selectOneRadio>
-					<p:message for="@previous" />
-					<h:outputText />					
-
-					<p:outputLabel for="@next" value="Runtime" />
-					<p:selectOneRadio required="true" value="#{project.jakartaRuntime}">
-						<f:selectItems itemLabel="#{element.displayName}"
-							itemValue="#{element}" value="#{JakartaRuntime.ALL_VALUES}"
-							var="element" />
+						<f:selectItem itemValue="false" itemLabel="No" />
+						<f:selectItem itemValue="true" itemLabel="Yes" />
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
 
+					<p:outputLabel for="@next" value="Runtime" />
+					<p:selectOneRadio required="true" value="#{project.runtime}">
+						<f:selectItem itemValue="none" itemLabel="None" />
+						<f:selectItems value="#{project.runtimes}" />
+					</p:selectOneRadio>
+					<p:message for="@previous" />
+					<h:outputText />
 				</p:panelGrid>
 
-				<p:commandButton value="GENERATE" ajax="false"
+				<p:commandButton value="Generate" ajax="false"
 					icon="pi pi-arrow-down" styleClass="mr-2"
 					action="#{project.generate}">
 				</p:commandButton>
