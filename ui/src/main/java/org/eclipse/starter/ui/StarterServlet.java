@@ -1,10 +1,10 @@
 package org.eclipse.starter.ui;
 
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.eclipse.starter.mavengenerator.CliMavenContext;
 import org.eclipse.starter.mavengenerator.EeArchetypeGenerateParameters;
 import org.eclipse.starter.mavengenerator.ZipCodec;
@@ -22,7 +22,8 @@ import java.util.zip.ZipOutputStream;
 @WebServlet(urlPatterns = {"/download.zip"}, name = "StarterServlet", loadOnStartup = 1)
 public class StarterServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(
+    private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(
             MethodHandles.lookup().lookupClass().getName());
     private static final String DOWNLOADABLE_FILE_NAME = "jakartaee-project.zip";
     private static final String ZIP_EXTENSION = ".zip";

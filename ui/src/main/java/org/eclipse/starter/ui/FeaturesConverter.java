@@ -1,7 +1,7 @@
 package org.eclipse.starter.ui;
 
-import jakarta.faces.convert.EnumConverter;
-import jakarta.faces.convert.FacesConverter;
+import javax.faces.convert.EnumConverter;
+import javax.faces.convert.FacesConverter;
 
 @FacesConverter("featuresConverter")
 public class FeaturesConverter extends EnumConverter {

@@ -1,4 +1,0 @@
-###
-# Gets an archetype and directs it use self defined names
-
-GET http://localhost:8080/jakarta-starter-ui/download.zip?archetypeGroupId=org.eclipse.starter&archetypeArtifactId=jakartaee10-minimal&archetypeVersion=1.1.0&groupId=nl.ivonet&artifactId=ivo_demo&version=1.0.0-SNAPSHOT

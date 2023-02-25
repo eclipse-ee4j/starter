@@ -3,10 +3,10 @@ package org.eclipse.starter.ui;
 
 import static java.util.logging.Level.SEVERE;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Named;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.net.URI;
@@ -29,7 +29,7 @@ public class Project {
   private Profile profile;
   private JavaSEVersion javaSEVersion;
   private ApplicationType applicationType;
-  private Set<ApplicationFeature> applicationFeatures = new HashSet<>();
+  private Set<ApplicationFeature> applicationFeatures = new HashSet<ApplicationFeature>();
   private JakartaRuntime jakartaRuntime;
   private String groupId = "com.example";
   private String artifactId = "demo";
@@ -109,16 +109,16 @@ public class Project {
   }
 
   public void generate() {
-    final var downloadUrl = String.format(
+    final String downloadUrl = String.format(
         "/download.zip?archetypeGroupId=%s&archetypeArtifactId=%s&archetypeVersion=%s&groupId=%s&artifactId=%s&profile=%s&version=%s",
         ARCHETYPE_GROUP_ID, jakartaEEVersion.getArcheTypeArtifactId(), ARCHETYPE_VERSION, groupId,
         artifactId, profile.getProfile(), version);
 
-    var context = FacesContext.getCurrentInstance();
-    var response = (HttpServletResponse) context.getExternalContext().getResponse();
+    FacesContext context = FacesContext.getCurrentInstance();
+    HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
     context.responseComplete();
     try {
-      final var redirectUrl = getApplicationUri()
+      final Object redirectUrl = getApplicationUri()
           .map(root -> root + downloadUrl)
           .orElse(downloadUrl);
       response.sendRedirect(redirectUrl + "?faces-redirect=true");
