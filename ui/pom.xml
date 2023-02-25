@@ -25,11 +25,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>maven-project-generator</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
 			<version>8.0.0</version>

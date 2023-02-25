@@ -85,7 +85,6 @@
 	
 	<modules>
 		<module>archetype</module>
-		<module>maven-project-generator</module>
 		<module>ui</module>
 	</modules>
 </project>
