@@ -5,9 +5,8 @@
     <parent>
         <artifactId>jakarta-starter-modules</artifactId>
         <groupId>org.eclipse.starter</groupId>
-        <version>2.0-SNAPSHOT</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
-    
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jakarta-starter-ui</artifactId>

@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 
 @Named
@@ -25,6 +27,10 @@ public class Project {
 
   private JakartaEEVersion jakartaEEVersion;
   private Profile profile;
+  private JavaSEVersion javaSEVersion;
+  private ApplicationType applicationType;
+  private Set<ApplicationFeature> applicationFeatures = new HashSet<>();
+  private JakartaRuntime jakartaRuntime;
   private String groupId = "com.example";
   private String artifactId = "demo";
   private String version = "1.0.0-SNAPSHOT"; //default value
@@ -67,6 +73,39 @@ public class Project {
 
   public void setProfile(final Profile profile) {
     this.profile = profile;
+  }
+
+  public JavaSEVersion getJavaSEVersion() {
+    return javaSEVersion;
+  }
+
+  public void setJavaSEVersion(final JavaSEVersion javaSEVersion) {
+    this.javaSEVersion = javaSEVersion;
+  }
+
+  public Set<ApplicationFeature> getApplicationFeatures() {
+    return applicationFeatures;
+  }
+
+  public void setApplicationFeatures(
+      final Set<ApplicationFeature> applicationFeatures) {
+    this.applicationFeatures = applicationFeatures;
+  }
+
+  public JakartaRuntime getJakartaRuntime() {
+    return jakartaRuntime;
+  }
+
+  public void setJakartaRuntime(final JakartaRuntime jakartaRuntime) {
+    this.jakartaRuntime = jakartaRuntime;
+  }
+
+  public ApplicationType getApplicationType() {
+    return applicationType;
+  }
+
+  public void setApplicationType(final ApplicationType applicationType) {
+    this.applicationType = applicationType;
   }
 
   public void generate() {
