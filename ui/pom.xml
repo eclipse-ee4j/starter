@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<parent>
 		<groupId>org.eclipse.starter</groupId>
 		<artifactId>jakarta-starter-modules</artifactId>
@@ -14,9 +13,13 @@
 	<artifactId>jakarta-starter-ui</artifactId>
 	<packaging>war</packaging>
 
+	<name>Eclipse Starter for Jakarta EE Web UI</name>
+	<description>
+		This is the web UI for the official Eclipse Foundation Starter for Jakarta EE.
+		It generates code to help get started with Jakarta EE projects. 
+    </description>
+
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
 		<maven.compiler.release>11</maven.compiler.release>
 	</properties>
 
@@ -26,20 +29,12 @@
 			<artifactId>maven-project-generator</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
 			<version>8.0.0</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate.validator</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>8.0.0.Final</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
