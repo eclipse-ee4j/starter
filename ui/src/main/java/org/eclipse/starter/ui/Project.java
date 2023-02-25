@@ -8,10 +8,10 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 @Named
@@ -80,8 +80,10 @@ public class Project {
 	}
 
 	public void generate() {
-		LOGGER.info("Generating project");
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.responseComplete();
+		LOGGER.log(Level.INFO,
+				"Generating project - Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
+				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
+		// FacesContext context = FacesContext.getCurrentInstance();
+		// context.responseComplete();
 	}
 }

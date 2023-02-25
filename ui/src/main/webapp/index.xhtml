@@ -15,8 +15,8 @@
 					columnClasses="ui-grid-col-2, ui-grid-col-6, ui-grid-col-2, ui-grid-col-2"
 					columns="4" layout="grid" styleClass="text-align-left">
 					<p:outputLabel for="@next" value="Jakarta EE version" />
-					<p:selectOneRadio required="true" value="#{project.jakartaVersion}"
-						converter="javax.faces.Double">
+					<p:selectOneRadio required="true" value="#{project.jakartaVersion}">
+					    <f:convertNumber minFractionDigits="0" maxFractionDigits="1" />
 						<f:selectItem itemValue="8" itemLabel="Jakarta EE 8" />
 						<f:selectItem itemValue="9" itemLabel="Jakarta EE 9" />
 						<f:selectItem itemValue="9.1" itemLabel="Jakarta EE 9.1" />
