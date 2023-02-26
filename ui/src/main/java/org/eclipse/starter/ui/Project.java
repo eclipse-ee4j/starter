@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
@@ -28,6 +29,11 @@ public class Project {
 	private static final Map<String, String> RUNTIMES = Map.ofEntries(entry("GlassFish", "glassfish"),
 			entry("Open Liberty", "open-liberty"), entry("Payara", "payara"), entry("TomEE", "tomee"),
 			entry("WildFly", "wildfly"));
+
+	@Inject
+	private FacesContext facesContext;
+	@Inject
+	private ExternalContext externalContext;
 
 	private double jakartaVersion = 10;
 	private String profile = "core";
@@ -91,11 +97,11 @@ public class Project {
 					"Generating project - Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
 					new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-
 			File workingDirectory = Files.createTempDirectory("starter-output-").toFile();
 			LOGGER.log(Level.INFO, "Working directory: {0}", new Object[] { workingDirectory.getAbsolutePath() });
 
+			
+			LOGGER.info("Executing Maven Archetype.");
 			Properties properties = new Properties();
 			properties.putAll(Map.ofEntries(
 					entry("jakartaVersion",
@@ -106,10 +112,13 @@ public class Project {
 			MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", "2.0-SNAPSHOT", properties,
 					workingDirectory);
 
+			LOGGER.info("Creating zip file.");
 			ZipUtility.zipDirectory(new File(workingDirectory, "jakartaee-hello-world"), workingDirectory);
 
-			downloadZip(new File(workingDirectory, "jakartaee-hello-world.zip"), facesContext.getExternalContext());
+			LOGGER.info("Downloading zip file.");
+			downloadZip(new File(workingDirectory, "jakartaee-hello-world.zip"));
 
+			LOGGER.info("Deleting working directory.");
 			workingDirectory.delete();
 
 			facesContext.responseComplete();
@@ -118,7 +127,7 @@ public class Project {
 		}
 	}
 
-	private void downloadZip(File zip, ExternalContext externalContext) {
+	private void downloadZip(File zip) {
 		try {
 			// Some component library or filter might have set some headers in the
 			// buffer beforehand. We want to get rid of them, else they may collide.
