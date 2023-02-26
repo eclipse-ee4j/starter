@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,8 +19,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-
-import org.apache.maven.cli.MavenCli;
 
 @Named
 @RequestScoped
@@ -87,18 +86,28 @@ public class Project {
 	}
 
 	public void generate() {
-		LOGGER.log(Level.INFO,
-				"Generating project - Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
-
 		try {
+			LOGGER.log(Level.INFO,
+					"Generating project - Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
+					new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
+
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 
 			File workingDirectory = Files.createTempDirectory("starter-output-").toFile();
 			LOGGER.log(Level.INFO, "Working directory: {0}", new Object[] { workingDirectory.getAbsolutePath() });
 
-			invokeMavenArchetype(workingDirectory);
+			Properties properties = new Properties();
+			properties.putAll(Map.ofEntries(
+					entry("jakartaVersion",
+							((jakartaVersion % 1.0 != 0) ? String.format("%s", jakartaVersion)
+									: String.format("%.0f", jakartaVersion))),
+					entry("profile", profile), entry("javaVersion", javaVersion),
+					entry("docker", (docker ? "yes" : "no")), entry("runtime", runtime)));
+			MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", "2.0-SNAPSHOT", properties,
+					workingDirectory);
+
 			ZipUtility.zipDirectory(new File(workingDirectory, "jakartaee-hello-world"), workingDirectory);
+
 			downloadZip(new File(workingDirectory, "jakartaee-hello-world.zip"), facesContext.getExternalContext());
 
 			workingDirectory.delete();
@@ -106,23 +115,6 @@ public class Project {
 			facesContext.responseComplete();
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to generate zip.", e);
-		}
-	}
-
-	private void invokeMavenArchetype(File workingDirectory) {
-		System.setProperty(MavenCli.MULTIMODULE_PROJECT_DIRECTORY, workingDirectory.getAbsolutePath());
-
-		String[] options = { "archetype:generate", "-DinteractiveMode=false", "-DaskForDefaultPropertyValues=false",
-				"-DarchetypeGroupId=org.eclipse.starter", "-DarchetypeArtifactId=jakarta-starter",
-				"-DarchetypeVersion=2.0-SNAPSHOT",
-				"-DjakartaVersion=" + ((jakartaVersion % 1.0 != 0) ? String.format("%s", jakartaVersion)
-						: String.format("%.0f", jakartaVersion)),
-				"-Dprofile=" + profile, "-DjavaVersion=" + javaVersion, "-Ddocker=" + (docker ? "yes" : "no"),
-				"-Druntime=" + runtime };
-		int result = new MavenCli().doMain(options, workingDirectory.getAbsolutePath(), System.out, System.err);
-
-		if (result != 0) {
-			throw new RuntimeException("Failed to invoke Maven Archetype.");
 		}
 	}
 
