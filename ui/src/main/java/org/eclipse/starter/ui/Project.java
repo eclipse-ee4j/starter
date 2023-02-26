@@ -178,7 +178,7 @@ public class Project {
 			externalContext.responseReset();
 			
 			File zip = new File(workingDirectory, "jakartaee-hello-world.zip");
-			externalContext.setResponseContentType(externalContext.getMimeType(zip.getName()));
+			externalContext.setResponseContentType("application/zip");
 			externalContext.setResponseContentLength((int) zip.length());
 			externalContext.setResponseHeader("Content-Disposition",
 					"attachment; filename=\"jakartaee-hello-world.zip\"");
