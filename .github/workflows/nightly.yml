@@ -106,7 +106,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 11
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -115,5 +115,5 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build maven-project-generator
-        run: mvn clean install --file maven-project-generator/pom.xml
+      - name: Build UI
+        run: mvn clean package --file ui/pom.xml

@@ -1,89 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html
-  xmlns:f="jakarta.faces.core"
-  xmlns:h="jakarta.faces.html"
-  xmlns:p="http://primefaces.org/ui">
-<p:importEnum type="org.eclipse.starter.ui.JakartaEEVersion"/>
-<p:importEnum type="org.eclipse.starter.ui.Profile"/>
-<style>
-  .text-align-left {
-    text-align: left;
-  }
-</style>
-
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
-
+	<title>Eclipse Starter for Jakarta EE</title>
 </h:head>
 <h:body>
-  <p>Welcome to the official Eclipse Foundation starter for Jakarta EE. The starter is a Maven
-    Archetype that generates sample code to get you going quickly with simple Jakarta EE
-    microservices
-    projects. The starter will include a web UI in a subsequent release.
-  </p>
-  <h1>Generate Jakarta EE Project
-  </h1>
-  <p>
-    In order to run the Maven Archetype and generate a sample Jakarta EE project, please execute the
-    following. Please ensure you have installed a Java <a
-    href="https://adoptium.net/?variant=openjdk8">SE 8+ implementation</a> and <a
-    href="https://maven.apache.org/download.cgi">Maven 3+</a> (we have tested with Java SE 8, Java
-    SE 11 and Java SE 17).
-  </p>
+	<p:panel header="Generate a Jakarta EE Project">
+		<div class="card">
+			<h:form>
+				<p:panelGrid
+					columnClasses="ui-grid-col-2, ui-grid-col-6, ui-grid-col-2, ui-grid-col-2"
+					columns="4" layout="grid" styleClass="text-align-left">
+					<p:outputLabel for="@next" value="Jakarta EE version" />
+					<p:selectOneRadio required="true" value="#{project.jakartaVersion}">
+					    <f:convertNumber minFractionDigits="0" maxFractionDigits="1" />
+						<f:selectItem itemValue="8" itemLabel="Jakarta EE 8" />
+						<f:selectItem itemValue="9" itemLabel="Jakarta EE 9" />
+						<f:selectItem itemValue="9.1" itemLabel="Jakarta EE 9.1" />
+						<f:selectItem itemValue="10" itemLabel="Jakarta EE 10" />
+					</p:selectOneRadio>
+					<p:message for="@previous" />
+					<h:outputText />
 
+					<p:outputLabel for="@next" value="Jakarta EE profile" />
+					<p:selectOneRadio required="true" value="#{project.profile}">
+						<f:selectItem itemValue="core" itemLabel="Core Profile" />
+						<f:selectItem itemValue="web" itemLabel="Web Profile" />
+						<f:selectItem itemValue="full" itemLabel="Full platform" />
+					</p:selectOneRadio>
+					<p:message for="@previous" />
+					<h:outputText />
 
-  <p:panel header="Generate a Jakarta EE Project">
-    <div class="card">
-      <h:form>
-        <p:panelGrid columns="4" layout="grid" styleClass="text-align-left">
-          <p:outputLabel for="@next"
-                         value="Jakarta EE Version"/>
-          <p:selectOneMenu value="#{project.jakartaEEVersion}" required="true">
-            <f:selectItems value="#{JakartaEEVersion.ALL_VALUES}"
-                           itemLabel="#{element.displayName}" itemValue="#{element}" var="element"/>
-          </p:selectOneMenu>
-          <p:message for="@previous"/>
-          <h:outputText/>
+					<p:outputLabel for="@next" value="Java SE version" />
+					<p:selectOneRadio required="true" value="#{project.javaVersion}">
+						<f:selectItem itemValue="8" itemLabel="Java SE 8" />
+						<f:selectItem itemValue="11" itemLabel="Java SE 11" />
+						<f:selectItem itemValue="17" itemLabel="Java SE 17" />
+					</p:selectOneRadio>
+					<p:message for="@previous" />
+					<h:outputText />
 
-          <p:outputLabel for="@next" value="Profile"/>
-          <p:selectOneMenu value="#{project.profile}" required="true">
-            <f:selectItems value="#{Profile.ALL_VALUES}"
-                           itemLabel="#{element.displayName}" itemValue="#{element}" var="element"/>
+					<p:outputLabel for="@next" value="Docker support" />
+					<p:selectOneRadio required="true" value="#{project.docker}">
+						<f:selectItem itemValue="false" itemLabel="No" />
+						<f:selectItem itemValue="true" itemLabel="Yes" />
+					</p:selectOneRadio>
+					<p:message for="@previous" />
+					<h:outputText />
 
-          </p:selectOneMenu>
-          <p:message for="@previous"/>
-          <h:outputText/>
+					<p:outputLabel for="@next" value="Runtime" />
+					<p:selectOneRadio required="true" value="#{project.runtime}">
+						<f:selectItem itemValue="none" itemLabel="None" />
+						<f:selectItems value="#{project.runtimes}" />
+					</p:selectOneRadio>
+					<p:message for="@previous" />
+					<h:outputText />
+				</p:panelGrid>
 
-          <p:outputLabel for="@next" value="groupId"/>
-          <p:inputText value="#{project.groupId}" required="true"
-                       requiredMessage="groupId is required.">
-          </p:inputText>
-          <p:message for="@previous"/>
-          <h:outputText/>
-
-          <p:outputLabel for="@next" value="artifactId"/>
-          <p:inputText value="#{project.artifactId}"
-                       required="true"
-                       requiredMessage="artifactId is required.">
-          </p:inputText>
-          <p:message for="@previous"/>
-          <h:outputText/>
-
-          <p:outputLabel for="@next" value="version"/>
-          <p:inputText value="#{project.version}" required="true"
-                       requiredMessage="version is required.">
-          </p:inputText>
-          <p:message for="@previous"/>
-          <h:outputText/>
-        </p:panelGrid>
-
-        <p:commandButton value="GENERATE" ajax="false"
-                         icon="pi pi-arrow-down" styleClass="mr-2"
-                         action="#{project.generate}">
-        </p:commandButton>
-      </h:form>
-    </div>
-  </p:panel>
-
+				<p:commandButton value="Generate" ajax="false"
+					icon="pi pi-arrow-down" styleClass="mr-2"
+					action="#{project.generate}">
+				</p:commandButton>
+			</h:form>
+		</div>
+	</p:panel>
 </h:body>
 </html>

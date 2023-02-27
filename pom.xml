@@ -1,129 +1,90 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.eclipse.ee4j</groupId>
+		<artifactId>project</artifactId>
+		<version>1.0.7</version>
+	</parent>
 
-    <groupId>org.eclipse.starter</groupId>
-    <artifactId>jakarta-starter-modules</artifactId>
-    <version>2.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+	<modelVersion>4.0.0</modelVersion>
 
-    <name>Eclipse Starter for Jakarta EE</name>
-
-    <description>
-        This is the official Eclipse Foundation Starter for Jakarta EE.
+	<groupId>org.eclipse.starter</groupId>
+	<artifactId>jakarta-starter-modules</artifactId>
+	<version>2.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<name>Eclipse Starter for Jakarta EE Project</name>
+	<description>
+        This is the official Eclipse Foundation Starter for Jakarta EE project.
         It generates code to help get started with Jakarta EE projects
         using Maven. It is possible to do so using Maven
-        archetypes.
+        archetypes or a web UI.
     </description>
-    <url>https://eclipse-ee4j.github.io/starter/</url>
 
-    <parent>
-        <groupId>org.eclipse.ee4j</groupId>
-        <artifactId>project</artifactId>
-        <version>1.0.7</version>
-    </parent>
-
-    <organization>
-        <name>Eclipse Foundation</name>
-        <url>https://www.eclipse.org/org/foundation/</url>
-    </organization>
-
-    <issueManagement>
-        <system>github</system>
-        <url>https://github.com/eclipse-ee4j/starter/issues</url>
-    </issueManagement>
-
-    <licenses>
-        <license>
-            <name>Eclipse Public License - v 2.0</name>
-            <url>https://www.eclipse.org/legal/epl-2.0/</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <!-- All active committers should add their information here. -->
-        <developer>
-            <id>rokon12</id>
-            <name>A N M Bazlur Rahman</name>
-            <email>bazlur@jugbd.org</email>
-        </developer>
-        <developer>
-            <id>jeyvison</id>
-            <name>Jeyvison Nascimento</name>
-            <email>jeynoronha@gmail.com</email>
-        </developer>
-        <developer>
-            <id>m-reza-rahman</id>
-            <name>Reza Rahman</name>
-            <email>reza_rahman@lycos.com</email>
-        </developer>
-        <developer>
-            <id>ivargrimstad</id>
-            <name>Ivar Grimstad</name>
-            <email>ivar.grimstad@eclipse-foundation.org</email>
-        </developer>
-        <developer>
-            <id>ivonet</id>
-            <name>Ivo Woltring</name>
-            <email>ivo@ivonet.nl</email>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
-        <developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
-        <url>http://github.com/eclipse-ee4j/starter/tree/master</url>
-    </scm>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
-        <project.build.outputTimestamp>10</project.build.outputTimestamp>
-    </properties>
-
-    <modules>
-        <module>archetype</module>
-    </modules>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-
-    <profiles>
-        <profile>
-            <!-- modules that require building with Java 17 -->
-            <id>jdk17plus</id>
-            <activation>
-                <jdk>[17,)</jdk>
-            </activation>
-            <modules>
-                <module>ui</module>
-                <module>maven-project-generator</module>
-            </modules>
-        </profile>
-    </profiles>
+	<url>https://eclipse-ee4j.github.io/starter/</url>
+	
+	<organization>
+		<name>Eclipse Foundation</name>
+		<url>https://www.eclipse.org/org/foundation/</url>
+	</organization>
+	
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/eclipse-ee4j/starter/issues</url>
+	</issueManagement>
+	
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 2.0</name>
+			<url>https://www.eclipse.org/legal/epl-2.0/</url>
+		</license>
+	</licenses>
+	
+	<developers>
+		<!-- All active committers should add their information here. -->
+		<developer>
+			<id>rokon12</id>
+			<name>A N M Bazlur Rahman</name>
+			<email>bazlur@jugbd.org</email>
+		</developer>
+		<developer>
+			<id>jeyvison</id>
+			<name>Jeyvison Nascimento</name>
+			<email>jeynoronha@gmail.com</email>
+		</developer>
+		<developer>
+			<id>m-reza-rahman</id>
+			<name>Reza Rahman</name>
+			<email>reza_rahman@lycos.com</email>
+		</developer>
+		<developer>
+			<id>ivargrimstad</id>
+			<name>Ivar Grimstad</name>
+			<email>ivar.grimstad@eclipse-foundation.org</email>
+		</developer>
+		<developer>
+			<id>ivonet</id>
+			<name>Ivo Woltring</name>
+			<email>ivo@ivonet.nl</email>
+		</developer>
+	</developers>
+	
+	<scm>
+		<connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
+		<developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
+		<url>http://github.com/eclipse-ee4j/starter/tree/master</url>
+	</scm>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
+		<project.build.outputTimestamp>10</project.build.outputTimestamp>
+	</properties>
+	
+	<modules>
+		<module>archetype</module>
+		<module>ui</module>
+	</modules>
 </project>
