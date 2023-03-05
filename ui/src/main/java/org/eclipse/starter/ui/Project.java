@@ -146,6 +146,7 @@ public class Project implements Serializable {
 			profiles.get("core").setDisabled(true);
 			if (profile.equals("core")) {
 				profile = "web";
+				onProfileChange();
 			}
 
 			if ((jakartaVersion == 9) || (jakartaVersion == 9.1)) {
