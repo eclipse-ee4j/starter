@@ -48,6 +48,8 @@ public class Project implements Serializable {
 
 	private Map<String, SelectItem> javaVersions = new LinkedHashMap<String, SelectItem>();
 	private int javaVersion = 17;
+
+	private Map<String, SelectItem> dockerOptions = new LinkedHashMap<String, SelectItem>();
 	private boolean docker = false;
 
 	private Map<String, SelectItem> runtimes = new LinkedHashMap<String, SelectItem>();
@@ -66,6 +68,9 @@ public class Project implements Serializable {
 		javaVersions.put("8", new SelectItem("8", "Java SE 8", "Java SE 8", true));
 		javaVersions.put("11", new SelectItem("11", "Java SE 11"));
 		javaVersions.put("17", new SelectItem("17", "Java SE 17"));
+
+		dockerOptions.put("false", new SelectItem("false", "No"));
+		dockerOptions.put("true", new SelectItem("true", "Yes", "Yes", true));
 
 		runtimes.put("none", new SelectItem("none", "None"));
 
@@ -112,6 +117,10 @@ public class Project implements Serializable {
 
 	public void setJavaVersion(int javaVersion) {
 		this.javaVersion = javaVersion;
+	}
+
+	public Collection<SelectItem> getDockerOptions() {
+		return dockerOptions.values();
 	}
 
 	public boolean isDocker() {
@@ -244,43 +253,25 @@ public class Project implements Serializable {
 		LOGGER.log(Level.INFO,
 				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
+		dockerOptions.get("true").setDisabled(false);
+
 		if (runtime.equals("none")) {
+			dockerOptions.get("true").setDisabled(true);
 			docker = false;
 		} else if (runtime.equals("payara")) {
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
 				javaVersion = 11;
 			}
 		} else if (runtime.equals("glassfish")) {
+			dockerOptions.get("true").setDisabled(true);
 			docker = false;
-
-			if (profile.equals("core")) {
-				profile = "web";
-			}
 
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
 				javaVersion = 11;
 			}
 		} else if (runtime.equals("tomee")) {
-			if (jakartaVersion == 10) {
-				jakartaVersion = 9.1;
-			}
-
-			profile = "web";
-
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
 				javaVersion = 11;
-			}
-		} else if (runtime.equals("wildfly")) {
-			if ((jakartaVersion == 9) || (jakartaVersion == 9.1)) {
-				jakartaVersion = 10;
-			}
-
-			if ((jakartaVersion == 10) && (javaVersion == 8)) {
-				javaVersion = 11;
-			}
-		} else if (runtime.equals("open-liberty")) {
-			if (jakartaVersion == 10) {
-				jakartaVersion = 9.1;
 			}
 		}
 	}

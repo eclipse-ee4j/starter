@@ -45,8 +45,7 @@
 
 					<p:outputLabel for="@next" value="Docker support" />
 					<p:selectOneRadio required="true" value="#{project.docker}">
-						<f:selectItem itemValue="false" itemLabel="No" />
-						<f:selectItem itemValue="true" itemLabel="Yes" />
+						<f:selectItems value="#{project.dockerOptions}" />
 						<p:ajax event="change" listener="#{project.onDockerChange}"
 							process="@form" update="@form" />
 					</p:selectOneRadio>
