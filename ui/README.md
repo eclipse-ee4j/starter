@@ -12,7 +12,7 @@ mvn clean install
 ```
 
 ##  Running the UI
-In order to run the UI, please execute the following from this directory. You can also simply build the war file using the `clean, package` Maven goals and deploye the code to either WildFly 26 or JBoss EAP 7.4. You can do this in an IDE if desired.
+In order to run the UI, please execute the following from this directory. You can also simply build the war from Maven and deploy the war to either WildFly 26 or JBoss EAP 7.4. You can do this in an IDE if desired.
 
 ```
 mvn clean package wildfly:run
