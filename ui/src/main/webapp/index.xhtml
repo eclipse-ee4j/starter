@@ -16,45 +16,47 @@
 					columns="4" layout="grid" styleClass="text-align-left">
 					<p:outputLabel for="@next" value="Jakarta EE version" />
 					<p:selectOneRadio required="true" value="#{project.jakartaVersion}">
-					    <f:convertNumber minFractionDigits="0" maxFractionDigits="1" />
-						<f:selectItem itemValue="8" itemLabel="Jakarta EE 8" />
-						<f:selectItem itemValue="9" itemLabel="Jakarta EE 9" />
-						<f:selectItem itemValue="9.1" itemLabel="Jakarta EE 9.1" />
-						<f:selectItem itemValue="10" itemLabel="Jakarta EE 10" />
+						<f:convertNumber minFractionDigits="0" maxFractionDigits="1" />
+						<f:selectItems value="#{project.jakartaVersions}" />
+						<p:ajax event="change"
+							listener="#{project.onJakartaVersionChange}" process="@form"
+							update="@form" />
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
 
 					<p:outputLabel for="@next" value="Jakarta EE profile" />
 					<p:selectOneRadio required="true" value="#{project.profile}">
-						<f:selectItem itemValue="core" itemLabel="Core Profile" />
-						<f:selectItem itemValue="web" itemLabel="Web Profile" />
-						<f:selectItem itemValue="full" itemLabel="Full platform" />
+						<f:selectItems value="#{project.profiles}" />
+						<p:ajax event="change" listener="#{project.onProfileChange}"
+							process="@form" update="@form" />
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
 
 					<p:outputLabel for="@next" value="Java SE version" />
 					<p:selectOneRadio required="true" value="#{project.javaVersion}">
-						<f:selectItem itemValue="8" itemLabel="Java SE 8" />
-						<f:selectItem itemValue="11" itemLabel="Java SE 11" />
-						<f:selectItem itemValue="17" itemLabel="Java SE 17" />
+						<f:selectItems value="#{project.javaVersions}" />
+						<p:ajax event="change" listener="#{project.onJavaVersionChange}"
+							process="@form" update="@form" />
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
 
 					<p:outputLabel for="@next" value="Docker support" />
 					<p:selectOneRadio required="true" value="#{project.docker}">
-						<f:selectItem itemValue="false" itemLabel="No" />
-						<f:selectItem itemValue="true" itemLabel="Yes" />
+						<f:selectItems value="#{project.dockerOptions}" />
+						<p:ajax event="change" listener="#{project.onDockerChange}"
+							process="@form" update="@form" />
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
 
 					<p:outputLabel for="@next" value="Runtime" />
 					<p:selectOneRadio required="true" value="#{project.runtime}">
-						<f:selectItem itemValue="none" itemLabel="None" />
 						<f:selectItems value="#{project.runtimes}" />
+						<p:ajax event="change" listener="#{project.onRuntimeChange}"
+							process="@form" update="@form" />
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
