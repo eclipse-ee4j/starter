@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -40,20 +41,22 @@ public class Project implements Serializable {
 	@Inject
 	private ExternalContext externalContext;
 
-	private Map<String, SelectItem> jakartaVersions = new LinkedHashMap<String, SelectItem>();
+	private Map<String, SelectItem> jakartaVersions = new LinkedHashMap<>();
 	private double jakartaVersion = 10;
 
-	private Map<String, SelectItem> profiles = new LinkedHashMap<String, SelectItem>();
+	private Map<String, SelectItem> profiles = new LinkedHashMap<>();
 	private String profile = "core";
 
-	private Map<String, SelectItem> javaVersions = new LinkedHashMap<String, SelectItem>();
+	private Map<String, SelectItem> javaVersions = new LinkedHashMap<>();
 	private int javaVersion = 17;
 
-	private Map<String, SelectItem> dockerOptions = new LinkedHashMap<String, SelectItem>();
+	private Map<String, SelectItem> dockerFlags = new LinkedHashMap<>();
 	private boolean docker = false;
 
-	private Map<String, SelectItem> runtimes = new LinkedHashMap<String, SelectItem>();
+	private Map<String, SelectItem> runtimes = new LinkedHashMap<>();
 	private String runtime = "none";
+
+	private Map<String, String> cache = new HashMap<>();
 
 	public Project() {
 		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8"));
@@ -69,13 +72,13 @@ public class Project implements Serializable {
 		javaVersions.put("11", new SelectItem("11", "Java SE 11"));
 		javaVersions.put("17", new SelectItem("17", "Java SE 17"));
 
-		dockerOptions.put("false", new SelectItem("false", "No"));
-		dockerOptions.put("true", new SelectItem("true", "Yes", "Yes", true));
+		dockerFlags.put("false", new SelectItem("false", "No"));
+		dockerFlags.put("true", new SelectItem("true", "Yes", "Yes", true));
 
 		runtimes.put("none", new SelectItem("none", "None"));
 
 		List<String> shuffledRuntimes = new ArrayList<>(RUNTIMES.keySet());
-		Collections.shuffle(shuffledRuntimes);
+		Collections.shuffle(shuffledRuntimes); // Ensure random order every time.
 		shuffledRuntimes.forEach(r -> runtimes.put(r, new SelectItem(r, RUNTIMES.get(r))));
 
 		runtimes.get("tomee").setDisabled(true); // EE 10 is the default. TomEE needs to be disabled.
@@ -119,8 +122,8 @@ public class Project implements Serializable {
 		this.javaVersion = javaVersion;
 	}
 
-	public Collection<SelectItem> getDockerOptions() {
-		return dockerOptions.values();
+	public Collection<SelectItem> getDockerFlags() {
+		return dockerFlags.values();
 	}
 
 	public boolean isDocker() {
@@ -131,12 +134,12 @@ public class Project implements Serializable {
 		this.docker = docker;
 	}
 
-	public String getRuntime() {
-		return runtime;
-	}
-
 	public Collection<SelectItem> getRuntimes() {
 		return runtimes.values();
+	}
+
+	public String getRuntime() {
+		return runtime;
 	}
 
 	public void setRuntime(String runtime) {
@@ -253,17 +256,17 @@ public class Project implements Serializable {
 		LOGGER.log(Level.INFO,
 				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
-		dockerOptions.get("true").setDisabled(false);
+		dockerFlags.get("true").setDisabled(false);
 
 		if (runtime.equals("none")) {
-			dockerOptions.get("true").setDisabled(true);
+			dockerFlags.get("true").setDisabled(true);
 			docker = false;
 		} else if (runtime.equals("payara")) {
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
 				javaVersion = 11;
 			}
 		} else if (runtime.equals("glassfish")) {
-			dockerOptions.get("true").setDisabled(true);
+			dockerFlags.get("true").setDisabled(true);
 			docker = false;
 
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
@@ -282,33 +285,46 @@ public class Project implements Serializable {
 					"Generating project - Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
 					new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 
-			File workingDirectory = Files.createTempDirectory("starter-output-").toFile();
-			LOGGER.log(Level.INFO, "Working directory: {0}", new Object[] { workingDirectory.getAbsolutePath() });
+			String cachedDirectory = cache.get(getCacheKey());
 
-			LOGGER.info("Executing Maven Archetype.");
-			Properties properties = new Properties();
-			properties.putAll(Map.ofEntries(
-					entry("jakartaVersion",
-							((jakartaVersion % 1.0 != 0) ? String.format("%s", jakartaVersion)
-									: String.format("%.0f", jakartaVersion))),
-					entry("profile", profile), entry("javaVersion", javaVersion),
-					entry("docker", (docker ? "yes" : "no")), entry("runtime", runtime)));
-			MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", "2.0-SNAPSHOT", properties,
-					workingDirectory);
+			if ((cachedDirectory == null) || (!new File(cachedDirectory).exists())) {
+				File workingDirectory = Files.createTempDirectory("starter-output-").toFile();
+				LOGGER.log(Level.INFO, "Working directory: {0}", new Object[] { workingDirectory.getAbsolutePath() });
 
-			LOGGER.info("Creating zip file.");
-			ZipUtility.zipDirectory(new File(workingDirectory, "jakartaee-hello-world"), workingDirectory);
+				LOGGER.info("Executing Maven Archetype.");
+				Properties properties = new Properties();
+				properties.putAll(Map.ofEntries(
+						entry("jakartaVersion",
+								((jakartaVersion % 1.0 != 0) ? String.format("%s", jakartaVersion)
+										: String.format("%.0f", jakartaVersion))),
+						entry("profile", profile), entry("javaVersion", javaVersion),
+						entry("docker", (docker ? "yes" : "no")), entry("runtime", runtime)));
+				MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", "2.0-SNAPSHOT", properties,
+						workingDirectory);
 
-			LOGGER.info("Downloading zip file.");
-			downloadZip(new File(workingDirectory, "jakartaee-hello-world.zip"));
+				LOGGER.info("Creating zip file.");
+				ZipUtility.zipDirectory(new File(workingDirectory, "jakartaee-hello-world"), workingDirectory);
 
-			LOGGER.info("Deleting working directory.");
-			workingDirectory.delete();
+				LOGGER.info("Downloading zip file.");
+				downloadZip(new File(workingDirectory, "jakartaee-hello-world.zip"));
+
+				LOGGER.info("Caching output.");
+				cache.put(getCacheKey(), workingDirectory.getAbsolutePath());
+				workingDirectory.deleteOnExit();
+			} else {
+				LOGGER.log(Level.INFO, "Downloading zip file from cached directory: {0}",
+						new Object[] { cachedDirectory });
+				downloadZip(new File(cachedDirectory, "jakartaee-hello-world.zip"));
+			}
 
 			facesContext.responseComplete();
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to generate zip.", e);
 		}
+	}
+
+	private String getCacheKey() {
+		return "" + jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker + ":" + runtime;
 	}
 
 	private void downloadZip(File zip) {
