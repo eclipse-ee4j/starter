@@ -58,9 +58,9 @@ public class Project implements Serializable {
 	private Map<String, String> cache = new HashMap<>();
 
 	public Project() {
-		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8"));
-		jakartaVersions.put("9", new SelectItem("9", "Jakarta EE 9"));
-		jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1"));
+		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8", "Jakarta EE 8", true));
+		jakartaVersions.put("9", new SelectItem("9", "Jakarta EE 9", "Jakarta EE 9", true));
+		jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1", "Jakarta EE 9.1", true));
 		jakartaVersions.put("10", new SelectItem("10", "Jakarta EE 10"));
 
 		profiles.put("core", new SelectItem("core", "Core Profile"));
@@ -194,7 +194,18 @@ public class Project implements Serializable {
 		LOGGER.log(Level.INFO,
 				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
+		jakartaVersions.get("8").setDisabled(false);
+
+		if (!runtime.equals("wildfly")) {
+			jakartaVersions.get("9").setDisabled(false);
+			jakartaVersions.get("9.1").setDisabled(false);
+		}
+
 		if (profile.equals("core")) {
+			jakartaVersions.get("8").setDisabled(true);
+			jakartaVersions.get("9").setDisabled(true);
+			jakartaVersions.get("9.1").setDisabled(true);
+
 			runtimes.get("glassfish").setDisabled(true);
 			runtimes.get("tomee").setDisabled(true);
 
@@ -253,6 +264,15 @@ public class Project implements Serializable {
 		LOGGER.log(Level.INFO,
 				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
+		jakartaVersions.get("10").setDisabled(false);
+
+		if (!profile.equals("core")) {
+			jakartaVersions.get("9.1").setDisabled(false);
+			jakartaVersions.get("9").setDisabled(false);
+		}
+
+		profiles.get("full").setDisabled(false);
+
 		dockerFlags.get("true").setDisabled(false);
 
 		if (runtime.equals("none")) {
@@ -270,9 +290,17 @@ public class Project implements Serializable {
 				javaVersion = 11;
 			}
 		} else if (runtime.equals("tomee")) {
+			jakartaVersions.get("10").setDisabled(true);
+			profiles.get("full").setDisabled(true);
+
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
 				javaVersion = 11;
 			}
+		} else if (runtime.equals("open-liberty")) {
+			jakartaVersions.get("10").setDisabled(true);
+		} else if (runtime.equals("wildfly")) {
+			jakartaVersions.get("9.1").setDisabled(true);
+			jakartaVersions.get("9").setDisabled(true);
 		}
 	}
 
