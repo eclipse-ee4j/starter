@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -241,14 +240,12 @@ public class Project implements Serializable {
 		if (docker) {
 			runtimes.get("none").setDisabled(true);
 			runtimes.get("glassfish").setDisabled(true);
-
-			Iterator<String> iterator = runtimes.keySet().iterator();
-			while (runtime.equals("none") || runtime.equals("glassfish")) {
-				runtime = iterator.next();
-			}
 		} else {
 			runtimes.get("none").setDisabled(false);
-			runtimes.get("glassfish").setDisabled(false);
+
+			if (!profile.equals("core")) {
+				runtimes.get("glassfish").setDisabled(false);
+			}
 		}
 	}
 
