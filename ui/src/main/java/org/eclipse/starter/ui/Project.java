@@ -202,6 +202,7 @@ public class Project implements Serializable {
 		}
 
 		if (jakartaVersion != 10) {
+			javaVersions.get("8").setDisabled(false);
 			runtimes.get("tomee").setDisabled(false);
 		}
 
@@ -213,6 +214,8 @@ public class Project implements Serializable {
 			jakartaVersions.get("8").setDisabled(true);
 			jakartaVersions.get("9").setDisabled(true);
 			jakartaVersions.get("9.1").setDisabled(true);
+
+			javaVersions.get("8").setDisabled(true);
 
 			runtimes.get("glassfish").setDisabled(true);
 			runtimes.get("tomee").setDisabled(true);
@@ -235,16 +238,11 @@ public class Project implements Serializable {
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		if (javaVersion == 8) {
 			jakartaVersions.get("10").setDisabled(true);
-			if (jakartaVersion == 10) {
-				jakartaVersion = 9.1;
-			}
-
 			profiles.get("core").setDisabled(true);
-			if (profile.equals("core")) {
-				profile = "web";
-			}
 		} else {
-			jakartaVersions.get("10").setDisabled(false);
+			if (!runtime.equals("tomee") && runtime.equals("open-liberty")) {
+				jakartaVersions.get("10").setDisabled(false);
+			}
 		}
 	}
 
