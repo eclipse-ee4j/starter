@@ -9,6 +9,19 @@
 </h:head>
 <h:body>
 	<p:panel header="Generate a Jakarta EE Project">
+	    Options not valid for a current selection are disabled. To enable an option, please
+	    make the appropriate selection. The following are some examples.
+	    <ul style="font-size: smaller;">
+	    <li>To enable Docker support, please select a runtime that supports Docker 
+	    (amongst the currently included runtimes only GlassFish does not yet support Docker)</li>
+	    <li>Only Jakarta EE 10 supports the Core Profile. To enable other Jakarta EE versions,
+	    please choose a profile other than Core</li>
+	    <li>Jakarta EE 10 does not support Java SE 8. The prior Jakarta EE versions support
+	    Java SE 8</li>
+	    <li>TomEE and Open Liberty do not yet support Jakarta EE 10, but the other 
+	    runtimes do</li>
+	    <li>GlassFish does not support the Core profile, but it supports the other profiles</li>
+	    </ul>
 		<div class="card">
 			<h:form>
 				<p:panelGrid
