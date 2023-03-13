@@ -92,6 +92,16 @@
 					<server-config>standalone-full.xml</server-config>
 				</configuration>
 			</plugin>
+
+			<!-- Execute 'mvn clean liberty:dev' to run the application with hot reload (dev mode). -->
+			<plugin>
+				<groupId>io.openliberty.tools</groupId>
+				<artifactId>liberty-maven-plugin</artifactId>
+				<version>3.7.1</version>
+				<configuration>
+					<generateFeatures>true</generateFeatures>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

@@ -27,13 +27,27 @@ under that directory will contain instructions on how to run the sample.
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide). The generated starter code is simply Maven projects. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
 ##  Running the UI
+
+### Using WildFly 
+
 In order to run the UI, please execute the following from this directory. You can also simply build the war from Maven and deploy the war to either WildFly 26 or JBoss EAP 7.4. You can do this in an IDE if desired.
 
 ```
 mvn clean package wildfly:run --file ui/pom.xml
 ```
 
-Once WildFly starts, please go to http://localhost:8080/jakarta-starter-ui. Unzip the file the UI generates and follow the README.md in the unzipped directory.
+Once WildFly starts, please go to [http://localhost:8080/jakarta-starter-ui](http://localhost:8080/jakarta-starter-ui). Unzip the file the UI generates and follow the README.md in the unzipped directory.
+
+### Using Open Liberty
+
+From this directory execute:
+ 
+```
+mvn clean liberty:dev --file ui/pom.xml
+```
+
+Once Open Liberty starts, please go to [http://localhost:9080/jakarta-starter-ui](http://localhost:9080/jakarta-starter-ui). Unzip the file the UI generates and follow the README.md in the unzipped directory.
+
 
 ## Known Issues
 * Note that Payara does not yet work on the Apple M1 chip. If you are on an M1 chip, we suggest you use another runtime for the time being with the Archetype.
