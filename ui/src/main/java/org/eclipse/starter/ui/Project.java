@@ -58,9 +58,9 @@ public class Project implements Serializable {
 	private Map<String, String> cache = new HashMap<>();
 
 	public Project() {
-		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8", "Jakarta EE 8", true));
-		jakartaVersions.put("9", new SelectItem("9", "Jakarta EE 9", "Jakarta EE 9", true));
-		jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1", "Jakarta EE 9.1", true));
+		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8", "Jakarta EE 8"));
+		jakartaVersions.put("9", new SelectItem("9", "Jakarta EE 9", "Jakarta EE 9"));
+		jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1", "Jakarta EE 9.1"));
 		jakartaVersions.put("10", new SelectItem("10", "Jakarta EE 10"));
 
 		profiles.put("core", new SelectItem("core", "Core Profile"));
