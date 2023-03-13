@@ -65,7 +65,7 @@ public class Project implements Serializable {
 
 		profiles.put("core", new SelectItem("core", "Core Profile"));
 		profiles.put("web", new SelectItem("web", "Web Profile"));
-		profiles.put("full", new SelectItem("full", "Full platform"));
+		profiles.put("full", new SelectItem("full", "Full Platform"));
 
 		javaVersions.put("8", new SelectItem("8", "Java SE 8", "Java SE 8", true));
 		javaVersions.put("11", new SelectItem("11", "Java SE 11"));
@@ -240,7 +240,7 @@ public class Project implements Serializable {
 			jakartaVersions.get("10").setDisabled(true);
 			profiles.get("core").setDisabled(true);
 		} else {
-			if (!runtime.equals("tomee") && runtime.equals("open-liberty")) {
+			if (!runtime.equals("tomee") && !runtime.equals("open-liberty")) {
 				jakartaVersions.get("10").setDisabled(false);
 			}
 		}
