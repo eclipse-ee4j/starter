@@ -151,14 +151,14 @@ public class Project implements Serializable {
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		if (jakartaVersion != 10) {
 			javaVersions.get("8").setDisabled(false);
-			runtimes.get("tomee").setDisabled(false);
+
+			if (profile.equals("web")) {
+				runtimes.get("tomee").setDisabled(false);
+			}
+
 			runtimes.get("open-liberty").setDisabled(false);
 
 			profiles.get("core").setDisabled(true);
-			if (profile.equals("core")) {
-				profile = "web";
-				onProfileChange();
-			}
 
 			if ((jakartaVersion == 9) || (jakartaVersion == 9.1)) {
 				runtimes.get("wildfly").setDisabled(true);
