@@ -58,18 +58,18 @@ public class Project implements Serializable {
 	private Map<String, String> cache = new HashMap<>();
 
 	public Project() {
-		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8"));
-		jakartaVersions.put("9", new SelectItem("9", "Jakarta EE 9"));
-		jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1"));
 		jakartaVersions.put("10", new SelectItem("10", "Jakarta EE 10"));
+		jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1"));
+		jakartaVersions.put("9", new SelectItem("9", "Jakarta EE 9"));		
+		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8"));
 
 		profiles.put("core", new SelectItem("core", "Core Profile"));
 		profiles.put("web", new SelectItem("web", "Web Profile"));
 		profiles.put("full", new SelectItem("full", "Full Platform"));
 
-		javaVersions.put("8", new SelectItem("8", "Java SE 8", "Java SE 8", true));
-		javaVersions.put("11", new SelectItem("11", "Java SE 11"));
 		javaVersions.put("17", new SelectItem("17", "Java SE 17"));
+		javaVersions.put("11", new SelectItem("11", "Java SE 11"));		
+		javaVersions.put("8", new SelectItem("8", "Java SE 8", "Java SE 8", true));
 
 		dockerFlags.put("false", new SelectItem("false", "No"));
 		dockerFlags.put("true", new SelectItem("true", "Yes", "Yes", true));
