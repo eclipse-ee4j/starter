@@ -44,7 +44,7 @@ public class Project implements Serializable {
 	private double jakartaVersion = 10;
 
 	private Map<String, SelectItem> profiles = new LinkedHashMap<>();
-	private String profile = "core";
+	private String profile = "full";
 
 	private Map<String, SelectItem> javaVersions = new LinkedHashMap<>();
 	private int javaVersion = 17;
@@ -58,9 +58,9 @@ public class Project implements Serializable {
 	private Map<String, String> cache = new HashMap<>();
 
 	public Project() {
-		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8", "Jakarta EE 8", true));
-		jakartaVersions.put("9", new SelectItem("9", "Jakarta EE 9", "Jakarta EE 9", true));
-		jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1", "Jakarta EE 9.1", true));
+		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8"));
+		jakartaVersions.put("9", new SelectItem("9", "Jakarta EE 9"));
+		jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1"));
 		jakartaVersions.put("10", new SelectItem("10", "Jakarta EE 10"));
 
 		profiles.put("core", new SelectItem("core", "Core Profile"));
@@ -82,7 +82,6 @@ public class Project implements Serializable {
 
 		runtimes.get("tomee").setDisabled(true); // EE 10 is the default. TomEE needs to be disabled.
 		runtimes.get("open-liberty").setDisabled(true); // EE 10 is the default. Open Liberty needs to be disabled.
-		runtimes.get("glassfish").setDisabled(true); // Core is the default. GlassFish needs to be disabled.
 	}
 
 	public Collection<SelectItem> getJakartaVersions() {
