@@ -56,15 +56,6 @@
 					<p:message for="@previous" />
 					<h:outputText />
 
-					<p:outputLabel for="@next" value="Docker support" />
-					<p:selectOneRadio required="true" value="#{project.docker}">
-						<f:selectItems value="#{project.dockerFlags}" />
-						<p:ajax event="change" listener="#{project.onDockerChange}"
-							process="@form" update="@form" />
-					</p:selectOneRadio>
-					<p:message for="@previous" />
-					<h:outputText />
-
 					<p:outputLabel for="@next" value="Runtime" />
 					<p:selectOneRadio required="true" value="#{project.runtime}">
 						<f:selectItems value="#{project.runtimes}" />
@@ -73,6 +64,15 @@
 					</p:selectOneRadio>
 					<p:message for="@previous" />
 					<h:outputText />
+					
+					<p:outputLabel for="@next" value="Docker support" />
+					<p:selectOneRadio required="true" value="#{project.docker}">
+						<f:selectItems value="#{project.dockerFlags}" />
+						<p:ajax event="change" listener="#{project.onDockerChange}"
+							process="@form" update="@form" />
+					</p:selectOneRadio>
+					<p:message for="@previous" />
+					<h:outputText />					
 				</p:panelGrid>
 
 				<p:commandButton value="Generate" ajax="false"
