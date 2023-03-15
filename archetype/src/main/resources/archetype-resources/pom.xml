@@ -208,7 +208,7 @@
 				</configuration>
 			</plugin>
 #elseif (${runtime} == 'open-liberty')
-			<!-- Execute 'mvn clean package liberty:dev' to run the application. -->
+			<!-- Execute 'mvn liberty:dev' to run the application, 'mvn package' to prepare for the Docker build.  -->
 			<plugin>
 				<groupId>io.openliberty.tools</groupId>
 				<artifactId>liberty-maven-plugin</artifactId>

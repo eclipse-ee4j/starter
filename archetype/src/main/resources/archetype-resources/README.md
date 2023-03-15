@@ -15,7 +15,7 @@ You can run the application by executing the following command from the director
 #elseif (${runtime} == 'wildfly')
 ./mvnw clean package wildfly:run
 #elseif (${runtime} == 'open-liberty')
-./mvnw clean package liberty:dev
+./mvnw liberty:dev
 #end
 ```
 
