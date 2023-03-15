@@ -7,65 +7,68 @@
 
   <ui:define name="content">
     <p:panel header="Generate a Jakarta EE Project">
-      The UI requires a valid combination of options every time an option is selected (not just when the <b>Generate</b> button is pressed), and so disables selection of any option which would result in an invalid combination.  Some notes (at the time of last update, which may change in the near future):
-      <ul style="font-size: smaller;">
-        <li>Only Jakarta EE 10 supports the Core Profile. To enable other Jakarta EE versions, first select a profile other than Core</li>
-        <li>To select TomEE, first select the Web Profile and a Jakarta EE version other than 10</li>
-        <li>To select Open Liberty, first select a Jakarta EE version other than 10</li>
-        <li>To select GlassFish, first select a profile other than Core, and select "No" for Docker support</li>
-        <li>To select Java SE 8, first select a Jakarta EE version other than Jakarta EE 10</li>
-      </ul>
+      Note: The UI requires a valid combination of options every time an option is selected and so disables selection of any option which would result in an invalid combination.
       <div class="card">
         <h:form>
           <p:panelGrid
-            columnClasses="ui-grid-col-2, ui-grid-col-6, ui-grid-col-2, ui-grid-col-2"
-            columns="4" layout="grid" styleClass="text-align-left">
+                  columnClasses="ui-grid-col-2, ui-grid-col-8, ui-grid-col-2"
+                  columns="3" layout="grid" styleClass="text-align-left">
             <p:outputLabel for="@next" value="Jakarta EE version" />
-            <p:selectOneRadio required="true" value="#{project.jakartaVersion}">
-              <f:convertNumber minFractionDigits="0" maxFractionDigits="1" />
-              <f:selectItems value="#{project.jakartaVersions}" />
-              <p:ajax event="change"
-                      listener="#{project.onJakartaVersionChange}" process="@form"
-                      update="@form" />
-            </p:selectOneRadio>
+            <p:column>
+              <p:selectOneRadio required="true" value="#{project.jakartaVersion}">
+                <f:convertNumber minFractionDigits="0" maxFractionDigits="1" />
+                <f:selectItems value="#{project.jakartaVersions}" />
+                <p:ajax event="change"
+                        listener="#{project.onJakartaVersionChange}" process="@form"
+                        update="@form" />
+              </p:selectOneRadio>
+              <h:outputText value="Jakarta EE 10 requires Java SE above 8"/>
+            </p:column>
             <p:message for="@previous" />
-            <h:outputText />
 
             <p:outputLabel for="@next" value="Jakarta EE profile" />
-            <p:selectOneRadio required="true" value="#{project.profile}">
-              <f:selectItems value="#{project.profiles}" />
-              <p:ajax event="change" listener="#{project.onProfileChange}"
-                      process="@form" update="@form" />
-            </p:selectOneRadio>
+            <p:column>
+              <p:selectOneRadio required="true" value="#{project.profile}">
+                <f:selectItems value="#{project.profiles}" />
+                <p:ajax event="change" listener="#{project.onProfileChange}"
+                        process="@form" update="@form" />
+              </p:selectOneRadio>
+              <h:outputText value="Core profile requires Jakarta EE 10"/>
+            </p:column>
             <p:message for="@previous" />
-            <h:outputText />
 
             <p:outputLabel for="@next" value="Java SE version" />
-            <p:selectOneRadio required="true" value="#{project.javaVersion}">
-              <f:selectItems value="#{project.javaVersions}" />
-              <p:ajax event="change" listener="#{project.onJavaVersionChange}"
-                      process="@form" update="@form" />
-            </p:selectOneRadio>
+            <p:column>
+              <p:selectOneRadio required="true" value="#{project.javaVersion}">
+                <f:selectItems value="#{project.javaVersions}" />
+                <p:ajax event="change" listener="#{project.onJavaVersionChange}"
+                        process="@form" update="@form" />
+              </p:selectOneRadio>
+              <h:outputText value="Java SE 8 requires Jakarta EE below 10"/>
+            </p:column>
             <p:message for="@previous" />
-            <h:outputText />
 
             <p:outputLabel for="@next" value="Runtime" />
-            <p:selectOneRadio required="true" value="#{project.runtime}">
-              <f:selectItems value="#{project.runtimes}" />
-              <p:ajax event="change" listener="#{project.onRuntimeChange}"
-                      process="@form" update="@form" />
-            </p:selectOneRadio>
+            <p:column>
+              <p:selectOneRadio required="true" value="#{project.runtime}">
+                <f:selectItems value="#{project.runtimes}" />
+                <p:ajax event="change" listener="#{project.onRuntimeChange}"
+                        process="@form" update="@form" />
+              </p:selectOneRadio>
+              <h:outputText value="Tom EE requires Web profile, Tom EE and Open Liberty require Jakarta EE below 10, GlassFish requires no docker suport"/>
+            </p:column>
             <p:message for="@previous" />
-            <h:outputText />
 
             <p:outputLabel for="@next" value="Docker support" />
-            <p:selectOneRadio required="true" value="#{project.docker}">
-              <f:selectItems value="#{project.dockerFlags}" />
-              <p:ajax event="change" listener="#{project.onDockerChange}"
-                      process="@form" update="@form" />
-            </p:selectOneRadio>
+            <p:column>
+              <p:selectOneRadio required="true" value="#{project.docker}">
+                <f:selectItems value="#{project.dockerFlags}" />
+                <p:ajax event="change" listener="#{project.onDockerChange}"
+                        process="@form" update="@form" />
+              </p:selectOneRadio>
+              <h:outputText value="Docker support yes requires runtime other than GlassFish"/>
+            </p:column>
             <p:message for="@previous" />
-            <h:outputText />
           </p:panelGrid>
 
           <p:commandButton value="Generate" ajax="false"
