@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<h:head>
+  <f:facet name="first">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start':
+            new Date().getTime(), event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s), dl = l != 'dataLayer' ? '&amp;l=' + l : '';
+      j.async = true;
+      j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5WLCZXC');</script>
+    <!-- End Google Tag Manager -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="#{resource['/images/favicon-32x32.png']}" rel="icon" type="image/png"
+          sizes="32x32"/>
+    <link href="#{resource['/images/favicon-16x16.png']}" rel="icon" type="image/png"
+          sizes="16x16"/>
+  </f:facet>
+  <link rel="stylesheet" href="https://jakarta.ee/css/styles.css"></link>
+  <title>Eclipse Starter for Jakarta EE</title>
+
+</h:head>
+<h:body>
+<f:view>
+  <ui:include src="./topbar.xhtml"/>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-18 padding-bottom-30">
+          <p>Welcome to the official Eclipse Foundation starter for Jakarta EE. The starter is a
+            Maven Archetype that generates
+            sample code to get you going quickly with simple Jakarta EE microservices projects. The
+            starter will include a web UI in
+            a subsequent release.</p>
+          <ui:insert name="content"/>
+        </div>
+        <div class="col-md-6  padding-bottom-30">
+          <!-- nav -->
+          <aside id="main-sidebar">
+            <ul class="ul-left-nav fa-ul hidden-print" id="leftnav">
+              <li class="separator">
+                <a class="separator" href="/">Project Resources</a>
+              </li>
+              <li>
+                <a href="https://github.com/eclipse-ee4j/starter/issues" target="_self">Issue
+                  Tracker</a>
+                <i class="fa fa-caret-right fa-fw"></i>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+  <ui:insert name="body"/>
+  <ui:include src="./footer.xhtml"/>
+</f:view>
+
+</h:body>
+
+</html>
