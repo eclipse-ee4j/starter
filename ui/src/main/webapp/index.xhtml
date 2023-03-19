@@ -4,10 +4,17 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/WEB-INF/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml">
-
   <ui:define name="content">
     <p:panel header="Generate a Jakarta EE Project">
-      Note: The UI requires a valid combination of options every time an option is selected and so disables selection of any option which would result in an invalid combination.
+      Select the options for the project and click generate. You will then be
+      prompted to download a zip file that contains the project. Unzip the file 
+      and follow the README.md in the unzipped directory.
+      <br/><br/>
+      This interface ensures a valid combination of options every time you make a 
+      selection. It automatically disables any option which would result in invalid input. 
+      It enables options that are valid for a given selection. Some examples are
+      provided below for each option.
+      <br/><br/>
       <div class="card">
         <h:form>
           <p:panelGrid
@@ -22,7 +29,8 @@
                         listener="#{project.onJakartaVersionChange}" process="@form"
                         update="@form" />
               </p:selectOneRadio>
-              <h:outputText value="Jakarta EE 10 requires Java SE above 8"/>
+              <br/>
+              <h:outputText value="Jakarta EE 10 requires Java SE above 8."/>
             </p:column>
             <p:message for="@previous" />
 
@@ -33,7 +41,8 @@
                 <p:ajax event="change" listener="#{project.onProfileChange}"
                         process="@form" update="@form" />
               </p:selectOneRadio>
-              <h:outputText value="Core profile requires Jakarta EE 10"/>
+              <br/>
+              <h:outputText value="Core Profile requires Jakarta EE 10."/>
             </p:column>
             <p:message for="@previous" />
 
@@ -44,7 +53,8 @@
                 <p:ajax event="change" listener="#{project.onJavaVersionChange}"
                         process="@form" update="@form" />
               </p:selectOneRadio>
-              <h:outputText value="Java SE 8 requires Jakarta EE below 10"/>
+              <br/>
+              <h:outputText value="Java SE 8 requires Jakarta EE below 10."/>
             </p:column>
             <p:message for="@previous" />
 
@@ -55,7 +65,8 @@
                 <p:ajax event="change" listener="#{project.onRuntimeChange}"
                         process="@form" update="@form" />
               </p:selectOneRadio>
-              <h:outputText value="TomEE requires Web profile, TomEE and Open Liberty require Jakarta EE below 10, GlassFish requires no Docker support"/>
+              <br/>
+              <h:outputText value="TomEE requires Web Profile, TomEE and Open Liberty require Jakarta EE below 10, GlassFish requires no Docker support and Web Profile or the full platform, WildFly requires Jakarta EE 8 or 10."/>
             </p:column>
             <p:message for="@previous" />
 
@@ -66,7 +77,8 @@
                 <p:ajax event="change" listener="#{project.onDockerChange}"
                         process="@form" update="@form" />
               </p:selectOneRadio>
-              <h:outputText value="Docker support requires a runtime other than GlassFish"/>
+              <br/>
+              <h:outputText value="Docker support requires a runtime other than GlassFish."/>
             </p:column>
             <p:message for="@previous" />
           </p:panelGrid>
@@ -79,7 +91,4 @@
       </div>
     </p:panel>
   </ui:define>
-
 </ui:composition>
-
-
