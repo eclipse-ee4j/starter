@@ -169,6 +169,7 @@ public class Project implements Serializable {
 			}
 		} else {
 			javaVersions.get("8").setDisabled(true);
+			
 			profiles.get("core").setDisabled(false);
 
 			runtimes.get("tomee").setDisabled(true);
