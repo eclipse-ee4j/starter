@@ -161,9 +161,6 @@ public class Project implements Serializable {
 
 			if ((jakartaVersion == 9) || (jakartaVersion == 9.1)) {
 				runtimes.get("wildfly").setDisabled(true);
-				if (runtime.equals("wildfly")) {
-					runtime = "none";
-				}
 			} else {
 				runtimes.get("wildfly").setDisabled(false);
 			}
