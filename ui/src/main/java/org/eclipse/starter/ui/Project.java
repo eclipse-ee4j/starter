@@ -169,19 +169,10 @@ public class Project implements Serializable {
 			}
 		} else {
 			javaVersions.get("8").setDisabled(true);
-			
-			profiles.get("core").setDisabled(false);
-
 			runtimes.get("tomee").setDisabled(true);
-			if (runtime.equals("tomee")) {
-				runtime = "none";
-			}
-
 			runtimes.get("open-liberty").setDisabled(true);
-			if (runtime.equals("open-liberty")) {
-				runtime = "none";
-			}
 
+			profiles.get("core").setDisabled(false);			
 			runtimes.get("wildfly").setDisabled(false);
 		}
 	}
