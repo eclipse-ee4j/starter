@@ -169,9 +169,6 @@ public class Project implements Serializable {
 			}
 		} else {
 			javaVersions.get("8").setDisabled(true);
-			if (javaVersion == 8) {
-				javaVersion = 11;
-			}
 
 			profiles.get("core").setDisabled(false);
 
