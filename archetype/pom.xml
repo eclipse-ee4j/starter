@@ -2,16 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>org.eclipse.starter</groupId>
-		<artifactId>jakarta-starter-modules</artifactId>
-		<version>2.0-SNAPSHOT</version>
-	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-
+	<groupId>org.eclipse.starter</groupId>
 	<artifactId>jakarta-starter</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
+
+	<parent>
+		<groupId>org.eclipse.ee4j</groupId>
+		<artifactId>project</artifactId>
+		<version>1.0.7</version>
+		<relativePath/>
+	</parent>
 
 	<name>Eclipse Starter for Jakarta EE</name>
 	<description>
@@ -20,9 +23,65 @@
 		It is possible to do so using Maven archetypes. 
    </description>
 
+   	<url>https://eclipse-ee4j.github.io/starter/</url>
+	
+	<organization>
+		<name>Eclipse Foundation</name>
+		<url>https://www.eclipse.org/org/foundation/</url>
+	</organization>
+	
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/eclipse-ee4j/starter/issues</url>
+	</issueManagement>
+	
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 2.0</name>
+			<url>https://www.eclipse.org/legal/epl-2.0/</url>
+		</license>
+	</licenses>
+	
+	<developers>
+		<!-- All active committers should add their information here. -->
+		<developer>
+			<id>rokon12</id>
+			<name>A N M Bazlur Rahman</name>
+			<email>bazlur@jugbd.org</email>
+		</developer>
+		<developer>
+			<id>jeyvison</id>
+			<name>Jeyvison Nascimento</name>
+			<email>jeynoronha@gmail.com</email>
+		</developer>
+		<developer>
+			<id>m-reza-rahman</id>
+			<name>Reza Rahman</name>
+			<email>reza_rahman@lycos.com</email>
+		</developer>
+		<developer>
+			<id>ivargrimstad</id>
+			<name>Ivar Grimstad</name>
+			<email>ivar.grimstad@eclipse-foundation.org</email>
+		</developer>
+		<developer>
+			<id>ivonet</id>
+			<name>Ivo Woltring</name>
+			<email>ivo@ivonet.nl</email>
+		</developer>
+	</developers>
+	
+	<scm>
+		<connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
+		<developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
+		<url>http://github.com/eclipse-ee4j/starter/tree/master</url>
+	</scm>
+
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
 	</properties>
 
 	<dependencies>
