@@ -169,7 +169,10 @@ public class Project implements Serializable {
 			runtimes.get("tomee").setDisabled(true);
 			runtimes.get("open-liberty").setDisabled(true);
 
-			profiles.get("core").setDisabled(false);			
+		    if (!runtime.equals("glassfish")) {			
+			    profiles.get("core").setDisabled(false);			
+			}
+
 			runtimes.get("wildfly").setDisabled(false);
 		}
 	}
