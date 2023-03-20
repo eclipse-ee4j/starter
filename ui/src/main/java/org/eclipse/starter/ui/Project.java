@@ -203,16 +203,8 @@ public class Project implements Serializable {
 
 			runtimes.get("glassfish").setDisabled(true);
 			runtimes.get("tomee").setDisabled(true);
-
-			if ((runtime.equals("glassfish")) || (runtime.equals("tomee"))) {
-				runtime = "none";
-			}
 		} else if (profile.equals("full")) {
 			runtimes.get("tomee").setDisabled(true);
-
-			if (runtime.equals("tomee")) {
-				runtime = "none";
-			}
 		}
 	}
 
@@ -257,26 +249,30 @@ public class Project implements Serializable {
 			jakartaVersions.get("9").setDisabled(false);
 		}
 
+		if (jakartaVersion == 10) {
+		    profiles.get("core").setDisabled(false);
+		}
+
 		profiles.get("full").setDisabled(false);
 
 		dockerFlags.get("true").setDisabled(false);
 
 		if (runtime.equals("none")) {
 			dockerFlags.get("true").setDisabled(true);
-			docker = false;
 		} else if (runtime.equals("payara")) {
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
 				javaVersion = 11;
 			}
 		} else if (runtime.equals("glassfish")) {
 			dockerFlags.get("true").setDisabled(true);
-			docker = false;
+			profiles.get("core").setDisabled(true);
 
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
 				javaVersion = 11;
 			}
 		} else if (runtime.equals("tomee")) {
 			jakartaVersions.get("10").setDisabled(true);
+			profiles.get("core").setDisabled(true);
 			profiles.get("full").setDisabled(true);
 
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
