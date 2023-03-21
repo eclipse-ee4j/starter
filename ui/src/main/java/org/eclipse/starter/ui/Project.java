@@ -33,7 +33,7 @@ public class Project implements Serializable {
 	private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
 	private static final String ARCHETYPE_VERSION = (System.getenv("ARCHETYPE_VERSION") != null)
 			? System.getenv("ARCHETYPE_VERSION")
-			: "2.0";
+			: "2.0.0";
 	private static final Map<String, String> RUNTIMES = Map.ofEntries(entry("glassfish", "GlassFish"),
 			entry("open-liberty", "Open Liberty"), entry("payara", "Payara"), entry("tomee", "TomEE"),
 			entry("wildfly", "WildFly"));
