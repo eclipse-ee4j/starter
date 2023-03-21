@@ -31,6 +31,9 @@ public class Project implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
+	private static final String ARCHETYPE_VERSION = (System.getenv("ARCHETYPE_VERSION") != null)
+			? System.getenv("ARCHETYPE_VERSION")
+			: "2.0";
 	private static final Map<String, String> RUNTIMES = Map.ofEntries(entry("glassfish", "GlassFish"),
 			entry("open-liberty", "Open Liberty"), entry("payara", "Payara"), entry("tomee", "TomEE"),
 			entry("wildfly", "WildFly"));
@@ -309,8 +312,9 @@ public class Project implements Serializable {
 										: String.format("%.0f", jakartaVersion))),
 						entry("profile", profile), entry("javaVersion", javaVersion),
 						entry("docker", (docker ? "yes" : "no")), entry("runtime", runtime)));
-				MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", "2.0-SNAPSHOT", properties,
-						workingDirectory);
+
+				MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", ARCHETYPE_VERSION,
+						properties, workingDirectory);
 
 				LOGGER.info("Creating zip file.");
 				ZipUtility.zipDirectory(new File(workingDirectory, "jakartaee-hello-world"), workingDirectory);
