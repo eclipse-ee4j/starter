@@ -161,7 +161,7 @@ private generateMavenWrapper(File outputDirectory) {
     if (proc.exitValue() != 0 || output == null || !output.contains("BUILD SUCCESS")) {
         println("${output}")
         FileUtils.forceDelete(outputDirectory)    
-        throw new RuntimeException("Failed to generate code from archetype.")
+        throw new RuntimeException("Failed to generate Maven wrapper.")
     }
 }
 
