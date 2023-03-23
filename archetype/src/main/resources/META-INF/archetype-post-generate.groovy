@@ -1,3 +1,9 @@
+import org.apache.maven.shared.invoker.DefaultInvocationRequest
+import org.apache.maven.shared.invoker.DefaultInvoker
+import org.apache.maven.shared.invoker.InvocationRequest
+import org.apache.maven.shared.invoker.Invoker
+import org.apache.maven.shared.invoker.MavenInvocationException
+
 import java.nio.file.Files
 import org.apache.commons.io.FileUtils
 
@@ -144,23 +150,19 @@ private generateDocker(docker, runtime, File outputDirectory) {
     }
 }
 
-private generateMavenWrapper(File outputDirectory) {
+def generateMavenWrapper(File outputDirectory) {
     println "Adding Maven Wrapper"
 
-    def pomFile = new File(outputDirectory, "pom.xml")
-    def isWindows = System.properties['os.name'].toLowerCase().contains('windows')
-    def starter = isWindows ? "cmd.exe" : "/bin/sh"
-    def switcher = isWindows ? "/c" : "-c"
-    def command = "mvn -f \"${pomFile.getAbsolutePath()}\" wrapper:wrapper"
+    File pomFile = new File(outputDirectory, "pom.xml")
 
-    def output = new StringBuilder()
-    def proc = [starter, switcher, command].execute();
-    proc.consumeProcessOutput(output, output)
-    proc.waitFor()
+    InvocationRequest request = new DefaultInvocationRequest()
+    request.pomFile = pomFile
+    request.goals = ['wrapper:wrapper']
 
-    if (proc.exitValue() != 0 || output == null || !output.contains("BUILD SUCCESS")) {
-        println("${output}")
-        FileUtils.forceDelete(outputDirectory)    
+    Invoker invoker = new DefaultInvoker()
+    def result = invoker.execute(request)
+
+    if (result.exitCode != 0 || result.executionException != null) {
         throw new RuntimeException("Failed to generate Maven wrapper.")
     }
 }
