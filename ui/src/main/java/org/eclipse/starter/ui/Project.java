@@ -338,7 +338,7 @@ public class Project implements Serializable {
 	}
 
 	private String getCacheKey() {
-		return "" + jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker + ":" + runtime;
+		return jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker + ":" + runtime;
 	}
 
 	private void downloadZip(File zip) {
