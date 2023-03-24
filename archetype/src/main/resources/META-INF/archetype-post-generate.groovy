@@ -1,10 +1,3 @@
-import org.apache.maven.shared.invoker.DefaultInvocationRequest
-import org.apache.maven.shared.invoker.DefaultInvoker
-import org.apache.maven.shared.invoker.InvocationRequest
-import org.apache.maven.shared.invoker.Invoker
-import org.apache.maven.shared.invoker.MavenInvocationException
-
-import java.nio.file.Files
 import org.apache.commons.io.FileUtils
 
 def jakartaVersion = request.properties["jakartaVersion"].trim()
@@ -19,7 +12,6 @@ validateInput(jakartaVersion, profile, javaVersion, runtime, outputDirectory)
 generateRuntime(runtime, jakartaVersion, docker, outputDirectory)
 bindEEPackage(jakartaVersion, outputDirectory)
 generateDocker(docker, runtime, outputDirectory)
-generateMavenWrapper(outputDirectory)
 printSummary()
 
 private validateInput(jakartaVersion, profile, javaVersion, runtime, File outputDirectory){
@@ -147,23 +139,6 @@ private generateDocker(docker, runtime, File outputDirectory) {
     } else if (runtime.equalsIgnoreCase("none")) {
         println "WARNING: Docker support is not possible without choosing a runtime"
         FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
-    }
-}
-
-def generateMavenWrapper(File outputDirectory) {
-    println "Adding Maven Wrapper"
-
-    File pomFile = new File(outputDirectory, "pom.xml")
-
-    InvocationRequest request = new DefaultInvocationRequest()
-    request.pomFile = pomFile
-    request.goals = ['wrapper:wrapper']
-
-    Invoker invoker = new DefaultInvoker()
-    def result = invoker.execute(request)
-
-    if (result.exitCode != 0 || result.executionException != null) {
-        throw new RuntimeException("Failed to generate Maven wrapper.")
     }
 }
 
