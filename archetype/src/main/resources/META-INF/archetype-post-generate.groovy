@@ -15,16 +15,16 @@ generateDocker(docker, runtime, outputDirectory)
 chmod(outputDirectory.toPath().resolve("mvnw").toFile())
 printSummary()
 
-private validateInput(jakartaVersion, profile, javaVersion, runtime, File outputDirectory){
+private validateInput(jakartaVersion, profile, javaVersion, runtime, File outputDirectory) {
     if (profile.equalsIgnoreCase("core") && jakartaVersion != '10') {
-       FileUtils.forceDelete(outputDirectory)
-       throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10")
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10")
     }
 
     if (runtime.equalsIgnoreCase("payara") && (jakartaVersion != '8') && (javaVersion == '8')) {
-       FileUtils.forceDelete(outputDirectory)
-       throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
-    }    
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
+    }
 
     if (runtime.equalsIgnoreCase("glassfish")) {
         if (profile.equalsIgnoreCase("core")) {
@@ -68,9 +68,9 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, File output
     }
 
     if (runtime.equalsIgnoreCase("open-liberty") && (jakartaVersion == '10')) {
-       FileUtils.forceDelete(outputDirectory)
-       throw new RuntimeException("Failed, Open Liberty does not yet support Jakarta EE 10")
-    }    
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, Open Liberty does not yet support Jakarta EE 10")
+    }
 }
 
 private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
@@ -80,7 +80,7 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
                 println "WARNING: GlassFish does not support Docker"
                 FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
             }
-        
+
             break
 
         case "tomee": println "Generating code for TomEE"
@@ -97,7 +97,7 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
             break
 
         case "open-liberty": println "Generating code for Open Liberty"
-            break 
+            break
 
         default: println "No runtime will be included in the sample"
     }
@@ -133,15 +133,19 @@ private bindEEPackage(jakartaVersion, File outputDirectory) {
     }
 }
 
-def chmod(File mvnw){
+def chmod(File mvnw) {
     println "Running chmod on " + mvnw.getName()
+
     def isWindows = System.properties['os.name'].toLowerCase().contains('windows')
-    if (!isWindows){
+    if (!isWindows) {
         def processBuilder = new ProcessBuilder("chmod", "+x", mvnw.getAbsolutePath())
         def process = processBuilder.start()
-        process.waitFor()
+        def exitCode = process.waitFor()
+
+        if (exitCode != 0) {
+            println("Warning: failed to set executable permission on file: ${file.getName()}")
+        } else println "Done!"
     }
-    println "Done!"
 }
 
 private generateDocker(docker, runtime, File outputDirectory) {
@@ -154,6 +158,6 @@ private generateDocker(docker, runtime, File outputDirectory) {
     }
 }
 
-private printSummary(){
+private printSummary() {
     println "The README.md file in the " + request.properties["artifactId"] + " directory explains how to run the generated application"
 }
