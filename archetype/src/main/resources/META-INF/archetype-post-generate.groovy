@@ -153,7 +153,7 @@ private chmod(File mvnw) {
         def process = processBuilder.start()
         def exitCode = process.waitFor()
 
-        if (exitCode == 0) {
+        if (exitCode != 0) {
             println "WARNING: Failed to set executable permission on file: " + mvnw.getAbsolutePath()
         }
     }
