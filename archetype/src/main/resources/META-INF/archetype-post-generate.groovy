@@ -133,21 +133,6 @@ private bindEEPackage(jakartaVersion, File outputDirectory) {
     }
 }
 
-def chmod(File mvnw) {
-    println "Running chmod on " + mvnw.getName()
-
-    def isWindows = System.properties['os.name'].toLowerCase().contains('windows')
-    if (!isWindows) {
-        def processBuilder = new ProcessBuilder("chmod", "+x", mvnw.getAbsolutePath())
-        def process = processBuilder.start()
-        def exitCode = process.waitFor()
-
-        if (exitCode != 0) {
-            println("Warning: failed to set executable permission on file: ${file.getName()}")
-        } else println "Done!"
-    }
-}
-
 private generateDocker(docker, runtime, File outputDirectory) {
     if (docker.equalsIgnoreCase("no")) {
         println "Docker support was not requested"
@@ -155,6 +140,22 @@ private generateDocker(docker, runtime, File outputDirectory) {
     } else if (runtime.equalsIgnoreCase("none")) {
         println "WARNING: Docker support is not possible without choosing a runtime"
         FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+    }
+}
+
+private chmod(File mvnw) {
+    def isWindows = System.properties['os.name'].toLowerCase().contains('windows')
+
+    if (!isWindows) {
+        println "Running chmod on " + mvnw.getName()
+
+        def processBuilder = new ProcessBuilder("chmod", "+x", mvnw.getAbsolutePath())
+        def process = processBuilder.start()
+        def exitCode = process.waitFor()
+
+        if (exitCode != 0) {
+            println "WARNING: Failed to set executable permission on file: " + mvnw.getAbsolutePath()
+        }
     }
 }
 
