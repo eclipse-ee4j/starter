@@ -97,6 +97,12 @@ jobs:
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
+          
+      - name: Test all cases
+        run: mvn test
+
+      - name: Test Maven build
+        run: mvn clean package
   
   build-ui:
     runs-on: ubuntu-20.04
