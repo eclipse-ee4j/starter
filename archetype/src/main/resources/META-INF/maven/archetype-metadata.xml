@@ -59,13 +59,9 @@
         <include>images/jakartaee_logo.jpg</include>
       </includes>
     </fileSet>
-    <fileSet>
-      <directory>.mvn/wrapper</directory>
-    </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
       <directory></directory>
       <includes>
-        <include>.gitignore</include>
         <include>Dockerfile</include>
         <include>README.md</include>
       </includes>
@@ -73,9 +69,13 @@
     <fileSet filtered="false" encoding="UTF-8">
       <directory></directory>
       <includes>
+        <include>.gitignore</include>        
         <include>mvnw</include>
         <include>mvnw.cmd</include>
       </includes>
     </fileSet>
+    <fileSet>
+      <directory>.mvn/wrapper</directory>
+    </fileSet>    
   </fileSets>
 </archetype-descriptor>
