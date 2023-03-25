@@ -12,6 +12,7 @@ validateInput(jakartaVersion, profile, javaVersion, runtime, outputDirectory)
 generateRuntime(runtime, jakartaVersion, docker, outputDirectory)
 bindEEPackage(jakartaVersion, outputDirectory)
 generateDocker(docker, runtime, outputDirectory)
+chmod(outputDirectory.toPath().resolve("mvnw").toFile())
 printSummary()
 
 private validateInput(jakartaVersion, profile, javaVersion, runtime, File outputDirectory){
@@ -130,6 +131,17 @@ private bindEEPackage(jakartaVersion, File outputDirectory) {
             }
         }
     }
+}
+
+def chmod(File mvnw){
+    println "Running chmod on " + mvnw.getName()
+    def isWindows = System.properties['os.name'].toLowerCase().contains('windows')
+    if (!isWindows){
+        def processBuilder = new ProcessBuilder("chmod", "+x", mvnw.getAbsolutePath())
+        def process = processBuilder.start()
+        process.waitFor()
+    }
+    println "Done!"
 }
 
 private generateDocker(docker, runtime, File outputDirectory) {
