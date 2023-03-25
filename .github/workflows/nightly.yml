@@ -97,6 +97,22 @@ jobs:
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
+          
+      - name: Build and Test
+        run: |
+          mvn clean verify
+          docker build -t my-project .
+          docker-compose up -d
+
+          # Run integration tests with Maven
+          mvn failsafe:integration-test
+
+          # Test running project via Maven
+          mvn -Dtest=RunningProjectIT verify
+
+          # Test running project via Docker
+          ./test-docker.sh
+
   
   build-ui:
     runs-on: ubuntu-20.04
