@@ -27,20 +27,24 @@ under that directory will contain instructions on how to run the sample.
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide). The generated starter code is simply Maven projects. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
 ## Instructions On How To Use Archetypes From An IDE Such As Eclipse
-Install Maven:
-Before you can use Maven in Eclipse, you need to install it on your system. You can download Maven from the official website (https://maven.apache.org/download.cgi) and follow the installation instructions.
 
-Install the Maven Integration for Eclipse:
-The Maven Integration for Eclipse is a plugin that provides integration between Eclipse and Maven. To install the plugin, open Eclipse and go to Help > Eclipse Marketplace. Search for "Maven Integration for Eclipse" and click on the "Install" button. Follow the installation wizard and restart Eclipse when prompted.
+# If you are using an enterprise version of Eclipse for a Jakarta EE project, you can follow these steps to create a new Maven project with an archetype:
 
-Create a new Maven project:
-To use an archetype in Eclipse, you need to create a new Maven project and select the archetype you want to use. To do this, go to File > New > Project > Maven > Maven Project. In the "New Maven Project" dialog, select "Create a simple project" and click "Next". Enter the Group Id, Artifact Id, and Version for your project, and then click "Next". In the "Select an Archetype" dialog, choose the archetype you want to use and click "Next". You can browse the available archetypes by clicking the "Add Archetype" button and entering the details of the archetype you want to use. Finally, enter any additional information required by the archetype and click "Finish" to create the project.
-
-Configure the Maven project:
-Once you have created the Maven project, you need to configure it to use the archetype. To do this, right-click on the project in the Project Explorer view and select "Maven > Update Project". In the "Update Maven Project" dialog, select the "Force Update of Snapshots/Releases" checkbox and click "OK". This will download and install the archetype and its dependencies.
-
-Build and run the project:
-You can now build and run the project as you would with any other Maven project. You can use the Maven Build menu in Eclipse to run the build, or you can use the command line to run the build. You can also run the project from within Eclipse by right-clicking on the project and selecting "Run As > Maven Build" and specifying the appropriate goals.
+Open Eclipse and select "File > New > Other..." from the menu bar.
+In the "New" dialog, expand the "Maven" folder and select "Maven Project".
+Click "Next".
+In the "New Maven Project" dialog, select "Create a simple project".
+Click "Next".
+In the "New Maven Project" dialog, enter the Group Id, Artifact Id, and Version for your project.
+Click "Next".
+In the "Select an Archetype" dialog, click the "Add Archetype" button.
+Enter the details for the archetype you want to use (groupId, artifactId, version).
+Click "OK".
+Select the archetype you just added from the list of available archetypes.
+Click "Next".
+Enter any additional information required by the archetype.
+Click "Finish" to create the project.
+Eclipse should automatically detect and configure the project with the appropriate settings for a Jakarta EE project using the selected archetype.
 
 It is recommended that you refer to the documentation of the specific archetype you are using for any additional configuration or usage instructions.
 
