@@ -6,13 +6,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.starter</groupId>
 	<artifactId>jakarta-starter-ui</artifactId>
-	<version>2.0.0-SNAPSHOT</version>
+	<version>2.0.0</version>
 	<packaging>war</packaging>
 
 	<parent>
 		<groupId>org.eclipse.ee4j</groupId>
 		<artifactId>project</artifactId>
 		<version>1.0.7</version>
+		<relativePath/>
 	</parent>
 
 	<name>Eclipse Starter for Jakarta EE Web UI</name>
