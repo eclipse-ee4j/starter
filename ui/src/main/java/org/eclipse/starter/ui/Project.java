@@ -10,11 +10,11 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,11 +33,13 @@ public class Project implements Serializable {
 	private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
 	private static final String ARCHETYPE_VERSION = (System.getenv("ARCHETYPE_VERSION") != null)
 			? System.getenv("ARCHETYPE_VERSION")
-			: "2.0.0";
+			: "2.0.1";
 	private static final Map<String, String> RUNTIMES = Map.ofEntries(entry("glassfish", "GlassFish"),
 			entry("open-liberty", "Open Liberty"), entry("payara", "Payara"), entry("tomee", "TomEE"),
 			entry("wildfly", "WildFly"));
 
+	private static Map<String, String> cache = new ConcurrentHashMap<>();
+	
 	@Inject
 	private FacesContext facesContext;
 	@Inject
@@ -57,8 +59,6 @@ public class Project implements Serializable {
 
 	private Map<String, SelectItem> runtimes = new LinkedHashMap<>();
 	private String runtime = "none";
-
-	private Map<String, String> cache = new HashMap<>();
 
 	public Project() {
 		jakartaVersions.put("10", new SelectItem("10", "Jakarta EE 10"));
