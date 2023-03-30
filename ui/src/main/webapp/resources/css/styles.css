@@ -1,0 +1,3 @@
+.card label.ui-state-disabled {
+  text-decoration: line-through;
+}
