@@ -68,7 +68,7 @@ public class Project implements Serializable {
 
 		profiles.put("core", new SelectItem("core", "Core Profile"));
 		profiles.put("web", new SelectItem("web", "Web Profile"));
-		profiles.put("full", new SelectItem("full", "Full Platform"));
+		profiles.put("full", new SelectItem("full", "Platform"));
 
 		javaVersions.put("17", new SelectItem("17", "Java SE 17"));
 		javaVersions.put("11", new SelectItem("11", "Java SE 11"));
