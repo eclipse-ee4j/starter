@@ -5,7 +5,11 @@
                 template="/WEB-INF/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml">
   <ui:define name="content">
-    <p:panel header="Generate a Jakarta EE Project">
+    <p:panel>
+        <f:facet name="header">
+            <a id="generate"></a>
+            <p:linkButton value="Generate a Jakarta EE Project" href="#generate"/>
+        </f:facet>
       Select the options for the project and click generate. You will then be
       prompted to download a zip file that contains the project. Unzip the file 
       and follow the README.md in the unzipped directory.
