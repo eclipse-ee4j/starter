@@ -66,9 +66,9 @@ public class Project implements Serializable {
 		jakartaVersions.put("9", new SelectItem("9", "Jakarta EE 9"));
 		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8"));
 
-		profiles.put("core", new SelectItem("core", "Core Profile"));
-		profiles.put("web", new SelectItem("web", "Web Profile"));
 		profiles.put("full", new SelectItem("full", "Platform"));
+		profiles.put("web", new SelectItem("web", "Web Profile"));		
+		profiles.put("core", new SelectItem("core", "Core Profile"));
 
 		javaVersions.put("17", new SelectItem("17", "Java SE 17"));
 		javaVersions.put("11", new SelectItem("11", "Java SE 11"));
