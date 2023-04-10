@@ -67,10 +67,6 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, File output
         }
     }
 
-    if (runtime.equalsIgnoreCase("open-liberty") && (jakartaVersion == '10')) {
-        FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, Open Liberty does not yet support Jakarta EE 10")
-    }
 }
 
 private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
