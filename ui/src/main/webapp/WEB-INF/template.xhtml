@@ -4,7 +4,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:jsf="http://xmlns.jcp.org/jsf">
-
 <h:head>
   <f:facet name="first">
     <!-- Google Tag Manager -->
@@ -31,6 +30,28 @@
   </f:facet>
 
   <link rel="stylesheet" href="https://jakarta.ee/css/styles.css"></link>
+  <h:outputStylesheet>
+    body .ui-widget {
+      font-size: 14px;
+    }
+    .ui-widget-header .ui-panel-title .heading-underline {
+      font-size: 24px;
+      color: #1b208b;
+    }
+    .footnote {
+      margin-top: .5rem;
+      font-weight: 250;
+    }
+    .ui-button.generate-button {
+      margin-top: 1rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+    .ui-panelgrid .ui-panelgrid-footer.ui-widget-header {
+      text-align: center;
+    }
+  </h:outputStylesheet>
+
   <title>Eclipse Starter for Jakarta EE</title>
 
 </h:head>
@@ -42,9 +63,8 @@
       <div class="row">
         <div class="col-md-18 padding-bottom-30">
           <p>Welcome to the official Eclipse Foundation Starter for Jakarta EE. The starter uses a
-            Maven Archetype to generate sample code to get you going quickly with simple Jakarta EE 
+            Maven Archetype to generate sample code to get you going quickly with simple Jakarta EE
             microservices projects.</p>
-          <br/>
           <ui:insert name="content"/>
         </div>
         <div class="col-md-6  padding-bottom-30">
