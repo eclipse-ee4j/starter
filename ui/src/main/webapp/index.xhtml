@@ -36,7 +36,7 @@
             <p:outputLabel for="@next" value="Jakarta EE version" />
             <p:column>
               <p:selectOneRadio required="true" value="#{project.jakartaVersion}" columns="3" layout="responsive">
-                <f:convertNumber minFractionDigits="0" maxFractionDigits="1" />
+                <f:convertNumber minFractionDigits="0" maxFractionDigits="1" locale="en-US" />
                 <f:selectItems value="#{project.jakartaVersions}" />
                 <p:ajax event="change"
                         listener="#{project.onJakartaVersionChange}" process="@form"
