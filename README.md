@@ -1,3 +1,6 @@
+[![Alt text](https://img.shields.io/badge/release-UI%202.0.1-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/ui-2.0.1)
+[![Alt text](https://img.shields.io/badge/release-Archetypes%202.0.1-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/archetype-2.0.1)
+
 # Eclipse Starter for Jakarta EE
 
 This is the official Eclipse Foundation Starter for Jakarta EE. It generates code to help get started with Jakarta EE projects using Maven. It is possible to do so using Maven Archetypes or a web UI.
