@@ -19,7 +19,7 @@
     <groupId>org.eclipse.starter</groupId>
     <artifactId>jakartaee9.1-minimal</artifactId>
     <packaging>maven-archetype</packaging>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.0.0</version>
 
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
