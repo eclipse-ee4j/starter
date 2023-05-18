@@ -151,6 +151,27 @@
           <server-config>standalone-full.xml</server-config>
         </configuration>
       </plugin>
+      <plugin>
+		    <groupId>com.microsoft.azure</groupId>
+		    <artifactId>azure-webapp-maven-plugin</artifactId>
+		    <version>2.11.0</version>
+		    <configuration>
+		        <appName>jakarta-ee-starter</appName>
+			      <resourceGroup>jakarta-ee-starter-rg</resourceGroup>
+			      <javaVersion>Java 11</javaVersion>
+			      <webContainer>JBossEAP 7</webContainer>
+			      <deployment>
+                <resources>
+                    <resource>
+                        <directory>${project.basedir}/target</directory>
+                        <includes>
+                            <include>jakarta-starter-ui.war</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </deployment>
+		    </configuration>
+		</plugin>
     </plugins>
   </build>
 </project>
