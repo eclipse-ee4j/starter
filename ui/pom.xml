@@ -142,10 +142,11 @@
       </plugin>
 
       <!-- Execute 'mvn clean package wildfly:run' to run the application. -->
+      <!-- Execute 'mvn wildfly:dev' to run the application with redeployment capability in case of sources change detection -->
       <plugin>
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-maven-plugin</artifactId>
-        <version>4.0.0.Final</version>
+        <version>4.1.0.Final</version>
         <configuration>
           <version>26.1.3.Final</version>
           <server-config>standalone-full.xml</server-config>
