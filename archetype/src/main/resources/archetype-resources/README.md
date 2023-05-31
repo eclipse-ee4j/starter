@@ -18,7 +18,14 @@ You can run the application by executing the following command from the director
 ./mvnw liberty:dev
 #end
 ```
+#if (${runtime} == 'wildfly')
+If you prefer to run the UI with redeployment support, please execute the following from this directory:
+```
+./mvnw wildfly:dev
+```
+Once the server is running, the source directories are monitored for changes. If required the sources will be compiled and the deployment may be redeployed.
 
+#end
 #if ((${runtime} == 'payara') && (${profile} != 'full'))
 Once the runtime starts, you can access the project at http://localhost:8080.
 #elseif (${runtime} == 'open-liberty')
