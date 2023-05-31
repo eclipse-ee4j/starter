@@ -86,7 +86,7 @@
 		<payara-micro-plugin.version>1.4.0</payara-micro-plugin.version>
 #end
 #if (${runtime} == 'wildfly')
-		<wildfly-plugin.version>4.0.0.Final</wildfly-plugin.version>
+		<wildfly-plugin.version>4.1.0.Final</wildfly-plugin.version>
 #end
 #if (${runtime} == 'open-liberty')
 		<liberty-plugin.version>3.7.1</liberty-plugin.version>
@@ -198,6 +198,7 @@
 #end
 #elseif (${runtime} == 'wildfly')
 			<!-- Execute 'mvn clean package wildfly:run' to run the application. -->
+			<!-- Execute 'mvn wildfly:dev' to run the application with redeployment capability in case of sources change detection -->
 			<plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
