@@ -214,9 +214,6 @@
 				<groupId>io.openliberty.tools</groupId>
 				<artifactId>liberty-maven-plugin</artifactId>
 				<version>${liberty-plugin.version}</version>
-				<configuration>
-					<libertyRuntimeVersion>RELEASE</libertyRuntimeVersion>
-				</configuration>
 			</plugin>
 #end
 		</plugins>

@@ -84,7 +84,6 @@ public class Project implements Serializable {
 		shuffledRuntimes.forEach(r -> runtimes.put(r, new SelectItem(r, RUNTIMES.get(r))));
 
 		runtimes.get("tomee").setDisabled(true); // EE 10 is the default. TomEE needs to be disabled.
-		runtimes.get("open-liberty").setDisabled(true); // EE 10 is the default. Open Liberty needs to be disabled.
 	}
 
 	public Collection<SelectItem> getJakartaVersions() {
@@ -158,7 +157,6 @@ public class Project implements Serializable {
 				runtimes.get("tomee").setDisabled(false);
 			}
 
-			runtimes.get("open-liberty").setDisabled(false);
 
 			profiles.get("core").setDisabled(true);
 
@@ -170,7 +168,6 @@ public class Project implements Serializable {
 		} else {
 			javaVersions.get("8").setDisabled(true);
 			runtimes.get("tomee").setDisabled(true);
-			runtimes.get("open-liberty").setDisabled(true);
 
 			if (!runtime.equals("glassfish")) {
 				profiles.get("core").setDisabled(false);
@@ -222,7 +219,7 @@ public class Project implements Serializable {
 			jakartaVersions.get("10").setDisabled(true);
 			profiles.get("core").setDisabled(true);
 		} else {
-			if (!runtime.equals("tomee") && !runtime.equals("open-liberty")) {
+			if (!runtime.equals("tomee")) {
 				jakartaVersions.get("10").setDisabled(false);
 			}
 		}
@@ -284,8 +281,6 @@ public class Project implements Serializable {
 			if ((jakartaVersion != 8) && (javaVersion == 8)) {
 				javaVersion = 11;
 			}
-		} else if (runtime.equals("open-liberty")) {
-			jakartaVersions.get("10").setDisabled(true);
 		} else if (runtime.equals("wildfly")) {
 			jakartaVersions.get("9.1").setDisabled(true);
 			jakartaVersions.get("9").setDisabled(true);
