@@ -16,7 +16,7 @@
 		<relativePath/>
 	</parent>
 
-	<name>Eclipse Starter for Jakarta EE</name>
+	<name>Eclipse Starter for Jakarta EE Archetypes</name>
 	<description>
 		This is the official Eclipse Foundation Starter for Jakarta EE.
 		It generates code to help get started with Jakarta EE projects. 
