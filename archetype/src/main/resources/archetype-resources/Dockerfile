@@ -26,7 +26,7 @@
 #set ($baseImage = "payara/server-full:5.2022.5")
 #else
 #set ($baseImage = "payara/server-web:5.2022.5")
-#end        
+#end
 #end
 #set ($deployDirectory = "$DEPLOY_DIR")
 #elseif (${runtime} == 'wildfly')
@@ -37,7 +37,7 @@
 #else
 #set ($baseImage = "quay.io/wildfly/wildfly:26.1.2.Final")
 #end
-#set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")    
+#set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
 #end
 #else
 #if (${runtime} == 'tomee')
@@ -50,25 +50,25 @@
 #elseif (${runtime} == 'payara')
 #if (${javaVersion} == '17')
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2023.2-jdk17")
+#set ($baseImage = "payara/server-full:6.2023.5-jdk17")
 #else
-#set ($baseImage = "payara/server-web:6.2023.2-jdk17")
+#set ($baseImage = "payara/server-web:6.2023.5-jdk17")
 #end
 #else
 #if (${profile} == 'full')
 #set ($baseImage = "payara/server-full")
 #else
 #set ($baseImage = "payara/server-web")
-#end        
 #end
-#set ($deployDirectory = "$DEPLOY_DIR")   
+#end
+#set ($deployDirectory = "$DEPLOY_DIR")
 #elseif (${runtime} == 'wildfly')
 #if (${javaVersion} == '17')
 #set ($baseImage = "quay.io/wildfly/wildfly")
 #else
 #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk11")
 #end
-#set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")    
+#set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
 #end
 #end
 #if (${runtime} == 'open-liberty')
@@ -79,7 +79,7 @@
 #else
 #set ($baseImage = "icr.io/appcafe/open-liberty:full-java8-openj9-ubi")
 #end
-#set ($deployDirectory = "/config/apps/")    
+#set ($deployDirectory = "/config/apps/")
 #end
 FROM $baseImage
 #if (${runtime} == 'open-liberty')
