@@ -36,12 +36,12 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
            && !runtime.equalsIgnoreCase("open-liberty") && !runtime.equalsIgnoreCase("payara")
            && !runtime.equalsIgnoreCase("tomee") && !runtime.equalsIgnoreCase("wildfly")) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, valid runtimes are none, GlassFish, Open-Liberty, Payara, TomEE, and WildFly")
+        throw new RuntimeException("Failed, valid runtime values are none, glassfish, open-liberty, payara, tomee, and wildfly")
     }
 
     if (!docker.equalsIgnoreCase("yes") && !docker.equalsIgnoreCase("no")) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, valid Docker options are Yes and No")
+        throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
     if (profile.equalsIgnoreCase("core") && jakartaVersion != '10') {
