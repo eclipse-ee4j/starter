@@ -8,14 +8,42 @@ def docker = request.properties["docker"].trim()
 
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 
-validateInput(jakartaVersion, profile, javaVersion, runtime, outputDirectory)
+validateInput(jakartaVersion, profile, javaVersion, runtime, docker, outputDirectory)
 generateRuntime(runtime, jakartaVersion, docker, outputDirectory)
 bindEEPackage(jakartaVersion, outputDirectory)
 generateDocker(docker, runtime, outputDirectory)
 chmod(outputDirectory.toPath().resolve("mvnw").toFile())
 printSummary()
 
-private validateInput(jakartaVersion, profile, javaVersion, runtime, File outputDirectory) {
+private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, File outputDirectory) {
+    if ((jakartaVersion != '8') && (jakartaVersion != '9')
+            && (jakartaVersion != '9.1') && (jakartaVersion != '10')) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, valid Jakarta EE versions are 8, 9, 9.1, and 10")
+    }
+
+    if (!profile.equalsIgnoreCase("core") && !profile.equalsIgnoreCase("web") && !profile.equalsIgnoreCase("full")) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, valid Jakarta EE profiles are core, web, and full")
+    }
+
+    if ((javaVersion != '8') && (javaVersion != '11') && (javaVersion != '17')) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, valid Java SE versions are 8, 11, and 17")
+    }
+
+    if (!runtime.equalsIgnoreCase("none") && !runtime.equalsIgnoreCase("glassfish")
+           && !runtime.equalsIgnoreCase("open-liberty") && !runtime.equalsIgnoreCase("payara")
+           && !runtime.equalsIgnoreCase("tomee") && !runtime.equalsIgnoreCase("wildfly")) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, valid runtimes are none, GlassFish, Open-Liberty, Payara, TomEE, and WildFly")
+    }
+
+    if (!docker.equalsIgnoreCase("yes") && !docker.equalsIgnoreCase("no")) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, valid Docker options are Yes and No")
+    }
+
     if (profile.equalsIgnoreCase("core") && jakartaVersion != '10') {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10")
@@ -66,14 +94,13 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, File output
             throw new RuntimeException("Failed, WildFly 27 does not support Java SE 8")
         }
     }
-
 }
 
 private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
     switch (runtime) {
         case "glassfish": println "Generating code for GlassFish"
             if (docker.equalsIgnoreCase("yes")) {
-                println "WARNING: GlassFish does not support Docker"
+                println "WARNING: GlassFish does not yet support Docker"
                 FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
             }
 
