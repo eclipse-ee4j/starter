@@ -15,22 +15,7 @@ mvn clean install
 In order to run the UI, please execute the following from this directory. You can also simply build the war from Maven and deploy the war to either WildFly 26 or JBoss EAP 7.4. You can do this in an IDE if desired. Note that you can override the underlying archetype version used by setting the `ARCHETYPE_VERSION` environment variable (the default version will be the most recent, see [here](https://github.com/eclipse-ee4j/starter/#readme) for the latest value).
 
 ```
-mvn clean package wildfly:run
+mvn clean package wildfly:dev
 ```
-
-If you prefer to run the UI with redeployment support, please execute the following from this directory:
-
-```
-mvn wildfly:dev
-```
-
-Once the server is running, the source directories are monitored for changes. If required the sources will be compiled and the deployment may be redeployed.
 
 Once WildFly starts, please go to http://localhost:8080/jakarta-starter-ui. Unzip the file the UI generates and follow the README.md in the unzipped directory.
-
-##  Running the UI in DevMode
-In order to run the UI, please execute the following from this directory. You can also simply build the war from Maven and deploy the war to either WildFly 26 or JBoss EAP 7.4. You can do this in an IDE if desired. Note that you can override the underlying archetype version used by setting the `ARCHETYPE_VERSION` environment variable (the default version will be the most recent, see [here](https://github.com/eclipse-ee4j/starter/#readme) for the latest value).
-
-```
-mvn clean package wildfly:run
-```
