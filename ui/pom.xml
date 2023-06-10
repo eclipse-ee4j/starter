@@ -20,7 +20,7 @@
   <description>
 		This is the web UI for the official Eclipse Foundation Starter for Jakarta EE.
 		It generates code to help get started with Jakarta EE projects. 
-    </description>
+  </description>
 
   <url>https://start.jakarta.ee</url>
 
@@ -130,7 +130,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.10.1</version>
+        <version>3.11.0</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -141,8 +141,7 @@
         </configuration>
       </plugin>
 
-      <!-- Execute 'mvn clean package wildfly:run' to run the application. -->
-      <!-- Execute 'mvn wildfly:dev' to run the application with redeployment capability in case of sources change detection -->
+      <!-- Execute 'mvn clean package wildfly:dev' to run the application. -->
       <plugin>
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-maven-plugin</artifactId>
