@@ -27,13 +27,13 @@
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
 #end
 #else
-#set ($payaraVersion = "6.2023.2")
+#set ($payaraVersion = "6.2023.5")
 #set ($tomeeVersion = "9.0.0")
 #set ($glassfishContainerId = "glassfish7x")
 #if (${profile} == 'web')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.2/web-7.0.2.zip")
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.5/web-7.0.5.zip")
 #else
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.2/glassfish-7.0.2.zip")
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.5/glassfish-7.0.5.zip")
 #end
 #end
 #if (${jakartaVersion} == '10')
@@ -74,22 +74,22 @@
 #if (${runtime} == 'wildfly')
 		<wildfly.version>${wildflyVersion}</wildfly.version>
 #end
-		<compiler-plugin.version>3.10.1</compiler-plugin.version>
+		<compiler-plugin.version>3.11.0</compiler-plugin.version>
 		<war-plugin.version>3.3.2</war-plugin.version>
 #if ((${runtime} == 'glassfish') || ((${runtime} == 'payara') && (${profile} == 'full')))
-		<cargo.version>1.10.4</cargo.version>
+		<cargo.version>1.10.7</cargo.version>
 #end
 #if (${runtime} == 'tomee')
 		<tomee-plugin.version>9.0.0.RC1</tomee-plugin.version>
 #end
 #if ((${runtime} == 'payara') && (${profile} != 'full'))
-		<payara-micro-plugin.version>1.4.0</payara-micro-plugin.version>
+		<payara-micro-plugin.version>2.0</payara-micro-plugin.version>
 #end
 #if (${runtime} == 'wildfly')
 		<wildfly-plugin.version>4.1.0.Final</wildfly-plugin.version>
 #end
 #if (${runtime} == 'open-liberty')
-		<liberty-plugin.version>3.7.1</liberty-plugin.version>
+		<liberty-plugin.version>3.8.2</liberty-plugin.version>
 #end
 	</properties>
 
@@ -197,8 +197,7 @@
 				</plugin>				
 #end
 #elseif (${runtime} == 'wildfly')
-			<!-- Execute 'mvn clean package wildfly:run' to run the application. -->
-			<!-- Execute 'mvn wildfly:dev' to run the application with redeployment capability in case of sources change detection -->
+			<!-- Execute 'mvn clean package wildfly:dev' to run the application. -->
 			<plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
