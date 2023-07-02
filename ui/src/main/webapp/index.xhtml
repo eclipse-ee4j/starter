@@ -23,15 +23,10 @@
       </p>
       <div class="card">
         <h:form>
+          <p:messages/>
           <p:panelGrid
                   columnClasses="ui-grid-col-3, ui-grid-col-9"
                   columns="2" layout="grid" styleClass="text-align-left">
-
-            <p:row>
-              <p:column colspan="2">
-                <p:messages/>
-              </p:column>
-            </p:row>
 
             <p:outputLabel for="@next" value="Jakarta EE version" />
             <p:column>
@@ -83,6 +78,14 @@
                         process="@form" update="@form" />
               </p:selectOneRadio>
               <h:outputText styleClass="footnote" value="Docker support requires a runtime other than GlassFish."/>
+            </p:column>
+
+            <p:outputLabel for="@next" value="Group / Artifact" />
+            <p:column>
+                <p:outputPanel class="input-container">
+                  <p:inputText required="true" styleClass="input-field" value="org.eclipse.starter" requiredMessage="Group has to be provided" />
+                  <p:inputText required="true" styleClass="input-field" value="hello" requiredMessage="Artifact has to be provided" />
+                </p:outputPanel>
             </p:column>
 
             <f:facet name="footer">
