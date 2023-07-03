@@ -38,8 +38,12 @@ public class Project implements Serializable {
 			entry("open-liberty", "Open Liberty"), entry("payara", "Payara"), entry("tomee", "TomEE"),
 			entry("wildfly", "WildFly"));
 
+	private static final String DEFAULT_GROUPID = "org.eclipse";
+
+	private static final String DEFAULT_ARTIFACTID = "jakartaee-hello-world";
+
 	private static Map<String, String> cache = new ConcurrentHashMap<>();
-	
+
 	@Inject
 	private FacesContext facesContext;
 	@Inject
@@ -60,6 +64,10 @@ public class Project implements Serializable {
 	private Map<String, SelectItem> runtimes = new LinkedHashMap<>();
 	private String runtime = "none";
 
+	private String groupId = DEFAULT_GROUPID;
+
+	private String artifactId = DEFAULT_ARTIFACTID;
+
 	public Project() {
 		jakartaVersions.put("10", new SelectItem("10", "Jakarta EE 10"));
 		jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1"));
@@ -67,7 +75,7 @@ public class Project implements Serializable {
 		jakartaVersions.put("8", new SelectItem("8", "Jakarta EE 8"));
 
 		profiles.put("full", new SelectItem("full", "Platform"));
-		profiles.put("web", new SelectItem("web", "Web Profile"));		
+		profiles.put("web", new SelectItem("web", "Web Profile"));
 		profiles.put("core", new SelectItem("core", "Core Profile"));
 
 		javaVersions.put("17", new SelectItem("17", "Java SE 17"));
@@ -146,10 +154,23 @@ public class Project implements Serializable {
 		this.runtime = runtime;
 	}
 
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getArtifactId() {
+		return artifactId;
+	}
+
+	public void setArtifactId(String artifactId) {
+		this.artifactId = artifactId;
+	}
+
 	public void onJakartaVersionChange() {
-		LOGGER.log(Level.INFO,
-				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		if (jakartaVersion != 10) {
 			javaVersions.get("8").setDisabled(false);
 
@@ -178,9 +199,6 @@ public class Project implements Serializable {
 	}
 
 	public void onProfileChange() {
-		LOGGER.log(Level.INFO,
-				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		jakartaVersions.get("8").setDisabled(false);
 
 		if (!runtime.equals("wildfly")) {
@@ -212,9 +230,6 @@ public class Project implements Serializable {
 	}
 
 	public void onJavaVersionChange() {
-		LOGGER.log(Level.INFO,
-				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		if (javaVersion == 8) {
 			jakartaVersions.get("10").setDisabled(true);
 			profiles.get("core").setDisabled(true);
@@ -226,9 +241,6 @@ public class Project implements Serializable {
 	}
 
 	public void onDockerChange() {
-		LOGGER.log(Level.INFO,
-				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		if (docker) {
 			runtimes.get("none").setDisabled(true);
 			runtimes.get("glassfish").setDisabled(true);
@@ -242,9 +254,6 @@ public class Project implements Serializable {
 	}
 
 	public void onRuntimeChange() {
-		LOGGER.log(Level.INFO,
-				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		jakartaVersions.get("10").setDisabled(false);
 
 		if (!profile.equals("core")) {
@@ -290,8 +299,8 @@ public class Project implements Serializable {
 	public void generate() {
 		try {
 			LOGGER.log(Level.INFO,
-					"Generating project - Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-					new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
+					"Generating project - Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}, groupId: {5}, artifactId: {6}",
+					new Object[] { jakartaVersion, profile, javaVersion, docker, runtime, groupId, artifactId });
 
 			String cachedDirectory = cache.get(getCacheKey());
 
@@ -305,25 +314,32 @@ public class Project implements Serializable {
 						entry("jakartaVersion",
 								((jakartaVersion % 1.0 != 0) ? String.format("%s", jakartaVersion)
 										: String.format("%.0f", jakartaVersion))),
-						entry("profile", profile), entry("javaVersion", javaVersion),
-						entry("docker", (docker ? "yes" : "no")), entry("runtime", runtime)));
+						entry("profile", profile),
+						entry("javaVersion", javaVersion),
+						entry("docker", (docker ? "yes" : "no")),
+						entry("runtime", runtime),
+						entry("groupId", groupId),
+						entry("artifactId", artifactId)));
 
 				MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", ARCHETYPE_VERSION,
 						properties, workingDirectory);
 
 				LOGGER.info("Creating zip file.");
-				ZipUtility.zipDirectory(new File(workingDirectory, "jakartaee-hello-world"), workingDirectory);
+				ZipUtility.zipDirectory(new File(workingDirectory, artifactId), workingDirectory);
 
 				LOGGER.info("Downloading zip file.");
-				downloadZip(new File(workingDirectory, "jakartaee-hello-world.zip"));
+				downloadZip(new File(workingDirectory, artifactId + ".zip"));
 
 				LOGGER.info("Caching output.");
-				cache.put(getCacheKey(), workingDirectory.getAbsolutePath());
+				// caching makes only sense if defaults weren't changed since otherwise it's unlikely to hit cache again
+				if (groupId.equals(DEFAULT_GROUPID) && artifactId.equals(DEFAULT_ARTIFACTID)) {
+					cache.put(getCacheKey(), workingDirectory.getAbsolutePath());
+				}
 				workingDirectory.deleteOnExit();
 			} else {
 				LOGGER.log(Level.INFO, "Downloading zip file from cached directory: {0}",
 						new Object[] { cachedDirectory });
-				downloadZip(new File(cachedDirectory, "jakartaee-hello-world.zip"));
+				downloadZip(new File(cachedDirectory, artifactId + ".zip"));
 			}
 
 			facesContext.responseComplete();
@@ -344,7 +360,7 @@ public class Project implements Serializable {
 			externalContext.setResponseContentType("application/zip");
 			externalContext.setResponseContentLength((int) zip.length());
 			externalContext.setResponseHeader("Content-Disposition",
-					"attachment; filename=\"jakartaee-hello-world.zip\"");
+					"attachment; filename=\"" + zip.getName() + "\"");
 
 			Files.copy(zip.toPath(), externalContext.getResponseOutputStream());
 		} catch (IOException e) {

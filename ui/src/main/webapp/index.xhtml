@@ -83,8 +83,12 @@
             <p:outputLabel for="@next" value="Group / Artifact" />
             <p:column>
                 <p:outputPanel class="input-container">
-                  <p:inputText required="true" styleClass="input-field" value="org.eclipse.starter" requiredMessage="Group has to be provided" />
-                  <p:inputText required="true" styleClass="input-field" value="hello" requiredMessage="Artifact has to be provided" />
+                  <p:inputText required="true" styleClass="input-field" value="#{project.groupId}" requiredMessage="Group has to be provided">
+                    <p:ajax event="change" process="@form" update="@form" />
+                  </p:inputText>
+                  <p:inputText required="true" styleClass="input-field" value="#{project.artifactId}" requiredMessage="Artifact has to be provided">
+                    <p:ajax event="change" process="@form" update="@form" />
+                  </p:inputText>
                 </p:outputPanel>
             </p:column>
 

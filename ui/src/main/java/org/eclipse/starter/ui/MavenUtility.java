@@ -14,9 +14,9 @@ public class MavenUtility {
 		System.setProperty(MavenCli.MULTIMODULE_PROJECT_DIRECTORY, workingDirectory.getAbsolutePath());
 
 		List<String> options = new LinkedList<>();
-		options.addAll(Arrays.asList(new String[] { "archetype:generate", "-DinteractiveMode=false",
+		options.addAll(Arrays.asList("archetype:generate", "-DinteractiveMode=false",
 				"-DaskForDefaultPropertyValues=false", "-DarchetypeGroupId=" + archetypeGroupId,
-				"-DarchetypeArtifactId=" + archetypeArtifactId, "-DarchetypeVersion=" + archetypeVersion }));
+				"-DarchetypeArtifactId=" + archetypeArtifactId, "-DarchetypeVersion=" + archetypeVersion));
 		properties.forEach((k, v) -> options.add("-D" + k + "=" + v));
 
 		int result = new MavenCli().doMain(options.toArray(new String[0]), workingDirectory.getAbsolutePath(),
