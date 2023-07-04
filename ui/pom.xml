@@ -80,6 +80,8 @@
     <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
+    <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+    <dev.build.timestamp>${maven.build.timestamp}</dev.build.timestamp>
   </properties>
 
   <dependencies>
@@ -125,6 +127,23 @@
 
   <build>
     <finalName>jakarta-starter-ui</finalName>
+      <resources>
+        <resource>
+        <directory>src/main/resources/</directory>
+         <filtering>true</filtering>
+         <includes>
+           <include>**/*.properties</include>
+         </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources/</directory>
+        <filtering>false</filtering>
+        <excludes>
+          <exclude>**/*.properties</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -138,6 +157,19 @@
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>parse-version</id>
+            <goals>
+              <goal>parse-version</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <!-- Execute 'mvn clean package wildfly:dev' to run the application. -->
