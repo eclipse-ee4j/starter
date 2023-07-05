@@ -83,11 +83,15 @@
             <p:outputLabel for="@next" value="Group / Artifact" />
             <p:column>
                 <p:outputPanel class="input-container">
-                  <p:inputText required="true" styleClass="input-field" value="#{project.groupId}" requiredMessage="Group has to be provided">
-                    <p:ajax event="change" process="@form" update="@form" />
+                  <p:inputText required="true" styleClass="input-field" value="#{project.groupId}" requiredMessage="Group has to be provided" validatorMessage="Group has to satisfy java package naming convention">
+                    <!-- groupId satisfies java package naming which must start with a letter followes by any number of letters, digits or underscore and then any number of similar parts separated by dot -->
+                    <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)*$" />
+                    <p:ajax event="change" update="@this" />
                   </p:inputText>
-                  <p:inputText required="true" styleClass="input-field" value="#{project.artifactId}" requiredMessage="Artifact has to be provided">
-                    <p:ajax event="change" process="@form" update="@form" />
+                  <p:inputText required="true" styleClass="input-field" value="#{project.artifactId}" requiredMessage="Artifact has to be provided" validatorMessage="Artifact has to satisfy jar naming convention">
+                    <!-- artifactId must start with a letter and then contain any number of letters, digits or underscore -->
+                    <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_-]*$" />
+                    <p:ajax event="change" update="@this" />
                   </p:inputText>
                 </p:outputPanel>
             </p:column>
@@ -96,8 +100,7 @@
               <p:commandButton value="Generate" ajax="false"
                                styleClass="generate-button"
                                icon="pi pi-arrow-down"
-                               action="#{project.generate}">
-              </p:commandButton>
+                               action="#{project.generate}" />
             </f:facet>
 
           </p:panelGrid>

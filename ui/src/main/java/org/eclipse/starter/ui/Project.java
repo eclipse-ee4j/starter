@@ -319,7 +319,8 @@ public class Project implements Serializable {
 						entry("docker", (docker ? "yes" : "no")),
 						entry("runtime", runtime),
 						entry("groupId", groupId),
-						entry("artifactId", artifactId)));
+						entry("artifactId", artifactId),
+						entry("package", groupId)));
 
 				MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", ARCHETYPE_VERSION,
 						properties, workingDirectory);
