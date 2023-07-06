@@ -31,9 +31,6 @@ public class Project implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
-	private static final String ARCHETYPE_VERSION = (System.getenv("ARCHETYPE_VERSION") != null)
-			? System.getenv("ARCHETYPE_VERSION")
-			: "2.1.0";
 	private static final Map<String, String> RUNTIMES = Map.ofEntries(entry("glassfish", "GlassFish"),
 			entry("open-liberty", "Open Liberty"), entry("payara", "Payara"), entry("tomee", "TomEE"),
 			entry("wildfly", "WildFly"));
@@ -322,7 +319,7 @@ public class Project implements Serializable {
 						entry("artifactId", artifactId),
 						entry("package", groupId)));
 
-				MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", ARCHETYPE_VERSION,
+				MavenUtility.invokeMavenArchetype("org.eclipse.starter", "jakarta-starter", VersionInfo.ARCHETYPE_VERSION,
 						properties, workingDirectory);
 
 				LOGGER.info("Creating zip file.");
