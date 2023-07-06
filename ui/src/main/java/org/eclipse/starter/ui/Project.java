@@ -350,7 +350,10 @@ public class Project implements Serializable {
 	}
 
 	private String getCacheKey() {
-		return jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker + ":" + runtime;
+		// if groupid or artifactid was changed, don't use cache
+		return (groupId.equals(DEFAULT_GROUPID) && artifactId.equals(DEFAULT_ARTIFACTID)) ?
+				jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker + ":" + runtime
+				: "";
 	}
 
 	private void downloadZip(File zip) {
