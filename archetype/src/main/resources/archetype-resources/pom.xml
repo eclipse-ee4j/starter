@@ -28,7 +28,7 @@
 #end
 #else
 #set ($payaraVersion = "6.2023.5")
-#set ($tomeeVersion = "9.0.0")
+#set ($tomeeVersion = "9.1.0")
 #set ($glassfishContainerId = "glassfish7x")
 #if (${profile} == 'web')
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.5/web-7.0.5.zip")
@@ -80,7 +80,7 @@
 		<cargo.version>1.10.7</cargo.version>
 #end
 #if (${runtime} == 'tomee')
-		<tomee-plugin.version>9.0.0.RC1</tomee-plugin.version>
+		<tomee-plugin.version>9.1.0</tomee-plugin.version>
 #end
 #if ((${runtime} == 'payara') && (${profile} != 'full'))
 		<payara-micro-plugin.version>2.0</payara-micro-plugin.version>
