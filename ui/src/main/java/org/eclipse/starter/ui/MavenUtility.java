@@ -24,10 +24,10 @@ public class MavenUtility {
 
 		if (result != 0) {
 		    StringBuffer mavenCommand = new StringBuffer("mvn");
-			options.forEach(o -> mavenCommand.append(" " + o));
+		    options.forEach(o -> mavenCommand.append(" " + o));
 
-			throw new RuntimeException(
-				"Failed to invoke Maven Archetype command: " + mavenCommand.toString());
+                    throw new RuntimeException(
+		            "Failed to invoke Maven Archetype command: " + mavenCommand.toString());
 		}
 	}
 }
