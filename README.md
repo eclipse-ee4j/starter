@@ -1,5 +1,5 @@
-[![Alt text](https://img.shields.io/badge/release-UI%202.0.1-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/ui-2.0.1)
-[![Alt text](https://img.shields.io/badge/release-Archetypes%202.1.0-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/archetype-2.1.0)
+[![Alt text](https://img.shields.io/badge/release-UI%202.0.2-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/ui-2.0.2)
+[![Alt text](https://img.shields.io/badge/release-Archetypes%202.2.0-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/archetype-2.2.0)
 
 # Eclipse Starter for Jakarta EE
 
