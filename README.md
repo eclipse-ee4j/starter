@@ -30,7 +30,7 @@ under that directory will contain instructions on how to run the sample.
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide). The generated starter code is simply Maven projects. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
 ##  Running the UI
-In order to run the UI, please execute the following from this directory. You can also simply build the war from Maven and deploy the war to either WildFly 26 or JBoss EAP 7.4. You can do this in an IDE if desired. Note that you can override the underlying archetype version used by setting the `ARCHETYPE_VERSION` environment variable (the default version will be the most recent, see [here](https://github.com/eclipse-ee4j/starter/#readme) for the latest value).
+In order to run the UI, please execute the following from this directory. You can also simply build the war from Maven and deploy the war to either WildFly 26 or JBoss EAP 7.4. You can do this in an IDE if desired. Note that you can override the underlying archetype version used by setting the `ARCHETYPE_VERSION` environment variable (the default version will be the most recent released to Maven Central, see [here](https://github.com/eclipse-ee4j/starter/#readme) for the latest value).
 
 ```
 mvn clean package wildfly:dev --file ui/pom.xml
