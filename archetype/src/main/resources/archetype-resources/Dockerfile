@@ -50,9 +50,9 @@
 #elseif (${runtime} == 'payara')
 #if (${javaVersion} == '17')
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2023.5-jdk17")
+#set ($baseImage = "payara/server-full:6.2023.9-jdk17")
 #else
-#set ($baseImage = "payara/server-web:6.2023.5-jdk17")
+#set ($baseImage = "payara/server-web:6.2023.9-jdk17")
 #end
 #else
 #if (${profile} == 'full')
@@ -64,7 +64,7 @@
 #set ($deployDirectory = "$DEPLOY_DIR")
 #elseif (${runtime} == 'wildfly')
 #if (${javaVersion} == '17')
-#set ($baseImage = "quay.io/wildfly/wildfly")
+#set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk17")
 #else
 #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk11")
 #end
