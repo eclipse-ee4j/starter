@@ -23,7 +23,11 @@ public class MavenUtility {
 				System.out, System.err);
 
 		if (result != 0) {
-			throw new RuntimeException("Failed to invoke Maven Archetype.");
+		    StringBuffer mavenCommand = new StringBuffer("mvn");
+			options.forEach(o -> mavenCommand.append(" " + o));
+
+			throw new RuntimeException(
+				"Failed to invoke Maven Archetype command: " + mavenCommand.toString());
 		}
 	}
 }
