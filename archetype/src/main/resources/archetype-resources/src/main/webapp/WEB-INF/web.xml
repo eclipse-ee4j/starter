@@ -15,13 +15,6 @@
 	xmlns="$xmlns"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="$schemaLocation">
-	<servlet>
-		<servlet-name>${eePackage}.ws.rs.core.Application</servlet-name>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>${eePackage}.ws.rs.core.Application</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
