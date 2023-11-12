@@ -344,7 +344,8 @@ public class Project implements Serializable {
 				downloadZip(new File(workingDirectory, artifactId + ".zip"));
 
 				LOGGER.info("Caching output.");
-				// caching makes only sense if defaults weren't changed since otherwise it's unlikely to hit cache again
+				// caching makes only sense if defaults weren't changed
+				// (arbitrary groupId and artifactId is unlikely hitting the cache)
 				if (groupId.equals(DEFAULT_GROUPID) && artifactId.equals(DEFAULT_ARTIFACTID)) {
 					cache.put(getCacheKey(), workingDirectory.getAbsolutePath());
 				}
@@ -362,10 +363,7 @@ public class Project implements Serializable {
 	}
 
 	private String getCacheKey() {
-		// if groupid or artifactid was changed, don't use cache
-		return (groupId.equals(DEFAULT_GROUPID) && artifactId.equals(DEFAULT_ARTIFACTID)) ?
-				jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker + ":" + runtime
-				: "";
+		return jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker + ":" + runtime;
 	}
 
 	private void downloadZip(File zip) {
