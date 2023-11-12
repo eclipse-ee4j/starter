@@ -168,6 +168,9 @@ public class Project implements Serializable {
 	}
 
 	public void onJakartaVersionChange() {
+		LOGGER.log(Level.INFO,
+				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
+				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		if (jakartaVersion != 10) {
 			javaVersions.get("8").setDisabled(false);
 
@@ -196,6 +199,9 @@ public class Project implements Serializable {
 	}
 
 	public void onProfileChange() {
+		LOGGER.log(Level.INFO,
+				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
+				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		jakartaVersions.get("8").setDisabled(false);
 
 		if (!runtime.equals("wildfly")) {
@@ -227,6 +233,9 @@ public class Project implements Serializable {
 	}
 
 	public void onJavaVersionChange() {
+		LOGGER.log(Level.INFO,
+				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
+				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		if (javaVersion == 8) {
 			jakartaVersions.get("10").setDisabled(true);
 			profiles.get("core").setDisabled(true);
@@ -238,6 +247,9 @@ public class Project implements Serializable {
 	}
 
 	public void onDockerChange() {
+		LOGGER.log(Level.INFO,
+				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
+				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		if (docker) {
 			runtimes.get("none").setDisabled(true);
 			runtimes.get("glassfish").setDisabled(true);
@@ -251,6 +263,9 @@ public class Project implements Serializable {
 	}
 
 	public void onRuntimeChange() {
+		LOGGER.log(Level.INFO,
+				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
+				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		jakartaVersions.get("10").setDisabled(false);
 
 		if (!profile.equals("core")) {
