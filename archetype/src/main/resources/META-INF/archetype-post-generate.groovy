@@ -72,6 +72,11 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
             throw new RuntimeException("Failed, TomEE does not yet support Jakarta EE 10")
         }
 
+        if (jakartaVersion == '9') {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, TomEE is certified against Jakarta EE 9.1, but not Jakarta EE 9")
+        }
+
         if (!profile.equalsIgnoreCase("web")) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, TomEE does not support the full and Core Profiles")
@@ -107,10 +112,6 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
             break
 
         case "tomee": println "Generating code for TomEE"
-            if (jakartaVersion != '8') {
-                println "WARNING: TomEE 9 is not yet a production ready release"
-            }
-
             break
 
         case "payara": println "Generating code for Payara"
