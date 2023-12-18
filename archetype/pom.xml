@@ -45,11 +45,6 @@
 	<developers>
 		<!-- All active committers should add their information here. -->
 		<developer>
-			<id>rokon12</id>
-			<name>A N M Bazlur Rahman</name>
-			<email>bazlur@jugbd.org</email>
-		</developer>
-		<developer>
 			<id>jeyvison</id>
 			<name>Jeyvison Nascimento</name>
 			<email>jeynoronha@gmail.com</email>
@@ -63,11 +58,6 @@
 			<id>ivargrimstad</id>
 			<name>Ivar Grimstad</name>
 			<email>ivar.grimstad@eclipse-foundation.org</email>
-		</developer>
-		<developer>
-			<id>ivonet</id>
-			<name>Ivo Woltring</name>
-			<email>ivo@ivonet.nl</email>
 		</developer>
 	</developers>
 	
