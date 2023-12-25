@@ -44,11 +44,6 @@
   <developers>
     <!-- All active committers should add their information here. -->
     <developer>
-      <id>rokon12</id>
-      <name>A N M Bazlur Rahman</name>
-      <email>bazlur@jugbd.org</email>
-    </developer>
-    <developer>
       <id>jeyvison</id>
       <name>Jeyvison Nascimento</name>
       <email>jeynoronha@gmail.com</email>
@@ -62,11 +57,6 @@
       <id>ivargrimstad</id>
       <name>Ivar Grimstad</name>
       <email>ivar.grimstad@eclipse-foundation.org</email>
-    </developer>
-    <developer>
-      <id>ivonet</id>
-      <name>Ivo Woltring</name>
-      <email>ivo@ivonet.nl</email>
     </developer>
   </developers>
 
@@ -102,7 +92,7 @@
       <version>3.9.4</version>
     </dependency>
 
-    <!-- for Maven Embedded to work -->
+    <!-- Dependencies for Embedded Maven -->
     <dependency>
       <groupId>org.apache.maven.resolver</groupId>
       <artifactId>maven-resolver-connector-basic</artifactId>
@@ -151,9 +141,9 @@
         <version>3.11.0</version>
       </plugin>
       <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-	  <artifactId>maven-resources-plugin</artifactId>
-	  <version>3.3.1</version>
+        <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-resources-plugin</artifactId>
+	      <version>3.3.1</version>
       </plugin>      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -207,7 +197,7 @@
                 </resources>
             </deployment>
 		    </configuration>
-		</plugin>
+		  </plugin>
     </plugins>
   </build>
 </project>
