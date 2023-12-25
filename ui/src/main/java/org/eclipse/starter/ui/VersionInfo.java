@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 public class VersionInfo {
 
 	public static final String VERSION_PROPERTY = "version";
-	public static final String COMPILE_DEFAULT_ARCHETYPE_VERSION = "2.2.0";
+	public static final String COMPILE_DEFAULT_ARCHETYPE_VERSION = "2.3.0";
 	public static final String ARCHETYPE_VERSION_ENV_VAR = System.getenv("ARCHETYPE_VERSION"); 
 	public static final String ARCHETYPE_VERSION = ( ARCHETYPE_VERSION_ENV_VAR != null)
 			? System.getenv("ARCHETYPE_VERSION")
@@ -37,12 +37,8 @@ public class VersionInfo {
 	}
 	
 	private void loadPomProperties() throws IOException {
-    
         InputStream is = this.getClass().getClassLoader()
             .getResourceAsStream("version.properties");
         pomProperties.load(is);
     }
-
-    
 }
-

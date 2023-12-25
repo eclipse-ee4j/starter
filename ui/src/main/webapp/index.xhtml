@@ -72,7 +72,7 @@
                 <p:ajax event="change" listener="#{project.onRuntimeChange}"
                         process="@form" update="@form" />
               </p:selectOneRadio>
-              <h:outputText styleClass="footnote" value="TomEE requires Web Profile and Jakarta EE below 10, GlassFish requires no Docker support and Web Profile or the Jakarta EE Platform, WildFly requires Jakarta EE 8 or 10."/>
+              <h:outputText styleClass="footnote" value="GlassFish requires no Docker support and Web Profile or the Jakarta EE Platform, WildFly requires Jakarta EE 8 or 10, TomEE requires Web Profile and Jakarta EE 8 or 9.1."/>
             </p:column>
 
             <p:outputLabel for="@next" value="Docker support" />
