@@ -24,7 +24,7 @@ Once the runtime starts, you can access the project at http://localhost:8080.
 #elseif (${runtime} == 'open-liberty')
 Once the runtime starts, you can access the project at http://localhost:9080.
 #else
-Once the runtime starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
+Once the runtime starts, you can access the project at http://localhost:8080/${artifactId}.
 #end
 
 #if ((${docker} == 'yes') and (${runtime} != 'glassfish'))
@@ -32,21 +32,21 @@ You can also run the project via Docker. To build the Docker image, execute the 
 
 ```
 ./mvnw clean package
-docker build -t jakartaee-hello-world:v1 .
+docker build -t ${artifactId}:v1 .
 ```
 
 You can then run the Docker image by executing:
 
 ```
 #if (${runtime} != 'open-liberty')
-docker run -it --rm -p 8080:8080 jakartaee-hello-world:v1
+docker run -it --rm -p 8080:8080 ${artifactId}:v1
 #else
-docker run -it --rm -p 9080:9080 jakartaee-hello-world:v1
+docker run -it --rm -p 9080:9080 ${artifactId}:v1
 #end
 ```
 
 #if (${runtime} != 'open-liberty')
-Once the runtime starts, you can access the project at http://localhost:8080/jakartaee-hello-world.
+Once the runtime starts, you can access the project at http://localhost:8080/${artifactId}.
 #else
 Once the runtime starts, you can access the project at http://localhost:9080/.
 #end
@@ -58,6 +58,6 @@ Once the runtime starts, you can access the project at http://localhost:9080/.
   ./mvnw clean package
   ```
  
-  This will generate a file named `jakartaee-hello-world.war`. You should be able to run the application by deploying the file to
+  This will generate a file named `${artifactId}.war`. You should be able to run the application by deploying the file to
   a [Jakarta EE compatible runtime](https://jakarta.ee/compatibility). 
 #end
