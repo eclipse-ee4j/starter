@@ -148,9 +148,18 @@ public class Project implements Serializable {
 				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		runtimes.get("tomee").setDisabled(true);
+		runtimes.get("payara").setDisabled(false);
+		
+		if (!docker && !profile.equals("core")) {
+	        runtimes.get("glassfish").setDisabled(false);
+		}		
 
 		if (jakartaVersion != 10) {
-			javaVersions.get("8").setDisabled(false);
+			if ((jakartaVersion == 8) 
+			    || runtime.equals("open-liberty") || runtime.equals("none")) {
+			    javaVersions.get("8").setDisabled(false);
+			}
+
 			profiles.get("core").setDisabled(true);
 
 			if ((jakartaVersion == 9) || (jakartaVersion == 9.1)) {
@@ -162,11 +171,16 @@ public class Project implements Serializable {
 			if (profile.equals("web") &&
 			        ((jakartaVersion == 8) || ((jakartaVersion == 9.1) && (javaVersion != 8)))) {
 				runtimes.get("tomee").setDisabled(false);
-			}			
+			}
+			
+			if ((jakartaVersion != 8) && (javaVersion == 8)) {
+			    runtimes.get("payara").setDisabled(true);
+				runtimes.get("glassfish").setDisabled(true);
+			}
 		} else {
 			javaVersions.get("8").setDisabled(true);
 
-			if (!runtime.equals("glassfish")) {
+			if (!runtime.equals("glassfish") && !runtime.equals("tomee")) {
 				profiles.get("core").setDisabled(false);
 			}
 
@@ -180,24 +194,29 @@ public class Project implements Serializable {
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		jakartaVersions.get("8").setDisabled(false);
 
-		if (!(runtime.equals("wildfly") || runtime.equals("tomee"))) {
+		if (!(runtime.equals("wildfly") || runtime.equals("tomee")
+		    || (runtime.equals("payara") && (javaVersion == 8))
+			|| (runtime.equals("glassfish") && (javaVersion == 8)))) {
 			jakartaVersions.get("9").setDisabled(false);
 		}
 
 		if (!(runtime.equals("wildfly")
-		        || (runtime.equals("tomee") && (javaVersion == 8)))) {
+		        || (runtime.equals("tomee") && (javaVersion == 8))
+				|| (runtime.equals("payara") && (javaVersion == 8))
+				|| (runtime.equals("glassfish") && (javaVersion == 8)))) {
 			jakartaVersions.get("9.1").setDisabled(false);
-		}		
-
-		if ((jakartaVersion != 10) && !((jakartaVersion == 9.1) && runtime.equals("tomee"))) {
-			javaVersions.get("8").setDisabled(false);
 		}
+
+		if ((jakartaVersion == 8) 
+		    || runtime.equals("open-liberty") || runtime.equals("none")) {
+		    javaVersions.get("8").setDisabled(false);
+	    }		
 
 		if ((jakartaVersion == 8) || ((jakartaVersion == 9.1) && (javaVersion != 8))) {
 			runtimes.get("tomee").setDisabled(false);
 		}
 
-		if (!docker) {
+		if (!docker && !((jakartaVersion != 8) && (javaVersion == 8))) {
 			runtimes.get("glassfish").setDisabled(false);
 		}
 
@@ -220,7 +239,12 @@ public class Project implements Serializable {
 				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
 		runtimes.get("tomee").setDisabled(true);
+		runtimes.get("payara").setDisabled(false);
 		
+		if (!docker && !profile.equals("core")) {
+			runtimes.get("glassfish").setDisabled(false);
+		}
+
 		if (javaVersion == 8) {
 			jakartaVersions.get("10").setDisabled(true);
 			profiles.get("core").setDisabled(true);
@@ -228,6 +252,11 @@ public class Project implements Serializable {
 		    if (profile.equals("web") && (jakartaVersion == 8)) {
 			    runtimes.get("tomee").setDisabled(false);
 		    }
+
+			if (jakartaVersion != 8) {
+			    runtimes.get("payara").setDisabled(false);
+				runtimes.get("glassfish").setDisabled(false);
+			}
 		} else {
 			if (!runtime.equals("tomee")) {
 				jakartaVersions.get("10").setDisabled(false);
@@ -249,7 +278,7 @@ public class Project implements Serializable {
 		} else {
 			runtimes.get("none").setDisabled(false);
 
-			if (!profile.equals("core")) {
+			if (!profile.equals("core") && !((jakartaVersion != 8) && (javaVersion == 8))) {
 				runtimes.get("glassfish").setDisabled(false);
 			}
 		}
@@ -281,22 +310,14 @@ public class Project implements Serializable {
 		if (runtime.equals("none")) {
 			dockerFlags.get("true").setDisabled(true);
 		} else if (runtime.equals("payara")) {
-			if (jakartaVersion != 8) {
-				if (javaVersion == 8) {
-				   javaVersion = 11;
-			    }
-				
+			if (jakartaVersion != 8) {				
 			    javaVersions.get("8").setDisabled(true);
 			}
 		} else if (runtime.equals("glassfish")) {
 			dockerFlags.get("true").setDisabled(true);
 			profiles.get("core").setDisabled(true);
 
-			if (jakartaVersion != 8) {
-				if (javaVersion == 8) {
-				   javaVersion = 11;
-			    }
-				
+			if (jakartaVersion != 8) {				
 			    javaVersions.get("8").setDisabled(true);
 			}
 		} else if (runtime.equals("tomee")) {
@@ -305,13 +326,7 @@ public class Project implements Serializable {
 			profiles.get("core").setDisabled(true);
 			profiles.get("full").setDisabled(true);
 
-			javaVersions.get("8").setDisabled(true);
-
 			if (jakartaVersion != 8) {
-				if (javaVersion == 8) {
-				   javaVersion = 11;
-			    }
-				
 			    javaVersions.get("8").setDisabled(true);
 			}			
 		} else if (runtime.equals("wildfly")) {
