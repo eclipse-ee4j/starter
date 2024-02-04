@@ -27,13 +27,13 @@
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
 #end
 #else
-#set ($payaraVersion = "6.2023.12")
+#set ($payaraVersion = "6.2024.1")
 #set ($tomeeVersion = "9.1.1")
 #set ($glassfishContainerId = "glassfish7x")
 #if (${profile} == 'web')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.11/web-7.0.11.zip")
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.12/web-7.0.12.zip")
 #else
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.11/glassfish-7.0.11.zip")
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.12/glassfish-7.0.12.zip")
 #end
 #end
 #if (${jakartaVersion} == '10')
