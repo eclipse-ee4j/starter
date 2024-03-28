@@ -85,7 +85,7 @@ FROM $baseImage
 #if (${runtime} == 'open-liberty')
 COPY src/main/liberty/config/server.xml /config/server.xml
 #end
-COPY target/jakartaee-hello-world.war $deployDirectory
+COPY target/${artifactId}.war $deployDirectory
 #if ((${runtime} == 'wildfly') && (${profile} == 'full'))
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c","standalone-full.xml"]
 #end
