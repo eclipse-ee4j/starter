@@ -18,4 +18,4 @@ In order to run the UI, please execute the following from this directory. You ca
 mvn clean package wildfly:dev
 ```
 
-Once WildFly starts, please go to http://localhost:8080/jakarta-starter-ui. Unzip the file the UI generates and follow the README.md in the unzipped directory.
+Once WildFly starts, please go to [http://localhost:8080/jakarta-starter-ui](http://localhost:8080/jakarta-starter-ui). Unzip the file the UI generates and follow the README.md in the unzipped directory.
