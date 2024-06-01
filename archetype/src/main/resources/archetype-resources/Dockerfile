@@ -50,15 +50,15 @@
 #elseif (${runtime} == 'payara')
 #if (${javaVersion} == '17')
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2023.12-jdk17")
+#set ($baseImage = "payara/server-full:6.2024.1-jdk17")
 #else
-#set ($baseImage = "payara/server-web:6.2023.12-jdk17")
+#set ($baseImage = "payara/server-web:6.2024.1-jdk17")
 #end
 #else
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2023.12")
+#set ($baseImage = "payara/server-full:6.2024.1")
 #else
-#set ($baseImage = "payara/server-web:6.2023.12")
+#set ($baseImage = "payara/server-web:6.2024.1")
 #end
 #end
 #set ($deployDirectory = "$DEPLOY_DIR")
@@ -85,7 +85,7 @@ FROM $baseImage
 #if (${runtime} == 'open-liberty')
 COPY src/main/liberty/config/server.xml /config/server.xml
 #end
-COPY target/jakartaee-hello-world.war $deployDirectory
+COPY target/${artifactId}.war $deployDirectory
 #if ((${runtime} == 'wildfly') && (${profile} == 'full'))
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c","standalone-full.xml"]
 #end

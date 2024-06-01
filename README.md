@@ -36,7 +36,7 @@ In order to run the UI, please execute the following from this directory. You ca
 mvn clean package wildfly:dev --file ui/pom.xml
 ```
 
-Once WildFly starts, please go to http://localhost:8080/jakarta-starter-ui/. Unzip the file the UI generates and follow the README.md in the unzipped directory.
+Once WildFly starts, please go to [http://localhost:8080/jakarta-starter-ui/](http://localhost:8080/jakarta-starter-ui/). Unzip the file the UI generates and follow the README.md in the unzipped directory.
 
 ## Known Issues
 * Note that Payara does not yet work on the Apple M1 chip. If you are on an M1 chip, we suggest you use another runtime for the time being with the Archetype.

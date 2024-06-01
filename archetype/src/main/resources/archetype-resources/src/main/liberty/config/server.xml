@@ -30,5 +30,5 @@
 
     <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="9080" httpsPort="9443" />
 
-    <webApplication location="jakartaee-hello-world.war" contextRoot="/"/>
+    <webApplication location="${artifactId}.war" contextRoot="/"/>
 </server>
