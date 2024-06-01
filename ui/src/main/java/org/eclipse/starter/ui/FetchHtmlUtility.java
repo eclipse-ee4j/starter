@@ -31,7 +31,7 @@ public class FetchHtmlUtility {
         Elements headerFragment = document.select("body");
         StringBuilder headerHtml = new StringBuilder();
         headerHtml.append(headerFragment.html());
-        logger.info("element: {}", headerHtml);
+        logger.debug("element: {}", headerHtml);
         return headerHtml.toString();
     }
     
@@ -42,7 +42,7 @@ public class FetchHtmlUtility {
         Elements footerFragment = document.select("body");
         StringBuilder footerHtml =   new StringBuilder();
         footerHtml.append(footerFragment.html());
-        logger.info("element: {}", footerFragment.html());
+        logger.debug("element: {}", footerFragment.html());
         return footerHtml.toString();
     }
     
