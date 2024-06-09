@@ -34,9 +34,7 @@ public class Project implements Serializable {
 	private static final Map<String, String> RUNTIMES = Map.ofEntries(entry("glassfish", "GlassFish"),
 			entry("open-liberty", "Open Liberty"), entry("payara", "Payara"), entry("tomee", "TomEE"),
 			entry("wildfly", "WildFly"));
-
-	private static final String DEFAULT_GROUPID = "org.eclipse";;
-
+	private static final String DEFAULT_GROUPID = "org.eclipse";
 	private static final String DEFAULT_ARTIFACTID = "jakartaee-hello-world";
 
 	private static Map<String, String> cache = new ConcurrentHashMap<>();
