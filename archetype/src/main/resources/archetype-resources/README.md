@@ -20,11 +20,11 @@ You can run the application by executing the following command from the director
 ```
 
 #if ((${runtime} == 'payara') && (${profile} != 'full'))
-Once the runtime starts, you can access the project at http://localhost:8080
+Once the runtime starts, you can access the project at [http://localhost:8080](http://localhost:8080).
 #elseif (${runtime} == 'open-liberty')
-Once the runtime starts, you can access the project at http://localhost:9080
+Once the runtime starts, you can access the project at [http://localhost:9080](http://localhost:9080).
 #else
-Once the runtime starts, you can access the project at http://localhost:8080/${artifactId}.
+Once the runtime starts, you can access the project at [http://localhost:8080/${artifactId}](http://localhost:8080/${artifactId}).
 #end
 
 #if ((${docker} == 'yes') and (${runtime} != 'glassfish'))
@@ -46,9 +46,9 @@ docker run -it --rm -p 9080:9080 ${artifactId}:v1
 ```
 
 #if (${runtime} != 'open-liberty')
-Once the runtime starts, you can access the project at http://localhost:8080/${artifactId}.
+Once the runtime starts, you can access the project at [http://localhost:8080/${artifactId}](http://localhost:8080/${artifactId}).
 #else
-Once the runtime starts, you can access the project at http://localhost:9080/
+Once the runtime starts, you can access the project at [http://localhost:9080/](http://localhost:9080/).
 #end
 #end
 #else
@@ -59,5 +59,5 @@ Once the runtime starts, you can access the project at http://localhost:9080/
   ```
  
   This will generate a file named `${artifactId}.war`. You should be able to run the application by deploying the file to
-  a [Jakarta EE compatible runtime](https://jakarta.ee/compatibility). 
+  a [Jakarta EE compatible runtime](https://jakarta.ee/compatibility).
 #end
