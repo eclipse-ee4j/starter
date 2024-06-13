@@ -49,6 +49,11 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10")
     }
 
+    if ((javaVersion == '8') && (jakartaVersion == '10')) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, Jakarta EE 10 does not support Java SE 8")
+    }
+
     if (runtime.equalsIgnoreCase("payara") && (jakartaVersion != '8') && (javaVersion == '8')) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
