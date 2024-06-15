@@ -24,8 +24,7 @@ In order to run the Maven Archetype and generate a sample Jakarta EE project, pl
 mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter"
 ```
 
-If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-hello-world`. The README.md file 
-under that directory will contain instructions on how to run the sample.
+If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-hello-world`. The README.md file under that directory will contain instructions on how to run the sample.
 
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide). The generated starter code is simply Maven projects. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
