@@ -177,6 +177,8 @@
           <server-config>standalone-full.xml</server-config>
         </configuration>
       </plugin>
+      
+      <!-- For deploying to Azure. -->
       <plugin>
 		    <groupId>com.microsoft.azure</groupId>
 		    <artifactId>azure-webapp-maven-plugin</artifactId>
