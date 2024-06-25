@@ -25,19 +25,7 @@ jobs:
 
       - name: Build Archetype
         run: mvn clean install --file archetype/pom.xml
-        
-      - name: Set up Java SE 11
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: 11
           
-      - name: Set up Java SE 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: 17  
-
       - name: Run Archetype for EE 8 Web Profile, SE 8, Tomee
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
@@ -47,6 +35,12 @@ jobs:
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime="tomee" -Ddocker=no -DoutputDirectory="app/tomee" -Dgoals="clean package"
           rm -rf app/tomee
+
+      - name: Set up Java SE 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
 
       - name: Run Archetype for EE 9.1 Web Profile, SE 11, Tomee
         run: |
@@ -67,6 +61,12 @@ jobs:
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime="tomee" -Ddocker=no -DoutputDirectory="app/tomee" -Dgoals="clean package"
           rm -rf app/tomee
+          
+      - name: Set up Java SE 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17  
 
       - name: Run Archetype for EE 9.1 Web Profile, SE 17, Tomee
         run: |
