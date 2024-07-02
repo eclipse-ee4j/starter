@@ -29,7 +29,7 @@ jobs:
       - name: Run Archetype for EE 8, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f "jakartaee-hello-world/Dockerfile" ]; then
+          if [ -f "app/Dockerfile" ]; then
             echo "Dockerfile found"
             exit 1
           else
