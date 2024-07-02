@@ -27,6 +27,3 @@ To run a specific version of the Archetype, including the locally installed deve
 ```
 mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.3.0-SNAPSHOT"
 ```
-
-## Known Issues
-* Note that Payara does not yet work on the Apple M1 chip. If you are on an M1 chip, we suggest you use another runtime for the time being with the Archetype.
