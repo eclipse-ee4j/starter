@@ -40,23 +40,12 @@ jobs:
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
           rm -rf app/glassfish
-  
-      - name: Run Archetype for EE 8, SE 8, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
 
       - name: Run Archetype for EE 8 Web Profile, SE 8, GlassFish 
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
           rm -rf app/glassfish
       
-
-      - name: Run Archetype for EE 8 Web Profile, SE 8, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-  
       - name: Run Archetype for EE 8 Web Profile, SE 8, TomEE
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=tomee -Ddocker=yes -DoutputDirectory=app/tomee -Dgoals="clean package"
@@ -78,19 +67,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=11 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 8, SE 11, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=11 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
       - name: Run Archetype for EE 8 Web Profile, SE 11, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
-      - name: Run Archetype for EE 8 Web Profile, SE 11, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
       - name: Run Archetype for EE 9, SE 11, GlassFish
@@ -98,19 +77,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=11 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 9, SE 11, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=11 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
       - name: Run Archetype for EE 9 Web Profile, SE 11, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
-      - name: Run Archetype for EE 9 Web Profile, SE 11, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
       - name: Run Archetype for EE 9.1, SE 11, GlassFish
@@ -118,19 +87,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=11 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 9.1, SE 11, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=11 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
       - name: Run Archetype for EE 9.1 Web Profile, SE 11, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 11, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
       - name: Run Archetype for EE 10, SE 11, GlassFish
@@ -138,21 +97,11 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 10, SE 11, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
       - name: Run Archetype for EE 10 Web Profile, SE 11, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 10 Web Profile, SE 11, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-  
       - name: Run Archetype for EE 9.1, SE 11, Open Liberty
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=11 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory="app/open-liberty" -Dgoals="clean package"
@@ -179,19 +128,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 8, SE 17, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
       - name: Run Archetype for EE 8 Web Profile, SE 17, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
-      - name: Run Archetype for EE 8 Web Profile, SE 17, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
       - name: Run Archetype for EE 9, SE 17, GlassFish
@@ -199,19 +138,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=17 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 9, SE 17, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=17 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
       - name: Run Archetype for EE 9 Web Profile, SE 17, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=17 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
-      - name: Run Archetype for EE 9 Web Profile, SE 17, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=17 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
       - name: Run Archetype for EE 9.1, SE 17, GlassFish
@@ -219,19 +148,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=17 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 9.1, SE 17, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=17 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
       - name: Run Archetype for EE 9.1 Web Profile, SE 17, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
       - name: Run Archetype for EE 10, SE 17, GlassFish
@@ -239,21 +158,11 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 10, SE 17, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-
       - name: Run Archetype for EE 10 Web Profile, SE 17, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime="glassfish" -Ddocker=no -DoutputDirectory="app/glassfish" -Dgoals="clean package"
           rm -rf app/glassfish
 
-      - name: Run Archetype for EE 10 Web Profile, SE 17, GlassFish, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime="glassfish" -Ddocker=yes -DoutputDirectory="app/glassfish" -Dgoals="clean package"
-          rm -rf app/glassfish
-  
       - name: Run Archetype for EE 10 Web Profile, SE 17, WildFly
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
