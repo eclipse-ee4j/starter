@@ -139,14 +139,8 @@ jobs:
       - name: Run Archetype for EE 8, SE 8, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 8 Web Profile, SE 8, WildFly
@@ -157,14 +151,8 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 8, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Set up Java SE 11
@@ -326,14 +314,8 @@ jobs:
       - name: Run Archetype for EE 8, SE 11, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=11 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 8 Web Profile, SE 11, WildFly
@@ -344,14 +326,8 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 11, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 10, SE 11, WildFly
@@ -362,14 +338,8 @@ jobs:
       - name: Run Archetype for EE 10, SE 11, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 10 Web Profile, SE 11, WildFly
@@ -380,14 +350,8 @@ jobs:
       - name: Run Archetype for EE 10 Web Profile, SE 11, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 10 Core Profile, SE 11, WildFly
@@ -398,14 +362,8 @@ jobs:
       - name: Run Archetype for EE 10 Core Profile, SE 11, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=11 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Set up Java SE 17
@@ -572,14 +530,8 @@ jobs:
       - name: Run Archetype for EE 8, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 8 Web Profile, SE 17, WildFly
@@ -590,14 +542,8 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 10, SE 17, WildFly
@@ -608,14 +554,8 @@ jobs:
       - name: Run Archetype for EE 10, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 10 Web Profile, SE 17, WildFly
@@ -626,14 +566,8 @@ jobs:
       - name: Run Archetype for EE 10 Web Profile, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 10 Core Profile, SE 17, WildFly
@@ -644,14 +578,8 @@ jobs:
       - name: Run Archetype for EE 10 Core Profile, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f "app/wildfly/jakartaee-hello-world/Dockerfile" ]; then
-            echo "Dockerfile found. Proceeding to build Docker image."
-            docker build -t test-image app/wildfly/jakartaee-hello-world
-            docker rmi test-image
-          else
-            echo "Dockerfile not found" 
-            exit 1
-          fi
+          docker build -t test-image app/wildfly/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/wildfly
 
   build-ui:
