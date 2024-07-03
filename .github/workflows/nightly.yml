@@ -31,6 +31,15 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
+      - name: Run Archetype for EE 8, SE 8, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
+          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
+            echo "Dockerfile found, test failed."
+            exit 1
+          fi
+          rm -rf app
+
       - name: Run Archetype for EE 8 Web Profile, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
@@ -45,6 +54,19 @@ jobs:
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
+
+      - name: Run Archetype for EE 9 Core Profile, SE 8, with Docker
+        id: ee_9_core_se_8_docker
+        continue-on-error: true
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=core -DjavaVersion=8 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package" > mvn.log
+
+      - name: Check Maven Build Status
+        run: |
+          if [[ "${{ steps['ee_9_core_se_8_docker'].outcome }}" != "failure" ]]; then
+            echo "Maven build for EE 9 Core Profile, SE 8, with Docker succeeded, test failed."
+            exit 1
+          fi
 
       - name: Run Archetype for EE 9.1, SE 8
         run: |
