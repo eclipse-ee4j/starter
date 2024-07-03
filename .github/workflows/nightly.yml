@@ -341,12 +341,12 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=tomee -Ddocker=yes -DoutputDirectory=app/tomee -Dgoals="clean package"
           rm -rf app/tomee
 
-      - name: Run Archetype for EE 8 Full Profile, SE 8, WildFly
+      - name: Run Archetype for EE 8, SE 8, WildFly
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 8 Full Profile, SE 8, WildFly, with Docker
+      - name: Run Archetype for EE 8, SE 8, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly
@@ -395,7 +395,7 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 9 Full Profile, SE 8, WildFly
+      - name: Run Archetype for EE 9, SE 8, WildFly
         id: ee_9_full_se_8_wildfly
         continue-on-error: true
         run: |
@@ -404,11 +404,11 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_full_se_8_wildfly'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9 Full Profile, SE 8, without Docker succeeded, test failed."
+            echo "Maven build for EE 9, SE 8, without Docker succeeded, test failed."
             exit 1
           fi
 
-      - name: Run Archetype for EE 9 Full Profile, SE 8, WildFly, with Docker
+      - name: Run Archetype for EE 9, SE 8, WildFly, with Docker
         id: ee_9_full_se_8_wildfly_docker
         continue-on-error: true
         run: |
@@ -417,7 +417,7 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_full_se_8_wildfly_docker'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9 Full Profile, SE 8, with Docker succeeded, test failed."
+            echo "Maven build for EE 9, SE 8, with Docker succeeded, test failed."
             exit 1
           fi
 
@@ -473,7 +473,7 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 9.1 Full Profile, SE 8, WildFly
+      - name: Run Archetype for EE 9.1, SE 8, WildFly
         id: ee_9_1_full_se_8_wildfly
         continue-on-error: true
         run: |
@@ -482,11 +482,11 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_1_full_se_8_wildfly'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9.1 Full Profile, SE 8, without Docker succeeded, test failed."
+            echo "Maven build for EE 9.1, SE 8, without Docker succeeded, test failed."
             exit 1
           fi
 
-      - name: Run Archetype for EE 9.1 Full Profile, SE 8, WildFly, with Docker
+      - name: Run Archetype for EE 9.1, SE 8, WildFly, with Docker
         id: ee_9_1_full_se_8_wildfly_docker
         continue-on-error: true
         run: |
@@ -495,7 +495,7 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_1_full_se_8_wildfly_docker'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9.1 Full Profile, SE 8, with Docker succeeded, test failed."
+            echo "Maven build for EE 9.1, SE 8, with Docker succeeded, test failed."
             exit 1
           fi
 
@@ -551,7 +551,7 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 10 Full Profile, SE 8, WildFly
+      - name: Run Archetype for EE 10, SE 8, WildFly
         id: ee_10_full_se_8_wildfly
         continue-on-error: true
         run: |
@@ -560,11 +560,11 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_10_full_se_8_wildfly'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 10 Full Profile, SE 8, without Docker succeeded, test failed."
+            echo "Maven build for EE 10, SE 8, without Docker succeeded, test failed."
             exit 1
           fi
 
-      - name: Run Archetype for EE 10 Full Profile, SE 8, WildFly, with Docker
+      - name: Run Archetype for EE 10, SE 8, WildFly, with Docker
         id: ee_10_full_se_8_wildfly_docker
         continue-on-error: true
         run: |
@@ -573,7 +573,7 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_10_full_se_8_wildfly_docker'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 10 Full Profile, SE 8, with Docker succeeded, test failed."
+            echo "Maven build for EE 10, SE 8, with Docker succeeded, test failed."
             exit 1
           fi
 
@@ -939,12 +939,12 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
           rm -rf app/tomee
 
-      - name: Run Archetype for EE 8 Full Profile, SE 11, WildFly
+      - name: Run Archetype for EE 8, SE 11, WildFly
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=11 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 8 Full Profile, SE 11, WildFly, with Docker
+      - name: Run Archetype for EE 8, SE 11, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=11 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly
@@ -989,7 +989,7 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 9 Full Profile, SE 11, WildFly
+      - name: Run Archetype for EE 9, SE 11, WildFly
         id: ee_9_full_se_11_wildfly
         continue-on-error: true
         run: |
@@ -998,11 +998,11 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_full_se_11_wildfly'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9 Full Profile, SE 11, without Docker succeeded, test failed."
+            echo "Maven build for EE 9, SE 11, without Docker succeeded, test failed."
             exit 1
           fi
 
-      - name: Run Archetype for EE 9 Full Profile, SE 11, WildFly, with Docker
+      - name: Run Archetype for EE 9, SE 11, WildFly, with Docker
         id: ee_9_full_se_11_wildfly_docker
         continue-on-error: true
         run: |
@@ -1011,7 +1011,7 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_full_se_11_wildfly_docker'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9 Full Profile, SE 11, with Docker succeeded, test failed."
+            echo "Maven build for EE 9, SE 11, with Docker succeeded, test failed."
             exit 1
           fi
 
@@ -1067,7 +1067,7 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 9.1 Full Profile, SE 11, WildFly
+      - name: Run Archetype for EE 9.1, SE 11, WildFly
         id: ee_9_1_full_se_11_wildfly
         continue-on-error: true
         run: |
@@ -1076,11 +1076,11 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_1_full_se_11_wildfly'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9.1 Full Profile, SE 11, without Docker succeeded, test failed."
+            echo "Maven build for EE 9.1, SE 11, without Docker succeeded, test failed."
             exit 1
           fi
 
-      - name: Run Archetype for EE 9.1 Full Profile, SE 11, WildFly, with Docker
+      - name: Run Archetype for EE 9.1, SE 11, WildFly, with Docker
         id: ee_9_1_full_se_11_wildfly_docker
         continue-on-error: true
         run: |
@@ -1089,7 +1089,7 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_1_full_se_11_wildfly_docker'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9.1 Full Profile, SE 11, with Docker succeeded, test failed."
+            echo "Maven build for EE 9.1, SE 11, with Docker succeeded, test failed."
             exit 1
           fi
 
@@ -1145,12 +1145,12 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 10 Full Profile, SE 11, WildFly
+      - name: Run Archetype for EE 10, SE 11, WildFly
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 10 Full Profile, SE 11, WildFly, with Docker
+      - name: Run Archetype for EE 10, SE 11, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly
@@ -1491,12 +1491,12 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
 
-      - name: Run Archetype for EE 8 Full Profile, SE 17, WildFly
+      - name: Run Archetype for EE 8, SE 17, WildFly
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 8 Full Profile, SE 17, WildFly, with Docker
+      - name: Run Archetype for EE 8, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly
@@ -1541,7 +1541,7 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 9 Full Profile, SE 17, WildFly
+      - name: Run Archetype for EE 9, SE 17, WildFly
         id: ee_9_full_se_17_wildfly
         continue-on-error: true
         run: |
@@ -1550,11 +1550,11 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_full_se_17_wildfly'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9 Full Profile, SE 17, without Docker succeeded, test failed."
+            echo "Maven build for EE 9, SE 17, without Docker succeeded, test failed."
             exit 1
           fi
 
-      - name: Run Archetype for EE 9 Full Profile, SE 17, WildFly, with Docker
+      - name: Run Archetype for EE 9, SE 17, WildFly, with Docker
         id: ee_9_full_se_17_wildfly_docker
         continue-on-error: true
         run: |
@@ -1563,7 +1563,7 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_full_se_17_wildfly_docker'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9 Full Profile, SE 17, with Docker succeeded, test failed."
+            echo "Maven build for EE 9, SE 17, with Docker succeeded, test failed."
             exit 1
           fi
 
@@ -1619,7 +1619,7 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 9.1 Full Profile, SE 17, WildFly
+      - name: Run Archetype for EE 9.1, SE 17, WildFly
         id: ee_9_1_full_se_17_wildfly
         continue-on-error: true
         run: |
@@ -1628,11 +1628,11 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_1_full_se_17_wildfly'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9.1 Full Profile, SE 17, without Docker succeeded, test failed."
+            echo "Maven build for EE 9.1, SE 17, without Docker succeeded, test failed."
             exit 1
           fi
 
-      - name: Run Archetype for EE 9.1 Full Profile, SE 17, WildFly, with Docker
+      - name: Run Archetype for EE 9.1, SE 17, WildFly, with Docker
         id: ee_9_1_full_se_17_wildfly_docker
         continue-on-error: true
         run: |
@@ -1641,7 +1641,7 @@ jobs:
       - name: Check Maven Build Status
         run: |
           if [[ "${{ steps['ee_9_1_full_se_17_wildfly_docker'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 9.1 Full Profile, SE 17, with Docker succeeded, test failed."
+            echo "Maven build for EE 9.1, SE 17, with Docker succeeded, test failed."
             exit 1
           fi
 
@@ -1697,12 +1697,12 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 10 Full Profile, SE 17, WildFly
+      - name: Run Archetype for EE 10, SE 17, WildFly
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 10 Full Profile, SE 17, WildFly, with Docker
+      - name: Run Archetype for EE 10, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly
