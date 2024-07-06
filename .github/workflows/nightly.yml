@@ -1,3 +1,4 @@
+
 name: Nightly build
 
 on:
@@ -129,11 +130,6 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 8, TomEE
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=tomee -Ddocker=yes -DoutputDirectory=app/tomee -Dgoals="clean package"
-          rm -rf app/tomee
-          
-      - name: Run Archetype for EE 8 Web Profile, SE 8, TomEE, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
           rm -rf app/tomee
 
       - name: Run Archetype for EE 8, SE 8, WildFly
@@ -306,22 +302,7 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
           rm -rf app/payara
 
-      - name: Run Archetype for EE 8 Web Profile, SE 11, TomEE
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime="tomee" -Ddocker=no -DoutputDirectory="app/tomee" -Dgoals="clean package"
-          rm -rf app/tomee
-
-      - name: Run Archetype for EE 8 Web Profile, SE 11, TomEE, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
-          rm -rf app/tomee
-
       - name: Run Archetype for EE 9.1 Web Profile, SE 11, TomEE
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
-          rm -rf app/tomee
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 11, TomEE, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
           rm -rf app/tomee
@@ -536,28 +517,6 @@ jobs:
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
-          
-      - name: Run Archetype for EE 8 Web Profile, SE 17, TomEE
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime="tomee" -Ddocker=no -DoutputDirectory="app/tomee" -Dgoals="clean package"
-          rm -rf app/tomee
-
-      - name: Run Archetype for EE 8 Web Profile, SE 17, TomEE, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
-          rm -rf app/tomee
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, TomEE
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime="tomee" -Ddocker=no -DoutputDirectory="app/tomee" -Dgoals="clean package"
-          rm -rf app/tomee
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, TomEE, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
-          rm -rf app/tomee
-
-
 
       - name: Run Archetype for EE 10 Web Profile, SE 17, WildFly
         run: |
