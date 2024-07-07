@@ -25,7 +25,6 @@ jobs:
 
       - name: Build Archetype
         run: mvn clean install --file archetype/pom.xml
-
       - name: Run Archetype for EE 8, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
