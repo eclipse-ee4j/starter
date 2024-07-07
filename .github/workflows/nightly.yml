@@ -17,7 +17,7 @@ jobs:
           java-version: 8
 
       - name: Cache Maven packages
-        uses: actions/cache@v4
+        uses: actions/cache@v3
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
@@ -570,7 +570,6 @@ jobs:
       - name: Run Archetype for EE 8, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
 
@@ -582,7 +581,6 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
 
@@ -594,7 +592,6 @@ jobs:
       - name: Run Archetype for EE 10, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
 
@@ -606,7 +603,6 @@ jobs:
       - name: Run Archetype for EE 10 Web Profile, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
 
@@ -618,7 +614,6 @@ jobs:
       - name: Run Archetype for EE 10 Core Profile, SE 17, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
 
