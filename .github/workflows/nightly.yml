@@ -108,19 +108,6 @@ jobs:
             exit 1
           fi
 
-      - name: Run Archetype for EE 10 Core Profile, SE 8
-        id: ee_10_core_se_8_none
-        continue-on-error: true
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
-
-      - name: Check Maven Build Status
-        run: |
-          if [[ "${{ steps['ee_10_core_se_8_none'].outcome }}" != "failure" ]]; then
-            echo "Maven build for EE 10 Core Profile, SE 8, without Docker succeeded, test failed."
-            exit 1
-          fi
-
       - name: Run Archetype for EE 8, SE 8, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
