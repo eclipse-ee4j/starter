@@ -45,15 +45,6 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 8 Web Profile, SE 8, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 8 Core Profile, SE 8
         id: ee_8_core_se_8_none
         continue-on-error: true
@@ -85,27 +76,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 9, SE 8, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=8 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 9 Web Profile, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 9 Web Profile, SE 8, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=8 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 9 Core Profile, SE 8
@@ -139,27 +112,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 9.1, SE 8, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=8 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 9.1 Web Profile, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 8, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=8 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 9.1 Core Profile, SE 8
@@ -640,27 +595,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 8, SE 11, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=11 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 8 Web Profile, SE 11
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 8 Web Profile, SE 11, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 8 Core Profile, SE 11
@@ -694,27 +631,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 9, SE 11, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=11 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 9 Web Profile, SE 11
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 9 Web Profile, SE 11, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 9 Core Profile, SE 11
@@ -748,27 +667,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 9.1, SE 11, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=11 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 9.1 Web Profile, SE 11
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 11, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 9.1 Core Profile, SE 11
@@ -802,41 +703,14 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 10, SE 11, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 10 Web Profile, SE 11
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 10 Web Profile, SE 11, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 10 Core Profile, SE 11
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 10 Core Profile, SE 11, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=11 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 8, SE 11, Open Liberty
@@ -1192,27 +1066,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 8, SE 17, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 8 Web Profile, SE 17
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 8 Web Profile, SE 17, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 8 Core Profile, SE 17
@@ -1246,27 +1102,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 9, SE 17, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=17 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 9 Web Profile, SE 17
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 9 Web Profile, SE 17, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=17 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 9 Core Profile, SE 17
@@ -1300,27 +1138,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 9.1, SE 17, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=17 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 9.1 Web Profile, SE 17
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 9.1 Core Profile, SE 17
@@ -1354,41 +1174,14 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 10, SE 17, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 10 Web Profile, SE 17
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 10 Web Profile, SE 17, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 10 Core Profile, SE 17
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
-          rm -rf app
-
-      - name: Run Archetype for EE 10 Core Profile, SE 17, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app
 
       - name: Run Archetype for EE 10, SE 17, GlassFish
