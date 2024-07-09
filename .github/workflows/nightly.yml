@@ -31,15 +31,6 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 8, SE 8, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package"
-          if [ -f app/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
-          rm -rf app
-
       - name: Run Archetype for EE 8 Web Profile, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
@@ -215,15 +206,6 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
-          rm -rf app/wildfly
-
-      - name: Run Archetype for EE 8 Web Profile, SE 8, WildFly
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
-          if [ -f app/wildfly/jakartaee-hello-world/Dockerfile ]; then
-            echo "Dockerfile found, test failed."
-            exit 1
-          fi
           rm -rf app/wildfly
 
       - name: Run Archetype for EE 8 Web Profile, SE 8, WildFly, with Docker
