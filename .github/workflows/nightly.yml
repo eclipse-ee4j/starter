@@ -198,7 +198,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          if [[ "${{ steps['ee_9.1_core_se_8_openliberty'].outcome }}" != "failure" ]]; then
+          if [[ "${{ steps['ee_9-1_core_se_8_openliberty'].outcome }}" != "failure" ]]; then
             echo "Maven build for EE 9.1 Core Profile, SE 8, Open Liberty succeeded, test failed."
             exit 1
           fi
@@ -211,7 +211,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          if [[ "${{ steps['ee_9.1_core_se_8_openliberty_docker'].outcome }}" != "failure" ]]; then
+          if [[ "${{ steps['ee_9-1_core_se_8_openliberty_docker'].outcome }}" != "failure" ]]; then
             echo "Maven build for EE 9.1 Core Profile, SE 8, Open Liberty, with Docker succeeded, test failed."
             exit 1
           fi
@@ -506,7 +506,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          if [[ "${{ steps['ee_9.1_core_se_11_openliberty'].outcome }}" != "failure" ]]; then
+          if [[ "${{ steps['ee_9-1_core_se_11_openliberty'].outcome }}" != "failure" ]]; then
             echo "Maven build for EE 9.1 Core Profile, SE 11, Open Liberty succeeded, test failed."
             exit 1
           fi
@@ -519,7 +519,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          if [[ "${{ steps['ee_9.1_core_se_11_openliberty_docker'].outcome }}" != "failure" ]]; then
+          if [[ "${{ steps['ee_9-1_core_se_11_openliberty_docker'].outcome }}" != "failure" ]]; then
             echo "Maven build for EE 9.1 Core Profile, SE 11, Open Liberty, with Docker succeeded, test failed."
             exit 1
           fi
@@ -818,7 +818,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          if [[ "${{ steps['ee_9.1_core_se_17_openliberty'].outcome }}" != "failure" ]]; then
+          if [[ "${{ steps['ee_9-1_core_se_17_openliberty'].outcome }}" != "failure" ]]; then
             echo "Maven build for EE 9.1 Core Profile, SE 17, Open Liberty succeeded, test failed."
             exit 1
           fi
@@ -831,7 +831,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          if [[ "${{ steps['ee_9.1_core_se_17_openliberty_docker'].outcome }}" != "failure" ]]; then
+          if [[ "${{ steps['ee_9-1_core_se_17_openliberty_docker'].outcome }}" != "failure" ]]; then
             echo "Maven build for EE 9.1 Core Profile, SE 17, Open Liberty, with Docker succeeded, test failed."
             exit 1
           fi
