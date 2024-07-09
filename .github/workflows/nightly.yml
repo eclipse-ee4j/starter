@@ -191,7 +191,7 @@ jobs:
           rm -rf app/open-liberty
 
       - name: Run Archetype for EE 9.1 Core Profile, SE 8, Open Liberty
-        id: ee_9.1_core_se_8_openliberty
+        id: ee_9-1_core_se_8_openliberty
         continue-on-error: true
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=core -DjavaVersion=8 -Druntime="open-liberty" -Ddocker=no -DoutputDirectory="app/open-liberty" -Dgoals="clean package"
@@ -204,7 +204,7 @@ jobs:
           fi
 
       - name: Run Archetype for EE 9.1 Core Profile, SE 8, Open Liberty, with Docker
-        id: ee_9.1_core_se_8_openliberty_docker
+        id: ee_9-1_core_se_8_openliberty_docker
         continue-on-error: true
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=core -DjavaVersion=8 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory="app/open-liberty" -Dgoals="clean package"
@@ -499,7 +499,7 @@ jobs:
           rm -rf app/open-liberty
 
       - name: Run Archetype for EE 9.1 Core Profile, SE 11, Open Liberty
-        id: ee_9.1_core_se_11_openliberty
+        id: ee_9-1_core_se_11_openliberty
         continue-on-error: true
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=core -DjavaVersion=11 -Druntime="open-liberty" -Ddocker=no -DoutputDirectory="app/open-liberty" -Dgoals="clean package"
@@ -512,7 +512,7 @@ jobs:
           fi
 
       - name: Run Archetype for EE 9.1 Core Profile, SE 11, Open Liberty, with Docker
-        id: ee_9.1_core_se_11_openliberty_docker
+        id: ee_9-1_core_se_11_openliberty_docker
         continue-on-error: true
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=core -DjavaVersion=11 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory="app/open-liberty" -Dgoals="clean package"
@@ -811,7 +811,7 @@ jobs:
           rm -rf app/open-liberty
 
       - name: Run Archetype for EE 9.1 Core Profile, SE 17, Open Liberty
-        id: ee_9.1_core_se_17_openliberty
+        id: ee_9-1_core_se_17_openliberty
         continue-on-error: true
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=core -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=no -DoutputDirectory="app/open-liberty" -Dgoals="clean package"
@@ -824,7 +824,7 @@ jobs:
           fi
 
       - name: Run Archetype for EE 9.1 Core Profile, SE 17, Open Liberty, with Docker
-        id: ee_9.1_core_se_17_openliberty_docker
+        id: ee_9-1_core_se_17_openliberty_docker
         continue-on-error: true
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=core -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory="app/open-liberty" -Dgoals="clean package"
