@@ -146,6 +146,8 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 8, TomEE, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
+          docker build -t test-image app/tomee/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/tomee
 
       - name: Run Archetype for EE 8, SE 8, WildFly
@@ -344,6 +346,8 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 11, TomEE, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
+          docker build -t test-image app/tomee/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/tomee
 
       - name: Run Archetype for EE 9.1 Web Profile, SE 11, TomEE
@@ -354,6 +358,8 @@ jobs:
       - name: Run Archetype for EE 9.1 Web Profile, SE 11, TomEE, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
+          docker build -t test-image app/tomee/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/tomee
 
       - name: Run Archetype for EE 8, SE 11, WildFly
@@ -593,6 +599,8 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 17, TomEE, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
+          docker build -t test-image app/tomee/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/tomee
 
       - name: Run Archetype for EE 9.1 Web Profile, SE 17, TomEE
@@ -603,6 +611,8 @@ jobs:
       - name: Run Archetype for EE 9.1 Web Profile, SE 17, TomEE, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime="tomee" -Ddocker=yes -DoutputDirectory="app/tomee" -Dgoals="clean package"
+          docker build -t test-image app/tomee/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/tomee
 
       - name: Run Archetype for EE 10 Web Profile, SE 17, WildFly
