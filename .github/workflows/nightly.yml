@@ -140,7 +140,7 @@ jobs:
 
       - name: Run Archetype for EE 8 Web Profile, SE 8, TomEE
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=tomee -Ddocker=no -DoutputDirectory=app/tomee -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime="tomee" -Ddocker=no -DoutputDirectory="app/tomee" -Dgoals="clean package"
           rm -rf app/tomee
 
       - name: Run Archetype for EE 8 Web Profile, SE 8, TomEE, with Docker
