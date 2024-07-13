@@ -138,6 +138,30 @@ jobs:
           docker rmi test-image
           rm -rf app/open-liberty
 
+      - name: Run Archetype for EE 8, SE 8, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 8, SE 8, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 8 Web Profile, SE 8, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 8 Web Profile, SE 8, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
       - name: Run Archetype for EE 8 Web Profile, SE 8, TomEE
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime="tomee" -Ddocker=no -DoutputDirectory="app/tomee" -Dgoals="clean package"
@@ -373,9 +397,112 @@ jobs:
           docker rmi test-image
           rm -rf app/open-liberty
 
+      - name: Run Archetype for EE 8, SE 11, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=11 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 8, SE 11, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 8 Web Profile, SE 11, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 8 Web Profile, SE 11, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9, SE 11, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=11 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9, SE 11, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9 Web Profile, SE 11, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9 Web Profile, SE 11, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9.1, SE 11, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=11 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9.1, SE 11, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
       - name: Run Archetype for EE 9.1 Web Profile, SE 11, Payara
         run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9.1 Web Profile, SE 11, Payara, with Docker
+        run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10, SE 11, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10, SE 11, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10 Web Profile, SE 11, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10 Web Profile, SE 11, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10 Core Profile, SE 11, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=11 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10 Core Profile, SE 11, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=11 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/payara
           
       - name: Run Archetype for EE 8 Web Profile, SE 11, TomEE
@@ -661,9 +788,112 @@ jobs:
           docker rmi test-image
           rm -rf app/open-liberty
 
+      - name: Run Archetype for EE 8, SE 17, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 8, SE 17, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 8 Web Profile, SE 17, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 8 Web Profile, SE 17, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9, SE 17, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=17 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9, SE 17, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=17 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9 Web Profile, SE 17, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=17 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9 Web Profile, SE 17, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=17 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9.1, SE 17, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=17 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9.1, SE 17, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=17 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9.1 Web Profile, SE 17, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 9.1 Web Profile, SE 17, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10, SE 17, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10, SE 17, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=17 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10 Web Profile, SE 17, Payara
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10 Web Profile, SE 17, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
+          rm -rf app/payara
+
       - name: Run Archetype for EE 10 Core Profile, SE 17, Payara
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime="payara" -Ddocker=no -DoutputDirectory="app/payara" -Dgoals="clean package"
+          rm -rf app/payara
+
+      - name: Run Archetype for EE 10 Core Profile, SE 17, Payara, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime="payara" -Ddocker=yes -DoutputDirectory="app/payara" -Dgoals="clean package"
+          docker build -t test-image app/payara/jakartaee-hello-world
+          docker rmi test-image
           rm -rf app/payara
           
       - name: Run Archetype for EE 8 Web Profile, SE 17, TomEE
