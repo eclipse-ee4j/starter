@@ -243,6 +243,11 @@ jobs:
           docker rmi test-image
           rm -rf app/wildfly
 
+      - name: Run Archetype for EE 8 Web Profile, SE 8, WildFly
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          rm -rf app/wildfly
+
       - name: Run Archetype for EE 8 Web Profile, SE 8, WildFly, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
