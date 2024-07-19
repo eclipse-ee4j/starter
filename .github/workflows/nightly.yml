@@ -44,7 +44,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          ERROR_MESSAGE="Failed to execute goal org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate (default-cli) on project jakarta-starter-modules: Failed, the Core Profile is only supported for Jakarta EE 10"
+          ERROR_MESSAGE="Core Profile is only supported for Jakarta EE 10"
           if ! grep -q "$ERROR_MESSAGE" mvn_output.txt; then
             echo "Expected error message not found in the Maven output."
             exit 1
@@ -68,7 +68,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          ERROR_MESSAGE="Failed to execute goal org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate (default-cli) on project jakarta-starter-modules: Failed, the Core Profile is only supported for Jakarta EE 10"
+          ERROR_MESSAGE="Core Profile is only supported for Jakarta EE 10"
           if ! grep -q "$ERROR_MESSAGE" mvn_output.txt; then
             echo "Expected error message not found in the Maven output."
             exit 1
@@ -92,7 +92,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          ERROR_MESSAGE="Failed to execute goal org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate (default-cli) on project jakarta-starter-modules: Failed, the Core Profile is only supported for Jakarta EE 10"
+          ERROR_MESSAGE="Core Profile is only supported for Jakarta EE 10"
           if ! grep -q "$ERROR_MESSAGE" mvn_output.txt; then
             echo "Expected error message not found in the Maven output."
             exit 1
@@ -106,7 +106,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          ERROR_MESSAGE="Failed to execute goal org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate (default-cli) on project jakarta-starter-modules: Failed, Jakarta EE 10 does not support Java SE 8"
+          ERROR_MESSAGE="Jakarta EE 10 does not support Java SE 8"
           if ! grep -q "$ERROR_MESSAGE" mvn_output.txt; then
             echo "Expected error message not found in the Maven output."
             exit 1
@@ -262,7 +262,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          ERROR_MESSAGE="Failed to execute goal org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate (default-cli) on project jakarta-starter-modules: Failed, WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1"
+          ERROR_MESSAGE="WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1"
           if ! grep -q "$ERROR_MESSAGE" mvn_output.txt; then
             echo "Expected error message not found in the Maven output."
             exit 1
@@ -276,7 +276,7 @@ jobs:
 
       - name: Check Maven Build Status
         run: |
-          ERROR_MESSAGE="Failed to execute goal org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate (default-cli) on project jakarta-starter-modules: Failed, WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1"
+          ERROR_MESSAGE="WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1"
           if ! grep -q "$ERROR_MESSAGE" mvn_output.txt; then
             echo "Expected error message not found in the Maven output."
             exit 1
