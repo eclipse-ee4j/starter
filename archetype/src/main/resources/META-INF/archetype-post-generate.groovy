@@ -98,11 +98,6 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1")
         }
-
-        if ((jakartaVersion == '10') && (javaVersion == '8')) {
-            FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, WildFly 27 does not support Java SE 8")
-        }
     }
 }
 
