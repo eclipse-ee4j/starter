@@ -238,6 +238,19 @@ jobs:
           docker rmi test-image
           rm -rf app/wildfly
 
+      - name: Run Archetype for EE 8, SE 8, WildFly, with Invalid Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Druntime=wildfly -Ddocker=Y -DoutputDirectory=app/wildfly -Dgoals="clean package" | tee mvn_output.txt
+          
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="valid Docker options are yes and no"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+
       - name: Run Archetype for EE 8 Web Profile, SE 8, WildFly
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
@@ -337,6 +350,19 @@ jobs:
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
+
+      - name: Run Archetype for EE 10 Micro Profile, SE 11
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=micro -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
+          
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="valid Jakarta EE profiles are core, web, and full"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
 
       - name: Run Archetype for EE 11, SE 11
         run: |
