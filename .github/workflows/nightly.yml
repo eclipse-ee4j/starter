@@ -276,6 +276,17 @@ jobs:
           
           rm -f mvn_output.txt
 
+      - name: Run Archetype for EE 8, SE 8, WebLogic
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Druntime=weblogic -DoutputDirectory=app/weblogic -Dgoals="clean package" | tee mvn_output.txt
+        
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="valid runtime values are none, glassfish, open-liberty, payara, tomee, and wildfly"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+
       - name: Set up Java SE 11
         uses: actions/setup-java@v4
         with:
