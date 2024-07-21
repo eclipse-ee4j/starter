@@ -36,6 +36,19 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
+      - name: Run Archetype for EE 8 Core Profile, SE 8
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=core -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
+          
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="Core Profile is only supported for Jakarta EE 10"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+
       - name: Run Archetype for EE 9, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
@@ -46,6 +59,19 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
+      - name: Run Archetype for EE 9 Core Profile, SE 8
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=core -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
+  
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="Core Profile is only supported for Jakarta EE 10"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+
       - name: Run Archetype for EE 9.1, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
@@ -55,6 +81,32 @@ jobs:
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
+
+      - name: Run Archetype for EE 9.1 Core Profile, SE 8
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=core -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
+  
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="Core Profile is only supported for Jakarta EE 10"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+
+      - name: Run Archetype for EE 10, SE 8
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
+
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="Jakarta EE 10 does not support Java SE 8"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
 
       - name: Run Archetype for EE 8, SE 8, GlassFish
         run: |
@@ -197,6 +249,32 @@ jobs:
           docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
+
+      - name: Run Archetype for EE 9, SE 8, WildFly
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=full -DjavaVersion=8 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package" | tee mvn_output.txt
+
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+
+      - name: Run Archetype for EE 9.1, SE 8, WildFly
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=full -DjavaVersion=8 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package" | tee mvn_output.txt
+
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
 
       - name: Set up Java SE 11
         uses: actions/setup-java@v4
