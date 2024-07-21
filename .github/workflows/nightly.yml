@@ -26,6 +26,19 @@ jobs:
       - name: Build Archetype
         run: mvn clean install --file archetype/pom.xml
 
+      - name: Run Archetype for EE 8, SE 7
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=7 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
+          
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="valid Java SE versions are 8, 11, and 17"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+
       - name: Run Archetype for EE 8, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
