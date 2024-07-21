@@ -68,7 +68,7 @@ jobs:
             
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="valid Jakarta EE profiles are core, web, and full"
-          if ![[$MAVEN_EXIT_CODE -ne 0] && [grep -q "$ERROR_MESSAGE" mvn_output.txt;]]; then
+          if !{[$MAVEN_EXIT_CODE -ne 0] && [grep -q "$ERROR_MESSAGE" mvn_output.txt;]}; then
               echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
           fi
