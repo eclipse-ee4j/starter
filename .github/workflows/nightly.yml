@@ -32,7 +32,7 @@ jobs:
           
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="valid Java SE versions are 8, 11, and 17"
-          if ![[$MAVEN_EXIT_CODE -ne 0] && [grep -q "$ERROR_MESSAGE" mvn_output.txt]]; then
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
               echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
           fi
@@ -258,7 +258,7 @@ jobs:
           
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="valid runtime values are none, glassfish, open-liberty, payara, tomee, and wildfly"
-          if ![[$MAVEN_EXIT_CODE -ne 0] && [grep -q "$ERROR_MESSAGE" mvn_output.txt]]; then
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
               echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
           fi
@@ -774,7 +774,7 @@ jobs:
             
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="valid Jakarta EE versions are 8, 9, 9.1, and 10"
-          if ![[$MAVEN_EXIT_CODE -ne 0] && [grep -q "$ERROR_MESSAGE" mvn_output.txt]]; then
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
               echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
           fi
