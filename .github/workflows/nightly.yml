@@ -44,6 +44,20 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
+      - name: Run Archetype for EE 8, SE 8, with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Ddocker=yes -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
+          
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          WARN_MESSAGE="Docker support is not possible without choosing a runtime"
+          if ! { [ $MAVEN_EXIT_CODE -eq 0 ] && [ ! -f app/jakartaee-hello-world/Dockerfile ] && grep -q "$WARN_MESSAGE" mvn_output.txt;  }; then
+              echo "Maven build did not fail, or the expected warning was not found. Test Failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+          rm -rf app
+
       - name: Run Archetype for EE 8 Web Profile, SE 8
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -DoutputDirectory=app -Dgoals="clean package"
