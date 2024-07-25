@@ -261,7 +261,7 @@ jobs:
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="Payara 6 does not support Java SE 8"
           if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
-              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
           fi
 
@@ -274,7 +274,7 @@ jobs:
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="Payara 6 does not support Java SE 8"
           if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
-              echo "Maven build did not fail, or the expected error message was not found. Test Failed."
+              echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
           fi
 
