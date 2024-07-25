@@ -254,6 +254,19 @@ jobs:
           docker rmi test-image
           rm -rf app/payara
 
+      - name: Run Archetype for EE, SE 8, TomEE
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
+          
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="TomEE requires Web Profile and Jakarta EE 8 or 9.1."
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+
       - name: Run Archetype for EE 8 Web Profile, SE 8, TomEE
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package"
