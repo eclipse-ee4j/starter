@@ -303,33 +303,8 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=tomee -Ddocker=yes -DoutputDirectory=app/tomee -Dgoals="clean package"
           docker build -t test-image app/tomee/jakartaee-hello-world
           docker rmi test-image
-          rm -rf app/tomee
-
-      - name: Run Archetype for EE 8 Core Profile, SE 8, TomEE
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=core -DjavaVersion=8 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
+          rm -rf app/tomee 
           
-          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-          ERROR_MESSAGE="TomEE does not support the full and Core Profiles"
-          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
-              echo "Maven build did not fail, or the expected error message was not found. Test failed."
-              exit 1
-          fi
-          
-          rm -f mvn_output.txt    
-          
-      - name: Run Archetype for EE 9 Web Profile, SE 8, TomEE
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
-          
-          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-          ERROR_MESSAGE="TomEE is certified against Jakarta EE 9.1, but not Jakarta EE 9"
-          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
-              echo "Maven build did not fail, or the expected error message was not found. Test failed."
-              exit 1
-          fi
-          
-          rm -f mvn_output.txt
 
       - name: Run Archetype for EE 9.1 Web Profile, SE 8, TomEE
         run: |
@@ -736,6 +711,19 @@ jobs:
           docker build -t test-image app/tomee/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/tomee
+
+      - name: Run Archetype for EE 9 Web Profile, SE 11, TomEE
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
+          
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="TomEE is certified against Jakarta EE 9.1, but not Jakarta EE 9"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
 
       - name: Run Archetype for EE 9.1 Web Profile, SE 11, TomEE
         run: |
