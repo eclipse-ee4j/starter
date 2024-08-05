@@ -282,7 +282,7 @@ jobs:
 
       - name: Run Archetype for EE 8, SE 8, TomEE
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
           
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="TomEE does not support the full and Core Profiles"
@@ -308,7 +308,7 @@ jobs:
 
       - name: Run Archetype for EE 9.1 Web Profile, SE 8, TomEE
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=8 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=8 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
           
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="TomEE 9 does not support Java SE 8"
@@ -714,7 +714,7 @@ jobs:
 
       - name: Run Archetype for EE 9 Web Profile, SE 11, TomEE
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=11 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
           
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="TomEE is certified against Jakarta EE 9.1, but not Jakarta EE 9"
@@ -739,7 +739,7 @@ jobs:
 
       - name: Run Archetype for EE 10 Web Profile, SE 11, TomEE
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.3.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
           
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="TomEE does not yet support Jakarta EE 10"
