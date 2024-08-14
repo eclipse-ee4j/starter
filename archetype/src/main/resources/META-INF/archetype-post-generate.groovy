@@ -9,7 +9,7 @@ def docker = request.properties["docker"].trim()
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 
 validateInput(jakartaVersion, profile, javaVersion, runtime, docker, outputDirectory)
-generateRuntime(runtime, jakartaVersion, docker, outputDirectory)
+generateRuntime(javaVersion, jakartaVersion, profile, runtime, docker, outputDirectory)
 bindEEPackage(jakartaVersion, outputDirectory)
 generateDocker(docker, runtime, outputDirectory)
 chmod(outputDirectory.toPath().resolve("mvnw").toFile())
@@ -101,12 +101,20 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     }
 }
 
-private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
+private generateRuntime(javaVersion, jakartaVersion, profile, runtime, docker, File outputDirectory) {
     switch (runtime) {
         case "glassfish": println "Generating code for GlassFish"
             if (docker.equalsIgnoreCase("yes")) {
-                println "WARNING: GlassFish does not yet support Docker"
-                FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                if (jakartaVersion != '10') {
+                    println "WARNING: GlassFish does not support Docker for Jakarta EE versions older than Jakarta EE 10"
+                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                } else if (javaVersion != '17') {
+                    println "WARNING: GlassFish does not support Docker for Java versions older than 17"
+                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                } else if (profile != 'full') {
+                    println "WARNING: GlassFish does not support Docker for Jakarta Core Profile or Jakarta Web Profile"
+                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                }
             }
 
             break
