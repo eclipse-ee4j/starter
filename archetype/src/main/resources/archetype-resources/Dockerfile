@@ -50,15 +50,15 @@
 #elseif (${runtime} == 'payara')
 #if (${javaVersion} == '17')
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2024.5-jdk17")
+#set ($baseImage = "payara/server-full:6.2024.9-jdk17")
 #else
-#set ($baseImage = "payara/server-web:6.2024.5-jdk17")
+#set ($baseImage = "payara/server-web:6.2024.9-jdk17")
 #end
 #else
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2024.5")
+#set ($baseImage = "payara/server-full:6.2024.9")
 #else
-#set ($baseImage = "payara/server-web:6.2024.5")
+#set ($baseImage = "payara/server-web:6.2024.9")
 #end
 #end
 #set ($deployDirectory = "$DEPLOY_DIR")
