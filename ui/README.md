@@ -5,7 +5,7 @@ This is the UI for the official Eclipse Foundation Starter for Jakarta EE. It ge
 Please note that this is a development version of the UI. For the current release, please use the latest version at https://start.jakarta.ee. This code will allow you to use UI features that are not yet released. It will also allow you to build the UI from source.
 
 ## Building from Source
-In order to build the project from source, please download this repository on your file system (the easiest way may be to [download as zip](https://github.com/eclipse-ee4j/starter/archive/refs/heads/master.zip)). Then execute the following from the parent directory (not this directory). Please ensure you have installed a [Java SE 11+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 11 and Java SE 17).
+In order to build the project from source, please download this repository on your file system (the easiest way may be to [download as zip](https://github.com/eclipse-ee4j/starter/archive/refs/heads/master.zip)). Then execute the following from the parent directory (not this directory). Please ensure you have installed a [Java SE 11+ implementation](https://adoptium.net/?variant=openjdk11) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 11 and Java SE 17).
 
 ```
 mvn clean install
