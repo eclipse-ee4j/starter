@@ -1,5 +1,9 @@
 import org.apache.commons.io.FileUtils
 
+import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+import java.nio.file.Path
+
 def jakartaVersion = request.properties["jakartaVersion"].trim()
 def profile = request.properties["profile"].trim()
 def javaVersion = request.properties["javaVersion"].trim()
@@ -132,29 +136,41 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
     }
 }
 
-private bindEEPackage(jakartaVersion, File outputDirectory) {
-    def eePackage = 'jakarta';
-    if (jakartaVersion == '8') {
-        eePackage = 'javax'
+static void bindEEPackage(String jakartaVersion, File outputDirectory) throws IOException {
+    String eePackage = "jakarta"
+    if ("8".equals(jakartaVersion)) {
+        eePackage = "javax"
     }
 
-    println "Binding EE package: " + eePackage
+    println "Binding EE package: $eePackage"
 
-    def binding = ["eePackage": eePackage]
-    def engine = new groovy.text.SimpleTemplateEngine()
-
-    outputDirectory.traverse(type: groovy.io.FileType.FILES, nameFilter: ~/.*\.(xml|java)$/) { it ->
-        if (!it.name.endsWith("pom.xml")) {
-            it.withReader('UTF-8') { reader ->
-                try {
-                    def template = engine.createTemplate(reader).make(binding)
-                    new FileWriter(it).write(template)
-                } catch (ignored) {
-                    println ignored
-                }
-            }
+    File[] files = outputDirectory.listFiles()
+    if (files != null) {
+        files.each { file ->
+            traverseFiles(file, eePackage)
         }
     }
+}
+
+private static void traverseFiles(File file, String eePackage) throws IOException {
+    if (file.isDirectory()) {
+        File[] files = file.listFiles()
+        if (files != null) {
+            files.each { subFile ->
+                traverseFiles(subFile, eePackage)
+            }
+        }
+    } else if (file.isFile() && file.getName().matches(".*\\.(xml|java)") && !file.getName().endsWith("pom.xml")) {
+        processFile(file, eePackage)
+    }
+}
+
+private static void processFile(File file, String eePackage) throws IOException {
+    Path filePath = file.toPath()
+    String content = new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8)
+    String replacedContent = content.replaceAll('\\$\\{eePackage}', eePackage)
+
+    Files.write(filePath, replacedContent.getBytes(StandardCharsets.UTF_8))
 }
 
 private generateDocker(docker, runtime, File outputDirectory) {
