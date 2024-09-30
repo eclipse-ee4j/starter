@@ -153,11 +153,51 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
           rm -rf app/glassfish
 
+      - name: Run Archetype for EE 8, SE 8, GlassFish with Docker
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Druntime=glassfish -Ddocker=yes -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
+          
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          WARN_MESSAGE="GlassFish does not yet support Docker"
+          if ! { [ $MAVEN_EXIT_CODE -eq 0 ] && [ ! -f app/glassfish/jakartaee-hello-world/Dockerfile ] && grep -q "$WARN_MESSAGE" mvn_output.txt;  }; then
+              echo "Maven build failed, a Dockerfile was found, or the expected warning was not found. Test failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+          rm -rf app/glassfish
+      
       - name: Run Archetype for EE 8 Web Profile, SE 8, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
           rm -rf app/glassfish
 
+      - name: Run Archetype for EE 9, SE 8, GlassFish
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=9 -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
+
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="GlassFish 7 does not support Java SE 8"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+
+      - name: Run Archetype for EE 9.1, SE 8, GlassFish
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
+
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="GlassFish 7 does not support Java SE 8"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test failed."
+              exit 1
+          fi
+          
+          rm -f mvn_output.txt
+          
       - name: Run Archetype for EE 8, SE 8, Open Liberty
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
@@ -484,6 +524,19 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
           rm -rf app/glassfish
 
+      - name: Run Archetype for EE 10 Core Profile, SE 11, GlassFish
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=11 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
+
+          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+          ERROR_MESSAGE="GlassFish does not support the Core Profile"
+          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+              echo "Maven build did not fail, or the expected error message was not found. Test failed."
+              exit 1
+          fi
+
+          rm -f mvn_output.txt
+            
       - name: Run Archetype for EE 8, SE 11, Open Liberty
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.4.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=11 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
