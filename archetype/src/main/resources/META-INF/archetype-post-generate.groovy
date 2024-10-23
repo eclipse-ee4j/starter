@@ -20,6 +20,7 @@ chmod(outputDirectory.toPath().resolve("mvnw").toFile())
 printSummary()
 
 private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, File outputDirectory) {
+    // TODO: add 11
     if ((jakartaVersion != '8') && (jakartaVersion != '9')
             && (jakartaVersion != '9.1') && (jakartaVersion != '10')) {
         FileUtils.forceDelete(outputDirectory)
@@ -30,7 +31,7 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, valid Jakarta EE profiles are core, web, and full")
     }
-
+// TODO: add 21
     if ((javaVersion != '8') && (javaVersion != '11') && (javaVersion != '17')) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, valid Java SE versions are 8, 11, and 17")
@@ -48,15 +49,16 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
-    if (profile.equalsIgnoreCase("core") && jakartaVersion != '10') {
+    if (profile.equalsIgnoreCase("core") && jakartaVersion != '10') { // add 11
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10")
     }
-
+// TODO: check SE versions for 11, own rule 
     if ((javaVersion == '8') && (jakartaVersion == '10')) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, Jakarta EE 10 does not support Java SE 8")
     }
+// TODO: check runtimes for 11
 
     if (runtime.equalsIgnoreCase("payara") && (jakartaVersion != '8') && (javaVersion == '8')) {
         FileUtils.forceDelete(outputDirectory)
@@ -74,7 +76,6 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
             throw new RuntimeException("Failed, GlassFish 7 does not support Java SE 8")
         }
     }
-
     if (runtime.equalsIgnoreCase("tomee")) {
         if (jakartaVersion == '10') {
             FileUtils.forceDelete(outputDirectory)
