@@ -23,7 +23,7 @@
 		It is possible to do so using Maven archetypes. 
    </description>
 
-   	<url>https://eclipse-ee4j.github.io/starter/</url>
+   	<url>https://start.jakarta.ee/</url>
 	
 	<organization>
 		<name>Eclipse Foundation</name>
@@ -58,6 +58,11 @@
 			<id>ivargrimstad</id>
 			<name>Ivar Grimstad</name>
 			<email>ivar.grimstad@eclipse-foundation.org</email>
+		</developer>
+		<developer>
+			<id>geziefer</id>
+			<name>Alexander Ruehl</name>
+			<email>alexander.ruehl@sti.valantic.com</email>
 		</developer>
 	</developers>
 	
