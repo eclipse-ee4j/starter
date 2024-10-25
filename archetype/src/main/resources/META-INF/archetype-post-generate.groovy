@@ -46,7 +46,7 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     def validDockerOptions = ['yes', 'no']
     if (!(docker in validDockerOptions)) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, valid Docker options are: ${validDockerOptions})
+        throw new RuntimeException("Failed, valid Docker options are: ${validDockerOptions}")
     }
 
     if (profile == 'core' && !(jakartaVersion in ['10', '11'])) {
