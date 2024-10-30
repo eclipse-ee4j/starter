@@ -16,6 +16,8 @@ You can run the application by executing the following command from the director
 ./mvnw clean package wildfly:dev
 #elseif (${runtime} == 'open-liberty')
 ./mvnw liberty:dev
+#elseif (${runtime} == 'helidon')
+./mvnw clean package && java -jar ./target/${artifactId}.jar
 #end
 ```
 
@@ -23,6 +25,8 @@ You can run the application by executing the following command from the director
 Once the runtime starts, you can access the project at [http://localhost:8080](http://localhost:8080).
 #elseif (${runtime} == 'open-liberty')
 Once the runtime starts, you can access the project at [http://localhost:9080](http://localhost:9080).
+#elseif (${runtime} == 'helidon')
+Once the runtime starts, you can access the project at [http://localhost:8080/](http://localhost:8080/).
 #else
 Once the runtime starts, you can access the project at [http://localhost:8080/${artifactId}](http://localhost:8080/${artifactId}).
 #end
@@ -45,10 +49,12 @@ docker run -it --rm -p 9080:9080 ${artifactId}:v1
 #end
 ```
 
-#if (${runtime} != 'open-liberty')
-Once the runtime starts, you can access the project at [http://localhost:8080/${artifactId}](http://localhost:8080/${artifactId}).
-#else
+#if (${runtime} == 'open-liberty')
 Once the runtime starts, you can access the project at [http://localhost:9080/](http://localhost:9080/).
+#elseif (${runtime} == 'helidon')
+Once the runtime starts, you can access the project at [http://localhost:8080/](http://localhost:8080/).
+#else
+Once the runtime starts, you can access the project at [http://localhost:8080/${artifactId}](http://localhost:8080/${artifactId}).
 #end
 #end
 #else
