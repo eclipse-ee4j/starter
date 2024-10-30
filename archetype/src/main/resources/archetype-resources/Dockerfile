@@ -81,11 +81,20 @@
 #end
 #set ($deployDirectory = "/config/apps/")
 #end
+#if (${runtime} == 'helidon')
+#set ($baseImage = "container-registry.oracle.com/java/jdk-no-fee-term:21")
+#end
 FROM $baseImage
 #if (${runtime} == 'open-liberty')
 COPY src/main/liberty/config/server.xml /config/server.xml
 #end
+#if (${runtime} == 'helidon')
+COPY target/libs ./libs
+COPY target/${artifactId}.jar ./
+CMD ["java", "-jar", "${artifactId}.jar"]
+#else
 COPY target/${artifactId}.war $deployDirectory
+#end
 #if ((${runtime} == 'wildfly') && (${profile} == 'full'))
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c","standalone-full.xml"]
 #end

@@ -33,7 +33,7 @@ public class Project implements Serializable {
 	private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
 	private static final Map<String, String> RUNTIMES = Map.ofEntries(entry("glassfish", "GlassFish"),
 			entry("open-liberty", "Open Liberty"), entry("payara", "Payara"), entry("tomee", "TomEE"),
-			entry("wildfly", "WildFly"));
+			entry("wildfly", "WildFly"), entry("helidon", "Helidon"));
 	private static final String DEFAULT_GROUPID = "org.eclipse";
 	private static final String DEFAULT_ARTIFACTID = "jakartaee-hello-world";
 
@@ -73,6 +73,7 @@ public class Project implements Serializable {
 		profiles.put("web", new SelectItem("web", "Web Profile"));
 		profiles.put("core", new SelectItem("core", "Core Profile"));
 
+		javaVersions.put("21", new SelectItem("21", "Java SE 21"));
 		javaVersions.put("17", new SelectItem("17", "Java SE 17"));
 		javaVersions.put("11", new SelectItem("11", "Java SE 11"));
 		javaVersions.put("8", new SelectItem("8", "Java SE 8", "Java SE 8", true));
@@ -191,6 +192,7 @@ public class Project implements Serializable {
 			    runtimes.get("payara").setDisabled(true);
 				runtimes.get("glassfish").setDisabled(true);
 			}
+			runtimes.get("helidon").setDisabled(true);
 		} else {
 			javaVersions.get("8").setDisabled(true);
 
@@ -199,6 +201,7 @@ public class Project implements Serializable {
 			}
 
 			runtimes.get("wildfly").setDisabled(false);
+			runtimes.get("helidon").setDisabled(false);
 		}
 	}
 
@@ -243,8 +246,12 @@ public class Project implements Serializable {
 
 			runtimes.get("glassfish").setDisabled(true);
 			runtimes.get("tomee").setDisabled(true);
+			runtimes.get("helidon").setDisabled(false);
 		} else if (profile.equals("full")) {
 			runtimes.get("tomee").setDisabled(true);
+			runtimes.get("helidon").setDisabled(true);
+		} else {
+			runtimes.get("helidon").setDisabled(true);
 		}
 	}
 
@@ -312,6 +319,10 @@ public class Project implements Serializable {
 		LOGGER.log(Level.INFO,
 				"Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
 				new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
+		javaVersions.forEach((s, i) -> i.setDisabled(false));
+		jakartaVersions.forEach((s, i) -> i.setDisabled(false));
+		jakartaVersions.forEach((s, i) -> i.setDisabled(false));
+
 		if (!profile.equals("core")) {
 			jakartaVersions.get("9").setDisabled(false);
 			jakartaVersions.get("9.1").setDisabled(false);
@@ -361,7 +372,21 @@ public class Project implements Serializable {
 
 			if (jakartaVersion != 8) {
 			    javaVersions.get("8").setDisabled(true);
-			}			
+			}
+		} else if (runtime.equals("helidon")) {
+			jakartaVersions.get("9").setDisabled(true);
+			profiles.get("web").setDisabled(true);
+			profiles.get("full").setDisabled(true);
+			javaVersions.get("8").setDisabled(true);
+			javaVersions.get("11").setDisabled(true);
+			javaVersions.get("17").setDisabled(true);
+			jakartaVersions.get("8").setDisabled(true);
+			jakartaVersions.get("9").setDisabled(true);
+			jakartaVersions.get("9.1").setDisabled(true);
+			// these are the only choices so far
+			jakartaVersion = 10;
+			javaVersion = 21;
+			profile = "core";
 		}
 	}
 

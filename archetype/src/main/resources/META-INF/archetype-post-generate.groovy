@@ -26,19 +26,17 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, valid Jakarta EE versions are 8, 9, 9.1, and 10")
     }
 
-    if (!profile.equalsIgnoreCase("core") && !profile.equalsIgnoreCase("web") && !profile.equalsIgnoreCase("full")) {
+    if (!["core", "web", "full"].contains(profile.toLowerCase())) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, valid Jakarta EE profiles are core, web, and full")
     }
 
-    if ((javaVersion != '8') && (javaVersion != '11') && (javaVersion != '17')) {
+    if (!['8', '11', '17', '21'].contains(javaVersion)) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, valid Java SE versions are 8, 11, and 17")
     }
 
-    if (!runtime.equalsIgnoreCase("none") && !runtime.equalsIgnoreCase("glassfish")
-           && !runtime.equalsIgnoreCase("open-liberty") && !runtime.equalsIgnoreCase("payara")
-           && !runtime.equalsIgnoreCase("tomee") && !runtime.equalsIgnoreCase("wildfly")) {
+    if (!["none", "glassfish", "open-liberty", "payara", "tomee", "wildfly", "helidon"].contains(runtime.toLowerCase())) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, valid runtime values are none, glassfish, open-liberty, payara, tomee, and wildfly")
     }
@@ -103,6 +101,13 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
             throw new RuntimeException("Failed, WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1")
         }
     }
+
+    if (runtime.equalsIgnoreCase("helidon")) {
+        if (jakartaVersion != '10' && javaVersion != '21' && profile != 'core') {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, Helidon offer a release for Jakarta EE 10 Core profile only")
+        }
+    }
 }
 
 private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
@@ -127,12 +132,28 @@ private generateRuntime(runtime, jakartaVersion, docker, File outputDirectory) {
         case "open-liberty": println "Generating code for Open Liberty"
             break
 
+        case "helidon": println "Generating code for Helidon"
+            var helidonDir = new File(outputDirectory, "src/main/helidon")
+            var resourcesDir = new File(outputDirectory, "src/main/resources")
+            var webappDir = new File(outputDirectory,"src/main/webapp");
+            FileUtils.forceDelete(new File(webappDir, "/WEB-INF"))
+            FileUtils.copyDirectory(new File(helidonDir, "resources"), resourcesDir)
+            FileUtils.copyDirectory(webappDir, new File(resourcesDir, "/WEB"))
+            FileUtils.forceDelete(webappDir)
+            FileUtils.forceDelete(helidonDir)
+            break
+
         default: println "No runtime will be included in the sample"
     }
 
     if (!runtime.equalsIgnoreCase("open-liberty")) {
         // We do not need the liberty configuration directory, let's delete it.
         FileUtils.forceDelete(new File(outputDirectory, "src/main/liberty"))
+    }
+
+    if (!runtime.equalsIgnoreCase("helidon")) {
+        // We do not need the helidon configuration directory, let's delete it.
+        FileUtils.forceDelete(new File(outputDirectory, "src/main/helidon"))
     }
 }
 
