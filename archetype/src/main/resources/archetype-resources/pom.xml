@@ -8,8 +8,10 @@
 #set ($eeArtifactId = "jakarta.jakartaee-api")
 #set ($wildflyConfiguration = "standalone-full")
 #end
-#if (${jakartaVersion} == '10')
-#set ($eeApiVersion = "10.0.0")
+#if (${jakartaVersion} == '11')
+#set ($eeApiVersion = "11.0.0-M4")
+#elseif (${jakartaVersion} == '10')
+#set ($eeApiVersion = "11.0.0")
 #elseif (${jakartaVersion} == '9.1')
 #set ($eeApiVersion = "9.1.0")
 #elseif (${jakartaVersion} == '9')
@@ -64,6 +66,7 @@
 #else
 		<maven.compiler.release>${javaVersion}</maven.compiler.release>
 #end
+		<!-- TODO: replace above xml with final version once released -->
 		<jakartaee-api.version>${eeApiVersion}</jakartaee-api.version>
 #if (${runtime} == 'payara')
 		<payara.version>${payaraVersion}</payara.version>
