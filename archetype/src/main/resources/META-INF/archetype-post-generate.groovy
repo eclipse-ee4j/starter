@@ -63,7 +63,12 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, Jakarta EE 11 does not support Java SE 11")
     }
 
-    // TODO: check which runtime does not support Jakarta EE when released and exclude here
+    // TODO: only support GlassFish for EE 11 at start, replace Milestone release once released
+    if (jakartaVersion == '11' && !(runtime in ['none', 'glassfish'])) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, Currently only glassfish is supported for Jakarta EE 11")
+    }
+
     if (runtime == 'payara' && (jakartaVersion != '8') && (javaVersion == '8')) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
