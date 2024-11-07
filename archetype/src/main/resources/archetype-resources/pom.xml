@@ -8,7 +8,9 @@
 #set ($eeArtifactId = "jakarta.jakartaee-api")
 #set ($wildflyConfiguration = "standalone-full")
 #end
-#if (${jakartaVersion} == '10')
+#if (${jakartaVersion} == '11')
+#set ($eeApiVersion = "11.0.0-M4")
+#elseif (${jakartaVersion} == '10')
 #set ($eeApiVersion = "10.0.0")
 #elseif (${jakartaVersion} == '9.1')
 #set ($eeApiVersion = "9.1.0")
@@ -41,7 +43,16 @@
 #else
 #set ($wildflyVersion = "26.1.3.Final")
 #end
+#if (${jakartaVersion} == '11')
+#set ($glassfishContainerId = "glassfish8x")
+#if (${profile} == 'web')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/8.0.0-M8/web-8.0.0-M8.zip")
+#else
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/8.0.0-M8/glassfish-8.0.0-M8.zip")
+#end
+#end
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: refactor descision tree for setting container runtimes -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -64,6 +75,7 @@
 #else
 		<maven.compiler.release>${javaVersion}</maven.compiler.release>
 #end
+		<!-- TODO: replace above xml with final version once released -->
 		<jakartaee-api.version>${eeApiVersion}</jakartaee-api.version>
 #if (${runtime} == 'payara')
 		<payara.version>${payaraVersion}</payara.version>

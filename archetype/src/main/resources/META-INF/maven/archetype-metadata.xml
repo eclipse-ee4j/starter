@@ -19,16 +19,16 @@
       <defaultValue>org.eclipse</defaultValue>
     </requiredProperty>
     <requiredProperty key="jakartaVersion">
-      <defaultValue>10</defaultValue>
-      <validationRegex>^(8|9|9.1|10)$</validationRegex>
+      <defaultValue>11</defaultValue>
+      <validationRegex>^(8|9|9.1|10|11)$</validationRegex>
     </requiredProperty>
     <requiredProperty key="profile">
       <defaultValue>full</defaultValue>
       <validationRegex>^(core|web|full)$</validationRegex>
     </requiredProperty>
     <requiredProperty key="javaVersion">
-      <defaultValue>17</defaultValue>
-      <validationRegex>^(8|11|17)$</validationRegex>
+      <defaultValue>21</defaultValue>
+      <validationRegex>^(8|11|17|21)$</validationRegex>
     </requiredProperty>
     <requiredProperty key="docker">
       <defaultValue>no</defaultValue>
