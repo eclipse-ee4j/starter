@@ -5,7 +5,6 @@ on:
     - cron: "0 0 * * *" # Run at midnight UTC
   workflow_dispatch:
 
-#TODO: add cases for EE 11
 jobs:
   build-archetype:
     runs-on: ubuntu-latest
