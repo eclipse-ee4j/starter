@@ -13,7 +13,6 @@ on:
       - reopened
   workflow_dispatch:
 
-#TODO: add cases for EE 11
 jobs:
   build-archetype:
     runs-on: ubuntu-latest
