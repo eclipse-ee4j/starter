@@ -20,58 +20,49 @@ chmod(outputDirectory.toPath().resolve("mvnw").toFile())
 printSummary()
 
 private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, File outputDirectory) {
-    def validJakartaVersions = ['8', '9', '9.1', '10', '11']
-    if (!(jakartaVersion in validJakartaVersions)) {
+    if (!(jakartaVersion in ['8', '9', '9.1', '10', '11'])) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, valid Jakarta EE versions are: ${validJakartaVersions}")
+        throw new RuntimeException("Failed, valid Jakarta EE versions are 8, 9, 9.1, 10, and 11")
     }
 
-    def validProfiles = ['core', 'web', 'full']
-    if (!(profile in validProfiles)) {
+    if (!(profile in ['core', 'web', 'full'])) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, valid Jakarta EE profiles are: ${validProfiles}")
-    }
-    def validJavaVersions = ['8', '11', '17', '21']
-    if (!(javaVersion in validJavaVersions)) {
-        FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, valid Java SE versions are: ${validJavaVersions}")
+        throw new RuntimeException("Failed, valid Jakarta EE profiles are core, web, and full")
     }
 
-    def validRuntimes = ['none', 'glassfish', 'open-liberty', 'payara', 'tomee', 'wildfly']
-    if (!(runtime in validRuntimes)) {
+    if (!(javaVersion in ['8', '11', '17', '21'])) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, valid runtime values are: ${validRuntimes}")
+        throw new RuntimeException("Failed, valid Java SE versions are 8, 11, 17, and 21")
     }
 
-    def validDockerOptions = ['yes', 'no']
-    if (!(docker in validDockerOptions)) {
+    if (!(runtime in ['none', 'glassfish', 'open-liberty', 'payara', 'tomee', 'wildfly'])) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, valid Docker options are: ${validDockerOptions}")
+        throw new RuntimeException("Failed, valid runtime values are none, glassfish, open-liberty, payara, tomee, and wildfly")
     }
 
-    if (profile == 'core' && !(jakartaVersion in ['10', '11'])) {
+    if (!(docker in ['yes', 'no'])) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10 and 11")
-    }
-    if ((javaVersion == '8') && (jakartaVersion in ['10', '11'])) {
-        FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, Jakarta EE 10 and 11 do not support Java SE 8")
+        throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
-    if ((javaVersion == '11') && (jakartaVersion == '11')) {
-        FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, Jakarta EE 11 does not support Java SE 11")
-    }
-
-    // TODO: only support GlassFish for EE 11 at start, replace Milestone release once released
     if (jakartaVersion == '11' && !(runtime in ['none', 'glassfish'])) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, Currently only glassfish is supported for Jakarta EE 11")
+        throw new RuntimeException("Failed, currently only GlassFish supports Jakarta EE 11")
     }
 
-    if (runtime == 'payara' && (jakartaVersion != '8') && (javaVersion == '8')) {
+    if ((profile == 'core') && (Double.valueOf(jakartaVersion) < 10)) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
+        throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10 and above")
+    }
+
+    if ((javaVersion == '8') && (Double.valueOf(jakartaVersion) > 9.1)) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, Java SE 8 is not supported in Jakarta EE versions 10 or later")
+    }
+
+    if ((javaVersion == '11') && (Double.valueOf(jakartaVersion) > 10)) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, Jakarta EE 11 does not support Java SE 11")
     }
 
     if (runtime == 'glassfish') {
@@ -82,14 +73,19 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
 
         if ((jakartaVersion != '8') && (javaVersion == '8')) {
             FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, GlassFish 7 does not support Java SE 8")
+            throw new RuntimeException("Failed, GlassFish 7 and above do not support Java SE 8")
         }
     }
 
+    if (runtime == 'payara' && (jakartaVersion != '8') && (javaVersion == '8')) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
+    }
+
     if (runtime == 'tomee') {
-        if (jakartaVersion in ['10', '11']) {
+        if (Double.valueOf(jakartaVersion) > 9.1) {
             FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, TomEE does not support Jakarta EE 10 or 11")
+            throw new RuntimeException("Failed, TomEE does not yet support Jakarta EE versions 10 or later")
         }
 
         if (jakartaVersion == '9') {
