@@ -111,7 +111,7 @@
 						<configuration>
 							<target>
 								<replaceregexp 
-									match="^\s*(#(if|else|set|elseif|end))" 
+									match="^\s*(#(if|else|set|elseif|end)|##)" 
 									replace="\1" 
 									flags="g" 
 									byline="true">
