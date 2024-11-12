@@ -1,21 +1,23 @@
 #if (${jakartaVersion} == '8')
-#set ($webAppVersion = "4.0")
-#set ($xmlns = "http://xmlns.jcp.org/xml/ns/javaee")
-#set ($schemaLocation = "http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd")
+    #set ($webAppVersion = "4.0")
+    #set ($xmlns = "http://xmlns.jcp.org/xml/ns/javaee")
+    #set ($schemaLocation = "http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd")
 #elseif ((${jakartaVersion} == '9') || (${jakartaVersion} == '9.1'))
-#set ($webAppVersion = "5.0")
-#set ($xmlns = "https://jakarta.ee/xml/ns/jakartaee")
-#set ($schemaLocation = "https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd")
+    #set ($webAppVersion = "5.0")
+    #set ($xmlns = "https://jakarta.ee/xml/ns/jakartaee")
+    #set ($schemaLocation = "https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd")
 #elseif (${jakartaVersion} == '10')
-#set ($webAppVersion = "6.0")
-#set ($xmlns = "https://jakarta.ee/xml/ns/jakartaee")
-#set ($schemaLocation = "https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd")
+    #set ($webAppVersion = "6.0")
+    #set ($xmlns = "https://jakarta.ee/xml/ns/jakartaee")
+    #set ($schemaLocation = "https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd")
 #end
+
 <web-app version="$webAppVersion"
-	xmlns="$xmlns"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="$schemaLocation">
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
+    xmlns="$xmlns"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="$schemaLocation">
+    
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>
