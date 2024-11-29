@@ -45,6 +45,7 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
+    // As there are more EE 11 runtimes, we will remove this temporary check.
     if (jakartaVersion == '11' && !(runtime in ['none', 'glassfish'])) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, currently only GlassFish supports Jakarta EE 11")
@@ -73,7 +74,7 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
 
         if ((jakartaVersion != '8') && (javaVersion == '8')) {
             FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, GlassFish 7 and above do not support Java SE 8")
+            throw new RuntimeException("Failed, GlassFish 8 does not support Java SE 8")
         }
     }
 
@@ -95,7 +96,7 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
 
         if (profile != 'web') {
             FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, TomEE does not support the full and Core Profiles")
+            throw new RuntimeException("Failed, TomEE only supports the Web Profile")
         }
 
         if ((jakartaVersion != '8') && (javaVersion == '8')) {
