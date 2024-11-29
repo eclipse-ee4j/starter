@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.starter</groupId>
@@ -16,32 +16,32 @@
 		<relativePath/>
 	</parent>
 
-	<name>Eclipse Starter for Jakarta EE Archetypes</name>
+	<name>Eclipse Starter for Jakarta EE Archetype</name>
 	<description>
 		This is the official Eclipse Foundation Starter for Jakarta EE.
 		It generates code to help get started with Jakarta EE projects. 
 		It is possible to do so using Maven archetypes. 
-        </description>
+    </description>
 
    	<url>https://github.com/eclipse-ee4j/starter</url>
-	
+
 	<organization>
 		<name>Eclipse Foundation</name>
 		<url>https://www.eclipse.org/org/foundation/</url>
 	</organization>
-	
+
 	<issueManagement>
 		<system>github</system>
 		<url>https://github.com/eclipse-ee4j/starter/issues</url>
 	</issueManagement>
-	
+
 	<licenses>
 		<license>
 			<name>Eclipse Public License - v 2.0</name>
 			<url>https://www.eclipse.org/legal/epl-2.0/</url>
 		</license>
 	</licenses>
-	
+
 	<developers>
 		<!-- All active committers should add their information here. -->
 		<developer>
@@ -59,13 +59,8 @@
 			<name>Ivar Grimstad</name>
 			<email>ivar.grimstad@eclipse-foundation.org</email>
 		</developer>
-		<developer>
-			<id>geziefer</id>
-			<name>Alexander Ruehl</name>
-			<email>alexander.ruehl@sti.valantic.com</email>
-		</developer>
 	</developers>
-	
+
 	<scm>
 		<connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
 		<developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
