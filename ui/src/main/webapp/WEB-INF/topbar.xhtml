@@ -1,32 +1,33 @@
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/WEB-INF/header_fragment.xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-  <h:outputText value="#{fetchHtmlUtility.headerHtml}" escape="false"/>
-  <div class="jumbotron featured-jumbotron header-default-bg-img margin-bottom-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-20 col-md-offset-2 col-sm-18 col-sm-offset-3">
-          <h1>Eclipse Starter for Jakarta EE</h1>
-          <h2>Generates code to help get started with Jakarta EE projects using Maven</h2>
+  <ui:define name="header-jumbotron">
+    <div class="jumbotron featured-jumbotron header-default-bg-img margin-bottom-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-20 col-md-offset-2 col-sm-18 col-sm-offset-3">
+            <h1>Eclipse Starter for Jakarta EE</h1>
+            <h2>Generates code to help get started with Jakarta EE projects using Maven</h2>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <section class="default-breadcrumbs hidden-print" id="breadcrumb">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-24">
-          <ol class="breadcrumb">
-            <li>
-              <a href="https://jakarta.ee/">Home</a>
-            </li>
-            <li class="active">
-              <a href="https://eclipse-ee4j.github.io/starter/">Eclipse Starter for Jakarta EE</a>
-            </li>
-          </ol>
+    <section class="default-breadcrumbs hidden-print" id="breadcrumb">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-24">
+            <ol class="breadcrumb">
+              <li>
+                <a href="https://jakarta.ee/">Home</a>
+              </li>
+              <li class="active">
+                <a href="https://eclipse-ee4j.github.io/starter/">Eclipse Starter for Jakarta EE</a>
+              </li>
+            </ol>
+          </div>
         </div>
+        <h3 class="sr-only">Breadcrumbs</h3>
       </div>
-      <h3 class="sr-only">Breadcrumbs</h3>
-    </div>
-  </section>
+    </section>
+  </ui:define>
 </ui:composition>

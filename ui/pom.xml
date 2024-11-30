@@ -59,7 +59,6 @@
       <email>ivar.grimstad@eclipse-foundation.org</email>
     </developer>
   </developers>
-
   <scm>
     <connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
     <developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
@@ -97,11 +96,6 @@
       <groupId>org.apache.maven.resolver</groupId>
       <artifactId>maven-resolver-connector-basic</artifactId>
       <version>1.9.16</version>
-    </dependency>
-    <dependency>
-        <groupId>org.jsoup</groupId>
-        <artifactId>jsoup</artifactId>
-        <version>1.17.2</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.resolver</groupId>
@@ -158,7 +152,7 @@
               <overwrite>true</overwrite>
 							<skipCache>true</skipCache>
             </configuration>
-          </execution>
+         </execution>
           <execution>
             <id>my-id-1</id>
             <phase>process-resources</phase>
@@ -174,6 +168,33 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.cosium.html</groupId>
+        <artifactId>html-to-xhtml-maven-plugin</artifactId>
+        <version>1.2</version>
+        <executions>
+          <!-- On Maven generate-resources phase, convert ${project.basedir}/example.html to  ${project.build.outputDirectory}/example.xhtml -->
+          <execution>
+            <id>convert-html-to-xhtml</id>
+            <phase>package</phase>
+            <goals>
+              <goal>html-to-xhtml</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <conversions>
+            <conversion>
+              <htmlInputFilePath>${project.build.directory}/jakarta-starter-ui/_template_header_.html</htmlInputFilePath>
+              <xhtmlOutputFilePath>${project.build.directory}/jakarta-starter-ui/WEB-INF/header_fragment.xhtml</xhtmlOutputFilePath>
+            </conversion>
+            <!-- <conversion>
+              <htmlInputFilePath>${project.build.directory}/jakarta-starter-ui/_template_footer_.html</htmlInputFilePath>
+              <xhtmlOutputFilePath>${project.build.directory}/jakarta-starter-ui/WEB-INF/footer_fragment.xhtml</xhtmlOutputFilePath>
+            </conversion> -->
+          </conversions>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
