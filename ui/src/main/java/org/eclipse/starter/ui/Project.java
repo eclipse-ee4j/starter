@@ -34,9 +34,7 @@ public class Project implements Serializable {
 	private static final Map<String, String> RUNTIMES = Map.ofEntries(entry("glassfish", "GlassFish"),
 			entry("open-liberty", "Open Liberty"), entry("payara", "Payara"), entry("tomee", "TomEE"),
 			entry("wildfly", "WildFly"));
-
-	private static final String DEFAULT_GROUPID = "org.eclipse";;
-
+	private static final String DEFAULT_GROUPID = "org.eclipse";
 	private static final String DEFAULT_ARTIFACTID = "jakartaee-hello-world";
 
 	private static Map<String, String> cache = new ConcurrentHashMap<>();
@@ -402,7 +400,7 @@ public class Project implements Serializable {
 				LOGGER.info("Downloading zip file.");
 				downloadZip(new File(workingDirectory, artifactId + ".zip"));
 
-				// caching makes only sense if defaults weren't changed since otherwise it's unlikely to hit cache
+				// Caching makes only sense if defaults weren't changed since otherwise it's unlikely to hit cache.
 				if (groupId.equals(DEFAULT_GROUPID) && artifactId.equals(DEFAULT_ARTIFACTID)) {
 					LOGGER.info("Caching output.");
 					cache.put(getCacheKey(), workingDirectory.getAbsolutePath());
@@ -422,7 +420,7 @@ public class Project implements Serializable {
 	}
 
 	private String getCacheKey() {
-		return jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker + ":" + runtime;
+		return jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker + ":" + runtime + ":" + groupId + ":" + artifactId;
 	}
 
 	private void downloadZip(File zip) {

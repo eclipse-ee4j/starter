@@ -1,8 +1,165 @@
 <ui:composition template="/WEB-INF/header_fragment.xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-  <ui:define name="header-jumbotron">
-    <div class="jumbotron featured-jumbotron header-default-bg-img margin-bottom-0">
+  <a class="sr-only" href="#content">Skip to main content</a>
+  <header class="header-wrapper header-default-bg-img" id="header-wrapper">
+    <div class="clearfix toolbar-container-wrapper">
+      <div class="container">
+        <div class="text-right toolbar-row row hidden-print">
+          <div class="col-md-24 row-toolbar-col">
+            <ul class="list-inline">
+              <li><a class="" data-tab-destination="tab-profile"
+                     href="https://accounts.eclipse.org/user/edit"><i class="fa fa-edit fa-fw"></i> Edit my
+                account</a></li>
+              <li><a class="toolbar-link toolbar-manage-cookies dropdown-toggle"><i
+                class="fa fa-wrench"></i> Manage Cookies</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row" id="header-row">
+        <div class="col-sm-5 col-md-4" id="header-left">
+          <div class="wrapper-logo-default">
+            <a href="https://jakarta.ee/" title="Jakarta EE: The New Home of Cloud Native Java">
+              <img alt="Jakarta EE: The New Home of Cloud Native Java" class="logo-eclipse-default img-responsive hidden-xs"
+                   src="https://jakarta.ee/images/jakarta/jakarta-ee-logo.svg"
+                   width="140"/>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-19 col-md-20 reset margin-top-10" id="main-menu-wrapper">
+          <div class="navbar yamm" id="main-menu">
+            <div class="navbar-collapse collapse reset float-right" id="navbar-main-menu">
+              <ul class="nav navbar-nav">
+                <li>
+                  <a class="" href="//jakarta.ee/about/">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a class="" href="//jakarta.ee/membership/">
+                    Membership
+                  </a>
+                </li>
+                <li>
+                  <a class="" href="//jakarta.ee/connect/">
+                    Connect
+                  </a>
+                </li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <b class="caret"></b>
+                    <span>Resources</span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="//jakarta.ee/resources#surveys">Surveys</a></li>
+                    <li><a href="//jakarta.ee/resources#infographics">Infographics</a></li>
+                    <li><a href="//jakarta.ee/resources#datasheets">Datasheets</a></li>
+                    <li><a href="//jakarta.ee/resources#presentations">Presentations</a></li>
+                    <li><a href="//jakarta.ee/community/adopt-a-spec/">Adopt A Spec</a></li>
+                    <li><a href="//jakarta.ee/committees">Committees</a></li>
+                    <li><a href="//jakarta.ee/newsletter/">Newsletter Archives</a></li>
+                    <li><a href="//jakarta.ee/meeting_minutes/">Meeting Minutes</a></li>
+                    <li><a href="https://Jakartablogs.ee">Blog</a></li>
+                    <li><a href="//jakarta.ee/resources#meetups">Tech Talk Meet-ups</a></li>
+                    <li><a href="https://www.youtube.com/channel/UC4M7h5b6elu9VlzjLfzuXyg">Jakarta
+                      EE YouTube Channel</a></li>
+                    <li><a
+                      href="https://projects.eclipse.org/list-of-projects?combine=jakarta&amp;field_project_techology_types_tid=1102&amp;field_state_value_2=All">Jakarta
+                      EE Specification Projects</a></li>
+                    <li><a
+                      href="https://drive.google.com/open?id=1kJFh6EIpOyAWP3JkymYZXOK311WM2HXm">Jakarta
+                      EE Community Folder</a></li>
+                    <li><a href="//jakarta.ee/resources#calendar">Jakarta EE Community Calendar</a>
+                    </li>
+                    <li><a href="https://start.jakarta.ee/">Starter for Jakarta EE</a></li>
+                    <li><a href="https://jakartaone.org/">JakartaOne Livestream</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a class="" href="//jakarta.ee/compatibility/">
+                    Compatible Products
+                  </a>
+                </li>
+                <li class="visible-xs"><a href="//jakarta.ee/release/">Releases</a></li>
+                <li class="dropdown eclipse-more hidden-xs">
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button">More<b
+                    class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <!-- Content container to add padding -->
+                      <div class="yamm-content">
+                        <div class="row">
+                          <ul class="col-sm-8 list-unstyled">
+                            <li>
+                              <p><strong>Community</strong></p>
+                            </li>
+                            <li><a href="http://marketplace.eclipse.org">Marketplace</a></li>
+                            <li><a href="http://events.eclipse.org">Events</a></li>
+                            <li><a href="http://www.planeteclipse.org/">Planet Eclipse</a></li>
+                            <li><a href="https://www.eclipse.org/community/eclipse_newsletter/">Newsletter</a>
+                            </li>
+                            <li><a href="https://www.youtube.com/user/EclipseFdn">Videos</a></li>
+                            <li><a href="https://blogs.eclipse.org">Blogs</a></li>
+                          </ul>
+                          <ul class="col-sm-8 list-unstyled">
+                            <li>
+                              <p><strong>Participate</strong></p>
+                            </li>
+                            <li><a href="https://bugs.eclipse.org/bugs/">Report a Bug</a></li>
+                            <li><a href="https://www.eclipse.org/forums/">Forums</a></li>
+                            <li><a href="https://www.eclipse.org/mail/">Mailing Lists</a></li>
+                            <li><a href="https://wiki.eclipse.org/">Wiki</a></li>
+                            <li><a href="https://wiki.eclipse.org/IRC">IRC</a></li>
+                          </ul>
+                          <ul class="col-sm-8 list-unstyled">
+                            <li>
+                              <p><strong>Eclipse IDE</strong></p>
+                            </li>
+                            <li><a href="https://www.eclipse.org/downloads">Download</a></li>
+                            <li><a href="https://help.eclipse.org">Documentation</a></li>
+                            <li><a href="https://www.eclipse.org/getting_started">Getting Started /
+                              Support</a></li>
+                            <li><a href="https://www.eclipse.org/contribute/">How to Contribute</a>
+                            </li>
+                            <li><a href="https://www.eclipse.org/ide/">IDE and Tools</a></li>
+                            <li><a href="https://www.eclipse.org/forums/index.php/f/89/">Newcomer
+                              Forum</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="navbar-header">
+              <button class="navbar-toggle" data-target="#navbar-main-menu" data-toggle="collapse"
+                      type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <div class="wrapper-logo-mobile">
+                <a class="navbar-brand visible-xs"
+                   href="https://start.jakarta.ee/"
+                   title="Jakarta EE: The New Home of Cloud Native Java">
+                  <img alt="Jakarta EE: The New Home of Cloud Native Java" class="logo-eclipse-default-mobile img-responsive"
+                       src="https://jakarta.ee/images/jakarta/jakarta-ee-logo.svg"
+                       width="140"/>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="jumbotron featured-jumbotron margin-bottom-0">
       <div class="container">
         <div class="row">
           <div class="col-md-20 col-md-offset-2 col-sm-18 col-sm-offset-3">
@@ -12,19 +169,20 @@
         </div>
       </div>
     </div>
-    <section class="default-breadcrumbs hidden-print" id="breadcrumb">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-24">
-            <ol class="breadcrumb">
-              <li>
-                <a href="https://jakarta.ee/">Home</a>
-              </li>
-              <li class="active">
-                <a href="https://eclipse-ee4j.github.io/starter/">Eclipse Starter for Jakarta EE</a>
-              </li>
-            </ol>
-          </div>
+  </header>
+
+  <section class="default-breadcrumbs hidden-print" id="breadcrumb">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-24">
+          <ol class="breadcrumb">
+            <li>
+              <a href="https://jakarta.ee/">Home</a>
+            </li>
+            <li class="active">
+              <a href="https://start.jakarta.ee/">Eclipse Starter for Jakarta EE</a>
+            </li>
+          </ol>
         </div>
         <h3 class="sr-only">Breadcrumbs</h3>
       </div>

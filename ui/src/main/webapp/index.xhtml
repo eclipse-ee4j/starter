@@ -23,7 +23,6 @@
       </p>
       <div class="card">
         <h:form>
-          <p:messages id="msg"/>
           <p:panelGrid
                   columnClasses="ui-grid-col-3, ui-grid-col-9"
                   columns="2" layout="grid" styleClass="text-align-left">
@@ -83,20 +82,28 @@
             <p:outputLabel for="@next" value="Group / Artifact"/>
             <p:column>
               <p:outputPanel class="input-container">
-                <p:inputText required="true" styleClass="input-field" value="#{project.groupId}"
-                             requiredMessage="Group has to be provided"
-                             validatorMessage="Group has to satisfy java package naming convention">
-                  <!-- groupId satisfies java package naming which must start with a letter followes by any number of letters, digits or underscore and then any number of similar parts separated by dot -->
+                <p:inputText id="groupIdInput"
+                             required="true"
+                             styleClass="input-field" 
+                             value="#{project.groupId}"
+                             requiredMessage="Group ID has to be provided."
+                             validatorMessage="Group ID has to satisfy Java package naming conventions.">
+                  <!-- groupId satisfies Java package naming which must start with a letter followed by any number of letters, digits, or underscore and then any number of similar parts separated by dot. -->
                   <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)*$"/>
-                  <p:ajax event="change" update="@this,msg"/>
+                  <p:ajax event="keyup" update="groupIdValidationMessage"/>
                 </p:inputText>
-                <p:inputText required="true" styleClass="input-field" value="#{project.artifactId}"
-                             requiredMessage="Artifact has to be provided"
-                             validatorMessage="Artifact has to satisfy jar naming convention">
-                  <!-- artifactId must start with a letter and then contain any number of letters, digits or underscore -->
+                <p:inputText id="artifactIdInput"
+                             required="true" 
+                             styleClass="input-field"
+                             value="#{project.artifactId}"
+                             requiredMessage="Artifact ID has to be provided."
+                             validatorMessage="Artifact ID has to satisfy jar naming conventions.">
+                  <!-- artifactId must start with a letter and then contain any number of letters, digits, or underscore. -->
                   <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_-]*$"/>
-                  <p:ajax event="change" update="@this,msg"/>
+                  <p:ajax event="keyup" update="artifactIdValidationMessage"/>
                 </p:inputText>
+                <p:message id="groupIdValidationMessage" for="groupIdInput" display="text"/>
+                <p:message id="artifactIdValidationMessage" for="artifactIdInput" display="text"/>
               </p:outputPanel>
             </p:column>
 
@@ -106,7 +113,6 @@
                                icon="pi pi-arrow-down"
                                action="#{project.generate}"/>
             </f:facet>
-
           </p:panelGrid>
         </h:form>
       </div>

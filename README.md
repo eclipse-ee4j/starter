@@ -24,10 +24,15 @@ In order to run the Maven Archetype and generate a sample Jakarta EE project, pl
 mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter"
 ```
 
-If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-hello-world`. The README.md file 
-under that directory will contain instructions on how to run the sample.
+If you use the defaults, this will generate the Jakarta EE project under a directory named `jakartaee-hello-world`. The README.md file under that directory will contain instructions on how to run the sample.
 
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide). The generated starter code is simply Maven projects. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
+
+To run a specific version of the Archetype, including the locally installed development version, specify the `archetypeVersion` property.
+
+```
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.5.0-SNAPSHOT"
+```
 
 ##  Running the UI
 In order to run the UI, please execute the following from this directory. You can also simply build the war from Maven and deploy the war to either WildFly 26 or JBoss EAP 7.4. You can do this in an IDE if desired. Note that you can override the underlying archetype version used by setting the `ARCHETYPE_VERSION` environment variable (the default version will be the most recent released to Maven Central, see [here](https://mvnrepository.com/artifact/org.eclipse.starter/jakarta-starter) for the latest value).
@@ -37,9 +42,6 @@ mvn clean package wildfly:dev --file ui/pom.xml
 ```
 
 Once WildFly starts, please go to [http://localhost:8080/jakarta-starter-ui/](http://localhost:8080/jakarta-starter-ui/). Unzip the file the UI generates and follow the README.md in the unzipped directory.
-
-## Known Issues
-* Note that Payara does not yet work on the Apple M1 chip. If you are on an M1 chip, we suggest you use another runtime for the time being with the Archetype.
 
 ## Contributing
 

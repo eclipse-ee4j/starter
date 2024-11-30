@@ -1,11 +1,11 @@
 #if (${jakartaVersion} == '8')
 #if (${runtime} == 'tomee')
 #if (${javaVersion} == '8')
-#set ($baseImage = "tomee:jre8-alpine-plume")
+#set ($baseImage = "tomee:8-jre8-plume")
 #elseif (${javaVersion} == '11')
-#set ($baseImage = "tomee:jre11-alpine-plume")
+#set ($baseImage = "tomee:8-jre11-plume")
 #else
-#set ($baseImage = "tomee:alpine-plume")
+#set ($baseImage = "tomee:8-jre17-plume")
 #end
 #set ($deployDirectory = "/usr/local/tomee/webapps/")
 #elseif (${runtime} == 'payara')
@@ -42,23 +42,23 @@
 #else
 #if (${runtime} == 'tomee')
 #if (${javaVersion} == '11')
-#set ($baseImage = "tomee:9-jre11-alpine-plume")
+#set ($baseImage = "tomee:9-jre11-plume")
 #else
-#set ($baseImage = "tomee:9-alpine-plume")
+#set ($baseImage = "tomee:9-jre17-plume")
 #end
 #set ($deployDirectory = "/usr/local/tomee/webapps/")
 #elseif (${runtime} == 'payara')
 #if (${javaVersion} == '17')
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2024.1-jdk17")
+#set ($baseImage = "payara/server-full:6.2024.9-jdk17")
 #else
-#set ($baseImage = "payara/server-web:6.2024.1-jdk17")
+#set ($baseImage = "payara/server-web:6.2024.9-jdk17")
 #end
 #else
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2024.1")
+#set ($baseImage = "payara/server-full:6.2024.9")
 #else
-#set ($baseImage = "payara/server-web:6.2024.1")
+#set ($baseImage = "payara/server-web:6.2024.9")
 #end
 #end
 #set ($deployDirectory = "$DEPLOY_DIR")
