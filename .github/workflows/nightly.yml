@@ -309,7 +309,7 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=8 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
           
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-          ERROR_MESSAGE="TomEE does not support the full and Core Profiles"
+          ERROR_MESSAGE="TomEE only supports the Web Profile"
           if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
               echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
