@@ -45,7 +45,7 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
-    // As there are more EE 11 runtimes, we will remove this temporary check.
+    // As there are more EE 11 runtimes, we will remove this temporary blanket check.
     if (jakartaVersion == '11' && !(runtime in ['none', 'glassfish'])) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, currently only GlassFish supports Jakarta EE 11")
@@ -71,16 +71,18 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, GlassFish does not support the Core Profile")
         }
+    }
+
+    if (runtime == 'payara') {
+        if (jakartaVersion == '9') {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, Payara is certified against Jakarta EE 9.1, but not Jakarta EE 9")
+        }
 
         if ((jakartaVersion != '8') && (javaVersion == '8')) {
             FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, GlassFish 8 does not support Java SE 8")
+            throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
         }
-    }
-
-    if (runtime == 'payara' && (jakartaVersion != '8') && (javaVersion == '8')) {
-        FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
     }
 
     if (runtime == 'tomee') {

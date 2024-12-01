@@ -4,43 +4,56 @@
 #elseif (${profile} == 'web')
 #set ($eeArtifactId = "jakarta.jakartaee-web-api")
 #set ($wildflyConfiguration = "standalone")
-#else
+#elseif (${profile} == 'full')
 #set ($eeArtifactId = "jakarta.jakartaee-api")
 #set ($wildflyConfiguration = "standalone-full")
 #end
 #if (${jakartaVersion} == '11')
 #set ($eeApiVersion = "11.0.0-M4")
+#set ($glassfishContainerId = "glassfish8x")
+#if (${profile} == 'full')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/8.0.0-M8/glassfish-8.0.0-M8.zip")
+#elseif (${profile} == 'web')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/8.0.0-M8/web-8.0.0-M8.zip")
+#end
 #elseif (${jakartaVersion} == '10')
 #set ($eeApiVersion = "10.0.0")
+#set ($glassfishContainerId = "glassfish7x")
+#if (${profile} == 'full')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.19/glassfish-7.0.19.zip")
+#elseif (${profile} == 'web')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.19/web-7.0.19.zip")
+#end
+#set ($payaraVersion = "6.2024.9")
+#set ($wildflyVersion = "33.0.2.Final")
 #elseif (${jakartaVersion} == '9.1')
 #set ($eeApiVersion = "9.1.0")
-#elseif (${jakartaVersion} == '9')
-#set ($eeApiVersion = "9.0.0")
-#else
-#set ($eeApiVersion = "8.0.0")
+#set ($glassfishContainerId = "glassfish6x")
+#if (${profile} == 'full')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip")
+#elseif (${profile} == 'web')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.2.5/web-6.2.5.zip")
 #end
-#if (${jakartaVersion} == '8')
-#set ($tomeeVersion = "8.0.16")
-#set ($payaraVersion = "5.2022.5")
-#set ($glassfishContainerId = "glassfish5x")
-#if (${profile} == 'web')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/5.1.0/web-5.1.0.zip")
-#else
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
-#end
-#else
 #set ($payaraVersion = "6.2024.9")
 #set ($tomeeVersion = "9.1.3")
-#set ($glassfishContainerId = "glassfish8x")
-#if (${profile} == 'web')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/8.0.0-M8/web-8.0.0-M8.zip")
-#else
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/8.0.0-M8/glassfish-8.0.0-M8.zip")
+#elseif (${jakartaVersion} == '9')
+#set ($eeApiVersion = "9.0.0")
+#set ($glassfishContainerId = "glassfish6x")
+#if (${profile} == 'full')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip")
+#elseif (${profile} == 'web')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.2.5/web-6.2.5.zip")
 #end
+#elseif (${jakartaVersion} == '8')
+#set ($eeApiVersion = "8.0.0")
+#set ($glassfishContainerId = "glassfish5x")
+#if (${profile} == 'full')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
+#elseif (${profile} == 'web')
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/5.1.0/web-5.1.0.zip")
 #end
-#if (${jakartaVersion} == '10')
-#set ($wildflyVersion = "33.0.2.Final")
-#else
+#set ($payaraVersion = "5.2022.5")
+#set ($tomeeVersion = "8.0.16")
 #set ($wildflyVersion = "26.1.3.Final")
 #end
 <?xml version="1.0" encoding="UTF-8"?>
