@@ -151,9 +151,19 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9 -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
           rm -rf app/glassfish
 
+      - name: Run Archetype for EE 9 Web Profile, SE 8, GlassFish
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9 -Dprofile=web -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+          rm -rf app/glassfish
+
       - name: Run Archetype for EE 9.1, SE 8, GlassFish
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+          rm -rf app/glassfish
+
+      - name: Run Archetype for EE 9.1 Web Profile, SE 8, GlassFish
+        run: |
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=8 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
           rm -rf app/glassfish
           
       - name: Run Archetype for EE 8, SE 8, Open Liberty
