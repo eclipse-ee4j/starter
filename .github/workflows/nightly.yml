@@ -755,7 +755,7 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=11 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package" | tee mvn_output.txt
           
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-          ERROR_MESSAGE="TomEE does not yet support Jakarta EE 10"
+          ERROR_MESSAGE="TomEE does not yet support Jakarta EE versions 10 or later"
           if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
               echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
