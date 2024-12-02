@@ -876,16 +876,8 @@ jobs:
 
       - name: Run Archetype for EE 11, SE 17
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=11 -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
-            
-          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-          ERROR_MESSAGE="valid Jakarta EE versions are 8, 9, 9.1, and 10"
-          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
-              echo "Maven build did not fail, or the expected error message was not found. Test failed."
-              exit 1
-          fi
-            
-          rm -f mvn_output.txt          
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=11 -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
+          rm -rf app  
 
       - name: Run Archetype for EE 8, SE 17, GlassFish
         run: |
