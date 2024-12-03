@@ -74,14 +74,9 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     }
 
     if (runtime == 'payara') {
-        if (jakartaVersion == '9') {
+        if ((jakartaVersion == '9') || (jakartaVersion == '9.1')) {
             FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, Payara is certified against Jakarta EE 9.1, but not Jakarta EE 9")
-        }
-
-        if ((jakartaVersion != '8') && (javaVersion == '8')) {
-            FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, Payara 6 does not support Java SE 8")
+            throw new RuntimeException("Failed, Payara does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")
         }
     }
 
@@ -110,7 +105,7 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     if (runtime == 'wildfly') {
         if ((jakartaVersion == '9') || (jakartaVersion == '9.1')) {
             FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1")
+            throw new RuntimeException("Failed, WildFly does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")
         }
     }
 }
