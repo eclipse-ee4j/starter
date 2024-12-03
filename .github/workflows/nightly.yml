@@ -267,20 +267,7 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9 -DjavaVersion=8 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package" | tee mvn_output.txt
 
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-          ERROR_MESSAGE="Payara is certified against Jakarta EE 9.1, but not Jakarta EE 9"
-          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
-              echo "Maven build did not fail, or the expected error message was not found. Test failed."
-              exit 1
-          fi
-
-          rm -f mvn_output.txt
-
-      - name: Run Archetype for EE 9.1, SE 8, Payara
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=8 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package" | tee mvn_output.txt
-
-          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-          ERROR_MESSAGE="Payara 6 does not support Java SE 8"
+          ERROR_MESSAGE="Payara does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1"
           if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
               echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
@@ -380,20 +367,7 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9 -DjavaVersion=8 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package" | tee mvn_output.txt
 
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-          ERROR_MESSAGE="WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1"
-          if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
-              echo "Maven build did not fail, or the expected error message was not found. Test failed."
-              exit 1
-          fi
-          
-          rm -f mvn_output.txt
-
-      - name: Run Archetype for EE 9.1, SE 8, WildFly
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=8 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package" | tee mvn_output.txt
-
-          MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-          ERROR_MESSAGE="WildFly does not offer a release for Jakarta EE 9 or Jakarta EE 9.1"
+          ERROR_MESSAGE="WildFly does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1"
           if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
               echo "Maven build did not fail, or the expected error message was not found. Test failed."
               exit 1
@@ -646,30 +620,6 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 11, Payara, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=11 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
-          docker build -t test-image app/payara/jakartaee-hello-world
-          docker rmi test-image
-          rm -rf app/payara
-
-      - name: Run Archetype for EE 9.1, SE 11, Payara
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=11 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
-          rm -rf app/payara
-
-      - name: Run Archetype for EE 9.1, SE 11, Payara, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=11 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
-          docker build -t test-image app/payara/jakartaee-hello-world
-          docker rmi test-image
-          rm -rf app/payara
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 11, Payara
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
-          rm -rf app/payara
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 11, Payara, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=11 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           docker build -t test-image app/payara/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/payara
@@ -1044,30 +994,6 @@ jobs:
       - name: Run Archetype for EE 8 Web Profile, SE 17, Payara, with Docker
         run: |
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
-          docker build -t test-image app/payara/jakartaee-hello-world
-          docker rmi test-image
-          rm -rf app/payara
-
-      - name: Run Archetype for EE 9.1, SE 17, Payara
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=17 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
-          rm -rf app/payara
-
-      - name: Run Archetype for EE 9.1, SE 17, Payara, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
-          docker build -t test-image app/payara/jakartaee-hello-world
-          docker rmi test-image
-          rm -rf app/payara
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, Payara
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
-          rm -rf app/payara
-
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, Payara, with Docker
-        run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           docker build -t test-image app/payara/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/payara
