@@ -1275,206 +1275,206 @@ jobs:
           docker rmi test-image
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 9.1, SE 17, Open Liberty
+      - name: Run Archetype for EE 9.1, SE 21, Open Liberty
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=17 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=21 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 9.1, SE 17, Open Liberty, with Docker
+      - name: Run Archetype for EE 9.1, SE 21, Open Liberty, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           docker build -t test-image app/open-liberty/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, Open Liberty
+      - name: Run Archetype for EE 9.1 Web Profile, SE 21, Open Liberty
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=21 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, Open Liberty, with Docker
+      - name: Run Archetype for EE 9.1 Web Profile, SE 21, Open Liberty, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           docker build -t test-image app/open-liberty/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 10, SE 17, Open Liberty
+      - name: Run Archetype for EE 10, SE 21, Open Liberty
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=21 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 10, SE 17, Open Liberty, with Docker
+      - name: Run Archetype for EE 10, SE 21, Open Liberty, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           docker build -t test-image app/open-liberty/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 10 Web Profile, SE 17, Open Liberty
+      - name: Run Archetype for EE 10 Web Profile, SE 21, Open Liberty
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=21 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 10 Web Profile, SE 17, Open Liberty, with Docker
+      - name: Run Archetype for EE 10 Web Profile, SE 21, Open Liberty, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           docker build -t test-image app/open-liberty/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 10 Core Profile, SE 17, Open Liberty
+      - name: Run Archetype for EE 10 Core Profile, SE 21, Open Liberty
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=21 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 10 Core Profile, SE 17, Open Liberty, with Docker
+      - name: Run Archetype for EE 10 Core Profile, SE 21, Open Liberty, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
           docker build -t test-image app/open-liberty/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/open-liberty
 
-      - name: Run Archetype for EE 8, SE 17, Payara
+      - name: Run Archetype for EE 8, SE 21, Payara
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=17 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=21 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
 
-      - name: Run Archetype for EE 8, SE 17, Payara, with Docker
+      - name: Run Archetype for EE 8, SE 21, Payara, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=21 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           docker build -t test-image app/payara/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/payara
 
-      - name: Run Archetype for EE 8 Web Profile, SE 17, Payara
+      - name: Run Archetype for EE 8 Web Profile, SE 21, Payara
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=21 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
 
-      - name: Run Archetype for EE 8 Web Profile, SE 17, Payara, with Docker
+      - name: Run Archetype for EE 8 Web Profile, SE 21, Payara, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=21 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           docker build -t test-image app/payara/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/payara
 
-      - name: Run Archetype for EE 10, SE 17, Payara
+      - name: Run Archetype for EE 10, SE 21, Payara
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=21 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
 
-      - name: Run Archetype for EE 10, SE 17, Payara, with Docker
+      - name: Run Archetype for EE 10, SE 21, Payara, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=21 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           docker build -t test-image app/payara/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/payara
 
-      - name: Run Archetype for EE 10 Web Profile, SE 17, Payara
+      - name: Run Archetype for EE 10 Web Profile, SE 21, Payara
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=21 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
 
-      - name: Run Archetype for EE 10 Web Profile, SE 17, Payara, with Docker
+      - name: Run Archetype for EE 10 Web Profile, SE 21, Payara, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=21 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           docker build -t test-image app/payara/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/payara
 
-      - name: Run Archetype for EE 10 Core Profile, SE 17, Payara
+      - name: Run Archetype for EE 10 Core Profile, SE 21, Payara
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=21 -Druntime=payara -DoutputDirectory=app/payara -Dgoals="clean package"
           rm -rf app/payara
 
-      - name: Run Archetype for EE 10 Core Profile, SE 17, Payara, with Docker
+      - name: Run Archetype for EE 10 Core Profile, SE 21, Payara, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=21 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
           docker build -t test-image app/payara/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/payara
           
-      - name: Run Archetype for EE 8 Web Profile, SE 17, TomEE
+      - name: Run Archetype for EE 8 Web Profile, SE 21, TomEE
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=21 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package"
           rm -rf app/tomee
 
-      - name: Run Archetype for EE 8 Web Profile, SE 17, TomEE, with Docker
+      - name: Run Archetype for EE 8 Web Profile, SE 21, TomEE, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime=tomee -Ddocker=yes -DoutputDirectory=app/tomee -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=21 -Druntime=tomee -Ddocker=yes -DoutputDirectory=app/tomee -Dgoals="clean package"
           docker build -t test-image app/tomee/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/tomee
 
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, TomEE
+      - name: Run Archetype for EE 9.1 Web Profile, SE 21, TomEE
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=21 -Druntime=tomee -DoutputDirectory=app/tomee -Dgoals="clean package"
           rm -rf app/tomee
 
-      - name: Run Archetype for EE 9.1 Web Profile, SE 17, TomEE, with Docker
+      - name: Run Archetype for EE 9.1 Web Profile, SE 21, TomEE, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=17 -Druntime=tomee -Ddocker=yes -DoutputDirectory=app/tomee -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=9.1 -Dprofile=web -DjavaVersion=21 -Druntime=tomee -Ddocker=yes -DoutputDirectory=app/tomee -Dgoals="clean package"
           docker build -t test-image app/tomee/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/tomee
 
-      - name: Run Archetype for EE 8, SE 17, WildFly
+      - name: Run Archetype for EE 8, SE 21, WildFly
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=17 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=21 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 8, SE 17, WildFly, with Docker
+      - name: Run Archetype for EE 8, SE 21, WildFly, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -DjavaVersion=21 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 8 Web Profile, SE 17, WildFly
+      - name: Run Archetype for EE 8 Web Profile, SE 21, WildFly
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=21 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 8 Web Profile, SE 17, WildFly, with Docker
+      - name: Run Archetype for EE 8 Web Profile, SE 21, WildFly, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=web -DjavaVersion=21 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 10, SE 17, WildFly
+      - name: Run Archetype for EE 10, SE 21, WildFly
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=21 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 10, SE 17, WildFly, with Docker
+      - name: Run Archetype for EE 10, SE 21, WildFly, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=21 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 10 Web Profile, SE 17, WildFly
+      - name: Run Archetype for EE 10 Web Profile, SE 21, WildFly
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=21 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 10 Web Profile, SE 17, WildFly, with Docker
+      - name: Run Archetype for EE 10 Web Profile, SE 21, WildFly, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=21 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 10 Core Profile, SE 17, WildFly
+      - name: Run Archetype for EE 10 Core Profile, SE 21, WildFly
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=21 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package"
           rm -rf app/wildfly
 
-      - name: Run Archetype for EE 10 Core Profile, SE 17, WildFly, with Docker
+      - name: Run Archetype for EE 10 Core Profile, SE 21, WildFly, with Docker
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=21 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
           docker build -t test-image app/wildfly/jakartaee-hello-world
           docker rmi test-image
           rm -rf app/wildfly
