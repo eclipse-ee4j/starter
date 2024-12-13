@@ -120,6 +120,7 @@
 				<version>${compiler-plugin.version}</version>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${war-plugin.version}</version>
 #if (${profile} == 'core')
