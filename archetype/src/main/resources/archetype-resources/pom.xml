@@ -122,9 +122,11 @@
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${war-plugin.version}</version>
+#if (${profile} == 'core')
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
+#end
 			</plugin>
 
 #if (${runtime} == 'glassfish')
