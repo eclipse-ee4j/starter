@@ -20,11 +20,23 @@ You can run the application by executing the following command from the director
 ```
 
 #if ((${runtime} == 'payara') && (${profile} != 'full'))
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:8080](http://localhost:8080).
+#else
+Once the runtime starts, you can access the REST end-point at [http://localhost:8080/rest/hello](http://localhost:8080/rest/hello).
+#end
 #elseif (${runtime} == 'open-liberty')
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:9080](http://localhost:9080).
 #else
+Once the runtime starts, you can access the REST end-point at [http://localhost:9080/rest/hello](http://localhost:9080/rest/hello).
+#end
+#else
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:8080/${artifactId}](http://localhost:8080/${artifactId}).
+#else
+Once the runtime starts, you can access the REST end-point at [http://localhost:8080/${artifactId}/rest/hello](http://localhost:8080/${artifactId}/rest/hello).
+#end
 #end
 
 #if ((${docker} == 'yes') and (${runtime} != 'glassfish'))
@@ -46,9 +58,17 @@ docker run -it --rm -p 9080:9080 ${artifactId}:v1
 ```
 
 #if (${runtime} != 'open-liberty')
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:8080/${artifactId}](http://localhost:8080/${artifactId}).
 #else
+Once the runtime starts, you can access the REST end-point at [http://localhost:8080/${artifactId}/rest/hello](http://localhost:8080/${artifactId}/rest/hello).
+#end
+#else
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:9080/](http://localhost:9080/).
+#else
+Once the runtime starts, you can access the REST end-point at [http://localhost:9080/rest/hello](http://localhost:9080/rest/hello).
+#end
 #end
 #end
 #else
