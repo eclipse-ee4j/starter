@@ -109,7 +109,11 @@
 #end
 #end
 #if (${runtime} == 'wildfly')
+#if (${javaVersion} == '8')
+		<wildfly-plugin.version>3.0.2.Final</wildfly-plugin.version>
+#else
 		<wildfly-plugin.version>5.0.1.Final</wildfly-plugin.version>
+#end
 #end
 #if (${runtime} == 'open-liberty')
 		<liberty-plugin.version>3.10.3</liberty-plugin.version>
