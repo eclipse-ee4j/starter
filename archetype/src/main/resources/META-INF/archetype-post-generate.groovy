@@ -71,6 +71,11 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, GlassFish does not support the Core Profile")
         }
+
+        if ((Integer.valueOf(javaVersion) > 8) && (jakartaVersion == '8')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, GlassFish 5 only supports Java SE 8")
+        }        
     }
 
     if (runtime == 'payara') {
