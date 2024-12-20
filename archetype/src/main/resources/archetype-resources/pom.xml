@@ -47,9 +47,17 @@
 #set ($eeApiVersion = "9.0.0")
 #set ($glassfishContainerId = "glassfish6x")
 #if (${profile} == 'full')
+#if (${javaVersion} == '8')
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.0.0/glassfish-6.0.0.zip")
+#else
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip")
+#end
 #elseif (${profile} == 'web')
+#if (${javaVersion} == '8')
 #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.0.0/web-6.0.0.zip")
+#else
+#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.2.5/web-6.2.5.zip")
+#end
 #end
 #elseif (${jakartaVersion} == '8')
 #set ($eeApiVersion = "8.0.0")
