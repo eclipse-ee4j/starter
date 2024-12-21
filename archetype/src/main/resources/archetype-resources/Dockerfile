@@ -45,21 +45,21 @@
 #if (${runtime} == 'payara')
 #if (${javaVersion} == '21')
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2024.11-jdk21")
+#set ($baseImage = "payara/server-full:6.2024.12-jdk21")
 #else
-#set ($baseImage = "payara/server-web:6.2024.11-jdk21")
+#set ($baseImage = "payara/server-web:6.2024.12-jdk21")
 #end
 #elseif (${javaVersion} == '17')
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2024.11-jdk17")
+#set ($baseImage = "payara/server-full:6.2024.12-jdk17")
 #else
-#set ($baseImage = "payara/server-web:6.2024.11-jdk17")
+#set ($baseImage = "payara/server-web:6.2024.12-jdk17")
 #end
 #else
 #if (${profile} == 'full')
-#set ($baseImage = "payara/server-full:6.2024.11")
+#set ($baseImage = "payara/server-full:6.2024.12")
 #else
-#set ($baseImage = "payara/server-web:6.2024.11")
+#set ($baseImage = "payara/server-web:6.2024.12")
 #end
 #end
 #set ($deployDirectory = "$DEPLOY_DIR")
