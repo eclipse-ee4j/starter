@@ -20,8 +20,8 @@
 	<description>
 		This is the official Eclipse Foundation Starter for Jakarta EE.
 		It generates code to help get started with Jakarta EE projects. 
-		It is possible to do so using Maven archetypes. 
-        </description>
+		It is possible to do so using Maven archetypes.
+    </description>
 
    	<url>https://github.com/eclipse-ee4j/starter</url>
 

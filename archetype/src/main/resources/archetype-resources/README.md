@@ -17,9 +17,9 @@ is not actually needed. You may first need to execute `chmod +x mvnw`.
 #elseif (${runtime} == 'tomee')
 ./mvnw clean package tomee:run
 #elseif (${runtime} == 'wildfly')
-./mvnw clean package wildfly:dev
+./mvnw clean package wildfly:run
 #elseif (${runtime} == 'open-liberty')
-./mvnw liberty:dev
+./mvnw clean package liberty:run
 #end
 ```
 

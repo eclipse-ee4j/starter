@@ -45,10 +45,10 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
-    // As there are more EE 11 runtimes, we will remove this temporary blanket check.
-    if (jakartaVersion == '11' && !(runtime in ['none', 'glassfish'])) {
+    // As EE 11 progresses, we will remove this temporary blanket check.
+    if ((jakartaVersion == '11') && !((profile == 'core') && (runtime in ['none', 'open-liberty']))) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, currently only GlassFish supports Jakarta EE 11")
+        throw new RuntimeException("Failed, for Jakarta EE 11 please choose Core Profile and Open Liberty or none as runtime at the current time")
     }
 
     if ((profile == 'core') && (Double.valueOf(jakartaVersion) < 10)) {
@@ -75,7 +75,7 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         if ((Integer.valueOf(javaVersion) > 8) && (jakartaVersion == '8')) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, GlassFish 5 only supports Java SE 8")
-        }        
+        }
     }
 
     if (runtime == 'payara') {

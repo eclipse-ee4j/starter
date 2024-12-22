@@ -10,12 +10,6 @@
 #end
 #if (${jakartaVersion} == '11')
 #set ($eeApiVersion = "11.0.0")
-#set ($glassfishContainerId = "glassfish8x")
-#if (${profile} == 'full')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/8.0.0-M9/glassfish-8.0.0-M9.zip")
-#elseif (${profile} == 'web')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/8.0.0-M9/web-8.0.0-M9.zip")
-#end
 #elseif (${jakartaVersion} == '10')
 #set ($eeApiVersion = "10.0.0")
 #set ($glassfishContainerId = "glassfish7x")
@@ -243,11 +237,22 @@
 				</configuration>
 			</plugin>
 #elseif (${runtime} == 'open-liberty')
-			<!-- Execute 'mvn liberty:dev' to run the application.  -->
+			<!-- Execute 'mvn clean package liberty:run' to run the application.  -->
 			<plugin>
 				<groupId>io.openliberty.tools</groupId>
 				<artifactId>liberty-maven-plugin</artifactId>
 				<version>${liberty-plugin.version}</version>
+## Once Open Liberty has a proper release for EE 11, this should be removed. 
+#if (${jakartaVersion} == '11')
+                <configuration>
+                    <runtimeArtifact>
+                        <groupId>io.openliberty.beta</groupId>
+                        <artifactId>openliberty-runtime</artifactId>
+                        <version>LATEST</version>
+                        <type>zip</type>
+                    </runtimeArtifact>
+                </configuration>
+#end
 			</plugin>
 #end
 		</plugins>
