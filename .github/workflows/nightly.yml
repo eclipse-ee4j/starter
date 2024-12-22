@@ -370,9 +370,9 @@ jobs:
           mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
           rm -rf app
 
-      - name: Run Archetype for EE 11, SE 11
+      - name: Run Archetype for EE 11 Core Profile, SE 11
         run: |
-          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=11 -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
+          mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
   
           MAVEN_EXIT_CODE=${PIPESTATUS[0]}
           ERROR_MESSAGE="EE 11 does not support Java SE 11"
