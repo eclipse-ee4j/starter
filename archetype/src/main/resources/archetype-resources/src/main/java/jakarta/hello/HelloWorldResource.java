@@ -9,13 +9,13 @@ import ${eePackage}.ws.rs.core.MediaType;
 @Path("hello")
 public class HelloWorldResource {
 
-	@GET
-	@Produces({ MediaType.APPLICATION_JSON })
-	public Hello hello(@QueryParam("name") String name) {
-		if ((name == null) || name.trim().isEmpty())  {
-			name = "world";
-		}
+  @GET
+  @Produces({ MediaType.APPLICATION_JSON })
+  public Hello hello(@QueryParam("name") String name) {
+    if ((name == null) || name.trim().isEmpty())  {
+      name = "world";
+    }
 
-		return new Hello(name);
-	}
+    return new Hello(name);
+  }
 }

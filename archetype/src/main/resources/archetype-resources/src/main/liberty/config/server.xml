@@ -13,11 +13,20 @@
 #else
         <feature>webProfile-9.1</feature>
 #end
-#else
+#elseif (${jakartaVersion} == '10')
 #if (${profile} == 'full')
         <feature>jakartaee-10.0</feature>
 #else
         <feature>webProfile-10.0</feature>
+#end
+#else
+#if (${profile} == 'full')
+        <feature>jakartaee-11.0</feature>
+#else
+## Once Open Liberty has a proper release for EE 11, this should be fixed.
+        <!-- <feature>webProfile-11.0</feature> -->
+        <feature>restfulWS-4.0</feature>
+        <feature>jsonb-3.0</feature>
 #end
 #end
     </featureManager>
