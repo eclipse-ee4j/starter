@@ -15,6 +15,7 @@ def outputDirectory = new File(request.getOutputDirectory(), request.getArtifact
 validateInput(jakartaVersion, profile, javaVersion, runtime, docker, outputDirectory)
 generateRuntime(runtime, jakartaVersion, docker, outputDirectory)
 bindEEPackage(jakartaVersion, outputDirectory)
+generateWebapp(profile, outputDirectory)
 generateDocker(docker, runtime, outputDirectory)
 chmod(outputDirectory.toPath().resolve("mvnw").toFile())
 printSummary()
@@ -179,6 +180,13 @@ private static void processFile(File file, String eePackage) throws IOException 
     String replacedContent = content.replaceAll('\\$\\{eePackage}', eePackage)
 
     Files.write(filePath, replacedContent.getBytes(StandardCharsets.UTF_8))
+}
+
+private generateWebapp(profile, File outputDirectory) {
+    if (profile.equalsIgnoreCase("core")) {
+        println "Core profile doesn't support Jakarta Servlet"
+        FileUtils.forceDelete(new File(outputDirectory, "src/main/webapp/"))
+    }
 }
 
 private generateDocker(docker, runtime, File outputDirectory) {
