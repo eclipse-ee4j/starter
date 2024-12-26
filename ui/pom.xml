@@ -59,7 +59,6 @@
       <email>ivar.grimstad@eclipse-foundation.org</email>
     </developer>
   </developers>
-
   <scm>
     <connection>scm:git:git://github.com/eclipse-ee4j/starter.git</connection>
     <developerConnection>scm:git:ssh://github.com:eclipse-ee4j/starter.git</developerConnection>
@@ -135,6 +134,68 @@
     </resources>
     
     <plugins>
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <version>1.3.0</version>
+        <executions>
+          <execution>
+            <id>my-id-0</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>https://jakarta.ee/templates/header/</url>
+              <outputFileName>_template_header_.html</outputFileName>
+              <outputDirectory>${project.build.directory}/jakarta-starter-ui</outputDirectory>
+              <overwrite>true</overwrite>
+							<skipCache>true</skipCache>
+            </configuration>
+         </execution>
+          <execution>
+            <id>my-id-1</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>https://jakarta.ee/templates/footer/</url>
+              <outputFileName>_template_footer_.html</outputFileName>
+              <outputDirectory>${project.build.directory}/jakarta-starter-ui</outputDirectory>
+              <overwrite>true</overwrite>
+							<skipCache>true</skipCache>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.cosium.html</groupId>
+        <artifactId>html-to-xhtml-maven-plugin</artifactId>
+        <version>1.2</version>
+        <executions>
+          <!-- On Maven generate-resources phase, convert ${project.basedir}/example.html to  ${project.build.outputDirectory}/example.xhtml -->
+          <execution>
+            <id>convert-html-to-xhtml</id>
+            <phase>package</phase>
+            <goals>
+              <goal>html-to-xhtml</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <conversions>
+            <conversion>
+              <htmlInputFilePath>${project.build.directory}/jakarta-starter-ui/_template_header_.html</htmlInputFilePath>
+              <xhtmlOutputFilePath>${project.build.directory}/jakarta-starter-ui/WEB-INF/header_fragment.xhtml</xhtmlOutputFilePath>
+            </conversion>
+            <!-- <conversion>
+              <htmlInputFilePath>${project.build.directory}/jakarta-starter-ui/_template_footer_.html</htmlInputFilePath>
+              <xhtmlOutputFilePath>${project.build.directory}/jakarta-starter-ui/WEB-INF/footer_fragment.xhtml</xhtmlOutputFilePath>
+            </conversion> -->
+          </conversions>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
