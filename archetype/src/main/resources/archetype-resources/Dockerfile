@@ -89,6 +89,8 @@
 ## Once Open Liberty has a proper release for EE 11, this should be removed.
 #if (${jakartaVersion} == '11')
 #set ($baseImage = "icr.io/appcafe/open-liberty:beta")
+#elseif (${javaVersion} == '21')
+#set ($baseImage = "icr.io/appcafe/open-liberty:full-java21-openj9-ubi-minimal")
 #elseif (${javaVersion} == '17')
 #set ($baseImage = "open-liberty:full-java17-openj9")
 #elseif (${javaVersion} == '11')
