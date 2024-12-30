@@ -95,8 +95,10 @@
 #set ($baseImage = "icr.io/appcafe/open-liberty:full-java17-openj9-ubi")
 #elseif (${javaVersion} == '11')
 #set ($baseImage = "icr.io/appcafe/open-liberty:full-java11-openj9-ubi")
-#else
+#elseif (${javaVersion} == '8')
 #set ($baseImage = "icr.io/appcafe/open-liberty:full-java8-openj9-ubi")
+#else
+#set ($baseImage = "icr.io/appcafe/open-liberty:latest")
 #end
 #set ($deployDirectory = "/config/apps/")
 #end
