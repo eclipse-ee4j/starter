@@ -80,7 +80,7 @@
 #elseif (${javaVersion} == '11')
 #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk11")
 #else
-#set ($baseImage = "quay.io/wildfly/wildfly:latest")
+#set ($baseImage = "quay.io/wildfly/wildfly")
 #end
 #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
 #end
@@ -98,7 +98,7 @@
 #elseif (${javaVersion} == '8')
 #set ($baseImage = "icr.io/appcafe/open-liberty:full-java8-openj9-ubi")
 #else
-#set ($baseImage = "icr.io/appcafe/open-liberty:latest")
+#set ($baseImage = "icr.io/appcafe/open-liberty")
 #end
 #set ($deployDirectory = "/config/apps/")
 #end
