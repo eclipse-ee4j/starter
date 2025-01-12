@@ -16,7 +16,6 @@
     #set ($webAppVersion = "6.1")
     #set ($schemaLocation = "https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd")
 #end
-
 <web-app version="$webAppVersion"
          xmlns="$xmlns"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

@@ -128,7 +128,7 @@
 				<version>3.1.0</version>
 				<executions>
 					<execution>
-						<!-- Remove leading space from velocity templates -->
+						<!-- Remove leading spaces from Velocity code. -->
 						<id>remove-leading-spaces</id>
 						<phase>process-resources</phase>
 						<goals>
@@ -141,9 +141,9 @@
 									replace="\1" 
 									flags="g" 
 									byline="true">
-									<fileset 
-										dir="${project.build.outputDirectory}/archetype-resources" 
-										includes="**/*.java Dockerfile **/*.xml **/*.html"/>
+									<fileset
+										dir="${project.build.outputDirectory}/archetype-resources"
+										includes="**/*.xml Dockerfile README.md"/>
 								</replaceregexp>
 							</target>
 						</configuration>

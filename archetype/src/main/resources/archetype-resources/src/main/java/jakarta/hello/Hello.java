@@ -2,13 +2,13 @@ package ${package}.jakarta.hello;
 
 public class Hello {
 
-  private String name;
+    private String name;
 
-  public Hello(String name) {
-    this.name = name;
-  }
+    public Hello(String name) {
+        this.name = name;
+    }
 
-  public String getHello(){
-    return name;
-  }
+    public String getHello(){
+        return name;
+    }
 }

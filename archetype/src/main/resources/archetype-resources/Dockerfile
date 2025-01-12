@@ -85,7 +85,6 @@
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
     #end
 #end
-
 #if (${runtime} == 'open-liberty')
     ## Once Open Liberty has a proper release for EE 11, this should be removed.
     #if (${jakartaVersion} == '11')
