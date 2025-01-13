@@ -155,9 +155,7 @@ static void bindEEPackage(String jakartaVersion, File outputDirectory) throws IO
 
     File[] files = outputDirectory.listFiles()
     if (files != null) {
-        files.each { file ->
-            traverseFiles(file, eePackage)
-        }
+        files.each { file -> traverseFiles(file, eePackage) }
     }
 }
 
@@ -165,9 +163,7 @@ private static void traverseFiles(File file, String eePackage) throws IOExceptio
     if (file.isDirectory()) {
         File[] files = file.listFiles()
         if (files != null) {
-            files.each { subFile ->
-                traverseFiles(subFile, eePackage)
-            }
+            files.each { subFile -> traverseFiles(subFile, eePackage) }
         }
     } else if (file.isFile() && file.getName().matches(".*\\.(xml|java)") && !file.getName().endsWith("pom.xml")) {
         processFile(file, eePackage)
