@@ -1,32 +1,32 @@
 <server description="defaultServer">
     <featureManager>
 #if (${jakartaVersion} == '8')
-    #if (${profile} == 'full')
+#if (${profile} == 'full')
         <feature>jakartaee-8.0</feature>
-    #else
-        <feature>webProfile-8.0</feature>
-    #end
-#elseif ((${jakartaVersion} == '9') || (${jakartaVersion} == '9.1'))
-    #if (${profile} == 'full')
-        <feature>jakartaee-9.1</feature>
-    #else
-        <feature>webProfile-9.1</feature>
-    #end
-#elseif (${jakartaVersion} == '10')
-    #if (${profile} == 'full')
-        <feature>jakartaee-10.0</feature>
-    #else
-        <feature>webProfile-10.0</feature>
-    #end
 #else
-    #if (${profile} == 'full')
+        <feature>webProfile-8.0</feature>
+#end
+#elseif ((${jakartaVersion} == '9') || (${jakartaVersion} == '9.1'))
+#if (${profile} == 'full')
+        <feature>jakartaee-9.1</feature>
+#else
+        <feature>webProfile-9.1</feature>
+#end
+#elseif (${jakartaVersion} == '10')
+#if (${profile} == 'full')
+        <feature>jakartaee-10.0</feature>
+#else
+        <feature>webProfile-10.0</feature>
+#end
+#else
+#if (${profile} == 'full')
         <feature>jakartaee-11.0</feature>
-    #else
-        ## Once Open Liberty has a proper release for EE 11, this should be fixed.
+#else
+## Once Open Liberty has a proper release for EE 11, this should be fixed.
         <!-- <feature>webProfile-11.0</feature> -->
         <feature>restfulWS-4.0</feature>
         <feature>jsonb-3.0</feature>
-    #end
+#end
 #end
     </featureManager>
     <basicRegistry id="defaultBasicRegistry" realm="BasicRealm">

@@ -10,40 +10,40 @@ the [Maven Wrapper](https://maven.apache.org/wrapper/) is already included in th
 is not actually needed. You may first need to execute `chmod +x mvnw`.
 
 ```
-    #if ((${runtime} == 'payara') && (${profile} != 'full'))
+#if ((${runtime} == 'payara') && (${profile} != 'full'))
 ./mvnw clean package payara-micro:start
-    #elseif ((${runtime} == 'payara') || (${runtime} == 'glassfish'))
+#elseif ((${runtime} == 'payara') || (${runtime} == 'glassfish'))
 ./mvnw clean package cargo:run
-    #elseif (${runtime} == 'tomee')
+#elseif (${runtime} == 'tomee')
 ./mvnw clean package tomee:run
-    #elseif (${runtime} == 'wildfly')
+#elseif (${runtime} == 'wildfly')
 ./mvnw clean package wildfly:run
-    #elseif (${runtime} == 'open-liberty')
+#elseif (${runtime} == 'open-liberty')
 ./mvnw clean package liberty:run
-    #end
+#end
 ```
 
-    #if ((${runtime} == 'payara') && (${profile} != 'full'))
-        #if (${profile} != 'core')
+#if ((${runtime} == 'payara') && (${profile} != 'full'))
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:8080](http://localhost:8080).
-        #else
+#else
 Once the runtime starts, you can access the REST end-point at [http://localhost:8080/rest/hello](http://localhost:8080/rest/hello).
-        #end
-    #elseif (${runtime} == 'open-liberty')
-        #if (${profile} != 'core')
+#end
+#elseif (${runtime} == 'open-liberty')
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:9080](http://localhost:9080).
-        #else
+#else
 Once the runtime starts, you can access the REST end-point at [http://localhost:9080/rest/hello](http://localhost:9080/rest/hello).
-        #end
-    #else
-        #if (${profile} != 'core')
+#end
+#else
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:8080/${artifactId}](http://localhost:8080/${artifactId}).
-        #else
+#else
 Once the runtime starts, you can access the REST end-point at [http://localhost:8080/${artifactId}/rest/hello](http://localhost:8080/${artifactId}/rest/hello).
-        #end
-    #end
+#end
+#end
 
-    #if ((${docker} == 'yes') and (${runtime} != 'glassfish'))
+#if ((${docker} == 'yes') and (${runtime} != 'glassfish'))
 You can also run the project via Docker. To build the Docker image, execute the following commands from the 
 directory where this file resides. Please ensure you have installed 
 a [Java SE implementation](https://adoptium.net) appropriate for your Jakarta EE version/runtime 
@@ -60,27 +60,27 @@ docker build -t ${artifactId}:v1 .
 You can then run the Docker image by executing:
 
 ```
-        #if (${runtime} != 'open-liberty')
+#if (${runtime} != 'open-liberty')
 docker run -it --rm -p 8080:8080 ${artifactId}:v1
-        #else
+#else
 docker run -it --rm -p 9080:9080 ${artifactId}:v1
-        #end
+#end
 ```
 
-        #if (${runtime} != 'open-liberty')
-            #if (${profile} != 'core')
+#if (${runtime} != 'open-liberty')
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:8080/${artifactId}](http://localhost:8080/${artifactId}).
-            #else
+#else
 Once the runtime starts, you can access the REST end-point at [http://localhost:8080/${artifactId}/rest/hello](http://localhost:8080/${artifactId}/rest/hello).
-            #end
-        #else
-            #if (${profile} != 'core')
+#end
+#else
+#if (${profile} != 'core')
 Once the runtime starts, you can access the project at [http://localhost:9080/](http://localhost:9080/).
-            #else
+#else
 Once the runtime starts, you can access the REST end-point at [http://localhost:9080/rest/hello](http://localhost:9080/rest/hello).
-            #end
-        #end
-    #end
+#end
+#end
+#end
 #else
 * You can build the application by executing the following command from the directory where this file resides. 
 Please ensure you have installed a [Java SE implementation](https://adoptium.net) appropriate for your 

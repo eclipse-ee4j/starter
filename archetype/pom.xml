@@ -123,31 +123,6 @@
                         <addDefaultExcludes>false</addDefaultExcludes>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <version>3.1.0</version>
-                    <executions>
-                        <execution>
-                            <!-- Remove leading spaces from Velocity code. -->
-                            <id>remove-leading-spaces</id>
-                            <phase>process-resources</phase>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                            <configuration>
-                                <target>
-                                    <replaceregexp match="^\s*(#(if|else|set|elseif|end))"
-                                                   replace="\1"
-                                                   flags="g" 
-                                                   byline="true">
-                                        <fileset dir="${project.build.outputDirectory}/archetype-resources"
-                                                 includes="**/*.xml Dockerfile README.md"/>
-                                    </replaceregexp>
-                                </target>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
         <extensions>
