@@ -13,6 +13,17 @@ The project maintains the following source code repositories
 
 * https://github.com/eclipse-ee4j/starter
 
+## Development Standards/Style
+
+We use four spaces for indentation. All files must end with a new line. Velocity code must be indented at a 
+separate level from the generated code.
+
+Note that the project performs pre-processing in Maven to make Velocity indentation in Archetypes possible.
+Only certain files (generated XML, Dockerfile, and README.md) is processed and only certain Velocity code
+is processed (inline-comments, if, else, elseif, end, and set). If you introduce Velocity in other files (for 
+example Java) or need other Velocity statements processed, the Maven pre-processing needs to be adjusted 
+accordingly.
+
 ## Eclipse Development Process
 
 This Eclipse Foundation open project is governed by the Eclipse Foundation

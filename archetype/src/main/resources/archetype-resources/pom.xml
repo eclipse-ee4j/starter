@@ -1,69 +1,69 @@
 #if (${profile} == 'core')
-#set ($eeArtifactId = "jakarta.jakartaee-core-api")
-#set ($wildflyConfiguration = "standalone")
+    #set ($eeArtifactId = "jakarta.jakartaee-core-api")
+    #set ($wildflyConfiguration = "standalone")
 #elseif (${profile} == 'web')
-#set ($eeArtifactId = "jakarta.jakartaee-web-api")
-#set ($wildflyConfiguration = "standalone")
+    #set ($eeArtifactId = "jakarta.jakartaee-web-api")
+    #set ($wildflyConfiguration = "standalone")
 #elseif (${profile} == 'full')
-#set ($eeArtifactId = "jakarta.jakartaee-api")
-#set ($wildflyConfiguration = "standalone-full")
+    #set ($eeArtifactId = "jakarta.jakartaee-api")
+    #set ($wildflyConfiguration = "standalone-full")
 #end
 #if (${jakartaVersion} == '11')
-#set ($eeApiVersion = "11.0.0")
+    #set ($eeApiVersion = "11.0.0")
 #elseif (${jakartaVersion} == '10')
-#set ($eeApiVersion = "10.0.0")
-#set ($glassfishContainerId = "glassfish7x")
-#if (${profile} == 'full')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.20/glassfish-7.0.20.zip")
-#elseif (${profile} == 'web')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.20/web-7.0.20.zip")
-#end
-#set ($payaraVersion = "6.2024.12")
-#set ($wildflyVersion = "34.0.1.Final")
+    #set ($eeApiVersion = "10.0.0")
+    #set ($glassfishContainerId = "glassfish7x")
+    #if (${profile} == 'full')
+        #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.20/glassfish-7.0.20.zip")
+    #elseif (${profile} == 'web')
+        #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.20/web-7.0.20.zip")
+    #end
+    #set ($payaraVersion = "6.2024.12")
+    #set ($wildflyVersion = "34.0.1.Final")
 #elseif (${jakartaVersion} == '9.1')
-#set ($eeApiVersion = "9.1.0")
-#set ($glassfishContainerId = "glassfish6x")
-#if (${profile} == 'full')
-#if (${javaVersion} == '8')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.0.0/glassfish-6.0.0.zip")
-#else
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip")
-#end
-#elseif (${profile} == 'web')
-#if (${javaVersion} == '8')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.0.0/web-6.0.0.zip")
-#else
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.2.5/web-6.2.5.zip")
-#end
-#end
-#set ($tomeeVersion = "9.1.3")
+    #set ($eeApiVersion = "9.1.0")
+    #set ($glassfishContainerId = "glassfish6x")
+    #if (${profile} == 'full')
+        #if (${javaVersion} == '8')
+            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.0.0/glassfish-6.0.0.zip")
+        #else
+            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip")
+        #end
+    #elseif (${profile} == 'web')
+        #if (${javaVersion} == '8')
+            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.0.0/web-6.0.0.zip")
+        #else
+            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.2.5/web-6.2.5.zip")
+        #end
+    #end
+    #set ($tomeeVersion = "9.1.3")
 #elseif (${jakartaVersion} == '9')
-#set ($eeApiVersion = "9.0.0")
-#set ($glassfishContainerId = "glassfish6x")
-#if (${profile} == 'full')
-#if (${javaVersion} == '8')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.0.0/glassfish-6.0.0.zip")
-#else
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip")
-#end
-#elseif (${profile} == 'web')
-#if (${javaVersion} == '8')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.0.0/web-6.0.0.zip")
-#else
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.2.5/web-6.2.5.zip")
-#end
-#end
+    #set ($eeApiVersion = "9.0.0")
+    #set ($glassfishContainerId = "glassfish6x")
+    #if (${profile} == 'full')
+        #if (${javaVersion} == '8')
+            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.0.0/glassfish-6.0.0.zip")
+        #else
+            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip")
+        #end
+    #elseif (${profile} == 'web')
+        #if (${javaVersion} == '8')
+            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.0.0/web-6.0.0.zip")
+        #else
+            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.2.5/web-6.2.5.zip")
+        #end
+    #end
 #elseif (${jakartaVersion} == '8')
-#set ($eeApiVersion = "8.0.0")
-#set ($glassfishContainerId = "glassfish5x")
-#if (${profile} == 'full')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
-#elseif (${profile} == 'web')
-#set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/5.1.0/web-5.1.0.zip")
-#end
-#set ($payaraVersion = "5.2022.5")
-#set ($tomeeVersion = "8.0.16")
-#set ($wildflyVersion = "26.1.3.Final")
+    #set ($eeApiVersion = "8.0.0")
+    #set ($glassfishContainerId = "glassfish5x")
+    #if (${profile} == 'full')
+        #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
+    #elseif (${profile} == 'web')
+        #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/5.1.0/web-5.1.0.zip")
+    #end
+    #set ($payaraVersion = "5.2022.5")
+    #set ($tomeeVersion = "8.0.16")
+    #set ($wildflyVersion = "26.1.3.Final")
 #end
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
@@ -106,18 +106,18 @@
         <cargo.version>1.10.15</cargo.version>
 #end
 #if ((${runtime} == 'payara') && (${profile} != 'full'))
-#if (${javaVersion} == '8')
+    #if (${javaVersion} == '8')
         <payara-micro-plugin.version>2.0</payara-micro-plugin.version>
-#else
+    #else
         <payara-micro-plugin.version>2.4</payara-micro-plugin.version>
-#end
+    #end
 #end
 #if (${runtime} == 'wildfly')
-#if (${javaVersion} == '8')
+    #if (${javaVersion} == '8')
         <wildfly-plugin.version>3.0.2.Final</wildfly-plugin.version>
-#else
+    #else
         <wildfly-plugin.version>5.0.1.Final</wildfly-plugin.version>
-#end
+    #end
 #end
 #if (${runtime} == 'open-liberty')
         <liberty-plugin.version>3.10.3</liberty-plugin.version>
@@ -189,7 +189,7 @@
                 </configuration>
             </plugin>
 #elseif (${runtime} == 'payara')
-#if (${profile} != 'full')
+    #if (${profile} != 'full')
             <!-- Execute 'mvn clean package payara-micro:start' to run the application. -->
             <plugin>
                 <groupId>fish.payara.maven.plugins</groupId>
@@ -212,7 +212,7 @@
                     <contextRoot>/</contextRoot>
                 </configuration>
             </plugin>
-#else
+    #else
             <!-- Execute 'mvn clean package cargo:run' to run the application. -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
@@ -229,7 +229,7 @@
                     </container>
                 </configuration>
             </plugin>
-#end
+    #end
 #elseif (${runtime} == 'wildfly')
             <!-- Execute 'mvn clean package wildfly:dev' to run the application. -->
             <plugin>
@@ -247,8 +247,8 @@
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>${liberty-plugin.version}</version>
-## Once Open Liberty has a proper release for EE 11, this should be removed. 
-#if (${jakartaVersion} == '11')
+    ## Once Open Liberty has a proper release for EE 11, this should be removed. 
+    #if (${jakartaVersion} == '11')
                 <configuration>
                     <runtimeArtifact>
                         <groupId>io.openliberty.beta</groupId>
@@ -257,7 +257,7 @@
                         <type>zip</type>
                     </runtimeArtifact>
                 </configuration>
-#end
+    #end
             </plugin>
 #end
         </plugins>

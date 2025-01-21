@@ -52,7 +52,7 @@
         <developer>
             <id>m-reza-rahman</id>
             <name>Reza Rahman</name>
-            <email>reza_rahman@lycos.com</email>
+            <email>reza_rahman@mail.com</email>
         </developer>
         <developer>
             <id>ivargrimstad</id>
@@ -97,34 +97,55 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <!-- Needed or else .gitignore is not copied -->
+                    <useDefaultExcludes>false</useDefaultExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <!-- Needed or else .gitignore is not copied -->
+                    <addDefaultExcludes>false</addDefaultExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <!-- Remove leading spaces from Velocity code. -->
+                        <id>remove-leading-spaces</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <replaceregexp match="^\s*(#(#|if|else|set|elseif|end))"
+                                               replace="\1"
+                                               flags="g"
+                                               byline="true">
+                                    <fileset dir="${project.build.outputDirectory}/archetype-resources"
+                                             includes="**/*.xml Dockerfile README.md"/>
+                                </replaceregexp>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.4.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-archetype-plugin</artifactId>
-                    <version>3.3.0</version>
-                    <configuration>
-                        <!-- Needed or else .gitignore is not copied -->
-                        <useDefaultExcludes>false</useDefaultExcludes>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.1</version>
-                    <configuration>
-                        <!-- Needed or else .gitignore is not copied -->
-                        <addDefaultExcludes>false</addDefaultExcludes>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
