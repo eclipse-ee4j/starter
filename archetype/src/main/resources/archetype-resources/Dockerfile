@@ -63,6 +63,9 @@
             #end
         #end
         #set ($deployDirectory = "$DEPLOY_DIR")
+    #elseif (${runtime} == 'glassfish')
+        #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.20")
+        #set ($deployDirectory = "/opt/glassfish7/glassfish/domains/domain1/autodeploy")
     #elseif (${runtime} == 'tomee')
         #if (${javaVersion} == '17')
             #set ($baseImage = "tomee:9-jre17-plume")
