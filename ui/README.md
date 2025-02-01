@@ -20,7 +20,7 @@ mvn clean install
 
 ##  Running the UI
 In order to run the UI, please execute the following from this directory. You can also simply build the war 
-from Maven and deploy the war to either WildFly 35 or JBoss EAP 8. You can do this in an IDE if desired. 
+from Maven and deploy the war to either WildFly 28 or JBoss EAP 8. You can do this in an IDE if desired. 
 Note that you can override the underlying archetype version used by setting the 
 `ARCHETYPE_VERSION` environment variable (the default version will be the most recent released to 
 Maven Central, see [here](https://mvnrepository.com/artifact/org.eclipse.starter/jakarta-starter) for the 
