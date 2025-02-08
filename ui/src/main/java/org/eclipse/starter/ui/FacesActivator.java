@@ -1,10 +1,10 @@
 package org.eclipse.starter.ui;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.annotation.FacesConfig;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.annotation.FacesConfig;
 
 @FacesConfig
 @ApplicationScoped
 public class FacesActivator {
-	// Just a marker, required to activate Faces 2.3.
+    // Just a marker, required to activate Faces 2.3.
 }
