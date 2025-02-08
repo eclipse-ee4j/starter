@@ -4,7 +4,6 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml">
-
     <ui:define name="content">
         <p:panel>
             <f:facet name="header">
@@ -27,7 +26,6 @@
                     <p:panelGrid
                             columnClasses="ui-grid-col-3, ui-grid-col-9"
                             columns="2" layout="grid" styleClass="text-align-left">
-
                         <p:outputLabel for="@next" value="Jakarta EE version"/>
                         <p:column>
                             <p:selectOneRadio required="true" 
@@ -62,7 +60,7 @@
 
                         <p:outputLabel for="@next" value="Java SE version"/>
                         <p:column>
-                            <p:selectOneRadio required="true" 
+                            <p:selectOneRadio required="true"
                                               value="#{project.javaVersion}"
                                               columns="3" layout="responsive">
                                 <f:selectItems value="#{project.javaVersions}"/>
@@ -71,7 +69,7 @@
                                         process="@form" update="@form"/>
                             </p:selectOneRadio>
                             <h:outputText styleClass="footnote" 
-                                          value="Java SE 8 requires Jakarta EE below 10."/>
+                                          value="Java SE 11 requires Jakarta EE below 11."/>
                         </p:column>
 
                         <p:outputLabel for="@next" value="Runtime"/>
@@ -85,13 +83,13 @@
                                         process="@form" update="@form"/>
                             </p:selectOneRadio>
                             <h:outputText styleClass="footnote"
-                                          value="GlassFish requires no Docker support and Web Profile or the Jakarta EE Platform, WildFly requires Jakarta EE 8 or 10, TomEE requires Web Profile and Jakarta EE 8 or 9.1."/>
+                                          value="GlassFish requires Web Profile or the Jakarta EE Platform, WildFly and Payara require Jakarta EE 8 or 10, TomEE requires Web Profile."/>
                         </p:column>
 
                         <p:outputLabel for="@next" value="Docker support" />
                         <p:column>
-                            <p:selectOneRadio required="true" 
-                                              value="#{project.docker}" 
+                            <p:selectOneRadio required="true"
+                                              value="#{project.docker}"
                                               columns="3" layout="responsive">
                                 <f:selectItems value="#{project.dockerFlags}"/>
                                 <p:ajax event="change"
