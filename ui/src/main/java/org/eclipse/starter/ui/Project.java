@@ -210,42 +210,34 @@ public class Project implements Serializable {
     public void onProfileChange() {
         LOGGER.log(Level.INFO,
             "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
-        jakartaVersions.get("8").setDisabled(false);
+                new Object[] { jakartaVersion, profile, javaVersion, docker,
+                runtime });
+        if (!(runtime.equals("glassfish") && (javaVersion > 8))) {
+            jakartaVersions.get("8").setDisabled(false);
+        }
 
-        if (!(runtime.equals("wildfly") || runtime.equals("tomee")
-                || (runtime.equals("payara") && (javaVersion == 8))
-                || (runtime.equals("glassfish") && (javaVersion == 8)))) {
+        if (!(runtime.equals("payara") || runtime.equals("tomee")
+                || runtime.equals("wildfly"))) {
             jakartaVersions.get("9").setDisabled(false);
         }
 
-        if (!(runtime.equals("wildfly")
-                || (runtime.equals("tomee") && (javaVersion == 8))
-                || (runtime.equals("payara") && (javaVersion == 8))
-                || (runtime.equals("glassfish") && (javaVersion == 8)))) {
+        if (!(runtime.equals("payara") || runtime.equals("wildfly")
+                || (runtime.equals("tomee") && (javaVersion == 8)))) {
             jakartaVersions.get("9.1").setDisabled(false);
         }
 
-        if ((jakartaVersion == 8)
-                || runtime.equals("open-liberty")
-                || runtime.equals("none")) {
-            javaVersions.get("8").setDisabled(false);
+        if (!docker && !((jakartaVersion == 8) && (javaVersion > 8))) {
+            runtimes.get("glassfish").setDisabled(false);
         }
 
         if ((jakartaVersion == 8) || ((jakartaVersion == 9.1) && (javaVersion != 8))) {
             runtimes.get("tomee").setDisabled(false);
         }
 
-        if (!docker && !((jakartaVersion != 8) && (javaVersion == 8))) {
-            runtimes.get("glassfish").setDisabled(false);
-        }
-
         if (profile.equals("core")) {
             jakartaVersions.get("8").setDisabled(true);
             jakartaVersions.get("9").setDisabled(true);
             jakartaVersions.get("9.1").setDisabled(true);
-
-            javaVersions.get("8").setDisabled(true);
 
             runtimes.get("glassfish").setDisabled(true);
             runtimes.get("tomee").setDisabled(true);
