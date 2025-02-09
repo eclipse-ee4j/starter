@@ -150,25 +150,29 @@ public class Project implements Serializable {
             "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
                 new Object[] { jakartaVersion, profile, javaVersion, docker,
                 runtime });
-        profiles.get("full").setDisabled(false);
+        if (!runtime.equals("tomee")) {
+            profiles.get("full").setDisabled(false);
+        }
+
         profiles.get("web").setDisabled(false);
         profiles.get("core").setDisabled(true);
 
+        javaVersions.get("8").setDisabled(true);
         javaVersions.get("11").setDisabled(false);
-
-        runtimes.get("tomee").setDisabled(true);
-        runtimes.get("payara").setDisabled(false);
 
         if (!docker && !profile.equals("core")) {
             runtimes.get("glassfish").setDisabled(false);
         }
+
+        runtimes.get("payara").setDisabled(false);
+        runtimes.get("tomee").setDisabled(true);
+        runtimes.get("wildfly").setDisabled(false);
 
         if (jakartaVersion == 11) {
             profiles.get("full").setDisabled(true);
             profiles.get("web").setDisabled(true);
             profiles.get("core").setDisabled(false);
 
-            javaVersions.get("8").setDisabled(true);
             javaVersions.get("11").setDisabled(true);
 
             runtimes.get("glassfish").setDisabled(true);
@@ -179,10 +183,6 @@ public class Project implements Serializable {
                     && !runtime.equals("tomee")) {
                 profiles.get("core").setDisabled(false);
             }
-
-            javaVersions.get("8").setDisabled(true);
-
-            runtimes.get("wildfly").setDisabled(false);
         } else {
             if ((jakartaVersion == 8)
                     || runtime.equals("open-liberty")
@@ -190,9 +190,12 @@ public class Project implements Serializable {
                 javaVersions.get("8").setDisabled(false);
             }
 
-            if (jakartaVersion == 8) {
-                runtimes.get("wildfly").setDisabled(false);
-            } else {
+            if ((jakartaVersion != 8) && (javaVersion == 8)) {
+                runtimes.get("glassfish").setDisabled(true);
+            }
+
+            if ((jakartaVersion == 9) || (jakartaVersion == 9.1)) {
+                runtimes.get("payara").setDisabled(true);
                 runtimes.get("wildfly").setDisabled(true);
             }
 
@@ -200,11 +203,6 @@ public class Project implements Serializable {
                     ((jakartaVersion == 8)
                     || ((jakartaVersion == 9.1) && (javaVersion != 8)))) {
                 runtimes.get("tomee").setDisabled(false);
-            }
-
-            if ((jakartaVersion != 8) && (javaVersion == 8)) {
-                runtimes.get("payara").setDisabled(true);
-                runtimes.get("glassfish").setDisabled(true);
             }
         }
     }
