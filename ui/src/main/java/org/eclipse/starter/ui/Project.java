@@ -293,7 +293,8 @@ public class Project implements Serializable {
     public void onDockerChange() {
         LOGGER.log(Level.INFO,
             "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
+                new Object[] { jakartaVersion, profile, javaVersion, docker,
+                runtime });
 
         if (docker) {
             runtimes.get("none").setDisabled(true);
@@ -301,7 +302,8 @@ public class Project implements Serializable {
         } else {
             runtimes.get("none").setDisabled(false);
 
-            if (!profile.equals("core") && !((jakartaVersion != 8) && (javaVersion == 8))) {
+            if (!profile.equals("core")
+                    && !((jakartaVersion == 8) && (javaVersion > 8))) {
                 runtimes.get("glassfish").setDisabled(false);
             }
         }
