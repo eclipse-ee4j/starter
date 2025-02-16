@@ -249,15 +249,27 @@ public class Project implements Serializable {
     public void onJavaVersionChange() {
         LOGGER.log(Level.INFO,
             "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[] { jakartaVersion, profile, javaVersion, docker, runtime });
-        runtimes.get("tomee").setDisabled(true);
-        runtimes.get("payara").setDisabled(false);
+                new Object[] { jakartaVersion, profile, javaVersion, docker, 
+                runtime });
+        if (!runtime.equals("tomee")) {
+            jakartaVersions.get("10").setDisabled(false);
+        }
+
+        jakartaVersions.get("11").setDisabled(true);
+
+        if ((jakartaVersion > 10) && !runtime.equals("tomee")
+                && !runtime.equals("glassfish")) {
+            profiles.get("core").setDisabled(false);
+        }
 
         if (!docker && !profile.equals("core")) {
             runtimes.get("glassfish").setDisabled(false);
         }
 
+        runtimes.get("tomee").setDisabled(true);
+
         if ((jakartaVersion != 9) && (jakartaVersion != 9.1)) {
+            runtimes.get("payara").setDisabled(false);
             runtimes.get("wildfly").setDisabled(false);
         }
 
@@ -265,25 +277,32 @@ public class Project implements Serializable {
             jakartaVersions.get("10").setDisabled(true);
             profiles.get("core").setDisabled(true);
 
+            if (jakartaVersion > 9.1) {
+                runtimes.get("glassfish").setDisabled(true);
+            }            
+            
             if (profile.equals("web") && (jakartaVersion == 8)) {
                 runtimes.get("tomee").setDisabled(false);
             }
 
             if (jakartaVersion != 8) {
                 runtimes.get("payara").setDisabled(true);
-                runtimes.get("glassfish").setDisabled(true);
                 runtimes.get("wildfly").setDisabled(true);
             }
         } else {
-            if (!runtime.equals("tomee")) {
-                jakartaVersions.get("10").setDisabled(false);
+            if ((javaVersion > 11) && profile.equals("core") 
+                && (runtime.equals("open-liberty") || runtime.equals("none"))) {
+                jakartaVersions.get("11").setDisabled(false);
             }
 
-            if ((jakartaVersion == 10)
-                    && !runtime.equals("tomee") && !runtime.equals("glassfish")) {
-                profiles.get("core").setDisabled(false);
+            if ((javaVersion == 11) && (jakartaVersion == 11)) {
+                profiles.get("core").setDisabled(true);
             }
 
+            if (jakartaVersion == 8) {
+                runtimes.get("glassfish").setDisabled(true);
+            }
+    
             if (profile.equals("web") && ((jakartaVersion == 8) || (jakartaVersion == 9.1))) {
                 runtimes.get("tomee").setDisabled(false);
             }
