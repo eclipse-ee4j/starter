@@ -23,7 +23,7 @@
             <validationRegex>^(8|9|9.1|10|11)$</validationRegex>
         </requiredProperty>
         <requiredProperty key="profile">
-            <defaultValue>full</defaultValue>
+            <defaultValue>core</defaultValue>
             <validationRegex>^(core|web|full)$</validationRegex>
         </requiredProperty>
         <requiredProperty key="javaVersion">
