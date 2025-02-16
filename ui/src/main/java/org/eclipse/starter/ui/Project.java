@@ -257,7 +257,7 @@ public class Project implements Serializable {
 
         jakartaVersions.get("11").setDisabled(true);
 
-        if ((jakartaVersion > 10) && !runtime.equals("tomee")
+        if ((jakartaVersion > 9.1) && !runtime.equals("tomee")
                 && !runtime.equals("glassfish")) {
             profiles.get("core").setDisabled(false);
         }
@@ -341,47 +341,72 @@ public class Project implements Serializable {
             jakartaVersions.get("10").setDisabled(false);
         }
 
-        if (jakartaVersion == 10) {
+        jakartaVersions.get("11").setDisabled(true);
+
+        if (jakartaVersion > 9.1) {
             profiles.get("core").setDisabled(false);
         }
 
         profiles.get("full").setDisabled(false);
 
-        if (jakartaVersion != 10) {
+        if (jakartaVersion < 10) {
             javaVersions.get("8").setDisabled(false);
         }
 
+        if (jakartaVersion < 11) {
+            javaVersions.get("11").setDisabled(false);
+        }
+
+        javaVersions.get("17").setDisabled(false);
+        javaVersions.get("21").setDisabled(false);
+
         dockerFlags.get("true").setDisabled(false);
 
-        if (runtime.equals("none")) {
-            dockerFlags.get("true").setDisabled(true);
-        } else if (runtime.equals("payara")) {
-            if (jakartaVersion != 8) {
-                javaVersions.get("8").setDisabled(true);
-            }
-        } else if (runtime.equals("glassfish")) {
-            dockerFlags.get("true").setDisabled(true);
-            profiles.get("core").setDisabled(true);
+        switch (runtime) {
+            case "none":
+                if (profile.equals("core") && (javaVersion > 11)) {
+                    jakartaVersions.get("11").setDisabled(false);
+                }
 
-            if (jakartaVersion != 8) {
-                javaVersions.get("8").setDisabled(true);
-            }
-        } else if (runtime.equals("tomee")) {
-            jakartaVersions.get("9").setDisabled(true);
-            jakartaVersions.get("10").setDisabled(true);
-            profiles.get("core").setDisabled(true);
-            profiles.get("full").setDisabled(true);
+                dockerFlags.get("true").setDisabled(true);
+                break;
+            case "glassfish":
+                profiles.get("core").setDisabled(true);
 
-            if (jakartaVersion != 8) {
-                javaVersions.get("8").setDisabled(true);
-            }
-        } else if (runtime.equals("wildfly")) {
-            jakartaVersions.get("9").setDisabled(true);
-            jakartaVersions.get("9.1").setDisabled(true);
+                if (jakartaVersion == 8) {
+                    javaVersions.get("11").setDisabled(true);
+                    javaVersions.get("17").setDisabled(true);
+                    javaVersions.get("21").setDisabled(true);
+                }
 
-            if (jakartaVersion != 8) {
-                javaVersions.get("8").setDisabled(true);
-            }
+                dockerFlags.get("true").setDisabled(true);
+                break;
+            case "open-liberty":
+                if (profile.equals("core") && (javaVersion > 11)) {
+                    jakartaVersions.get("11").setDisabled(false);
+                }
+                break;
+            case "payara":
+                jakartaVersions.get("9").setDisabled(true);
+                jakartaVersions.get("9.1").setDisabled(true);
+                break;
+            case "tomee":
+                jakartaVersions.get("9").setDisabled(true);
+                jakartaVersions.get("10").setDisabled(true);
+                profiles.get("core").setDisabled(true);
+                profiles.get("full").setDisabled(true);
+
+                if (jakartaVersion != 8) {
+                    javaVersions.get("8").setDisabled(true);
+                }
+
+                dockerFlags.get("true").setDisabled(true);
+                break;
+            case "wildfly":
+                jakartaVersions.get("9").setDisabled(true);
+                jakartaVersions.get("9.1").setDisabled(true);
+
+                break;
         }
     }
 
