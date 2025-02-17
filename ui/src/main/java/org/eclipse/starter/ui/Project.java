@@ -358,7 +358,9 @@ public class Project implements Serializable {
             profiles.get("core").setDisabled(false);
         }
 
-        profiles.get("full").setDisabled(false);
+        if (jakartaVersion != 11) {
+            profiles.get("full").setDisabled(false);
+        }
 
         if (jakartaVersion < 10) {
             javaVersions.get("8").setDisabled(false);
