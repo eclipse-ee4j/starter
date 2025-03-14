@@ -724,6 +724,18 @@ jobs:
 
                   rm -f mvn_output.txt
 
+            - name: Run Archetype for EE 10, SE 17, GlassFish, with Docker
+              run: |
+                mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=glassfish -Ddocker=yes -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                docker build -t test-image app/glassfish/jakartaee-hello-world
+                docker rmi test-image
+                rm -rf app/glassfish
+
+            - name: Run Archetype for EE 10 Web Profile, SE 17, GlassFish
+              run: |
+                mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.5.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=17 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                rm -rf app/glassfish
+
             - name: Run Archetype for EE 8, SE 17, Open Liberty, with Docker
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.6.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"

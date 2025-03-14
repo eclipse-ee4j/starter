@@ -4,63 +4,41 @@
 #elseif (${profile} == 'web')
     #set ($eeArtifactId = "jakarta.jakartaee-web-api")
     #set ($wildflyConfiguration = "standalone")
+    #set ($glassfishArtifact = "web")
 #elseif (${profile} == 'full')
     #set ($eeArtifactId = "jakarta.jakartaee-api")
     #set ($wildflyConfiguration = "standalone-full")
+    #set ($glassfishArtifact = "glassfish")
 #end
 #if (${jakartaVersion} == '11')
     #set ($eeApiVersion = "11.0.0")
 #elseif (${jakartaVersion} == '10')
     #set ($eeApiVersion = "10.0.0")
+    #set ($glassfishVersion = "7.0.20")
     #set ($glassfishContainerId = "glassfish7x")
-    #if (${profile} == 'full')
-        #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/7.0.22/glassfish-7.0.22.zip")
-    #elseif (${profile} == 'web')
-        #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/7.0.22/web-7.0.22.zip")
-    #end
     #set ($payaraVersion = "6.2025.1")
     #set ($wildflyVersion = "35.0.1.Final")
 #elseif (${jakartaVersion} == '9.1')
     #set ($eeApiVersion = "9.1.0")
     #set ($glassfishContainerId = "glassfish6x")
-    #if (${profile} == 'full')
-        #if (${javaVersion} == '8')
-            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.0.0/glassfish-6.0.0.zip")
-        #else
-            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip")
-        #end
-    #elseif (${profile} == 'web')
-        #if (${javaVersion} == '8')
-            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.0.0/web-6.0.0.zip")
-        #else
-            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.2.5/web-6.2.5.zip")
-        #end
+    #if (${javaVersion} == '8')
+        #set ($glassfishVersion = "6.0.0")
+    #else
+        #set ($glassfishVersion = "6.2.5")
     #end
     #set ($tomeeVersion = "9.1.3")
 #elseif (${jakartaVersion} == '9')
     #set ($eeApiVersion = "9.0.0")
     #set ($glassfishContainerId = "glassfish6x")
-    #if (${profile} == 'full')
-        #if (${javaVersion} == '8')
-            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.0.0/glassfish-6.0.0.zip")
-        #else
-            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/6.2.5/glassfish-6.2.5.zip")
-        #end
-    #elseif (${profile} == 'web')
-        #if (${javaVersion} == '8')
-            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.0.0/web-6.0.0.zip")
-        #else
-            #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/6.2.5/web-6.2.5.zip")
-        #end
+    #if (${javaVersion} == '8')
+        #set ($glassfishVersion = "6.0.0")
+    #else
+        #set ($glassfishVersion = "6.2.5")
     #end
 #elseif (${jakartaVersion} == '8')
     #set ($eeApiVersion = "8.0.0")
+    #set ($glassfishVersion = "5.1.0")
     #set ($glassfishContainerId = "glassfish5x")
-    #if (${profile} == 'full')
-        #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/glassfish/5.1.0/glassfish-5.1.0.zip")
-    #elseif (${profile} == 'web')
-        #set ($glassfishUrl = "https://repo.maven.apache.org/maven2/org/glassfish/main/distributions/web/5.1.0/web-5.1.0.zip")
-    #end
     #set ($payaraVersion = "5.2022.5")
     #set ($tomeeVersion = "8.0.16")
     #set ($wildflyVersion = "26.1.3.Final")
@@ -170,9 +148,12 @@
                 <configuration>
                     <container>
                         <containerId>${glassfishContainerId}</containerId>
-                        <zipUrlInstaller>
-                            <url>${glassfishUrl}</url>
-                        </zipUrlInstaller>
+                        <artifactInstaller>
+                            <groupId>org.glassfish.main.distributions</groupId>
+                            <artifactId>${glassfishArtifact}</artifactId>
+                            <version>${glassfishVersion}</version>
+                            <type>zip</type>
+                        </artifactInstaller>
                     </container>
                 </configuration>
             </plugin>
