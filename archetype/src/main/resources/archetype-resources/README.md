@@ -43,7 +43,7 @@ Once the runtime starts, you can access the REST end-point at [http://localhost:
         #end
     #end
 
-    #if (${docker} == 'yes')
+    #if (((${docker} == 'yes') && (${runtime} != 'glassfish')) || ((${runtime} == 'glassfish') && (${docker} == 'yes') && (${jakartaVersion} == '10') && (${profile} == 'full') && (${javaVersion} == 17)))
 You can also run the project via Docker. To build the Docker image, execute the following commands from the 
 directory where this file resides. Please ensure you have installed 
 a [Java SE implementation](https://adoptium.net) appropriate for your Jakarta EE version/runtime 

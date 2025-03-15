@@ -14,7 +14,7 @@
     #set ($eeApiVersion = "11.0.0")
 #elseif (${jakartaVersion} == '10')
     #set ($eeApiVersion = "10.0.0")
-    #set ($glassfishVersion = "7.0.20")
+    #set ($glassfishVersion = "7.0.22")
     #set ($glassfishContainerId = "glassfish7x")
     #set ($payaraVersion = "6.2025.1")
     #set ($wildflyVersion = "35.0.1.Final")
