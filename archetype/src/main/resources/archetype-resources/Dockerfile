@@ -42,7 +42,10 @@
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
     #end
 #else
-    #if (${runtime} == 'payara')
+    #if (${runtime} == 'glassfish')
+        #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.21")
+        #set ($deployDirectory = "/opt/glassfish7/glassfish/domains/domain1/autodeploy")    
+    #elseif (${runtime} == 'payara')
         #if (${javaVersion} == '21')
             #if (${profile} == 'full')
                 #set ($baseImage = "payara/server-full:6.2025.1-jdk21")
@@ -63,9 +66,6 @@
             #end
         #end
         #set ($deployDirectory = "$DEPLOY_DIR")
-    #elseif (${runtime} == 'glassfish')
-        #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.20")
-        #set ($deployDirectory = "/opt/glassfish7/glassfish/domains/domain1/autodeploy")
     #elseif (${runtime} == 'tomee')
         #if (${javaVersion} == '17')
             #set ($baseImage = "tomee:9-jre17-plume")

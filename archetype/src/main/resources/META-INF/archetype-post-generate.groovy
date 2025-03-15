@@ -13,7 +13,7 @@ def docker = request.properties["docker"].trim().toLowerCase()
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 
 validateInput(jakartaVersion, profile, javaVersion, runtime, docker, outputDirectory)
-generateRuntime(runtime, jakartaVersion, javaVersion, profile, docker, outputDirectory)
+generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, outputDirectory)
 bindEEPackage(jakartaVersion, outputDirectory)
 generateWebApp(profile, outputDirectory)
 generateDocker(docker, runtime, outputDirectory)
@@ -116,18 +116,18 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     }
 }
 
-private generateRuntime(runtime, jakartaVersion, javaVersion, profile, docker, File outputDirectory) {
+private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, File outputDirectory) {
     switch (runtime) {
         case "glassfish": println "Generating code for GlassFish"
             if (docker.equalsIgnoreCase("yes")) {
                 if (Double.valueOf(jakartaVersion) < 10) {
-                    println "WARNING: GlassFish does not support Docker for Jakarta EE ${jakartaVersion}, only for Jakarta EE 10 or newer"
+                    println "WARNING: GlassFish only supports Docker for Jakarta EE 10 or newer"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 } else if (javaVersion != '17') {
-                    println "WARNING: GlassFish does not support Docker for Java ${javaVersion}, only for Java 17"
+                    println "WARNING: GlassFish only supports Docker for Java 17"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 } else if (profile != 'full') {
-                    println "WARNING: GlassFish does not support Docker for Jakarta Core Profile or Jakarta Web Profile"
+                    println "WARNING: GlassFish only supports Docker for the full platform"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 }
             }
