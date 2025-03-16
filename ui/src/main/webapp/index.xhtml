@@ -1,160 +1,219 @@
-<ui:composition xmlns:f="jakarta.faces.core"
-                xmlns:h="jakarta.faces.html"
-                xmlns:ui="jakarta.faces.facelets"
-                xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml">
+<ui:composition
+    xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html"
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="content">
         <p:panel>
             <f:facet name="header">
-                <h:outputText value="Generate a Jakarta EE Project"
-                              styleClass="heading-underline"/>
+                <h:outputText
+                    value="Generate a Jakarta EE Project"
+                    styleClass="heading-underline" />
             </f:facet>
-            <p>
-                Select the options for the project and click generate. You will then 
-                be prompted to download a zip file that contains the project. Unzip 
-                the file and follow the README.md in the unzipped directory.
-            </p>
-            <p>
-                This interface ensures a valid combination of options every time you 
-                make a selection. It automatically disables any option which would 
-                result in invalid input. It enables options that are valid for a 
-                given selection. Some examples are provided below for each option.
-            </p>
+            <p>Select the options for the project and click generate. You
+                will then be prompted to download a zip file that contains the
+                project. Unzip the file and follow the README.md in the unzipped
+                directory.</p>
+            <p>This interface ensures a valid combination of options every
+                time you make a selection. It automatically disables any option
+                which would result in invalid input. It enables options that are
+                valid for a given selection. Some examples are provided below
+                for each option.</p>
             <div class="card">
                 <h:form>
                     <p:panelGrid
-                            columnClasses="ui-grid-col-3, ui-grid-col-9"
-                            columns="2" layout="grid" styleClass="text-align-left">
-                        <p:outputLabel for="@next" value="Jakarta EE version"/>
+                        columnClasses="ui-grid-col-3, ui-grid-col-9"
+                        columns="2"
+                        layout="grid"
+                        styleClass="text-align-left">
+                        <p:outputLabel
+                            for="@next"
+                            value="Jakarta EE version" />
                         <p:column>
-                            <p:selectOneRadio required="true" 
-                                              value="#{project.jakartaVersion}"
-                                              columns="3" layout="responsive">
-                                <f:convertNumber minFractionDigits="0"
-                                                 maxFractionDigits="1"
-                                                 locale="en-US" />
-                                <f:selectItems value="#{project.jakartaVersions}"/>
-                                <p:ajax event="change"
-                                        listener="#{project.onJakartaVersionChange}"
-                                        process="@form"
-                                        update="@form"/>
+                            <p:selectOneRadio
+                                required="true"
+                                value="#{project.jakartaVersion}"
+                                columns="3"
+                                layout="responsive">
+                                <f:convertNumber
+                                    minFractionDigits="0"
+                                    maxFractionDigits="1"
+                                    locale="en-US" />
+                                <f:selectItems
+                                    value="#{project.jakartaVersions}" />
+                                <p:ajax
+                                    event="change"
+                                    listener="#{project.onJakartaVersionChange}"
+                                    process="@form"
+                                    update="@form" />
                             </p:selectOneRadio>
-                            <h:outputText styleClass="footnote" 
-                                          value="Jakarta EE 10 requires Java SE above 8."/>
+                            <h:outputText
+                                styleClass="footnote"
+                                value="Jakarta EE 10 requires Java SE above 8." />
                         </p:column>
 
-                        <p:outputLabel for="@next" value="Jakarta EE profile"/>
+                        <p:outputLabel
+                            for="@next"
+                            value="Jakarta EE profile" />
                         <p:column>
-                            <p:selectOneRadio required="true"
-                                              value="#{project.profile}" columns="3"
-                                              layout="responsive">
-                                <f:selectItems value="#{project.profiles}"/>
-                                <p:ajax event="change"
-                                        listener="#{project.onProfileChange}"
-                                        process="@form" update="@form"/>
+                            <p:selectOneRadio
+                                required="true"
+                                value="#{project.profile}"
+                                columns="3"
+                                layout="responsive">
+                                <f:selectItems value="#{project.profiles}" />
+                                <p:ajax
+                                    event="change"
+                                    listener="#{project.onProfileChange}"
+                                    process="@form"
+                                    update="@form" />
                             </p:selectOneRadio>
-                            <h:outputText styleClass="footnote" 
-                                          value="Core Profile only available for Jakarta EE 10 and later."/>
+                            <h:outputText
+                                styleClass="footnote"
+                                value="Core Profile only available for Jakarta EE 10 and later." />
                         </p:column>
 
-                        <p:outputLabel for="@next" value="Java SE version"/>
+                        <p:outputLabel
+                            for="@next"
+                            value="Java SE version" />
                         <p:column>
-                            <p:selectOneRadio required="true"
-                                              value="#{project.javaVersion}"
-                                              columns="3" layout="responsive">
-                                <f:selectItems value="#{project.javaVersions}"/>
-                                <p:ajax event="change"
-                                        listener="#{project.onJavaVersionChange}"
-                                        process="@form" update="@form"/>
+                            <p:selectOneRadio
+                                required="true"
+                                value="#{project.javaVersion}"
+                                columns="3"
+                                layout="responsive">
+                                <f:selectItems value="#{project.javaVersions}" />
+                                <p:ajax
+                                    event="change"
+                                    listener="#{project.onJavaVersionChange}"
+                                    process="@form"
+                                    update="@form" />
                             </p:selectOneRadio>
-                            <h:outputText styleClass="footnote" 
-                                          value="Java SE 11 requires Jakarta EE below 11."/>
+                            <h:outputText
+                                styleClass="footnote"
+                                value="Java SE 11 requires Jakarta EE below 11." />
                         </p:column>
 
-                        <p:outputLabel for="@next" value="Runtime"/>
+                        <p:outputLabel
+                            for="@next"
+                            value="Runtime" />
                         <p:column>
-                            <p:selectOneRadio required="true" 
-                                              value="#{project.runtime}"
-                                              columns="3" layout="responsive">
-                                <f:selectItems value="#{project.runtimes}"/>
-                                <p:ajax event="change" 
-                                        listener="#{project.onRuntimeChange}"
-                                        process="@form" update="@form"/>
+                            <p:selectOneRadio
+                                required="true"
+                                value="#{project.runtime}"
+                                columns="3"
+                                layout="responsive">
+                                <f:selectItems value="#{project.runtimes}" />
+                                <p:ajax
+                                    event="change"
+                                    listener="#{project.onRuntimeChange}"
+                                    process="@form"
+                                    update="@form" />
                             </p:selectOneRadio>
-                            <h:outputText styleClass="footnote"
-                                          value="GlassFish requires Web Profile or the Jakarta EE Platform, WildFly and Payara require Jakarta EE 8 or 10, TomEE requires Web Profile."/>
+                            <h:outputText
+                                styleClass="footnote"
+                                value="GlassFish requires Web Profile or the Jakarta EE Platform, WildFly and Payara require Jakarta EE 8 or 10, TomEE requires Web Profile." />
                         </p:column>
 
-                        <p:outputLabel for="@next" value="Docker support" />
+                        <p:outputLabel
+                            for="@next"
+                            value="Docker support" />
                         <p:column>
-                            <p:selectOneRadio required="true"
-                                              value="#{project.docker}"
-                                              columns="3" layout="responsive">
-                                <f:selectItems value="#{project.dockerFlags}"/>
-                                <p:ajax event="change"
-                                        listener="#{project.onDockerChange}"
-                                        process="@form" update="@form"/>
+                            <p:selectOneRadio
+                                required="true"
+                                value="#{project.docker}"
+                                columns="3"
+                                layout="responsive">
+                                <f:selectItems value="#{project.dockerFlags}" />
+                                <p:ajax
+                                    event="change"
+                                    listener="#{project.onDockerChange}"
+                                    process="@form"
+                                    update="@form" />
                             </p:selectOneRadio>
-                            <h:outputText styleClass="footnote"
-                                          value="Docker support requires a runtime other than GlassFish."/>
+                            <h:outputText
+                                styleClass="footnote"
+                                value="Docker support requires a runtime, GlassFish offers limited Docker support." />
                         </p:column>
 
-                        <p:outputLabel for="@next" value="Group / Artifact"/>
+                        <p:outputLabel
+                            for="@next"
+                            value="Group/Artifact" />
                         <p:column>
                             <p:outputPanel class="input-container">
-                                <p:inputText id="groupIdInput"
-                                             required="true"
-                                             styleClass="input-field" 
-                                             value="#{project.groupId}"
-                                             requiredMessage="Group ID has to be provided."
-                                             validatorMessage="Group ID has to satisfy Java package naming conventions.">
+                                <p:inputText
+                                    id="groupIdInput"
+                                    required="true"
+                                    styleClass="input-field"
+                                    value="#{project.groupId}"
+                                    requiredMessage="Group ID has to be provided."
+                                    validatorMessage="Group ID has to satisfy Java package naming conventions.">
                                     <!-- groupId satisfies Java package naming which 
                                          must start with a letter followed by any 
                                          number of letters, digits, or underscore and 
                                          then any number of similar parts separated by 
                                          dot. -->
-                                    <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)*$"/>
-                                    <p:ajax event="keyup"
-                                            update="groupIdValidationMessage"/>
+                                    <f:validateRegex
+                                        pattern="^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)*$" />
+                                    <p:ajax
+                                        event="keyup"
+                                        update="groupIdValidationMessage" />
                                 </p:inputText>
-                                <p:inputText id="artifactIdInput"
-                                             required="true"
-                                             styleClass="input-field"
-                                             value="#{project.artifactId}"
-                                             requiredMessage="Artifact ID has to be provided."
-                                             validatorMessage="Artifact ID has to satisfy jar naming conventions.">
+                                <p:inputText
+                                    id="artifactIdInput"
+                                    required="true"
+                                    styleClass="input-field"
+                                    value="#{project.artifactId}"
+                                    requiredMessage="Artifact ID has to be provided."
+                                    validatorMessage="Artifact ID has to satisfy jar naming conventions.">
                                     <!-- artifactId must start with a letter and then 
                                          contain any number of letters, digits, or 
                                          underscore. -->
-                                    <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_-]*$"/>
-                                    <p:ajax event="keyup" 
-                                            update="artifactIdValidationMessage"/>
+                                    <f:validateRegex
+                                        pattern="^[a-zA-Z][a-zA-Z0-9_-]*$" />
+                                    <p:ajax
+                                        event="keyup"
+                                        update="artifactIdValidationMessage" />
                                 </p:inputText>
-                                <p:message id="groupIdValidationMessage" 
-                                           for="groupIdInput" display="text"/>
-                                <p:message id="artifactIdValidationMessage"
-                                           for="artifactIdInput" display="text"/>
+                                <p:message
+                                    id="groupIdValidationMessage"
+                                    for="groupIdInput"
+                                    display="text" />
+                                <p:message
+                                    id="artifactIdValidationMessage"
+                                    for="artifactIdInput"
+                                    display="text" />
                             </p:outputPanel>
                         </p:column>
 
                         <f:facet name="footer">
-                            <p:commandButton value="Generate" ajax="false"
-                                             styleClass="generate-button"
-                                             icon="pi pi-arrow-down"
-                                             action="#{project.generate}"/>
+                            <p:commandButton
+                                value="Generate"
+                                ajax="false"
+                                styleClass="generate-button"
+                                icon="pi pi-arrow-down"
+                                action="#{project.generate}" />
                         </f:facet>
                     </p:panelGrid>
                 </h:form>
             </div>
         </p:panel>
-        <br/>
+        <br />
         <p style="text-align: center; font-size: smaller">
             The official Jakarta EE Starter is hosted on
-            <a target="_blank" href="https://learn.microsoft.com/en-us/azure/developer/java/ee/jboss-on-azure#jboss-eap-on-azure-app-service">Azure App Service JBoss EAP</a>.
-            It is powered by <a target="_blank" href="https://jakarta.ee">Jakarta EE</a>,
-            <a target="_blank" href="https://jakarta.ee/specifications/faces/">Jakarta Faces</a> and
-            <a target="_blank" href="https://www.primefaces.org">PrimeFaces</a>.
+            <a
+                target="_blank"
+                href="https://learn.microsoft.com/azure/developer/java/ee/jboss-on-azure#jboss-eap-on-azure-app-service">Azure
+                App Service JBoss EAP</a>. It is powered by <a
+                target="_blank"
+                href="https://jakarta.ee">Jakarta EE</a>, <a
+                target="_blank"
+                href="https://jakarta.ee/specifications/faces/">Jakarta
+                Faces</a> and <a
+                target="_blank"
+                href="https://www.primefaces.org">PrimeFaces</a>.
         </p>
     </ui:define>
 </ui:composition>
