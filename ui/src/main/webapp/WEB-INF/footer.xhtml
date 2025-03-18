@@ -1,98 +1,145 @@
-<ui:composition xmlns:ui="jakarta.faces.facelets"
-                xmlns="http://www.w3.org/1999/xhtml">
-    <footer id="solstice-footer">
+<ui:composition xmlns:ui="jakarta.faces.facelets" xmlns="http://www.w3.org/1999/xhtml">
+    <footer id="solstice-footer" class="">
         <div class="container">
             <div class="row">
-                <a class="scrollup" href="#">Back to the top</a>
+                <section class="col-sm-5th footer-section-socials" id="footer-socials">
+                    <h2 class="section-title">
+                        <img class="img-responsive" src="https://jakarta.ee/images/jakarta/jakarta-ee-logo-white.svg"
+                            alt="Jakarta EE logo" />
+                    </h2>
+                    <ul class="list-inline margin-top-20">
+                        <li>
+                            <a class="social-icon" href="https://www.facebook.com/JakartaEE/">
+                                <i class="fa fa-facebook-official" aria-label="Facebook page for Jakarta EE"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="social-icon" href="https://ca.linkedin.com/showcase/jakartaee">
+                                <i class="fa fa-linkedin-square" aria-label="Linkedin profile for Jakarta EE"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="social-icon" href="https://twitter.com/JakartaEE">
+                                <i class="fa fa-twitter" aria-label="Twitter profile for Jakarta EE"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="social-icon" href="https://www.youtube.com/c/JakartaEE">
+                                <i class="fa fa-youtube-play" aria-label="Youtube channel for Jakarta EE"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <section class="col-sm-5th padding-top-20" id="footer-eclipse-foundation">
+                    <h2 class="section-title">Eclipse Foundation</h2>
+                    <ul class="nav">
+                        <li>
+                            <a href="https://www.eclipse.org/org/">About</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/org/foundation/contact.php">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/sponsor">Sponsor</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/membership">Membership</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/org/documents/">Governance</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/org/documents/Community_Code_of_Conduct.php"></a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/artwork/">Logo and Artwork</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/org/foundation/directors.php">Board of Directors</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/careers/">Careers</a>
+                        </li>
+                    </ul>
+                </section>
+                <section class="col-sm-5th padding-top-20" id="footer-legal">
+                    <h2 class="section-title">Legal</h2>
+                    <ul class="nav">
+                        <li>
+                            <a href="https://www.eclipse.org/legal/privacy.php">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/legal/termsofuse.php">Terms of Use</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/legal/compliance/">Compliance</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/legal/epl-2.0/">Eclipse Public License</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/legal/">Legal Resources </a>
+                        </li>
+                    </ul>
+                </section>
+                <section class="col-sm-5th padding-top-20" id="footer-useful-links">
+                    <h2 class="section-title">Useful Links</h2>
+                    <ul class="nav">
+                        <li>
+                            <a href="https://github.com/jakartaee/jakarta.ee">Report a Bug</a>
+                        </li>
+                        <li>
+                            <a href="https://jakarta.ee/resources/">Documentation</a>
+                        </li>
+                        <li>
+                            <a href="https://jakarta.ee/community/get-involved/">How to Contribute</a>
+                        </li>
+                        <li>
+                            <a href="https://jakarta.ee/connect/mailing-lists/">Mailing Lists</a>
+                        </li>
+                        <li>
+                            <a href="https://jakarta.ee/connect/">Stay Connected</a>
+                        </li>
+                        <li>
+                            <a href="https://jakarta.ee/compatibility/">Compatible Products</a>
+                        </li>
+                    </ul>
+                </section>
+                <section class="col-sm-5th padding-top-20" id="footer-other">
+                    <h2 class="section-title">More</h2>
+                    <ul class="nav">
+                        <li>
+                            <a href="https://www.eclipse.org/ide/">IDE and Tools</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/projects">Projects</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/org/workinggroups/">Working Groups</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/org/research/">Research@Eclipse</a>
+                        </li>
+                        <li>
+                            <a href="https://www.eclipse.org/security/">Report a Vulnerability</a>
+                        </li>
+                        <li>
+                            <a href="https://status.eclipse.org">Service Status</a>
+                        </li>
+                    </ul>
+                </section>
+                <a href="#" class="scrollup">Back to the top</a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
                 <div class="col-sm-24 margin-top-20">
                     <div class="row">
-                        <div class="col-md-16" id="copyright">
-                            <p id="copyright-text">Copyright © Eclipse Foundation, Inc. All Rights Reserved.</p>
-                        </div>
-                        <div class="col-md-8 social-media">
-                            <ul class="list-inline">
-                                <li>
-                                    <a class="social-media-link fa-stack fa-lg" 
-                                       href="https://twitter.com/JakartaEE">
-                                        <i class="fa fa-circle-thin fa-stack-2x"></i>
-                                        <i class="fa fa-twitter fa-stack-1x"></i>
-                                        <span class="sr-only">Twitter account</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="social-media-link fa-stack fa-lg"
-                                       href="https://www.facebook.com/JakartaEE">
-                                        <i class="fa fa-circle-thin fa-stack-2x"></i>
-                                        <i class="fa fa-facebook fa-stack-1x"></i>
-                                        <span class="sr-only">Facebook account</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="social-media-link fa-stack fa-lg"
-                                       href="https://www.youtube.com/channel/UC4M7h5b6elu9VlzjLfzuXyg">
-                                        <i class="fa fa-circle-thin fa-stack-2x"></i>
-                                        <i class="fa fa-youtube fa-stack-1x"></i>
-                                        <span class="sr-only">Youtube account</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="social-media-link fa-stack fa-lg"
-                                       href="https://www.linkedin.com/groups/13597511/"
-                                       title="">
-                                        <i class="fa fa-circle-thin fa-stack-2x"></i>
-                                        <i class="fa fa-linkedin fa-stack-1x"></i>
-                                        <span class="sr-only">Linkedin account</span>
-                                    </a>
-                                </li>
-                            </ul>
+                        <div id="copyright" class="col-md-16">
+                            <p id="copyright-text">Copyright © Eclipse Foundation AISBL. All Rights Reserved.</p>
                         </div>
                     </div>
                 </div>
-                <section class="col-sm-6 hidden-print" id="footer-useful-links">
-                    <h2 class="section-title">Useful Links</h2>
-                    <ul class="nav">
-                        <li><a href="https://bugs.eclipse.org/bugs/">Report a Bug</a></li>
-                        <li><a href="//help.eclipse.org/">Documentation</a></li>
-                        <li><a href="https://www.eclipse.org/contribute/">How to Contribute</a></li>
-                        <li><a href="https://www.eclipse.org/mail/">Mailing Lists</a></li>
-                        <li><a href="https://www.eclipse.org/forums/">Forums</a></li>
-                        <li><a href="//marketplace.eclipse.org">Marketplace</a></li>
-                    </ul>
-                </section>
-                <section class="col-sm-6 hidden-print" id="footer-other">
-                    <h2 class="section-title">Other</h2>
-                    <ul class="nav">
-                        <li><a href="https://www.eclipse.org/ide/">IDE and Tools</a></li>
-                        <li><a href="https://www.eclipse.org/projects">Projects</a></li>
-                        <li><a href="https://www.eclipse.org/org/workinggroups/">Working Groups</a></li>
-                        <li><a href="https://www.eclipse.org/org/research/">Research@Eclipse</a></li>
-                        <li><a href="https://www.eclipse.org/security/">Report a Vulnerability</a></li>
-                        <li><a href="https://status.eclipse.org">Service Status</a></li>
-                    </ul>
-                </section>
-                <section class="col-sm-6 hidden-print" id="footer-eclipse-foundation">
-                    <h2 class="section-title">Eclipse Foundation</h2>
-                    <ul class="nav">
-                        <li><a href="https://www.eclipse.org/org/">About Us</a></li>
-                        <li><a href="https://www.eclipse.org/org/foundation/contact.php">Contact Us</a></li>
-                        <li><a href="https://www.eclipse.org/donate">Donate</a></li>
-                        <li><a href="https://www.eclipse.org/membership">Members</a></li>
-                        <li><a href="https://www.eclipse.org/org/documents/">Governance</a></li>
-                        <li><a href="https://www.eclipse.org/org/documents/Community_Code_of_Conduct.php">Code of Conduct</a></li>
-                        <li><a href="https://www.eclipse.org/artwork/">Logo and Artwork</a></li>
-                        <li><a href="https://www.eclipse.org/org/foundation/directors.php">Board of Directors</a></li>
-                    </ul>
-                </section>
-                <section class="col-sm-6 hidden-print" id="footer-legal">
-                    <h2 class="section-title">Legal</h2>
-                    <ul class="nav">
-                        <li><a href="https://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
-                        <li><a href="https://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
-                        <li><a href="https://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
-                        <li><a href="https://www.eclipse.org/legal/epl-2.0/">Eclipse Public License</a></li>
-                        <li><a href="https://www.eclipse.org/legal/">Legal Resources </a></li>
-                    </ul>
-                </section>
             </div>
         </div>
     </footer>
