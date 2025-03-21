@@ -47,7 +47,7 @@ To run a specific version of the Archetype, including the locally installed deve
 the `archetypeVersion` property.
 
 ```
-mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.6.0-SNAPSHOT"
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.7.0-SNAPSHOT"
 ```
 
 ##  Running the UI
