@@ -46,10 +46,10 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
-    // As EE 11 progresses, we will remove this temporary blanket check.
-    if ((jakartaVersion == '11') && !((profile == 'core') && (runtime in ['none', 'open-liberty']))) {
+    // As EE 11 progresses, this check should be removed.
+    if ((profile == 'full') && (jakartaVersion == '11')) {
         FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, for Jakarta EE 11 please choose Core Profile and Open Liberty or none as runtime at the current time")
+        throw new RuntimeException("Failed, for Jakarta EE 11 please choose Core or Web Profile")
     }
 
     if ((profile == 'core') && (Double.valueOf(jakartaVersion) < 10)) {
@@ -79,7 +79,21 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         }
     }
 
+    if (runtime == 'open-liberty') {
+        // As EE 11 progresses, this check should be removed.
+        if ((jakartaVersion == '11') && (profile == 'web')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, Open Liberty does not yet support the Jakarta EE 11 Web Profile")
+        }
+    }
+
     if (runtime == 'payara') {
+        // As EE 11 progresses, this check should be removed.
+        if (jakartaVersion == '11') {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, Payara does not yet support Jakarta EE 11")
+        }
+
         if ((jakartaVersion == '9') || (jakartaVersion == '9.1')) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, Payara does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")
@@ -109,6 +123,12 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     }
 
     if (runtime == 'wildfly') {
+        // As EE 11 progresses, this check should be removed.
+        if ((jakartaVersion == '11') && (profile == 'web')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, WildFly does not yet support the Jakarta EE 11 Web Profile")
+        }
+		
         if ((jakartaVersion == '9') || (jakartaVersion == '9.1')) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, WildFly does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")
@@ -120,8 +140,8 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
     switch (runtime) {
         case "glassfish": println "Generating code for GlassFish"
             if (docker.equalsIgnoreCase("yes")) {
-                if (Double.valueOf(jakartaVersion) < 10) {
-                    println "WARNING: GlassFish only supports Docker for Jakarta EE 10 or newer"
+                if (Double.valueOf(jakartaVersion) != 10) {
+                    println "WARNING: GlassFish only supports Docker for Jakarta EE 10"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 } else if (javaVersion != '17') {
                     println "WARNING: GlassFish only supports Docker for Java 17"
