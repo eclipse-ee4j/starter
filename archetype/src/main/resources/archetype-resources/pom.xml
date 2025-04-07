@@ -11,10 +11,18 @@
     #set ($glassfishArtifact = "glassfish")
 #end
 #if (${jakartaVersion} == '11')
-    #set ($eeApiVersion = "11.0.0")
+    ## Update this once there is a proper release of EE 11.
+    #set ($eeApiVersion = "11.0.0-RC1")
+    #if (${javaVersion} == '17')
+        #set ($glassfishVersion = "8.0.0-JDK17-M10")
+    #else
+        #set ($glassfishVersion = "8.0.0-M10")
+    #end
+    #set ($glassfishContainerId = "glassfish8x")
+    #set ($wildflyVersion = "35.0.1.Final")
 #elseif (${jakartaVersion} == '10')
     #set ($eeApiVersion = "10.0.0")
-    #set ($glassfishVersion = "7.0.22")
+    #set ($glassfishVersion = "7.0.23")
     #set ($glassfishContainerId = "glassfish7x")
     #set ($payaraVersion = "6.2025.1")
     #set ($wildflyVersion = "35.0.1.Final")

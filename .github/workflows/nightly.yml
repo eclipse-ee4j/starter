@@ -132,7 +132,7 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=glassfish -Ddocker=yes -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
 
                   MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-                  WARN_MESSAGE="GlassFish only supports Docker for Jakarta EE 10 or newer"
+                  WARN_MESSAGE="GlassFish only supports Docker for Jakarta EE 10"
                   if ! { [ $MAVEN_EXIT_CODE -eq 0 ] && [ ! -f app/glassfish/jakartaee-hello-world/Dockerfile ] && grep -q "$WARN_MESSAGE" mvn_output.txt;  }; then
                       echo "Maven build failed, a Dockerfile was found, or the expected warning was not found. Test failed."
                       exit 1
@@ -682,13 +682,18 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
 
                   MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-                  ERROR_MESSAGE="for Jakarta EE 11 please choose Core Profile and Open Liberty or none as runtime at the current time"
+                  ERROR_MESSAGE="for Jakarta EE 11 please choose Core or Web Profile"
                   if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
                       echo "Maven build did not fail, or the expected error message was not found. Test failed."
                       exit 1
                   fi
 
                   rm -f mvn_output.txt
+
+            - name: Run Archetype for EE 11 Web Profile, SE 17
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
+                  rm -rf app
 
             - name: Run Archetype for EE 11 Core Profile, SE 17
               run: |
@@ -741,18 +746,24 @@ jobs:
                   rm -f mvn_output.txt
                   rm -rf app/glassfish
 
-            - name: Run Archetype for EE 11, SE 17, GlassFish
+            - name: Run Archetype for EE 11 Web Profile, SE 17, GlassFish
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=17 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=17 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                  rm -rf app/glassfish
+
+            - name: Run Archetype for EE 11 Web Profile, SE 17, GlassFish with Docker
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=17 -Druntime=glassfish -Ddocker=yes -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
 
                   MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-                  ERROR_MESSAGE="for Jakarta EE 11 please choose Core Profile and Open Liberty or none as runtime at the current time"
-                  if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
-                      echo "Maven build did not fail, or the expected error message was not found. Test failed."
+                  WARN_MESSAGE="GlassFish only supports Docker for Jakarta EE 10"
+                  if ! { [ $MAVEN_EXIT_CODE -eq 0 ] && [ ! -f app/glassfish/jakartaee-hello-world/Dockerfile ] && grep -q "$WARN_MESSAGE" mvn_output.txt;  }; then
+                      echo "Maven build failed, a Dockerfile was found, or the expected warning was not found. Test failed."
                       exit 1
                   fi
 
                   rm -f mvn_output.txt
+                  rm -rf app/glassfish
 
             - name: Run Archetype for EE 8, SE 17, Open Liberty, with Docker
               run: |
@@ -817,12 +828,12 @@ jobs:
                   docker rmi test-image
                   rm -rf app/open-liberty
 
-            - name: Run Archetype for EE 11, SE 17, Open Liberty
+            - name: Run Archetype for EE 11 Web Profile, SE 17, Open Liberty
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=17 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package" | tee mvn_output.txt
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=17 -Druntime="open-liberty" -DoutputDirectory=app/open-liberty -Dgoals="clean package" | tee mvn_output.txt
 
                   MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-                  ERROR_MESSAGE="for Jakarta EE 11 please choose Core Profile and Open Liberty or none as runtime at the current time"
+                  ERROR_MESSAGE="Open Liberty does not yet support the Jakarta EE 11 Web Profile"
                   if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
                       echo "Maven build did not fail, or the expected error message was not found. Test failed."
                       exit 1
@@ -877,7 +888,7 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package" | tee mvn_output.txt
 
                   MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-                  ERROR_MESSAGE="for Jakarta EE 11 please choose Core Profile and Open Liberty or none as runtime at the current time"
+                  ERROR_MESSAGE="Payara does not yet support Jakarta EE 11"
                   if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
                       echo "Maven build did not fail, or the expected error message was not found. Test failed."
                       exit 1
@@ -934,6 +945,26 @@ jobs:
                   docker rmi test-image
                   rm -rf app/wildfly
 
+            - name: Run Archetype for EE 11 Web Profile, SE 17, WildFly, with Docker
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=17 -Druntime=wilfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package" | tee mvn_output.txt
+
+                  MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+                  ERROR_MESSAGE="WildFly does not yet support the Jakarta EE 11 Web Profile"
+                  if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+                      echo "Maven build did not fail, or the expected error message was not found. Test failed."
+                      exit 1
+                  fi
+
+                  rm -f mvn_output.txt
+
+            - name: Run Archetype for EE 11 Core Profile, SE 17, WildFly, with Docker
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=17 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
+                  docker build -t test-image app/wildfly/jakartaee-hello-world
+                  docker rmi test-image
+                  rm -rf app/wildfly
+
             - name: Set up Java SE 21
               uses: actions/setup-java@v4
               with:
@@ -985,6 +1016,11 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=21 -DoutputDirectory=app -Dgoals="clean package"
                   rm -rf app
 
+            - name: Run Archetype for EE 11 Web Profile, SE 21
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=21 -DoutputDirectory=app -Dgoals="clean package"
+                  rm -rf app
+
             - name: Run Archetype for EE 11 Core Profile, SE 21
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=21 -DoutputDirectory=app -Dgoals="clean package"
@@ -1031,6 +1067,11 @@ jobs:
             - name: Run Archetype for EE 10 Web Profile, SE 21, GlassFish
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=21 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                  rm -rf app/glassfish
+
+            - name: Run Archetype for EE 11 Web Profile, SE 21, GlassFish
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=21 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
                   rm -rf app/glassfish
 
             - name: Run Archetype for EE 8, SE 21, Open Liberty, with Docker
@@ -1183,6 +1224,13 @@ jobs:
             - name: Run Archetype for EE 10 Core Profile, SE 21, WildFly, with Docker
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=21 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
+                  docker build -t test-image app/wildfly/jakartaee-hello-world
+                  docker rmi test-image
+                  rm -rf app/wildfly
+
+            - name: Run Archetype for EE 11 Core Profile, SE 21, WildFly, with Docker
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.7.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=21 -Druntime=wildfly -Ddocker=yes -DoutputDirectory=app/wildfly -Dgoals="clean package"
                   docker build -t test-image app/wildfly/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/wildfly
