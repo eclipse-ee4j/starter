@@ -22,11 +22,11 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes"/>
-            <link href="https://jakarta.ee/images/jakarta/favicon.ico" rel="icon" 
+            <link href="https://jakarta.ee/images/jakarta/favicon.ico" rel="icon"
                   type='image/x-icon'/>
         </f:facet>
 
-        <link rel="stylesheet" href="https://jakarta.ee/css/styles.css"></link>
+        <link rel="stylesheet" href="temp-styles.css"></link>
         <h:outputStylesheet>
             body .ui-widget {
                      font-size: 14px;
@@ -57,22 +57,45 @@
                      flex-grow: 1;
                      margin-right: 10px;
                  }
+
+                .starter .header-wrapper.header-default-bg-img {
+                    background-position: -140px 0;
+                }
+/* TODO: Make responsive */
+                .starter .header-wrapper .jumbotron .app-name {
+                    font-size: 18px;
+                    margin-bottom: .5rem;
+                }
+
+                 .starter .header-wrapper .jumbotron h1.app-heading {
+                     color: #f98200;
+                 }
+
+                 .starter .header-wrapper.header-secondary-bg-img .featured-jumbotron {
+                     padding-top: 100px;
+                 }
+
+                .starter .header-wrapper .featured-jumbotron .container {
+                    text-align: center;
+                }
+
+
         </h:outputStylesheet>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet" type="text/css"/>
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
         <title>Eclipse Starter for Jakarta EE</title>
     </h:head>
-    <h:body>
+    <h:body styleClass="starter">
         <f:view>
             <ui:include src="./topbar.xhtml"/>
             <main>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-18 padding-bottom-30">
-                            <p>Welcome to the official Eclipse Foundation Starter for 
-                              Jakarta EE. The starter uses a Maven Archetype to 
-                              generate sample code to get you going quickly with 
+                            <p>Welcome to the official Eclipse Foundation Starter for
+                              Jakarta EE. The starter uses a Maven Archetype to
+                              generate sample code to get you going quickly with
                               simple Jakarta EE microservices projects.</p>
                             <br/>
                             <ui:insert name="content"/>

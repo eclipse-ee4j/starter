@@ -12,14 +12,6 @@
                     value="Generate a Jakarta EE Project"
                     styleClass="heading-underline" />
             </f:facet>
-            <p>Select the options for the project and click generate. You
-                will then be prompted to download a zip file that contains the
-                project. Unzip the file and follow the README.md in the unzipped
-                directory.</p>
-            <p>This interface automatically disables invalid options and enables 
-               valid options each time you make a selection. Please make sure you 
-               choose a valid set of options after making each selection. Some 
-               validation examples are provided for each option.</p>
             <div class="card">
                 <h:form>
                     <p:panelGrid
@@ -149,10 +141,10 @@
                                     value="#{project.groupId}"
                                     requiredMessage="Group ID has to be provided."
                                     validatorMessage="Group ID has to satisfy Java package naming conventions.">
-                                    <!-- groupId satisfies Java package naming which 
-                                         must start with a letter followed by any 
-                                         number of letters, digits, or underscore and 
-                                         then any number of similar parts separated by 
+                                    <!-- groupId satisfies Java package naming which
+                                         must start with a letter followed by any
+                                         number of letters, digits, or underscore and
+                                         then any number of similar parts separated by
                                          dot. -->
                                     <f:validateRegex
                                         pattern="^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)*$" />
@@ -167,8 +159,8 @@
                                     value="#{project.artifactId}"
                                     requiredMessage="Artifact ID has to be provided."
                                     validatorMessage="Artifact ID has to satisfy jar naming conventions.">
-                                    <!-- artifactId must start with a letter and then 
-                                         contain any number of letters, digits, or 
+                                    <!-- artifactId must start with a letter and then
+                                         contain any number of letters, digits, or
                                          underscore. -->
                                     <f:validateRegex
                                         pattern="^[a-zA-Z][a-zA-Z0-9_-]*$" />
