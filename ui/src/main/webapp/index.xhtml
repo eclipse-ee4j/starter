@@ -6,13 +6,7 @@
     template="/WEB-INF/template.xhtml"
     xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="content">
-        <p:panel>
-            <f:facet name="header">
-                <h:outputText
-                    value="Generate a Jakarta EE Project"
-                    styleClass="heading-underline" />
-            </f:facet>
-            <div class="card">
+        <p:panel styleClass="card">
                 <h:form>
                     <p:panelGrid
                         columnClasses="ui-grid-col-3, ui-grid-col-9"
@@ -189,7 +183,6 @@
                         </f:facet>
                     </p:panelGrid>
                 </h:form>
-            </div>
         </p:panel>
         <br />
         <p style="text-align: center; font-size: smaller">
