@@ -175,11 +175,13 @@
 
                         <f:facet name="footer">
                             <p:commandButton
-                                value="Generate"
+                                value="Generate Project"
                                 ajax="false"
-                                styleClass="generate-button"
-                                icon="pi pi-arrow-down"
-                                action="#{project.generate}" />
+                                icon="chevron-right"
+                                iconPos="right"
+                                styleClass="btn btn-secondary margin-0"
+                                action="#{project.generate}" inline="">
+                            </p:commandButton>
                         </f:facet>
                     </p:panelGrid>
                 </h:form>
