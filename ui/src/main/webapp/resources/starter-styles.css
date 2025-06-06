@@ -20,9 +20,21 @@ body .ui-inputfield {
     text-align: center;
 }
 
-.ui-button.btn-secondary {
+body .ui-button.btn-secondary {
     background-color: #f98200;
     border-color: #f98200;
+    color: #fff;
+}
+
+body .ui-button.btn-secondary.ui-state-active {
+    background-color: #f98200;
+    border-color: #f98200;
+    color: #fff;
+}
+
+body .ui-button.btn-secondary.ui-state-hover {
+    background-color: #c66700;
+    border-color: #bc6200;
     color: #fff;
 }
 
@@ -62,7 +74,6 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
     background-color:  #1b208b;
 }
 
-/* TODO: Make responsive */
 .starter .header-wrapper .jumbotron .app-name {
     font-size: 18px;
     margin-bottom: .5rem;
@@ -89,7 +100,12 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
 .starter .content {
     position: relative;
     top: -100px;
-    /* TODO: Add breakpoints */
+}
+
+@media screen and (max-width: 570px) and (max-width: 1048px) {
+    .starter .content {
+        top: -50px;
+    }
 }
 
 .starter main .container .row {
