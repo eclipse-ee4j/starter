@@ -98,6 +98,10 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
     align-items: center;
 }
 
+.starter .info-card .info-card-heading {
+    font-size: 20px;
+}
+
 
 .footnote {
     margin-top: .5rem;
@@ -110,7 +114,7 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url(#{resource['chevron-right.svg']});
+    background-image: url(#{resource['icons:chevron-right.svg']});
 }
 
 .input-container {
