@@ -80,6 +80,10 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
     text-align: center;
 }
 
+.starter .info-cards {
+    padding-top: 10rem;
+}
+
 /** Starter styles */
 
 .starter .content {
