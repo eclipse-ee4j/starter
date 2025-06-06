@@ -92,7 +92,7 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
     /* TODO: Add breakpoints */
 }
 
-.starter .container .row {
+.starter main .container .row {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,7 +101,6 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
 .starter .info-card .info-card-heading {
     font-size: 20px;
 }
-
 
 .footnote {
     margin-top: .5rem;
