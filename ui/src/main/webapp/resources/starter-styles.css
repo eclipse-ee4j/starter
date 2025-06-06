@@ -1,6 +1,15 @@
 
+
+/** PrimeFaces overrides */
+
 body .ui-widget {
+    font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 14px;
+}
+
+body .ui-inputfield {
+    font-size: 14px;
+    padding: 1.5rem 1.5rem;
 }
 
 .ui-widget-header .ui-panel-title .heading-underline {
@@ -8,24 +17,46 @@ body .ui-widget {
     color: #1b208b;
 }
 
-.footnote {
-    margin-top: .5rem;
-    font-weight: 250;
-}
-
 .ui-panelgrid .ui-panelgrid-footer.ui-widget-header {
     text-align: center;
 }
 
-.input-container {
-    display: flex;
-    justify-content: space-between;
+.ui-button.btn-secondary {
+    background-color: #f98200;
+    border-color: #f98200;
+    color: #fff;
 }
 
-.input-container .input-field {
-    flex-grow: 1;
-    margin-right: 10px;
+body .main-panel label.ui-outputlabel > .ui-outputlabel-label {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 100%;
 }
+
+body .main-panel .ui-panelgrid .ui-panelgrid-cell {
+    padding: 2rem;
+}
+
+body .main-panel > .ui-panel-content {
+    border-radius: 20px;
+    box-shadow: 5px 10px 10px 0 #00000026;
+    padding: 5rem 10rem;
+    background-color: #F9F9F9;
+}
+
+body .ui-panel-content, body .ui-panelgrid .ui-panelgrid-cell {
+    background-color: #F9F9F9;
+}
+
+body .ui-radiobutton .ui-radiobutton-box.ui-state-active {
+    border-color: #E1E1E1;
+    background-color: #fff;
+}
+
+body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
+    background-color: #f98200;
+}
+/* Jakarta EE style overrides */
 
 .starter .header-wrapper.header-default-bg-img {
     background-position: -140px 0;
@@ -49,20 +80,12 @@ body .ui-widget {
     text-align: center;
 }
 
+/** Starter styles */
+
 .starter .content {
     position: relative;
     top: -100px;
     /* TODO: Add breakpoints */
-}
-
-body.starter .ui-panel .ui-panel-content {
-    border-radius: 20px;
-    box-shadow: 5px 10px 10px 0 #00000026;
-    padding: 4rem;
-}
-
-.starter .ui-panelgrid .ui-panelgrid-footer {
-    padding: 2rem 0 0 0;
 }
 
 .starter .container .row {
@@ -71,28 +94,37 @@ body.starter .ui-panel .ui-panel-content {
     align-items: center;
 }
 
-body .ui-button.btn-secondary {
-    /*margin-top: 1rem;*/
-    /*padding-left: 2rem;*/
-    /*padding-right: 2rem;*/
-    background-color: #f98200;
-    border-color: #f98200;
-    color: #fff;
+
+.footnote {
+    margin-top: .5rem;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 14px;
 }
 
-.chevron-right {
-
-    /*.chevron-right {*/
-    /*    display: inline-block;*/
-    /*    width: 16px; !* Adjust width as needed *!*/
-    /*    height: 16px; !* Adjust height as needed *!*/
-    /*    background-image: url(#{resources[ 'icon-chevron-right.svg' ]});*/
-    /*    background-size: contain;*/
-    /*    background-repeat: no-repeat;*/
-    /*    background-position: center;*/
-    /*}*/
-        display: inline-block;
-        width: 16px; /* Adjust width as needed */
-        height: 16px; /* Adjust height as needed */
+.icon-chevron-right {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
     background-image: url(#{resource['chevron-right.svg']});
 }
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-container .input-field {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.main-panel-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
