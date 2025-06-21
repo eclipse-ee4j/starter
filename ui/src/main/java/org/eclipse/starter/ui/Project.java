@@ -41,25 +41,30 @@ public class Project implements Serializable {
 
     private static Map<String, String> cache = new ConcurrentHashMap<>();
 
+    static final int DEFAULT_JAVA_VERSION = 21;
+    static final int DEFAULT_JAKARTA_VERSION = 11;
+    static final String DEFAULT_PROFILE = "Core";
+    static final String DEFAULT_RUNTIME = "none";
+
     @Inject
     private FacesContext facesContext;
     @Inject
     private ExternalContext externalContext;
 
     private Map<String, SelectItem> jakartaVersions = new LinkedHashMap<>();
-    private double jakartaVersion = 11;
+    private double jakartaVersion = DEFAULT_JAKARTA_VERSION;
 
     private Map<String, SelectItem> profiles = new LinkedHashMap<>();
-    private String profile = "core";
+    private String profile = DEFAULT_PROFILE;
 
     private Map<String, SelectItem> javaVersions = new LinkedHashMap<>();
-    private int javaVersion = 21;
+    private int javaVersion = DEFAULT_JAVA_VERSION;
 
     private Map<String, SelectItem> dockerFlags = new LinkedHashMap<>();
     private boolean docker = false;
 
     private Map<String, SelectItem> runtimes = new LinkedHashMap<>();
-    private String runtime = "none";
+    private String runtime = DEFAULT_RUNTIME;
 
     private String groupId = DEFAULT_GROUPID;
     private String artifactId = DEFAULT_ARTIFACTID;
@@ -183,17 +188,16 @@ public class Project implements Serializable {
 
     public void onJakartaVersionChange() {
         LOGGER.log(Level.INFO,
-                "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
+                "Jakarta EE version: {0} selected; enabling/disabling items and clearing the form",
                 new Object[] { jakartaVersion, profile, javaVersion, docker,
                         runtime });
+
+        clearForm(false);
+        enableAll(jakartaVersions);
 
         // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
         updateGlassFishEnabledState();
-
-        if (!runtime.equals("tomee")) {
-            profiles.get("full").setDisabled(false);
-        }
 
         profiles.get("web").setDisabled(false);
         profiles.get("core").setDisabled(true);
@@ -254,10 +258,6 @@ public class Project implements Serializable {
         // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
         updateGlassFishEnabledState();
-
-        if (!(runtime.equals("glassfish") && (javaVersion > 8))) {
-            jakartaVersions.get("8").setDisabled(false);
-        }
 
         if (!(runtime.equals("payara") || runtime.equals("tomee")
                 || runtime.equals("wildfly"))) {
@@ -556,5 +556,19 @@ public class Project implements Serializable {
         } catch (IOException e) {
             throw new RuntimeException("Failed to generate zip download.", e);
         }
+    }
+
+    private void enableAll(Map<String, SelectItem> items) {
+        items.values().forEach(jakartaVersion -> jakartaVersion.setDisabled(false));
+    }
+
+    private void clearForm(boolean clearJakartaVersion) {
+        if (clearJakartaVersion) {
+            jakartaVersion = DEFAULT_JAKARTA_VERSION;
+        }
+        profile = DEFAULT_PROFILE;
+        javaVersion = DEFAULT_JAVA_VERSION;
+        docker = false;
+        runtime = DEFAULT_RUNTIME;
     }
 }
