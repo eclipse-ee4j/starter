@@ -13,7 +13,6 @@
                         layout="grid"
                         columnClasses="main-panel-column, main-panel-column"
                         styleClass="text-align-left main-panel">
-
                     <p:column>
                         <p:outputLabel
                                 for="@next"
@@ -22,10 +21,6 @@
                                 required="true"
                                 value="#{project.jakartaVersion}"
                                 appendTo="@this">
-                            <f:convertNumber
-                                    minFractionDigits="0"
-                                    maxFractionDigits="1"
-                                    locale="en-US"/>
                             <f:selectItems
                                     value="#{project.jakartaVersions}"/>
                             <p:ajax
@@ -34,6 +29,7 @@
                                     process="@form"
                                     update="@form"/>
                         </p:selectOneMenu>
+                        <h:outputText value="Selectedadaass version: #{project.jakartaVersion}"/>
                         <h:outputText
                                 styleClass="footnote"
                                 value="Jakarta EE 10 requires Java SE above 8."/>

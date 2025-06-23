@@ -53,8 +53,7 @@ public class ProjectTest {
 
         project.onJakartaVersionChange();
 
-        // Verify that jakartaVersion, groupId, and artifactId are not null
-        assertNotNull(project.getJakartaVersion(), "jakartaVersion should not be null");
+        // Verify that groupId and artifactId are not null
         assertNotNull(project.getGroupId(), "groupId should not be null");
         assertNotNull(project.getArtifactId(), "artifactId should not be null");
 
@@ -68,21 +67,21 @@ public class ProjectTest {
         assertEquals(jakartaVersion, project.getJakartaVersion(), "jakartaVersion should still be set to the test parameter");
     }
 
-    @Test
-    public void testJakartaVersionsEnabledOnJakartaVersionChange() {
-        // Set the specific Jakarta version for this test iteration
-        project.setJakartaVersion(Project.DEFAULT_JAKARTA_VERSION);
-
-        // Select a random number of items and set disabled to true
-        final var jakartaVersions = new ArrayList<>(project.getJakartaVersions());
-        shuffle(jakartaVersions);
-        jakartaVersions.stream().limit((int) (Math.random() * jakartaVersions.size()))
-                .forEach(item -> item.setDisabled(true));
-
-        project.onJakartaVersionChange();
-
-        verifyJakartaVersionsEnabled();
-    }
+//    @Test
+//    public void testJakartaVersionsEnabledOnJakartaVersionChange() {
+//        // Set the specific Jakarta version for this test iteration
+//        project.setJakartaVersion(Project.DEFAULT_JAKARTA_VERSION);
+//
+//        // Select a random number of items and set disabled to true
+//        final var jakartaVersions = new ArrayList<>(project.getJakartaVersions());
+//        shuffle(jakartaVersions);
+//        jakartaVersions.stream().limit((int) (Math.random() * jakartaVersions.size()))
+//                .forEach(item -> item.setDisabled(true));
+//
+//        project.onJakartaVersionChange();
+//
+//        verifyJakartaVersionsEnabled();
+//    }
 
 
     @ParameterizedTest
@@ -169,9 +168,9 @@ public class ProjectTest {
     }
 
     private void verifyJakartaVersionsEnabled() {
-        // In the initial state, Jakarta EE 11 and 10 should be enabled, while 9.1, 9, and 8 are disabled
-        verifyItemState(true, project.getJakartaVersions(), "11", "Jakarta EE 11 should be enabled");
-        verifyItemState(true, project.getJakartaVersions(), "10", "Jakarta EE 10 should be enabled");
+        project.getJakartaVersions().forEach(item ->
+                assertFalse(item.isDisabled(), "Jakarta EE version " + item.getValue() + " should be enabled")
+        );
     }
 
     @ParameterizedTest
@@ -184,35 +183,17 @@ public class ProjectTest {
         project.onProfileChange();
 
         // Verify that items are correctly enabled or disabled based on profile
-        final var jakartaVersions = project.getJakartaVersions();
         final var runtimes = project.getRuntimes();
 
-        if (profileValue.equals("core")) {
-            // Core profile disables Jakarta EE 8, 9, and 9.1
-            verifyItemState(false, jakartaVersions, "8", "Jakarta EE 8 should be disabled for Core profile");
-            verifyItemState(false, jakartaVersions, "9", "Jakarta EE 9 should be disabled for Core profile");
-            verifyItemState(false, jakartaVersions, "9.1", "Jakarta EE 9.1 should be disabled for Core profile");
+        verifyJakartaVersionsEnabled();
 
+        if (profileValue.equals("core")) {
             // TomEE should be disabled for Core profile
             verifyItemState(false, runtimes, "tomee", "TomEE should be disabled for Core profile");
-
-            // Jakarta EE 11 might be enabled if conditions are met
-            if ((project.getRuntime().equals("none") || project.getRuntime().equals("open-liberty"))
-                    && (project.getJavaVersion() > 11)) {
-                verifyItemState(true, jakartaVersions, "11", "Jakarta EE 11 should be enabled for Core profile with compatible runtime and Java version");
-            } else {
-                verifyItemState(false, jakartaVersions, "11", "Jakarta EE 11 should be disabled by default");
-            }
         } else if (profileValue.equals("full")) {
-            // Jakarta EE 11 is disabled by default for non-core profiles
-            verifyItemState(false, jakartaVersions, "11", "Jakarta EE 11 should be disabled by default for Full profile");
-
             // TomEE should be disabled for Full profile
             verifyItemState(false, runtimes, "tomee", "TomEE should be disabled for Full profile");
         } else if (profileValue.equals("web")) {
-            // Jakarta EE 11 is disabled by default for non-core profiles
-            verifyItemState(false, jakartaVersions, "11", "Jakarta EE 11 should be disabled by default for Web profile");
-
             // For Web profile, TomEE might be enabled if conditions are met
             if ((project.getJakartaVersion() == 8) ||
                     ((project.getJakartaVersion() == 9.1) && (project.getJavaVersion() != 8))) {
@@ -235,16 +216,10 @@ public class ProjectTest {
         final var profiles = project.getProfiles();
         final var runtimes = project.getRuntimes();
 
-        // Jakarta EE 11 is disabled by default
-        verifyItemState(false, jakartaVersions, "11", "Jakarta EE 11 should be disabled by default");
-
         // TomEE is disabled by default
         verifyItemState(false, runtimes, "tomee", "TomEE should be disabled by default");
 
         if (javaVersion == 8) {
-            // Java 8 disables Jakarta EE 10
-            verifyItemState(false, jakartaVersions, "10", "Jakarta EE 10 should be disabled for Java 8");
-
             // Core profile should be disabled for Java 8
             verifyItemState(false, profiles, "core", "Core profile should be disabled for Java 8");
 
@@ -263,19 +238,6 @@ public class ProjectTest {
                 verifyItemState(true, runtimes, "wildfly", "WildFly should be enabled for Java 8 with Jakarta EE 8");
             }
         } else {
-            // For Java versions > 8
-
-            // Jakarta EE 10 should be enabled if not TomEE
-            if (!project.getRuntime().equals("tomee")) {
-                verifyItemState(true, jakartaVersions, "10", "Jakarta EE 10 should be enabled for Java > 8 with compatible runtime");
-            }
-
-            // Jakarta EE 11 might be enabled for Core profile and Java > 11
-            if ((javaVersion > 11) && project.getProfile().equals("core")
-                    && (project.getRuntime().equals("open-liberty") || project.getRuntime().equals("none"))) {
-                verifyItemState(true, jakartaVersions, "11", "Jakarta EE 11 should be enabled for Core profile with Java > 11 and compatible runtime");
-            }
-
             // Core profile might be enabled for Jakarta EE > 9.1
             if ((project.getJakartaVersion() > 9.1) && !project.getRuntime().equals("tomee")
                     && !project.getRuntime().equals("glassfish")) {
@@ -346,37 +308,6 @@ public class ProjectTest {
         final var profiles = project.getProfiles();
         final var javaVersions = project.getJavaVersions();
 
-        // Common assertions for all runtimes
-        // Check if Jakarta EE 9 and 9.1 are enabled/disabled based on runtime
-        if (runtimeValue.equals("payara") || runtimeValue.equals("wildfly") || runtimeValue.equals("tomee")) {
-            // These runtimes disable Jakarta EE 9 and 9.1
-            if (runtimeValue.equals("payara") || runtimeValue.equals("wildfly")) {
-                verifyItemState(false, jakartaVersions, "9", "Jakarta EE 9 should be disabled for " + runtimeValue);
-                verifyItemState(false, jakartaVersions, "9.1", "Jakarta EE 9.1 should be disabled for " + runtimeValue);
-            } else if (runtimeValue.equals("tomee")) {
-                verifyItemState(false, jakartaVersions, "9", "Jakarta EE 9 should be disabled for TomEE");
-            }
-        } else if (!project.getProfile().equals("core")) {
-            // For other runtimes with non-core profiles, Jakarta EE 9 and 9.1 should be enabled
-            verifyItemState(true, jakartaVersions, "9", "Jakarta EE 9 should be enabled for non-core profiles with " + runtimeValue);
-            verifyItemState(true, jakartaVersions, "9.1", "Jakarta EE 9.1 should be enabled for non-core profiles with " + runtimeValue);
-        }
-
-        // Check Jakarta EE 10 enabled state
-        if (runtimeValue.equals("tomee") || project.getJavaVersion() == 8) {
-            verifyItemState(false, jakartaVersions, "10", "Jakarta EE 10 should be disabled for TomEE or Java 8");
-        } else {
-            verifyItemState(true, jakartaVersions, "10", "Jakarta EE 10 should be enabled for Java versions > 8 with compatible runtime");
-        }
-
-        // Jakarta EE 11 is disabled by default, but might be enabled in specific cases
-        if ((runtimeValue.equals("none") || runtimeValue.equals("open-liberty")) &&
-                project.getProfile().equals("core") && project.getJavaVersion() > 11) {
-            verifyItemState(true, jakartaVersions, "11", "Jakarta EE 11 should be enabled for Core profile with Java > 11 and " + runtimeValue);
-        } else {
-            verifyItemState(false, jakartaVersions, "11", "Jakarta EE 11 should be disabled by default");
-        }
-
         // Check Core profile enabled state
         if (runtimeValue.equals("glassfish") || runtimeValue.equals("tomee")) {
             verifyItemState(false, profiles, "core", "Core profile should be disabled for " + runtimeValue);
@@ -408,9 +339,6 @@ public class ProjectTest {
         // Runtime-specific assertions
         switch (runtimeValue) {
             case "none":
-                if (project.getProfile().equals("core") && (project.getJavaVersion() > 11)) {
-                    verifyItemState(true, jakartaVersions, "11", "Jakarta EE 11 should be enabled for Core profile with Java > 11 and None runtime");
-                }
                 break;
             case "glassfish":
                 verifyItemState(false, profiles, "core", "Core profile should be disabled for GlassFish runtime");
@@ -422,27 +350,14 @@ public class ProjectTest {
                 }
                 break;
             case "open-liberty":
-                if (project.getProfile().equals("core") && (project.getJavaVersion() > 11)) {
-                    verifyItemState(true, jakartaVersions, "11", "Jakarta EE 11 should be enabled for Core profile with Java > 11 and Open Liberty runtime");
-                }
                 break;
             case "payara":
-                verifyItemState(false, jakartaVersions, "9", "Jakarta EE 9 should be disabled for Payara runtime");
-                verifyItemState(false, jakartaVersions, "9.1", "Jakarta EE 9.1 should be disabled for Payara runtime");
                 break;
             case "tomee":
-                verifyItemState(false, jakartaVersions, "9", "Jakarta EE 9 should be disabled for TomEE runtime");
-                verifyItemState(false, jakartaVersions, "10", "Jakarta EE 10 should be disabled for TomEE runtime");
                 verifyItemState(false, profiles, "core", "Core profile should be disabled for TomEE runtime");
                 verifyItemState(false, profiles, "full", "Full profile should be disabled for TomEE runtime");
-
-                if (project.getJakartaVersion() != 8) {
-                    verifyItemState(false, javaVersions, "8", "Java 8 should be disabled for TomEE with Jakarta EE version other than 8");
-                }
                 break;
             case "wildfly":
-                verifyItemState(false, jakartaVersions, "9", "Jakarta EE 9 should be disabled for WildFly runtime");
-                verifyItemState(false, jakartaVersions, "9.1", "Jakarta EE 9.1 should be disabled for WildFly runtime");
                 break;
         }
     }

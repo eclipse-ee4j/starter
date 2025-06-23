@@ -42,7 +42,7 @@ public class Project implements Serializable {
     private static Map<String, String> cache = new ConcurrentHashMap<>();
 
     static final int DEFAULT_JAVA_VERSION = 21;
-    static final int DEFAULT_JAKARTA_VERSION = 11;
+    static final double DEFAULT_JAKARTA_VERSION = 11;
     static final String DEFAULT_PROFILE = "Core";
     static final String DEFAULT_RUNTIME = "none";
 
@@ -51,8 +51,8 @@ public class Project implements Serializable {
     @Inject
     private ExternalContext externalContext;
 
-    private Map<String, SelectItem> jakartaVersions = new LinkedHashMap<>();
-    private double jakartaVersion = DEFAULT_JAKARTA_VERSION;
+    private Map<Double, SelectItem> jakartaVersions = new LinkedHashMap<>();
+    private Double jakartaVersion = DEFAULT_JAKARTA_VERSION;
 
     private Map<String, SelectItem> profiles = new LinkedHashMap<>();
     private String profile = DEFAULT_PROFILE;
@@ -70,14 +70,14 @@ public class Project implements Serializable {
     private String artifactId = DEFAULT_ARTIFACTID;
 
     public Project() {
-        jakartaVersions.put("11", new SelectItem("11", "Jakarta EE 11"));
-        jakartaVersions.put("10", new SelectItem("10", "Jakarta EE 10"));
-        jakartaVersions.put("9.1", new SelectItem("9.1", "Jakarta EE 9.1",
-                "Jakarta EE 9.1", true));
-        jakartaVersions.put("9",
-                new SelectItem("9", "Jakarta EE 9", "Jakarta EE 9", true));
-        jakartaVersions.put("8",
-                new SelectItem("8", "Jakarta EE 8", "Jakarta EE 8", true));
+        jakartaVersions.put(11.0, new SelectItem(11.0, "Jakarta EE 11"));
+        jakartaVersions.put(10.0, new SelectItem(10.0, "Jakarta EE 10"));
+        jakartaVersions.put(9.1, new SelectItem(9.1, "Jakarta EE 9.1",
+                "Jakarta EE 9.1"));
+        jakartaVersions.put(9.0,
+                new SelectItem(9.0, "Jakarta EE 9", "Jakarta EE 9"));
+        jakartaVersions.put(8.0,
+                new SelectItem(8.0, "Jakarta EE 8", "Jakarta EE 8"));
 
         profiles.put("full",
                 new SelectItem("full", "Platform", "Platform", true));
@@ -99,7 +99,7 @@ public class Project implements Serializable {
 
         List<String> shuffledRuntimes = new ArrayList<>(RUNTIMES.keySet());
         Collections.shuffle(shuffledRuntimes); // Ensure random order every
-                                               // time.
+        // time.
         shuffledRuntimes.forEach(
                 r -> runtimes.put(r, new SelectItem(r, RUNTIMES.get(r))));
 
@@ -114,11 +114,11 @@ public class Project implements Serializable {
         return jakartaVersions.values();
     }
 
-    public double getJakartaVersion() {
+    public Double getJakartaVersion() {
         return jakartaVersion;
     }
 
-    public void setJakartaVersion(double jakartaVersion) {
+    public void setJakartaVersion(Double jakartaVersion) {
         this.jakartaVersion = jakartaVersion;
     }
 
@@ -189,11 +189,11 @@ public class Project implements Serializable {
     public void onJakartaVersionChange() {
         LOGGER.log(Level.INFO,
                 "Jakarta EE version: {0} selected; enabling/disabling items and clearing the form",
-                new Object[] { jakartaVersion, profile, javaVersion, docker,
-                        runtime });
+                new Object[]{jakartaVersion, profile, javaVersion, docker,
+                        runtime});
 
         clearForm(false);
-        enableAll(jakartaVersions);
+//        enableAll(jakartaVersions);
 
         // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
@@ -231,12 +231,6 @@ public class Project implements Serializable {
                 javaVersions.get("8").setDisabled(false);
             }
 
-            if ((jakartaVersion == 8) && runtime.equals("glassfish")) {
-                javaVersions.get("11").setDisabled(true);
-                javaVersions.get("17").setDisabled(true);
-                javaVersions.get("21").setDisabled(true);
-            }
-
             if ((jakartaVersion == 9) || (jakartaVersion == 9.1)) {
                 runtimes.get("payara").setDisabled(true);
                 runtimes.get("wildfly").setDisabled(true);
@@ -252,24 +246,12 @@ public class Project implements Serializable {
     public void onProfileChange() {
         LOGGER.log(Level.INFO,
                 "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[] { jakartaVersion, profile, javaVersion, docker,
-                        runtime });
+                new Object[]{jakartaVersion, profile, javaVersion, docker,
+                        runtime});
 
         // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
         updateGlassFishEnabledState();
-
-        if (!(runtime.equals("payara") || runtime.equals("tomee")
-                || runtime.equals("wildfly"))) {
-            jakartaVersions.get("9").setDisabled(false);
-        }
-
-        if (!(runtime.equals("payara") || runtime.equals("wildfly")
-                || (runtime.equals("tomee") && (javaVersion == 8)))) {
-            jakartaVersions.get("9.1").setDisabled(false);
-        }
-
-        jakartaVersions.get("11").setDisabled(true);
 
         if ((jakartaVersion == 8)
                 || ((jakartaVersion == 9.1) && (javaVersion != 8))) {
@@ -277,15 +259,6 @@ public class Project implements Serializable {
         }
 
         if (profile.equals("core")) {
-            jakartaVersions.get("8").setDisabled(true);
-            jakartaVersions.get("9").setDisabled(true);
-            jakartaVersions.get("9.1").setDisabled(true);
-
-            if ((runtime.equals("none") || runtime.equals("open-liberty"))
-                    && (javaVersion > 11)) {
-                jakartaVersions.get("11").setDisabled(false);
-            }
-
             runtimes.get("tomee").setDisabled(true);
         } else if (profile.equals("full")) {
             runtimes.get("tomee").setDisabled(true);
@@ -295,18 +268,12 @@ public class Project implements Serializable {
     public void onJavaVersionChange() {
         LOGGER.log(Level.INFO,
                 "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[] { jakartaVersion, profile, javaVersion, docker,
-                        runtime });
+                new Object[]{jakartaVersion, profile, javaVersion, docker,
+                        runtime});
 
         // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
         updateGlassFishEnabledState();
-
-        if (!runtime.equals("tomee")) {
-            jakartaVersions.get("10").setDisabled(false);
-        }
-
-        jakartaVersions.get("11").setDisabled(true);
 
         if ((jakartaVersion > 9.1) && !runtime.equals("tomee")
                 && !runtime.equals("glassfish")) {
@@ -322,7 +289,6 @@ public class Project implements Serializable {
         }
 
         if (javaVersion == 8) {
-            jakartaVersions.get("10").setDisabled(true);
             profiles.get("core").setDisabled(true);
 
             if (profile.equals("web") && (jakartaVersion == 8)) {
@@ -333,25 +299,18 @@ public class Project implements Serializable {
                 runtimes.get("payara").setDisabled(true);
                 runtimes.get("wildfly").setDisabled(true);
             }
-        } else {
-            if ((javaVersion > 11) && profile.equals("core")
-                    && (runtime.equals("open-liberty")
-                            || runtime.equals("none"))) {
-                jakartaVersions.get("11").setDisabled(false);
-            }
-
-            if (profile.equals("web")
-                    && ((jakartaVersion == 8) || (jakartaVersion == 9.1))) {
-                runtimes.get("tomee").setDisabled(false);
-            }
+        }
+        if (profile.equals("web")
+                && ((jakartaVersion == 8) || (jakartaVersion == 9.1))) {
+            runtimes.get("tomee").setDisabled(false);
         }
     }
 
     public void onDockerChange() {
         LOGGER.log(Level.INFO,
                 "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[] { jakartaVersion, profile, javaVersion, docker,
-                        runtime });
+                new Object[]{jakartaVersion, profile, javaVersion, docker,
+                        runtime});
 
         // TODO Gradually move to this simplified validation logic.
         updateGlassFishEnabledState();
@@ -366,21 +325,10 @@ public class Project implements Serializable {
     public void onRuntimeChange() {
         LOGGER.log(Level.INFO,
                 "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[] { jakartaVersion, profile, javaVersion, docker,
-                        runtime });
+                new Object[]{jakartaVersion, profile, javaVersion, docker,
+                        runtime});
         // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
-
-        if (!profile.equals("core")) {
-            jakartaVersions.get("9").setDisabled(false);
-            jakartaVersions.get("9.1").setDisabled(false);
-        }
-
-        if (javaVersion != 8) {
-            jakartaVersions.get("10").setDisabled(false);
-        }
-
-        jakartaVersions.get("11").setDisabled(true);
 
         if (jakartaVersion > 9.1) {
             profiles.get("core").setDisabled(false);
@@ -402,46 +350,33 @@ public class Project implements Serializable {
         javaVersions.get("21").setDisabled(false);
 
         switch (runtime) {
-        case "none":
-            if (profile.equals("core") && (javaVersion > 11)) {
-                jakartaVersions.get("11").setDisabled(false);
-            }
+            case "none":
+                break;
+            case "glassfish":
+                profiles.get("core").setDisabled(true);
 
-            break;
-        case "glassfish":
-            profiles.get("core").setDisabled(true);
+                if (jakartaVersion == 8) {
+                    javaVersions.get("11").setDisabled(true);
+                    javaVersions.get("17").setDisabled(true);
+                    javaVersions.get("21").setDisabled(true);
+                }
 
-            if (jakartaVersion == 8) {
-                javaVersions.get("11").setDisabled(true);
-                javaVersions.get("17").setDisabled(true);
-                javaVersions.get("21").setDisabled(true);
-            }
+                break;
+            case "open-liberty":
+                break;
+            case "payara":
+                break;
+            case "tomee":
+                profiles.get("core").setDisabled(true);
+                profiles.get("full").setDisabled(true);
 
-            break;
-        case "open-liberty":
-            if (profile.equals("core") && (javaVersion > 11)) {
-                jakartaVersions.get("11").setDisabled(false);
-            }
-            break;
-        case "payara":
-            jakartaVersions.get("9").setDisabled(true);
-            jakartaVersions.get("9.1").setDisabled(true);
-            break;
-        case "tomee":
-            jakartaVersions.get("9").setDisabled(true);
-            jakartaVersions.get("10").setDisabled(true);
-            profiles.get("core").setDisabled(true);
-            profiles.get("full").setDisabled(true);
+                if (jakartaVersion != 8) {
+                    javaVersions.get("8").setDisabled(true);
+                }
 
-            if (jakartaVersion != 8) {
-                javaVersions.get("8").setDisabled(true);
-            }
-
-            break;
-        case "wildfly":
-            jakartaVersions.get("9").setDisabled(true);
-            jakartaVersions.get("9.1").setDisabled(true);
-            break;
+                break;
+            case "wildfly":
+                break;
         }
     }
 
@@ -475,8 +410,8 @@ public class Project implements Serializable {
         try {
             LOGGER.log(Level.INFO,
                     "Generating project - Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}, groupId: {5}, artifactId: {6}",
-                    new Object[] { jakartaVersion, profile, javaVersion, docker,
-                            runtime, groupId, artifactId });
+                    new Object[]{jakartaVersion, profile, javaVersion, docker,
+                            runtime, groupId, artifactId});
 
             String cachedDirectory = cache.get(getCacheKey());
 
@@ -485,7 +420,7 @@ public class Project implements Serializable {
                 File workingDirectory = Files
                         .createTempDirectory("starter-output-").toFile();
                 LOGGER.log(Level.INFO, "Working directory: {0}",
-                        new Object[] { workingDirectory.getAbsolutePath() });
+                        new Object[]{workingDirectory.getAbsolutePath()});
 
                 LOGGER.info("Executing Maven Archetype.");
                 Properties properties = new Properties();
@@ -494,7 +429,7 @@ public class Project implements Serializable {
                                 ((jakartaVersion % 1.0 != 0)
                                         ? String.format("%s", jakartaVersion)
                                         : String.format("%.0f",
-                                                jakartaVersion))),
+                                        jakartaVersion))),
                         entry("profile", profile),
                         entry("javaVersion", javaVersion),
                         entry("docker", (docker ? "yes" : "no")),
@@ -526,7 +461,7 @@ public class Project implements Serializable {
             } else {
                 LOGGER.log(Level.INFO,
                         "Downloading zip file from cached directory: {0}",
-                        new Object[] { cachedDirectory });
+                        new Object[]{cachedDirectory});
                 downloadZip(new File(cachedDirectory, artifactId + ".zip"));
             }
 
