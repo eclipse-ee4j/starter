@@ -33,12 +33,29 @@ named `jakartaee-hello-world`. The README.md file under that directory will cont
 run the sample.
 
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such 
-as [Eclipse](https://www.eclipse.org/ide). The generated starter code is simply Maven projects. You can easily 
-load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
+as [Eclipse](https://www.eclipse.org/ide). The generated starter code supports both Maven and Gradle build systems. 
+You can easily load, explore and run the code in any IDE that supports Maven or Gradle projects.
 
 To run a specific version of the Archetype, including the locally installed development version, 
 specify the `archetypeVersion` property.
 
 ```
-mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.7.0-SNAPSHOT"
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.7.1-SNAPSHOT"
 ```
+
+## Build System Options
+
+The archetype supports generating projects with either Maven or Gradle build systems. By default, it generates 
+Maven projects. To generate a Gradle project, use the `-DbuildSystem=gradle` parameter:
+
+```
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DbuildSystem=gradle
+```
+
+### Supported Parameters
+
+- `buildSystem` - Build system to use (default: `maven`)
+  - `maven` - Generates project with pom.xml and Maven wrapper
+  - `gradle` - Generates project with build.gradle and Gradle wrapper
+
+All other parameters (jakartaVersion, profile, runtime, etc.) work the same with both build systems.

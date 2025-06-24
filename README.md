@@ -4,7 +4,7 @@
 # Eclipse Starter for Jakarta EE
 
 This is the official Eclipse Foundation Starter for Jakarta EE. It generates code to help get started with 
-Jakarta EE projects using Maven. It is possible to do so using Maven Archetypes or a web UI.
+Jakarta EE projects using Maven or Gradle. It is possible to do so using Maven Archetypes or a web UI.
 
 ## Current Release
 
@@ -47,8 +47,23 @@ To run a specific version of the Archetype, including the locally installed deve
 the `archetypeVersion` property.
 
 ```
-mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.7.0-SNAPSHOT"
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.7.1-SNAPSHOT"
 ```
+
+### Generating Projects with Gradle Build System
+
+By default, the archetype generates Maven-based projects. To generate a project with Gradle build system instead, 
+use the `-DbuildSystem=gradle` parameter:
+
+```
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DbuildSystem=gradle
+```
+
+The archetype supports the following build systems:
+- `maven` (default) - Generates a Maven project with pom.xml and Maven wrapper
+- `gradle` - Generates a Gradle project with build.gradle and Gradle wrapper
+
+All runtime options (GlassFish, WildFly, Open Liberty, Payara, TomEE) are supported with both build systems.
 
 ##  Running the UI
 In order to run the UI, please execute the following from this directory. You can also simply build the war 
