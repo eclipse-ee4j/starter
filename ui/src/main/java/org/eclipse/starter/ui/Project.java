@@ -52,7 +52,7 @@ public class Project implements Serializable {
     private ExternalContext externalContext;
 
     private Map<Double, SelectItem> jakartaVersions = new LinkedHashMap<>();
-    private Double jakartaVersion = DEFAULT_JAKARTA_VERSION;
+    private double jakartaVersion = DEFAULT_JAKARTA_VERSION;
 
     private Map<String, SelectItem> profiles = new LinkedHashMap<>();
     private String profile = DEFAULT_PROFILE;
@@ -114,11 +114,11 @@ public class Project implements Serializable {
         return jakartaVersions.values();
     }
 
-    public Double getJakartaVersion() {
+    public double getJakartaVersion() {
         return jakartaVersion;
     }
 
-    public void setJakartaVersion(Double jakartaVersion) {
+    public void setJakartaVersion(double jakartaVersion) {
         this.jakartaVersion = jakartaVersion;
     }
 
@@ -193,7 +193,6 @@ public class Project implements Serializable {
                         runtime});
 
         clearForm(false);
-//        enableAll(jakartaVersions);
 
         // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
@@ -491,10 +490,6 @@ public class Project implements Serializable {
         } catch (IOException e) {
             throw new RuntimeException("Failed to generate zip download.", e);
         }
-    }
-
-    private void enableAll(Map<String, SelectItem> items) {
-        items.values().forEach(jakartaVersion -> jakartaVersion.setDisabled(false));
     }
 
     private void clearForm(boolean clearJakartaVersion) {

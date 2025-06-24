@@ -1,20 +1,17 @@
 package org.eclipse.starter.ui;
 
+import jakarta.faces.model.SelectItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import jakarta.faces.model.SelectItem;
-
-import static java.util.Collections.shuffle;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Unit test for the {@link Project} class.
@@ -24,10 +21,9 @@ public class ProjectTest {
     private Project project;
 
     static Stream<Double> jakartaVersionProvider() {
-        // Get all Jakarta versions from the Project class
         Project project = new Project();
         return project.getJakartaVersions().stream()
-                .map(item -> Double.parseDouble(item.getValue().toString()));
+                .map(item -> (Double)item.getValue());
     }
 
     @BeforeEach
@@ -48,7 +44,6 @@ public class ProjectTest {
     @ParameterizedTest
     @MethodSource("jakartaVersionProvider")
     public void testFormValuesOnJakartaVersionChange(Double jakartaVersion) {
-        // Set the specific Jakarta version for this test iteration
         project.setJakartaVersion(jakartaVersion);
 
         project.onJakartaVersionChange();
@@ -67,27 +62,9 @@ public class ProjectTest {
         assertEquals(jakartaVersion, project.getJakartaVersion(), "jakartaVersion should still be set to the test parameter");
     }
 
-//    @Test
-//    public void testJakartaVersionsEnabledOnJakartaVersionChange() {
-//        // Set the specific Jakarta version for this test iteration
-//        project.setJakartaVersion(Project.DEFAULT_JAKARTA_VERSION);
-//
-//        // Select a random number of items and set disabled to true
-//        final var jakartaVersions = new ArrayList<>(project.getJakartaVersions());
-//        shuffle(jakartaVersions);
-//        jakartaVersions.stream().limit((int) (Math.random() * jakartaVersions.size()))
-//                .forEach(item -> item.setDisabled(true));
-//
-//        project.onJakartaVersionChange();
-//
-//        verifyJakartaVersionsEnabled();
-//    }
-
-
     @ParameterizedTest
     @MethodSource("jakartaVersionProvider")
     public void testItemsEnabledDisabledOnJakartaVersionChange(Double jakartaVersion) {
-        // Set the specific Jakarta version for this test iteration
         project.setJakartaVersion(jakartaVersion);
 
         project.onJakartaVersionChange();
@@ -155,34 +132,13 @@ public class ProjectTest {
         }
     }
 
-    // Helper method to find a SelectItem by its value
-    private SelectItem getSelectItemByValue(java.util.Collection<SelectItem> items, String value) {
-        return items.stream()
-                .filter(item -> item.getValue().toString().equals(value))
-                .findFirst()
-                .orElseThrow(() -> new AssertionError("SelectItem with value '" + value + "' not found"));
-    }
-
-    private void verifyItemState(boolean shouldBeEnabled, java.util.Collection<SelectItem> items, String value, String message) {
-        assertEquals(shouldBeEnabled, !getSelectItemByValue(items, value).isDisabled(), message);
-    }
-
-    private void verifyJakartaVersionsEnabled() {
-        project.getJakartaVersions().forEach(item ->
-                assertFalse(item.isDisabled(), "Jakarta EE version " + item.getValue() + " should be enabled")
-        );
-    }
-
     @ParameterizedTest
     @ValueSource(strings = {"web", "full", "core"})
     public void testItemsEnabledDisabledOnProfileChange(String profileValue) {
-        // Set the specific profile for this test iteration
         project.setProfile(profileValue);
 
-        // Execute the method under test
         project.onProfileChange();
 
-        // Verify that items are correctly enabled or disabled based on profile
         final var runtimes = project.getRuntimes();
 
         verifyJakartaVersionsEnabled();
@@ -205,10 +161,8 @@ public class ProjectTest {
     @ParameterizedTest
     @ValueSource(ints = {8, 11, 17, 21})
     public void testItemsEnabledDisabledOnJavaVersionChange(int javaVersion) {
-        // Set the specific Java version for this test iteration
         project.setJavaVersion(javaVersion);
 
-        // Execute the method under test
         project.onJavaVersionChange();
 
         // Verify that items are correctly enabled or disabled based on Java version
@@ -262,10 +216,8 @@ public class ProjectTest {
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     public void testItemsEnabledDisabledOnDockerChange(boolean dockerValue) {
-        // Set the specific Docker value for this test iteration
         project.setDocker(dockerValue);
 
-        // Execute the method under test
         project.onDockerChange();
 
         // Verify that items are correctly enabled or disabled based on Docker support
@@ -297,14 +249,10 @@ public class ProjectTest {
     @ParameterizedTest
     @ValueSource(strings = {"none", "glassfish", "open-liberty", "payara", "tomee", "wildfly"})
     public void testItemsEnabledDisabledOnRuntimeChange(String runtimeValue) {
-        // Set the specific runtime for this test iteration
         project.setRuntime(runtimeValue);
 
-        // Execute the method under test
         project.onRuntimeChange();
 
-        // Verify that items are correctly enabled or disabled based on runtime
-        final var jakartaVersions = project.getJakartaVersions();
         final var profiles = project.getProfiles();
         final var javaVersions = project.getJavaVersions();
 
@@ -360,5 +308,22 @@ public class ProjectTest {
             case "wildfly":
                 break;
         }
+    }
+
+    private SelectItem getSelectItemByValue(java.util.Collection<SelectItem> items, String value) {
+        return items.stream()
+                .filter(item -> item.getValue().toString().equals(value))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("SelectItem with value '" + value + "' not found"));
+    }
+
+    private void verifyItemState(boolean shouldBeEnabled, java.util.Collection<SelectItem> items, String value, String message) {
+        assertEquals(shouldBeEnabled, !getSelectItemByValue(items, value).isDisabled(), message);
+    }
+
+    private void verifyJakartaVersionsEnabled() {
+        project.getJakartaVersions().forEach(item ->
+                assertFalse(item.isDisabled(), "Jakarta EE version " + item.getValue() + " should be enabled")
+        );
     }
 }
