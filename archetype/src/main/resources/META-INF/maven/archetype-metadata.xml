@@ -38,6 +38,10 @@
             <defaultValue>none</defaultValue>
             <validationRegex>^(none|glassfish|open-liberty|payara|tomee|wildfly)$</validationRegex>
         </requiredProperty>
+        <requiredProperty key="buildSystem">
+            <defaultValue>maven</defaultValue>
+            <validationRegex>^(maven|gradle)$</validationRegex>
+        </requiredProperty>
     </requiredProperties>
     <fileSets>
         <fileSet filtered="true" packaged="true" encoding="UTF-8">
@@ -75,6 +79,23 @@
         </fileSet>
         <fileSet>
             <directory>.mvn/wrapper</directory>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory></directory>
+            <includes>
+                <include>build.gradle</include>
+                <include>settings.gradle</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="false" encoding="UTF-8">
+            <directory></directory>
+            <includes>
+                <include>gradlew</include>
+                <include>gradlew.cmd</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>gradle/wrapper</directory>
         </fileSet>
     </fileSets>
 </archetype-descriptor>
