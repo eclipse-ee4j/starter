@@ -9,18 +9,19 @@ def profile = request.properties["profile"].trim().toLowerCase()
 def javaVersion = request.properties["javaVersion"].trim()
 def runtime = request.properties["runtime"].trim().toLowerCase()
 def docker = request.properties["docker"].trim().toLowerCase()
+def buildSystem = request.properties["buildSystem"]?.trim()?.toLowerCase() ?: "maven"
 
 def outputDirectory = new File(request.getOutputDirectory(), request.getArtifactId())
 
-validateInput(jakartaVersion, profile, javaVersion, runtime, docker, outputDirectory)
+validateInput(jakartaVersion, profile, javaVersion, runtime, docker, buildSystem, outputDirectory)
 generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, outputDirectory)
 bindEEPackage(jakartaVersion, outputDirectory)
 generateWebApp(profile, outputDirectory)
 generateDocker(docker, runtime, outputDirectory)
-chmod(outputDirectory.toPath().resolve("mvnw").toFile())
+handleBuildSystem(buildSystem, outputDirectory)
 printSummary()
 
-private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, File outputDirectory) {
+private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, buildSystem, File outputDirectory) {
     if (!(jakartaVersion in ['8', '9', '9.1', '10', '11'])) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, valid Jakarta EE versions are 8, 9, 9.1, 10, and 11")
@@ -44,6 +45,11 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     if (!(docker in ['yes', 'no'])) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, valid Docker options are yes and no")
+    }
+
+    if (!(buildSystem in ['maven', 'gradle'])) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, valid build systems are maven and gradle")
     }
 
     // As EE 11 progresses, this check should be removed.
@@ -236,6 +242,31 @@ private chmod(File mvnw) {
         if (exitCode != 0) {
             println "WARNING: Failed to set executable permission on file: " + mvnw.getAbsolutePath()
         }
+    }
+}
+
+private handleBuildSystem(buildSystem, File outputDirectory) {
+    println "Configuring build system: $buildSystem"
+    
+    if (buildSystem == "gradle") {
+        // Remove Maven files
+        FileUtils.forceDelete(new File(outputDirectory, "pom.xml"))
+        FileUtils.forceDelete(new File(outputDirectory, "mvnw"))
+        FileUtils.forceDelete(new File(outputDirectory, "mvnw.cmd"))
+        FileUtils.forceDelete(new File(outputDirectory, ".mvn"))
+        
+        // Set executable permission on gradlew
+        chmod(outputDirectory.toPath().resolve("gradlew").toFile())
+    } else {
+        // Remove Gradle files
+        FileUtils.forceDelete(new File(outputDirectory, "build.gradle"))
+        FileUtils.forceDelete(new File(outputDirectory, "settings.gradle"))
+        FileUtils.forceDelete(new File(outputDirectory, "gradlew"))
+        FileUtils.forceDelete(new File(outputDirectory, "gradlew.cmd"))
+        FileUtils.forceDelete(new File(outputDirectory, "gradle"))
+        
+        // Set executable permission on mvnw
+        chmod(outputDirectory.toPath().resolve("mvnw").toFile())
     }
 }
 
