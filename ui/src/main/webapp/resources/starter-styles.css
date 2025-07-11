@@ -1,0 +1,160 @@
+
+/* PrimeFaces overrides */
+
+body .ui-widget {
+    font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+}
+
+body .ui-inputfield {
+    font-size: 14px;
+    padding: 1.5rem 1.5rem;
+}
+
+.ui-widget-header .ui-panel-title .heading-underline {
+    font-size: 24px;
+    color: #1b208b;
+}
+
+.ui-panelgrid .ui-panelgrid-footer.ui-widget-header {
+    text-align: center;
+}
+
+body .ui-button.btn-secondary {
+    background-color: #f98200;
+    border-color: #f98200;
+    color: #fff;
+}
+
+body .ui-button.btn-secondary.ui-state-active {
+    background-color: #f98200;
+    border-color: #f98200;
+    color: #fff;
+}
+
+body .ui-button.btn-secondary.ui-state-hover {
+    background-color: #c66700;
+    border-color: #bc6200;
+    color: #fff;
+}
+
+body .main-panel label.ui-outputlabel > .ui-outputlabel-label {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 100%;
+}
+
+body .main-panel .ui-panelgrid .ui-panelgrid-cell {
+    padding: 2rem;
+}
+
+body .main-panel > .ui-panel-content {
+    border-radius: 20px;
+    box-shadow: 5px 10px 10px 0 #00000026;
+    padding: 5rem 10rem;
+    background-color: #F9F9F9;
+}
+
+body .ui-panel-content, body .ui-panelgrid .ui-panelgrid-cell {
+    background-color: #F9F9F9;
+}
+
+body .ui-radiobutton .ui-radiobutton-box.ui-state-active {
+    border-color: #E1E1E1;
+    background-color: #fff;
+}
+
+body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
+    background-color: #f98200;
+}
+/* Jakarta EE style overrides */
+
+.starter .header-wrapper {
+    background-position: -80px 0;
+    background-color:  #1b208b;
+}
+
+.starter .header-wrapper .jumbotron .app-name {
+    font-size: 18px;
+    margin-bottom: .5rem;
+}
+
+.starter .header-wrapper .jumbotron h1.app-heading {
+    color: #f98200;
+}
+
+.starter .header-wrapper.header-secondary-bg-img .featured-jumbotron {
+    padding-top: 100px;
+}
+
+.starter .header-wrapper .featured-jumbotron .container {
+    text-align: center;
+}
+
+.starter .info-cards {
+    padding-top: 10rem;
+}
+
+/** Starter styles */
+
+.starter .content {
+    position: relative;
+    top: -100px;
+}
+
+@media screen and (max-width: 570px) and (max-width: 1048px) {
+    .starter .content {
+        top: -50px;
+    }
+}
+
+.starter main .container .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.starter .info-card .info-card-heading {
+    font-size: 20px;
+}
+
+.footnote {
+    margin-top: .5rem;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.icon-chevron-right {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(#{resource['icons:chevron-right.svg']});
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-container .input-field {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.main-panel-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.powered-by {
+    margin-top: 5rem;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 100%;
+}
+
