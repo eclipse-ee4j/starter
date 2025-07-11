@@ -193,51 +193,128 @@ public class Project implements Serializable {
                         runtime});
 
         clearForm(false);
+        updateAllValidationStates();
+    }
 
-        // TODO Gradually move to this simplified validation logic.
+    private void updateAllValidationStates() {
         updateDockerEnabledState();
         updateGlassFishEnabledState();
+        updateProfilesForJakartaVersion();
+        updateJavaVersionsForJakartaVersion();
+        updateRuntimesForJakartaVersion();
+    }
 
+    private void updateProfilesForJakartaVersion() {
+        // Reset all profiles to enabled first
+        profiles.get("full").setDisabled(false);
         profiles.get("web").setDisabled(false);
-        profiles.get("core").setDisabled(true);
+        profiles.get("core").setDisabled(false);
 
-        javaVersions.get("8").setDisabled(true);
+        if (jakartaVersion == 11) {
+            // Jakarta EE 11: Only Core Profile is available
+            profiles.get("full").setDisabled(true);
+            profiles.get("web").setDisabled(true);
+        } else if (jakartaVersion == 10) {
+            // Jakarta EE 10: Core Profile availability depends on runtime
+            if (runtime.equals("glassfish") || runtime.equals("tomee")) {
+                profiles.get("core").setDisabled(true);
+            }
+        } else {
+            // Jakarta EE 8, 9, 9.1: Core Profile disabled by default
+            profiles.get("core").setDisabled(true);
+        }
+
+        // Java version constraints for profiles
+        if (javaVersion == 8) {
+            profiles.get("core").setDisabled(true);
+        }
+
+        // Runtime-specific profile constraints
+        switch (runtime) {
+            case "glassfish":
+                profiles.get("core").setDisabled(true);
+                break;
+            case "tomee":
+                profiles.get("core").setDisabled(true);
+                profiles.get("full").setDisabled(true);
+                break;
+        }
+    }
+
+    private void updateJavaVersionsForJakartaVersion() {
+        // Reset all Java versions to enabled first
+        javaVersions.get("8").setDisabled(false);
         javaVersions.get("11").setDisabled(false);
         javaVersions.get("17").setDisabled(false);
         javaVersions.get("21").setDisabled(false);
 
+        if (jakartaVersion == 11) {
+            // Jakarta EE 11: Java 8 and 11 not supported
+            javaVersions.get("8").setDisabled(true);
+            javaVersions.get("11").setDisabled(true);
+        } else if (jakartaVersion == 10) {
+            // Jakarta EE 10: Java 8 disabled
+            javaVersions.get("8").setDisabled(true);
+        } else if (jakartaVersion >= 9) {
+            // Jakarta EE 9+: Java 8 disabled unless specific conditions met
+            javaVersions.get("8").setDisabled(true);
+            if (jakartaVersion == 8 || 
+                runtime.equals("none") || 
+                runtime.equals("glassfish") || 
+                runtime.equals("open-liberty")) {
+                javaVersions.get("8").setDisabled(false);
+            }
+        }
+
+        // Runtime-specific profile constraints
+        switch (runtime) {
+            case "glassfish":
+                if (jakartaVersion == 8) {
+                    javaVersions.get("11").setDisabled(true);
+                    javaVersions.get("17").setDisabled(true);
+                    javaVersions.get("21").setDisabled(true);
+                }
+                break;
+            case "tomee":
+                if (jakartaVersion != 8) {
+                    javaVersions.get("8").setDisabled(true);
+                }
+                break;
+        }
+    }
+
+    private void updateRuntimesForJakartaVersion() {
+        // Reset runtimes to default state
         runtimes.get("payara").setDisabled(false);
-        runtimes.get("tomee").setDisabled(true);
+        runtimes.get("tomee").setDisabled(false);
         runtimes.get("wildfly").setDisabled(false);
 
         if (jakartaVersion == 11) {
-            profiles.get("full").setDisabled(true);
-            profiles.get("web").setDisabled(true);
-            profiles.get("core").setDisabled(false);
-
-            javaVersions.get("11").setDisabled(true);
-
+            // Jakarta EE 11: Most runtimes not supported
             runtimes.get("payara").setDisabled(true);
             runtimes.get("wildfly").setDisabled(true);
-        } else if (jakartaVersion == 10) {
-            if (!runtime.equals("glassfish") && !runtime.equals("tomee")) {
-                profiles.get("core").setDisabled(false);
+            runtimes.get("tomee").setDisabled(true);
+        } else if (jakartaVersion == 9 || jakartaVersion == 9.1) {
+            // Jakarta EE 9/9.1: Payara and WildFly not supported
+            runtimes.get("payara").setDisabled(true);
+            runtimes.get("wildfly").setDisabled(true);
+            
+            // TomEE enabled for Web Profile under specific conditions
+            if (profile.equals("web") && 
+                (jakartaVersion == 8 || 
+                (jakartaVersion == 9.1 && javaVersion != 8))) {
+                runtimes.get("tomee").setDisabled(false);
+            } else {
+                runtimes.get("tomee").setDisabled(true);
             }
         } else {
-            if ((jakartaVersion == 8) || runtime.equals("none")
-                    || runtime.equals("glassfish")
-                    || runtime.equals("open-liberty")) {
-                javaVersions.get("8").setDisabled(false);
-            }
-
-            if ((jakartaVersion == 9) || (jakartaVersion == 9.1)) {
-                runtimes.get("payara").setDisabled(true);
-                runtimes.get("wildfly").setDisabled(true);
-            }
-
-            if (profile.equals("web") && ((jakartaVersion == 8)
-                    || ((jakartaVersion == 9.1) && (javaVersion != 8)))) {
+            // Jakarta EE 8 and 10: TomEE enabled for Web Profile under specific conditions
+            if (profile.equals("web") && 
+                (jakartaVersion == 8 || 
+                (jakartaVersion == 9.1 && javaVersion != 8))) {
                 runtimes.get("tomee").setDisabled(false);
+            } else {
+                runtimes.get("tomee").setDisabled(true);
             }
         }
     }
@@ -248,20 +325,7 @@ public class Project implements Serializable {
                 new Object[]{jakartaVersion, profile, javaVersion, docker,
                         runtime});
 
-        // TODO Gradually move to this simplified validation logic.
-        updateDockerEnabledState();
-        updateGlassFishEnabledState();
-
-        if ((jakartaVersion == 8)
-                || ((jakartaVersion == 9.1) && (javaVersion != 8))) {
-            runtimes.get("tomee").setDisabled(false);
-        }
-
-        if (profile.equals("core")) {
-            runtimes.get("tomee").setDisabled(true);
-        } else if (profile.equals("full")) {
-            runtimes.get("tomee").setDisabled(true);
-        }
+        updateAllValidationStates();
     }
 
     public void onJavaVersionChange() {
@@ -270,39 +334,7 @@ public class Project implements Serializable {
                 new Object[]{jakartaVersion, profile, javaVersion, docker,
                         runtime});
 
-        // TODO Gradually move to this simplified validation logic.
-        updateDockerEnabledState();
-        updateGlassFishEnabledState();
-
-        if ((jakartaVersion > 9.1) && !runtime.equals("tomee")
-                && !runtime.equals("glassfish")) {
-            profiles.get("core").setDisabled(false);
-        }
-
-        runtimes.get("tomee").setDisabled(true);
-
-        if ((jakartaVersion != 9) && (jakartaVersion != 9.1)
-                && (jakartaVersion != 11)) {
-            runtimes.get("payara").setDisabled(false);
-            runtimes.get("wildfly").setDisabled(false);
-        }
-
-        if (javaVersion == 8) {
-            profiles.get("core").setDisabled(true);
-
-            if (profile.equals("web") && (jakartaVersion == 8)) {
-                runtimes.get("tomee").setDisabled(false);
-            }
-
-            if (jakartaVersion != 8) {
-                runtimes.get("payara").setDisabled(true);
-                runtimes.get("wildfly").setDisabled(true);
-            }
-        }
-        if (profile.equals("web")
-                && ((jakartaVersion == 8) || (jakartaVersion == 9.1))) {
-            runtimes.get("tomee").setDisabled(false);
-        }
+        updateAllValidationStates();
     }
 
     public void onDockerChange() {
@@ -311,9 +343,11 @@ public class Project implements Serializable {
                 new Object[]{jakartaVersion, profile, javaVersion, docker,
                         runtime});
 
-        // TODO Gradually move to this simplified validation logic.
-        updateGlassFishEnabledState();
+        updateAllValidationStates();
+        updateNoneRuntimeForDocker();
+    }
 
+    private void updateNoneRuntimeForDocker() {
         if (docker) {
             runtimes.get("none").setDisabled(true);
         } else {
@@ -326,57 +360,9 @@ public class Project implements Serializable {
                 "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
                 new Object[]{jakartaVersion, profile, javaVersion, docker,
                         runtime});
-        // TODO Gradually move to this simplified validation logic.
-        updateDockerEnabledState();
-
-        if (jakartaVersion > 9.1) {
-            profiles.get("core").setDisabled(false);
-        }
-
-        if (jakartaVersion != 11) {
-            profiles.get("full").setDisabled(false);
-        }
-
-        if (jakartaVersion < 10) {
-            javaVersions.get("8").setDisabled(false);
-        }
-
-        if (jakartaVersion < 11) {
-            javaVersions.get("11").setDisabled(false);
-        }
-
-        javaVersions.get("17").setDisabled(false);
-        javaVersions.get("21").setDisabled(false);
-
-        switch (runtime) {
-            case "none":
-                break;
-            case "glassfish":
-                profiles.get("core").setDisabled(true);
-
-                if (jakartaVersion == 8) {
-                    javaVersions.get("11").setDisabled(true);
-                    javaVersions.get("17").setDisabled(true);
-                    javaVersions.get("21").setDisabled(true);
-                }
-
-                break;
-            case "open-liberty":
-                break;
-            case "payara":
-                break;
-            case "tomee":
-                profiles.get("core").setDisabled(true);
-                profiles.get("full").setDisabled(true);
-
-                if (jakartaVersion != 8) {
-                    javaVersions.get("8").setDisabled(true);
-                }
-
-                break;
-            case "wildfly":
-                break;
-        }
+        
+        updateAllValidationStates();
+        updateNoneRuntimeForDocker();
     }
 
     private void updateDockerEnabledState() {
