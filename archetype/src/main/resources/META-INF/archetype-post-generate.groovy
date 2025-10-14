@@ -46,12 +46,6 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
-    // As EE 11 progresses, this check should be removed.
-    if ((profile == 'full') && (jakartaVersion == '11')) {
-        FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, for Jakarta EE 11 please choose Core or Web Profile")
-    }
-
     if ((profile == 'core') && (Double.valueOf(jakartaVersion) < 10)) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10 and above")
@@ -81,9 +75,9 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
 
     if (runtime == 'open-liberty') {
         // As EE 11 progresses, this check should be removed.
-        if ((jakartaVersion == '11') && (profile == 'web')) {
+        if ((jakartaVersion == '11') && (profile == 'web' || profile == 'full')) {
             FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, Open Liberty does not yet support the Jakarta EE 11 Web Profile")
+            throw new RuntimeException("Failed, Open Liberty does not yet support the Jakarta EE 11 Web Profile or Platform")
         }
     }
 
