@@ -102,6 +102,16 @@ jobs:
                   distribution: 'temurin'
                   java-version: 21
 
+            - name: Run Archetype for EE 11, SE 21, GlassFish
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=21 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                  rm -rf app/glassfish
+
+            - name: Run Archetype for EE 11 Web Profile, SE 21, GlassFish
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=21 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                  rm -rf app/glassfish
+
             - name: Run Archetype for EE 11 Core Profile, SE 21
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=21 -DoutputDirectory=app -Dgoals="clean package"
