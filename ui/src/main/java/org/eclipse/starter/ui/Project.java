@@ -80,9 +80,9 @@ public class Project implements Serializable {
                 new SelectItem(8.0, "Jakarta EE 8", "Jakarta EE 8"));
 
         profiles.put("full",
-                new SelectItem("full", "Platform", "Platform", true));
+                new SelectItem("full", "Platform", "Platform"));
         profiles.put("web",
-                new SelectItem("web", "Web Profile", "Web Profile", true));
+                new SelectItem("web", "Web Profile", "Web Profile"));
         profiles.put("core", new SelectItem("core", "Core Profile"));
 
         javaVersions.put("21", new SelectItem("21", "Java SE 21"));
@@ -101,13 +101,11 @@ public class Project implements Serializable {
         Collections.shuffle(shuffledRuntimes); // Ensure random order every
         // time.
         shuffledRuntimes.forEach(
-                r -> runtimes.put(r, new SelectItem(r, RUNTIMES.get(r))));
+                r -> runtimes.put(r, new SelectItem(r, RUNTIMES.get(r), RUNTIMES.get(r), true)));
 
-        // Disable all runtimes that do not support the EE 11 Core Profile.
-        runtimes.get("glassfish").setDisabled(true);
-        runtimes.get("payara").setDisabled(true);
-        runtimes.get("tomee").setDisabled(true);
-        runtimes.get("wildfly").setDisabled(true);
+        // Enable all runtimes that support the EE 11 Platform.
+        runtimes.get("none").setDisabled(false);
+        runtimes.get("glassfish").setDisabled(false);
     }
 
     public Collection<SelectItem> getJakartaVersions() {
@@ -198,6 +196,7 @@ public class Project implements Serializable {
         updateDockerEnabledState();
         updateGlassFishEnabledState();
 
+        profiles.get("full").setDisabled(false);
         profiles.get("web").setDisabled(false);
         profiles.get("core").setDisabled(true);
 
@@ -206,17 +205,19 @@ public class Project implements Serializable {
         javaVersions.get("17").setDisabled(false);
         javaVersions.get("21").setDisabled(false);
 
+        runtimes.get("open-liberty").setDisabled(false);
         runtimes.get("payara").setDisabled(false);
         runtimes.get("tomee").setDisabled(true);
         runtimes.get("wildfly").setDisabled(false);
 
         if (jakartaVersion == 11) {
-            profiles.get("full").setDisabled(true);
-            profiles.get("web").setDisabled(true);
-            profiles.get("core").setDisabled(false);
+            if (!runtime.equals("glassfish") && !runtime.equals("tomee")) {
+                profiles.get("core").setDisabled(false);
+            }
 
             javaVersions.get("11").setDisabled(true);
 
+            runtimes.get("open-liberty").setDisabled(!profile.equals("core"));
             runtimes.get("payara").setDisabled(true);
             runtimes.get("wildfly").setDisabled(true);
         } else if (jakartaVersion == 10) {
@@ -252,7 +253,9 @@ public class Project implements Serializable {
         updateDockerEnabledState();
         updateGlassFishEnabledState();
 
-        if ((jakartaVersion == 8)
+        if (jakartaVersion == 11) {
+            runtimes.get("open-liberty").setDisabled(!profile.equals("core"));
+        } else if ((jakartaVersion == 8)
                 || ((jakartaVersion == 9.1) && (javaVersion != 8))) {
             runtimes.get("tomee").setDisabled(false);
         }
@@ -333,9 +336,8 @@ public class Project implements Serializable {
             profiles.get("core").setDisabled(false);
         }
 
-        if (jakartaVersion != 11) {
-            profiles.get("full").setDisabled(false);
-        }
+        profiles.get("web").setDisabled(false);
+        profiles.get("full").setDisabled(false);
 
         if (jakartaVersion < 10) {
             javaVersions.get("8").setDisabled(false);
@@ -362,8 +364,16 @@ public class Project implements Serializable {
 
                 break;
             case "open-liberty":
+                if (jakartaVersion == 11) {
+                    profiles.get("web").setDisabled(true);
+                    profiles.get("full").setDisabled(true);
+                }
                 break;
             case "payara":
+                if (jakartaVersion == 11) {
+                    profiles.get("web").setDisabled(true);
+                    profiles.get("full").setDisabled(true);
+                }
                 break;
             case "tomee":
                 profiles.get("core").setDisabled(true);
@@ -375,6 +385,10 @@ public class Project implements Serializable {
 
                 break;
             case "wildfly":
+                if (jakartaVersion == 11) {
+                    profiles.get("web").setDisabled(true);
+                    profiles.get("full").setDisabled(true);
+                }
                 break;
         }
     }
@@ -392,8 +406,6 @@ public class Project implements Serializable {
 
     private void updateGlassFishEnabledState() {
         if ((jakartaVersion == 8) && (javaVersion > 8)) {
-            runtimes.get("glassfish").setDisabled(true);
-        } else if (jakartaVersion == 11) {
             runtimes.get("glassfish").setDisabled(true);
         } else if (profile.equals("core")) {
             runtimes.get("glassfish").setDisabled(true);

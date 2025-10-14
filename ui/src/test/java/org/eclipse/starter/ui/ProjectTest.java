@@ -75,7 +75,7 @@ public class ProjectTest {
 
         if (jakartaVersion == 11) {
             // For Jakarta EE 11, the Full profile is actually enabled in the implementation
-            verifyItemState(false, profiles, "web", "Web profile should be disabled for Jakarta EE 11");
+            verifyItemState(true, profiles, "web", "Web profile should be enabled for Jakarta EE 11");
             verifyItemState(true, profiles, "core", "Core profile should be enabled for Jakarta EE 11");
 
             verifyItemState(false, javaVersions, "11", "Java 11 should be disabled for Jakarta EE 11");
@@ -83,7 +83,7 @@ public class ProjectTest {
             verifyItemState(true, javaVersions, "21", "Java 21 should be enabled for Jakarta EE 11");
             verifyItemState(false, javaVersions, "8", "Java 8 should be disabled for Jakarta EE 11");
 
-            verifyItemState(false, runtimes, "glassfish", "GlassFish should be disabled for Jakarta EE 11");
+            verifyItemState(true, runtimes, "glassfish", "GlassFish should be enabled for Jakarta EE 11");
             verifyItemState(false, runtimes, "payara", "Payara should be disabled for Jakarta EE 11");
             verifyItemState(false, runtimes, "tomee", "TomEE should be disabled for Jakarta EE 11");
             verifyItemState(false, runtimes, "wildfly", "WildFly should be disabled for Jakarta EE 11");
@@ -237,7 +237,6 @@ public class ProjectTest {
 
             // GlassFish might be enabled or disabled based on other conditions
             if ((project.getJakartaVersion() == 8 && project.getJavaVersion() > 8) ||
-                    project.getJakartaVersion() == 11 ||
                     project.getProfile().equals("core")) {
                 verifyItemState(false, runtimes, "glassfish", "GlassFish should be disabled based on Jakarta version, profile, or Java version");
             } else {
@@ -269,7 +268,11 @@ public class ProjectTest {
         } else if (project.getJakartaVersion() != 11) {
             verifyItemState(true, profiles, "full", "Full profile should be enabled for Jakarta EE versions != 11 with " + runtimeValue);
         } else {
-            verifyItemState(false, profiles, "full", "Full profile should be disabled for Jakarta EE 11");
+            if (runtimeValue.equals("none") || runtimeValue.equals("glassfish")) {
+                verifyItemState(true, profiles, "full", "Full profile should be enabled for Jakarta EE 11 with " + runtimeValue);
+            } else {
+                verifyItemState(false, profiles, "full", "Full profile should be disabled for Jakarta EE 11 with " + runtimeValue);
+            }
         }
 
         if (project.getJakartaVersion() < 10) {
