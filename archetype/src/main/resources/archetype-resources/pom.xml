@@ -85,7 +85,7 @@
 #if (${runtime} == 'wildfly')
         <wildfly.version>${wildflyVersion}</wildfly.version>
 #end
-        <compiler-plugin.version>3.13.0</compiler-plugin.version>
+        <compiler-plugin.version>3.14.0</compiler-plugin.version>
         <war-plugin.version>3.4.0</war-plugin.version>
 #if ((${runtime} == 'glassfish') || ((${runtime} == 'payara') && (${profile} == 'full')))
         <cargo.version>1.10.15</cargo.version>
@@ -105,7 +105,7 @@
     #end
 #end
 #if (${runtime} == 'open-liberty')
-        <liberty-plugin.version>3.10.3</liberty-plugin.version>
+        <liberty-plugin.version>3.12.0</liberty-plugin.version>
 #end
     </properties>
 
