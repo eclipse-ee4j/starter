@@ -13,9 +13,9 @@
 #if (${jakartaVersion} == '11')
     #set ($eeApiVersion = "11.0.0")
     #if (${javaVersion} == '17')
-        #set ($glassfishVersion = "8.0.0-JDK17-M12")
+        #set ($glassfishVersion = "8.0.0-JDK17")
     #else
-        #set ($glassfishVersion = "8.0.0-M12")
+        #set ($glassfishVersion = "8.0.0")
     #end
     #set ($glassfishContainerId = "glassfish8x")
     #set ($payaraVersion = "7.2025.2")
@@ -235,17 +235,6 @@
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>${liberty-plugin.version}</version>
-    ## Once Open Liberty has a proper release for EE 11, this should be removed. 
-    #if (${jakartaVersion} == '11')
-                <configuration>
-                    <runtimeArtifact>
-                        <groupId>io.openliberty.beta</groupId>
-                        <artifactId>openliberty-runtime</artifactId>
-                        <version>LATEST</version>
-                        <type>zip</type>
-                    </runtimeArtifact>
-                </configuration>
-    #end
             </plugin>
 #end
         </plugins>
