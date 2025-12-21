@@ -41,7 +41,7 @@
         #end
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
     #end
-#elseif (${jakartaVersion} == '11')    
+#elseif (${jakartaVersion} == '11')
     #if (${runtime} == 'payara')
         #if (${profile} == 'full')
             #set ($baseImage = "payara/server-full:7.2025.2")
@@ -98,10 +98,7 @@
     #end
 #end
 #if (${runtime} == 'open-liberty')
-    ## Once Open Liberty has a proper release for EE 11, this should be removed.
-    #if (${jakartaVersion} == '11')
-        #set ($baseImage = "icr.io/appcafe/open-liberty:beta")
-    #elseif (${javaVersion} == '21')
+    #if (${javaVersion} == '21')
         #set ($baseImage = "icr.io/appcafe/open-liberty:full-java21-openj9-ubi-minimal")
     #elseif (${javaVersion} == '17')
         #set ($baseImage = "icr.io/appcafe/open-liberty:full-java17-openj9-ubi")
