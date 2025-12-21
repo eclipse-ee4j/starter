@@ -96,31 +96,28 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=10 -DjavaVersion=17 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
                   rm -rf app/payara
 
+            - name: Run Archetype for EE 11, SE 17, Payara
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=17 -Druntime=payara -DoutputDirectory=app -Dgoals="clean package"
+                  rm -rf app
+
             - name: Set up Java SE 21
               uses: actions/setup-java@v4
               with:
                   distribution: 'temurin'
                   java-version: 21
 
-            - name: Run Archetype for EE 11, SE 21, GlassFish
-              run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=21 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
-                  rm -rf app/glassfish
-
-            - name: Run Archetype for EE 11 Web Profile, SE 21, GlassFish
-              run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=21 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
-                  rm -rf app/glassfish
-
             - name: Run Archetype for EE 11 Core Profile, SE 21
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=21 -DoutputDirectory=app -Dgoals="clean package"
                   rm -rf app
 
-            - name: Run Archetype for EE 11 Core Profile, SE 21, Open Liberty
+            - name: Run Archetype for EE 11 Web Profile, SE 21, Payara, with Docker
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory="app/open-liberty" -Dgoals="clean package"
-                  rm -rf app/open-liberty
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=21 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
+                  docker build -t test-image app/payara/jakartaee-hello-world
+                  docker rmi test-image
+                  rm -rf app/payara
 
     build-ui:
         runs-on: ubuntu-latest
