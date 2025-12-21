@@ -18,13 +18,13 @@
         #set ($glassfishVersion = "8.0.0-M12")
     #end
     #set ($glassfishContainerId = "glassfish8x")
-    #set ($wildflyVersion = "35.0.1.Final")
+    #set ($payaraVersion = "7.2025.2")
 #elseif (${jakartaVersion} == '10')
     #set ($eeApiVersion = "10.0.0")
     #set ($glassfishVersion = "7.0.23")
     #set ($glassfishContainerId = "glassfish7x")
-    #set ($payaraVersion = "6.2025.1")
-    #set ($wildflyVersion = "35.0.1.Final")
+    #set ($payaraVersion = "6.2025.11")
+    #set ($wildflyVersion = "38.0.1.Final")
 #elseif (${jakartaVersion} == '9.1')
     #set ($eeApiVersion = "9.1.0")
     #set ($glassfishContainerId = "glassfish6x")
@@ -85,27 +85,27 @@
 #if (${runtime} == 'wildfly')
         <wildfly.version>${wildflyVersion}</wildfly.version>
 #end
-        <compiler-plugin.version>3.14.0</compiler-plugin.version>
-        <war-plugin.version>3.4.0</war-plugin.version>
+        <compiler-plugin.version>3.14.1</compiler-plugin.version>
+        <war-plugin.version>3.5.1</war-plugin.version>
 #if ((${runtime} == 'glassfish') || ((${runtime} == 'payara') && (${profile} == 'full')))
-        <cargo.version>1.10.15</cargo.version>
+        <cargo.version>1.10.25</cargo.version>
 #end
 #if ((${runtime} == 'payara') && (${profile} != 'full'))
     #if (${javaVersion} == '8')
         <payara-micro-plugin.version>2.0</payara-micro-plugin.version>
     #else
-        <payara-micro-plugin.version>2.4</payara-micro-plugin.version>
+        <payara-micro-plugin.version>2.5.2</payara-micro-plugin.version>
     #end
 #end
 #if (${runtime} == 'wildfly')
     #if (${javaVersion} == '8')
         <wildfly-plugin.version>3.0.2.Final</wildfly-plugin.version>
     #else
-        <wildfly-plugin.version>5.0.1.Final</wildfly-plugin.version>
+        <wildfly-plugin.version>5.1.5.Final</wildfly-plugin.version>
     #end
 #end
 #if (${runtime} == 'open-liberty')
-        <liberty-plugin.version>3.12.0</liberty-plugin.version>
+        <liberty-plugin.version>3.11.5</liberty-plugin.version>
 #end
     </properties>
 
