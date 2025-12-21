@@ -46,6 +46,13 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
+    // For now, this catch-all will simplify the rest of the validation.
+    // It should be evolved once more runtimes properly suppport Jakarta EE 11.
+    if ((jakartaVersion == '11') && (runtime != 'none') && (runtime != 'payara')) {
+        FileUtils.forceDelete(outputDirectory)
+        throw new RuntimeException("Failed, only Payara currently supports Jakarta EE 11 in a stable release")
+    }
+
     if ((profile == 'core') && (Double.valueOf(jakartaVersion) < 10)) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10 and above")
@@ -73,21 +80,7 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         }
     }
 
-    if (runtime == 'open-liberty') {
-        // As EE 11 progresses, this check should be removed.
-        if ((jakartaVersion == '11') && (profile == 'web' || profile == 'full')) {
-            FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, Open Liberty does not yet support the Jakarta EE 11 Web Profile or Platform")
-        }
-    }
-
     if (runtime == 'payara') {
-        // As EE 11 progresses, this check should be removed.
-        if (jakartaVersion == '11') {
-            FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, Payara does not yet support Jakarta EE 11")
-        }
-
         if ((jakartaVersion == '9') || (jakartaVersion == '9.1')) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, Payara does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")
@@ -117,12 +110,6 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     }
 
     if (runtime == 'wildfly') {
-        // As EE 11 progresses, this check should be removed.
-        if ((jakartaVersion == '11') && (profile == 'web')) {
-            FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, WildFly does not yet support the Jakarta EE 11 Web Profile")
-        }
-		
         if ((jakartaVersion == '9') || (jakartaVersion == '9.1')) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, WildFly does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")
@@ -137,26 +124,26 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
                 if (Double.valueOf(jakartaVersion) != 10) {
                     println "WARNING: GlassFish only supports Docker for Jakarta EE 10"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
-                } else if (javaVersion != '17') {
-                    println "WARNING: GlassFish only supports Docker for Java 17"
-                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 } else if (profile != 'full') {
                     println "WARNING: GlassFish only supports Docker for the full platform"
+                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                } else if (javaVersion != '17') {
+                    println "WARNING: GlassFish only supports Docker for Java 17"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 }
             }
             break
 
-        case "tomee": println "Generating code for TomEE"
+        case "open-liberty": println "Generating code for Open Liberty"
             break
 
         case "payara": println "Generating code for Payara"
             break
 
-        case "wildfly": println "Generating code for WildFly"
+        case "tomee": println "Generating code for TomEE"
             break
 
-        case "open-liberty": println "Generating code for Open Liberty"
+        case "wildfly": println "Generating code for WildFly"
             break
 
         default: println "No runtime will be included in the sample"
