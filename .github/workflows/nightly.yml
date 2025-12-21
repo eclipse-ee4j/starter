@@ -370,9 +370,9 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=core -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package"
                   rm -rf app
 
-            - name: Run Archetype for EE 11 Core Profile, SE 11
+            - name: Run Archetype for EE 11, SE 11
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=11 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
 
                   MAVEN_EXIT_CODE=${PIPESTATUS[0]}
                   ERROR_MESSAGE="EE 11 does not support Java SE 11"
@@ -738,8 +738,6 @@ jobs:
                   rm -f mvn_output.txt
                   rm -rf app/glassfish
 
-
-
             - name: Run Archetype for EE 8, SE 17, Open Liberty, with Docker
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
@@ -802,8 +800,6 @@ jobs:
                   docker build -t test-image app/open-liberty/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/open-liberty
-
-
 
             - name: Run Archetype for EE 8, SE 17, Payara, with Docker
               run: |
@@ -901,8 +897,6 @@ jobs:
                   docker build -t test-image app/wildfly/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/wildfly
-
-
 
             - name: Set up Java SE 21
               uses: actions/setup-java@v4
@@ -1013,8 +1007,6 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=web -DjavaVersion=21 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
                   rm -rf app/glassfish
 
-
-
             - name: Run Archetype for EE 8, SE 21, Open Liberty, with Docker
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
@@ -1077,8 +1069,6 @@ jobs:
                   docker build -t test-image app/open-liberty/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/open-liberty
-
-
 
             - name: Run Archetype for EE 8, SE 21, Payara, with Docker
               run: |
@@ -1163,8 +1153,6 @@ jobs:
                   docker build -t test-image app/wildfly/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/wildfly
-
-
 
     build-ui:
         runs-on: ubuntu-latest
