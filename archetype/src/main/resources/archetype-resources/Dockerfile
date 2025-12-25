@@ -41,6 +41,15 @@
         #end
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
     #end
+#elseif (${jakartaVersion} == '11')
+    #if (${runtime} == 'payara')
+        #if (${profile} == 'full')
+            #set ($baseImage = "payara/server-full:7.2025.2")
+        #else
+            #set ($baseImage = "payara/server-web:7.2025.2")
+        #end
+        #set ($deployDirectory = "$DEPLOY_DIR")
+    #end
 #else
     #if (${runtime} == 'glassfish')
         #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.23")
@@ -48,21 +57,21 @@
     #elseif (${runtime} == 'payara')
         #if (${javaVersion} == '21')
             #if (${profile} == 'full')
-                #set ($baseImage = "payara/server-full:6.2025.1-jdk21")
+                #set ($baseImage = "payara/server-full:6.2025.11-jdk21")
             #else
-                #set ($baseImage = "payara/server-web:6.2025.1-jdk21")
+                #set ($baseImage = "payara/server-web:6.2025.11-jdk21")
             #end
         #elseif (${javaVersion} == '17')
             #if (${profile} == 'full')
-                #set ($baseImage = "payara/server-full:6.2025.1-jdk17")
+                #set ($baseImage = "payara/server-full:6.2025.11-jdk17")
             #else
-                #set ($baseImage = "payara/server-web:6.2025.1-jdk17")
+                #set ($baseImage = "payara/server-web:6.2025.11-jdk17")
             #end
         #else
             #if (${profile} == 'full')
-                #set ($baseImage = "payara/server-full:6.2025.1")
+                #set ($baseImage = "payara/server-full:6.2025.11")
             #else
-                #set ($baseImage = "payara/server-web:6.2025.1")
+                #set ($baseImage = "payara/server-web:6.2025.11")
             #end
         #end
         #set ($deployDirectory = "$DEPLOY_DIR")
@@ -89,10 +98,7 @@
     #end
 #end
 #if (${runtime} == 'open-liberty')
-    ## Once Open Liberty has a proper release for EE 11, this should be removed.
-    #if (${jakartaVersion} == '11')
-        #set ($baseImage = "icr.io/appcafe/open-liberty:beta")
-    #elseif (${javaVersion} == '21')
+    #if (${javaVersion} == '21')
         #set ($baseImage = "icr.io/appcafe/open-liberty:full-java21-openj9-ubi-minimal")
     #elseif (${javaVersion} == '17')
         #set ($baseImage = "icr.io/appcafe/open-liberty:full-java17-openj9-ubi")
