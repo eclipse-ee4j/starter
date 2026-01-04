@@ -38,10 +38,11 @@
                     <p:column>
                         <p:outputLabel
                                 for="@next"
-                                value="Jakarta EE profile"/>
+                                value="Jakarta EE Profile"/>
                         <p:selectOneMenu
                                 required="true"
                                 value="#{project.profile}"
+                                disabled="#{project.profileDisabled}"
                                 appendTo="@this">
                             <f:selectItems value="#{project.profiles}"/>
                             <p:ajax
@@ -62,6 +63,7 @@
                         <p:selectOneMenu
                                 required="true"
                                 value="#{project.javaVersion}"
+                                disabled="#{project.javaVersionDisabled}"
                                 appendTo="@this">
                             <f:selectItems value="#{project.javaVersions}"/>
                             <p:ajax
@@ -82,6 +84,7 @@
                         <p:selectOneMenu
                                 required="true"
                                 value="#{project.runtime}"
+                                disabled="#{project.runtimeDisabled}"
                                 appendTo="@this">
                             <f:selectItems value="#{project.runtimes}"/>
                             <p:ajax
@@ -102,6 +105,7 @@
                         <p:selectOneRadio
                                 required="true"
                                 value="#{project.docker}"
+                                disabled="#{project.dockerDisabled}"
                                 columns="3"
                                 layout="responsive">
                             <f:selectItems value="#{project.dockerFlags}"/>
@@ -174,9 +178,9 @@
                                 ajax="false"
                                 icon="icon-chevron-right"
                                 iconPos="right"
-                                styleClass="#{project.generateButtonDisabled ? 'btn btn-secondary margin-0 disabled-button' : 'btn btn-secondary margin-0'}"
+                                styleClass="#{project.generateDisabled ? 'btn btn-secondary margin-0 disabled-button' : 'btn btn-secondary margin-0'}"
                                 action="#{project.generate}"
-                                disabled="#{project.generateButtonDisabled}"/>
+                                disabled="#{project.generateDisabled}"/>
                     </f:facet>
                 </p:panelGrid>
             </h:form>
