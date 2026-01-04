@@ -28,29 +28,28 @@ import jakarta.inject.Named;
 @Named
 @ViewScoped
 public class Project implements Serializable {
-
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = Logger
             .getLogger(MethodHandles.lookup().lookupClass().getName());
+
     private static final Map<String, String> RUNTIMES = Map.ofEntries(
             entry("glassfish", "GlassFish"),
             entry("open-liberty", "Open Liberty"), entry("payara", "Payara"),
             entry("tomee", "TomEE"), entry("wildfly", "WildFly"));
+    private static final double DEFAULT_JAKARTA_VERSION = 11;
+    private static final String DEFAULT_PROFILE = "Core";
+    private static final int DEFAULT_JAVA_VERSION = 21;    
+    private static final String DEFAULT_RUNTIME = "none";
     private static final String DEFAULT_GROUPID = "org.eclipse";
-    private static final String DEFAULT_ARTIFACTID = "jakartaee-hello-world";
+    private static final String DEFAULT_ARTIFACTID = "jakartaee-hello-world";    
 
-    private static Map<String, String> cache = new ConcurrentHashMap<>();
-
-    static final int DEFAULT_JAVA_VERSION = 21;
-    static final double DEFAULT_JAKARTA_VERSION = 11;
-    static final String DEFAULT_PROFILE = "Core";
-    static final String DEFAULT_RUNTIME = "none";
-
-        private static final String DEFAULT_ARCHETYPE_VERSION = "2.7.0";
-        private static final String ARCHETYPE_VERSION_ENV_VAR = System.getenv("ARCHETYPE_VERSION");
-        private static final String ARCHETYPE_VERSION = (ARCHETYPE_VERSION_ENV_VAR != null)
+    private static final String DEFAULT_ARCHETYPE_VERSION = "2.7.0";
+    private static final String ARCHETYPE_VERSION_ENV_VAR = System.getenv("ARCHETYPE_VERSION");
+    private static final String ARCHETYPE_VERSION = (ARCHETYPE_VERSION_ENV_VAR != null)
             ? ARCHETYPE_VERSION_ENV_VAR
             : DEFAULT_ARCHETYPE_VERSION;
+
+   private static Map<String, String> cache = new ConcurrentHashMap<>();            
 
     @Inject
     private FacesContext facesContext;
@@ -74,6 +73,7 @@ public class Project implements Serializable {
 
     private String groupId = DEFAULT_GROUPID;
     private String artifactId = DEFAULT_ARTIFACTID;
+    private boolean generateButtonDisabled = true;
 
     public Project() {
         jakartaVersions.put(11.0, new SelectItem(11.0, "Jakarta EE 11"));
@@ -190,6 +190,10 @@ public class Project implements Serializable {
         this.artifactId = artifactId;
     }
 
+    public boolean isGenerateButtonDisabled() {
+        return generateButtonDisabled;
+    }    
+
     public void onJakartaVersionChange() {
         LOGGER.log(Level.INFO,
                 "Jakarta EE version: {0} selected; enabling/disabling items and clearing the form",
@@ -198,7 +202,6 @@ public class Project implements Serializable {
 
         clearForm(false);
 
-        // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
         updateGlassFishEnabledState();
 
@@ -255,7 +258,6 @@ public class Project implements Serializable {
                 new Object[]{jakartaVersion, profile, javaVersion, docker,
                         runtime});
 
-        // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
         updateGlassFishEnabledState();
 
@@ -279,7 +281,6 @@ public class Project implements Serializable {
                 new Object[]{jakartaVersion, profile, javaVersion, docker,
                         runtime});
 
-        // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
         updateGlassFishEnabledState();
 
@@ -320,7 +321,6 @@ public class Project implements Serializable {
                 new Object[]{jakartaVersion, profile, javaVersion, docker,
                         runtime});
 
-        // TODO Gradually move to this simplified validation logic.
         updateGlassFishEnabledState();
 
         if (docker) {
@@ -335,7 +335,6 @@ public class Project implements Serializable {
                 "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
                 new Object[]{jakartaVersion, profile, javaVersion, docker,
                         runtime});
-        // TODO Gradually move to this simplified validation logic.
         updateDockerEnabledState();
 
         if (jakartaVersion > 9.1) {

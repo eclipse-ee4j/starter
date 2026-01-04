@@ -174,9 +174,9 @@
                                 ajax="false"
                                 icon="icon-chevron-right"
                                 iconPos="right"
-                                styleClass="btn btn-secondary margin-0"
-                                action="#{project.generate}" inline="">
-                        </p:commandButton>
+                                styleClass="#{project.generateButtonDisabled ? 'btn btn-secondary margin-0 disabled-button' : 'btn btn-secondary margin-0'}"
+                                action="#{project.generate}"
+                                disabled="#{project.generateButtonDisabled}"/>
                     </f:facet>
                 </p:panelGrid>
             </h:form>
