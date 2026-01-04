@@ -46,6 +46,12 @@ public class Project implements Serializable {
     static final String DEFAULT_PROFILE = "Core";
     static final String DEFAULT_RUNTIME = "none";
 
+        private static final String DEFAULT_ARCHETYPE_VERSION = "2.7.0";
+        private static final String ARCHETYPE_VERSION_ENV_VAR = System.getenv("ARCHETYPE_VERSION");
+        private static final String ARCHETYPE_VERSION = (ARCHETYPE_VERSION_ENV_VAR != null)
+            ? ARCHETYPE_VERSION_ENV_VAR
+            : DEFAULT_ARCHETYPE_VERSION;
+
     @Inject
     private FacesContext facesContext;
     @Inject
@@ -449,7 +455,7 @@ public class Project implements Serializable {
                         entry("package", groupId)));
 
                 MavenUtility.invokeMavenArchetype("org.eclipse.starter",
-                        "jakarta-starter", VersionInfo.ARCHETYPE_VERSION,
+                    "jakarta-starter", ARCHETYPE_VERSION,
                         properties, workingDirectory);
 
                 LOGGER.info("Creating zip file.");
