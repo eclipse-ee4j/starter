@@ -25,8 +25,7 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-@Named
-@ViewScoped
+@Named @ViewScoped
 public class Project implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = Logger
@@ -65,7 +64,7 @@ public class Project implements Serializable {
     private int javaVersion = 0;
 
     private boolean dockerDisabled = true;
-    private Map<String, SelectItem> dockerFlags = new LinkedHashMap<>();
+    private Map<Boolean, SelectItem> dockerFlags = new LinkedHashMap<>();
     private boolean docker = false;
 
     private boolean runtimeDisabled = true;
@@ -95,8 +94,8 @@ public class Project implements Serializable {
         javaVersions.put(11, new SelectItem(11, "Java SE 11"));
         javaVersions.put(8, new SelectItem(8, "Java SE 8"));
 
-        dockerFlags.put("false", new SelectItem(false, "No"));
-        dockerFlags.put("true", new SelectItem(true, "Yes"));
+        dockerFlags.put(false, new SelectItem(false, "No"));
+        dockerFlags.put(true, new SelectItem(true, "Yes"));
 
         runtimes.put("", new SelectItem("", "-- Select runtime --", null, true));
         runtimes.put("none", new SelectItem("none", "None"));
@@ -250,7 +249,6 @@ public class Project implements Serializable {
         LOGGER.log(Level.INFO, "Docker option selected: {0}", docker);
 
         generateDisabled = true;
-        runtimeDisabled = false;
         runtime = "";
 
         updateRuntimeEnabledStates();
