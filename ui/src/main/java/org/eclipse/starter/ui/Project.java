@@ -93,8 +93,8 @@ public class Project implements Serializable {
         javaVersions.put(11, new SelectItem(11, "Java SE 11"));
         javaVersions.put(8, new SelectItem(8, "Java SE 8"));
 
-        dockerFlags.put("false", new SelectItem("false", "No"));
-        dockerFlags.put("true", new SelectItem("true", "Yes"));
+        dockerFlags.put("false", new SelectItem(false, "No"));
+        dockerFlags.put("true", new SelectItem(true, "Yes"));
 
         runtimes.put("", new SelectItem("", "-- Select runtime --", null, true));
         runtimes.put("none", new SelectItem("none", "None"));
@@ -248,6 +248,7 @@ public class Project implements Serializable {
         LOGGER.log(Level.INFO, "Docker option selected: {0}", docker);
 
         generateDisabled = true;
+        runtimeDisabled = false;
         runtime = "";
 
         updateRuntimeEnabledStates();

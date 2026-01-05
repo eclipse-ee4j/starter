@@ -26,7 +26,7 @@
                             <p:ajax
                                     event="change"
                                     listener="#{project.onJakartaVersionChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
                         <h:outputText value="Selected version: #{project.jakartaVersion}"/>
@@ -48,7 +48,7 @@
                             <p:ajax
                                     event="change"
                                     listener="#{project.onProfileChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
                         <h:outputText
@@ -69,7 +69,7 @@
                             <p:ajax
                                     event="change"
                                     listener="#{project.onJavaVersionChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
                         <h:outputText
@@ -90,7 +90,7 @@
                             <p:ajax
                                     event="change"
                                     listener="#{project.onRuntimeChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
                         <h:outputText
@@ -112,7 +112,7 @@
                             <p:ajax
                                     event="change"
                                     listener="#{project.onDockerChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneRadio>
                         <h:outputText
