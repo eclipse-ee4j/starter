@@ -328,6 +328,7 @@ public class Project implements Serializable {
 
             if ((cachedDirectory == null)
                     || (!new File(cachedDirectory).exists())) {
+                // This will result in a random directory like: starter-output-XYZ123
                 File workingDirectory = Files
                         .createTempDirectory("starter-output-").toFile();
                 LOGGER.log(Level.INFO, "Working directory: {0}",
@@ -384,6 +385,7 @@ public class Project implements Serializable {
     }
 
     private String getCacheKey() {
+        // Need the groupId and artifactId in the key to avoid returning the default cached zip
         return jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker
                 + ":" + runtime + ":" + groupId + ":" + artifactId;
     }
