@@ -40,9 +40,8 @@ public class Project implements Serializable {
     private static final String DEFAULT_ARTIFACTID = "jakartaee-hello-world";
 
     private static final String DEFAULT_ARCHETYPE_VERSION = "2.7.0";
-    private static final String ARCHETYPE_VERSION_ENV_VAR = System.getenv("ARCHETYPE_VERSION");
-    private static final String ARCHETYPE_VERSION = (ARCHETYPE_VERSION_ENV_VAR != null)
-            ? ARCHETYPE_VERSION_ENV_VAR
+    private static final String ARCHETYPE_VERSION = (System.getenv("ARCHETYPE_VERSION") != null)
+            ? System.getenv("ARCHETYPE_VERSION")
             : DEFAULT_ARCHETYPE_VERSION;
 
     private static Map<String, String> cache = new ConcurrentHashMap<>();
@@ -53,7 +52,7 @@ public class Project implements Serializable {
     private ExternalContext externalContext;
 
     private Map<Double, SelectItem> jakartaVersions = new LinkedHashMap<>();
-    private Double jakartaVersion = 0.0;
+    private double jakartaVersion = 0.0;
 
     private boolean profileDisabled = true;
     private Map<String, SelectItem> profiles = new LinkedHashMap<>();
@@ -61,7 +60,7 @@ public class Project implements Serializable {
 
     private boolean javaVersionDisabled = true;
     private Map<Integer, SelectItem> javaVersions = new LinkedHashMap<>();
-    private Integer javaVersion = 0;
+    private int javaVersion = 0;
 
     private boolean dockerDisabled = true;
     private Map<String, SelectItem> dockerFlags = new LinkedHashMap<>();
@@ -110,11 +109,11 @@ public class Project implements Serializable {
         return jakartaVersions.values();
     }
 
-    public Double getJakartaVersion() {
+    public double getJakartaVersion() {
         return jakartaVersion;
     }
 
-    public void setJakartaVersion(Double jakartaVersion) {
+    public void setJakartaVersion(double jakartaVersion) {
         this.jakartaVersion = jakartaVersion;
     }
 
@@ -142,11 +141,11 @@ public class Project implements Serializable {
         return javaVersions.values();
     }
 
-    public Integer getJavaVersion() {
+    public int getJavaVersion() {
         return javaVersion;
     }
 
-    public void setJavaVersion(Integer javaVersion) {
+    public void setJavaVersion(int javaVersion) {
         this.javaVersion = javaVersion;
     }
 
@@ -240,142 +239,79 @@ public class Project implements Serializable {
         dockerDisabled = false;
         docker = false;
         runtimeDisabled = true;
-        runtime = "";   
+        runtime = "";
     }
 
     public void onDockerChange() {
-        LOGGER.log(Level.INFO,
-                "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[]{jakartaVersion, profile, javaVersion, docker, runtime});
+        LOGGER.log(Level.INFO, "Docker option selected: {0}", docker);
 
-        updateGlassFishEnabledState();
+        generateDisabled = true;
+        runtimeDisabled = false;
+        runtime = "";
 
-        if (docker) {
-            runtimes.get("none").setDisabled(true);
-        } else {
-            runtimes.get("none").setDisabled(false);
-        }
-    }
+        runtimes.get("none").setDisabled(docker);
 
-    public void onRuntimeChange() {
-        double jakartaValue = (jakartaVersion != null) ? jakartaVersion : 0;
-        String profileValue = (profile != null) ? profile : "";
-        int javaValue = (javaVersion != null) ? javaVersion : 0;
-        boolean dockerValue = Boolean.TRUE.equals(docker);
-        String runtimeValue = (runtime != null) ? runtime : "";
-
-        LOGGER.log(Level.INFO,
-                "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[]{jakartaValue, profileValue, javaValue, dockerValue, runtimeValue});
-        updateDockerEnabledState();
-
-        if (jakartaValue > 9.1) {
-            profiles.get("core").setDisabled(false);
-        }
-
-        profiles.get("web").setDisabled(false);
-        profiles.get("full").setDisabled(false);
-
-        if (jakartaValue < 10) {
-            javaVersions.get("8").setDisabled(false);
-        }
-
-        if (jakartaValue < 11) {
-            javaVersions.get("11").setDisabled(false);
-        }
-
-        javaVersions.get("17").setDisabled(false);
-        javaVersions.get("21").setDisabled(false);
-
-        switch (runtimeValue) {
-            case "none":
-                break;
-            case "glassfish":
-                profiles.get("core").setDisabled(true);
-
-                if (jakartaValue == 8) {
-                    javaVersions.get("11").setDisabled(true);
-                    javaVersions.get("17").setDisabled(true);
-                    javaVersions.get("21").setDisabled(true);
-                }
-
-                break;
-            case "open-liberty":
-                if (jakartaValue == 11) {
-                    profiles.get("web").setDisabled(true);
-                    profiles.get("full").setDisabled(true);
-                }
-                break;
-            case "payara":
-                if (jakartaValue == 11) {
-                    profiles.get("web").setDisabled(true);
-                    profiles.get("full").setDisabled(true);
-                }
-                break;
-            case "tomee":
-                profiles.get("core").setDisabled(true);
-                profiles.get("full").setDisabled(true);
-
-                if (jakartaValue != 8) {
-                    javaVersions.get("8").setDisabled(true);
-                }
-
-                break;
-            case "wildfly":
-                if (jakartaValue == 11) {
-                    profiles.get("web").setDisabled(true);
-                    profiles.get("full").setDisabled(true);
-                }
-                break;
-        }
-    }
-
-    private void updateDockerEnabledState() {
-        String runtimeValue = (runtime != null) ? runtime : "";
-        double jakartaValue = (jakartaVersion != null) ? jakartaVersion : 0;
-        String profileValue = (profile != null) ? profile : "";
-        int javaValue = (javaVersion != null) ? javaVersion : 0;
-
-        if (runtimeValue.equals("none")) {
-            dockerFlags.get("true").setDisabled(true);
-        } else if (runtimeValue.equals("glassfish") && !((jakartaValue == 10)
-                && profileValue.equals("full") && (javaValue == 17))) {
-            dockerFlags.get("true").setDisabled(true);
-        } else {
-            dockerFlags.get("true").setDisabled(false);
-        }
-    }
-
-    private void updateGlassFishEnabledState() {
-        String runtimeValue = (runtime != null) ? runtime : "";
-        double jakartaValue = (jakartaVersion != null) ? jakartaVersion : 0;
-        String profileValue = (profile != null) ? profile : "";
-        boolean dockerValue = Boolean.TRUE.equals(docker);
-        int javaValue = (javaVersion != null) ? javaVersion : 0;
-
-        if ((jakartaValue == 8) && (javaValue > 8)) {
+        if (profile.equals("core")) {
+            // GlassFish does not support Core Profile
             runtimes.get("glassfish").setDisabled(true);
-        } else if (profileValue.equals("core")) {
+        } else if (jakartaVersion == 8 && javaVersion > 8) {
+            // GlassFish 5 only supports Java SE 8
             runtimes.get("glassfish").setDisabled(true);
-        } else if (dockerValue && !((jakartaValue == 10) && profileValue.equals("full")
-                && (javaValue == 17))) {
+        } else if (docker && !(jakartaVersion == 10 && profile.equals("full") && javaVersion == 17)) {
+            // GlassFish with Docker only supported with EE 10 + platform + Java 17
             runtimes.get("glassfish").setDisabled(true);
         } else {
             runtimes.get("glassfish").setDisabled(false);
         }
+
+        if (jakartaVersion == 11) {
+            runtimes.get("open-liberty").setDisabled(true);
+        } else {
+            runtimes.get("open-liberty").setDisabled(false);
+        }
+
+        if (jakartaVersion == 9 || jakartaVersion == 9.1) {
+            // Payara does not offer a stable release for EE 9/9.1
+            runtimes.get("payara").setDisabled(true);
+        } else {
+            runtimes.get("payara").setDisabled(false);
+        }
+
+        if (jakartaVersion > 9.1) {
+            // TomEE does not support EE 10+
+            runtimes.get("tomee").setDisabled(true);
+        } else if (jakartaVersion == 9) {
+            // TomEE is certified for 9.1, not 9
+            runtimes.get("tomee").setDisabled(true);
+        } else if (!profile.equals("web")) {
+            // TomEE only supports Web Profile
+            runtimes.get("tomee").setDisabled(true);
+        } else if (jakartaVersion != 8 && javaVersion == 8) {
+            // TomEE 9 does not support Java SE 8
+            runtimes.get("tomee").setDisabled(true);
+        } else {
+            runtimes.get("tomee").setDisabled(false);
+        }
+
+        if (jakartaVersion == 9 || jakartaVersion == 9.1 || jakartaVersion == 11) {
+            // No stable release for EE 9/9.1, doesn't support EE 11 yet
+            runtimes.get("wildfly").setDisabled(true);
+        } else {
+            runtimes.get("wildfly").setDisabled(false);
+        }
+    }
+
+    public void onRuntimeChange() {
+        LOGGER.log(Level.INFO, "Runtime selected: {0}", runtime);
+
+        generateDisabled = false;
     }
 
     public void generate() {
-        double jakartaValue = (jakartaVersion != null) ? jakartaVersion : 0;
-        String profileValue = (profile != null) ? profile : "";
-        int javaValue = (javaVersion != null) ? javaVersion : 0;
-        boolean dockerValue = Boolean.TRUE.equals(docker);
-        String runtimeValue = (runtime != null) ? runtime : "";
-
         try {
             LOGGER.log(Level.INFO,
                     "Generating project - Jakarta EE version: {0}, Jakarta EE Profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}, groupId: {5}, artifactId: {6}",
-                    new Object[]{jakartaValue, profileValue, javaValue, dockerValue, runtimeValue, groupId, artifactId});
+                    new Object[]{jakartaVersion, profile, javaVersion, docker, runtime, groupId, artifactId});
 
             String cachedDirectory = cache.get(getCacheKey());
 
@@ -390,14 +326,15 @@ public class Project implements Serializable {
                 Properties properties = new Properties();
                 properties.putAll(Map.ofEntries(
                         entry("jakartaVersion",
-                            ((jakartaValue % 1.0 != 0)
-                                ? String.format("%s", jakartaValue)
+                            ((jakartaVersion % 1.0 != 0)
+                                ? String.format("%s", jakartaVersion)
                                         : String.format("%.0f",
-                                jakartaValue))),
-                        entry("profile", profileValue),
-                        entry("javaVersion", javaValue),
-                        entry("docker", (dockerValue ? "yes" : "no")),
-                        entry("runtime", runtimeValue), entry("groupId", groupId),
+                                jakartaVersion))),
+                        entry("profile", profile),
+                        entry("javaVersion", javaVersion),
+                        entry("docker", (docker ? "yes" : "no")),
+                        entry("runtime", runtime), 
+                        entry("groupId", groupId),
                         entry("artifactId", artifactId),
                         entry("package", groupId)));
 
@@ -436,14 +373,8 @@ public class Project implements Serializable {
     }
 
     private String getCacheKey() {
-        double jakartaValue = (jakartaVersion != null) ? jakartaVersion : 0;
-        String profileValue = (profile != null) ? profile : "";
-        int javaValue = (javaVersion != null) ? javaVersion : 0;
-        boolean dockerValue = Boolean.TRUE.equals(docker);
-        String runtimeValue = (runtime != null) ? runtime : "";
-
-        return jakartaValue + ":" + profileValue + ":" + javaValue + ":" + dockerValue
-                + ":" + runtimeValue + ":" + groupId + ":" + artifactId;
+        return jakartaVersion + ":" + profile + ":" + javaVersion + ":" + docker
+                + ":" + runtime + ":" + groupId + ":" + artifactId;
     }
 
     private void downloadZip(File zip) {
