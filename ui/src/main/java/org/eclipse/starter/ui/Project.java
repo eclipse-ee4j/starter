@@ -205,6 +205,7 @@ public class Project implements Serializable {
     public void onJakartaVersionChange() {
         LOGGER.log(Level.INFO, "Jakarta EE version selected: {0}", jakartaVersion);
 
+        generateDisabled = true;
         profileDisabled = false;
         profile = "";
         javaVersionDisabled = true;
@@ -220,6 +221,7 @@ public class Project implements Serializable {
     public void onProfileChange() {
         LOGGER.log(Level.INFO, "Jakarta EE Profile selected: {0}", profile);
 
+        generateDisabled = true;
         javaVersionDisabled = false;
         javaVersion = 0;
         dockerDisabled = true;
@@ -232,48 +234,13 @@ public class Project implements Serializable {
     }
 
     public void onJavaVersionChange() {
-        double jakartaValue = (jakartaVersion != null) ? jakartaVersion : 0;
-        String profileValue = (profile != null) ? profile : "";
-        int javaValue = (javaVersion != null) ? javaVersion : 0;
-        boolean dockerValue = Boolean.TRUE.equals(docker);
-        String runtimeValue = (runtime != null) ? runtime : "";
+        LOGGER.log(Level.INFO, "Java SE version selected: {0}", javaVersion);
 
-        LOGGER.log(Level.INFO,
-                "Validating form for Jakarta EE version: {0}, Jakarta EE profile: {1}, Java SE version: {2}, Docker: {3}, runtime: {4}",
-                new Object[]{jakartaValue, profileValue, javaValue, dockerValue, runtimeValue});
-
-        updateDockerEnabledState();
-        updateGlassFishEnabledState();
-
-        if ((jakartaValue > 9.1) && !runtimeValue.equals("tomee")
-                && !runtimeValue.equals("glassfish")) {
-            profiles.get("core").setDisabled(false);
-        }
-
-        runtimes.get("tomee").setDisabled(true);
-
-        if ((jakartaValue != 9) && (jakartaValue != 9.1)
-                && (jakartaValue != 11)) {
-            runtimes.get("payara").setDisabled(false);
-            runtimes.get("wildfly").setDisabled(false);
-        }
-
-        if (javaValue == 8) {
-            profiles.get("core").setDisabled(true);
-
-            if (profileValue.equals("web") && (jakartaValue == 8)) {
-                runtimes.get("tomee").setDisabled(false);
-            }
-
-            if (jakartaValue != 8) {
-                runtimes.get("payara").setDisabled(true);
-                runtimes.get("wildfly").setDisabled(true);
-            }
-        }
-        if (profileValue.equals("web")
-                && ((jakartaValue == 8) || (jakartaValue == 9.1))) {
-            runtimes.get("tomee").setDisabled(false);
-        }
+        generateDisabled = true;
+        dockerDisabled = false;
+        docker = false;
+        runtimeDisabled = true;
+        runtime = "";   
     }
 
     public void onDockerChange() {
