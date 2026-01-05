@@ -462,14 +462,4 @@ public class Project implements Serializable {
             throw new RuntimeException("Failed to generate zip download.", e);
         }
     }
-
-    private void clearForm(boolean clearJakartaVersion) {
-        if (clearJakartaVersion) {
-            jakartaVersion = null;
-        }
-        profile = null;
-        javaVersion = null;
-        docker = false;
-        runtime = null;
-    }
 }
