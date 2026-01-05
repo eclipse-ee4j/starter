@@ -238,20 +238,28 @@ public class Project implements Serializable {
         generateDisabled = true;
         dockerDisabled = false;
         docker = false;
-        runtimeDisabled = true;
+        runtimeDisabled = false;
         runtime = "";
+
+        updateRuntimeEnabledStates();
     }
 
     public void onDockerChange() {
         LOGGER.log(Level.INFO, "Docker option selected: {0}", docker);
 
         generateDisabled = true;
-        runtimeDisabled = false;
         runtime = "";
 
+        updateRuntimeEnabledStates();
+    }
+
+    private void updateRuntimeEnabledStates() {
         runtimes.get("none").setDisabled(docker);
 
-        if (profile.equals("core")) {
+        if (jakartaVersion == 11) {
+            // GlassFish does not support EE 11 yet
+            runtimes.get("glassfish").setDisabled(true);
+        } else if (profile.equals("core")) {
             // GlassFish does not support Core Profile
             runtimes.get("glassfish").setDisabled(true);
         } else if (jakartaVersion == 8 && javaVersion > 8) {
