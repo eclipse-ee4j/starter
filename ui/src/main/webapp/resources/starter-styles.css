@@ -38,6 +38,14 @@ body .ui-button.btn-secondary.ui-state-hover {
     color: #fff;
 }
 
+body .ui-button.btn-secondary.disabled-button {
+    background-color: #ccc !important;
+    border-color: #999 !important;
+    color: #666 !important;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 body .main-panel label.ui-outputlabel > .ui-outputlabel-label {
     font-weight: 600;
     font-size: 18px;

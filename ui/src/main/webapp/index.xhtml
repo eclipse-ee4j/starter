@@ -26,7 +26,7 @@
                             <p:ajax
                                     event="change"
                                     listener="#{project.onJakartaVersionChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
                         <h:outputText value="Selected version: #{project.jakartaVersion}"/>
@@ -38,16 +38,17 @@
                     <p:column>
                         <p:outputLabel
                                 for="@next"
-                                value="Jakarta EE profile"/>
+                                value="Jakarta EE Profile"/>
                         <p:selectOneMenu
                                 required="true"
                                 value="#{project.profile}"
+                                disabled="#{project.profileDisabled}"
                                 appendTo="@this">
                             <f:selectItems value="#{project.profiles}"/>
                             <p:ajax
                                     event="change"
                                     listener="#{project.onProfileChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
                         <h:outputText
@@ -62,12 +63,13 @@
                         <p:selectOneMenu
                                 required="true"
                                 value="#{project.javaVersion}"
+                                disabled="#{project.javaVersionDisabled}"
                                 appendTo="@this">
                             <f:selectItems value="#{project.javaVersions}"/>
                             <p:ajax
                                     event="change"
                                     listener="#{project.onJavaVersionChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
                         <h:outputText
@@ -82,12 +84,13 @@
                         <p:selectOneMenu
                                 required="true"
                                 value="#{project.runtime}"
+                                disabled="#{project.runtimeDisabled}"
                                 appendTo="@this">
                             <f:selectItems value="#{project.runtimes}"/>
                             <p:ajax
                                     event="change"
                                     listener="#{project.onRuntimeChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
                         <h:outputText
@@ -102,13 +105,14 @@
                         <p:selectOneRadio
                                 required="true"
                                 value="#{project.docker}"
+                                disabled="#{project.dockerDisabled}"
                                 columns="3"
                                 layout="responsive">
                             <f:selectItems value="#{project.dockerFlags}"/>
                             <p:ajax
                                     event="change"
                                     listener="#{project.onDockerChange}"
-                                    process="@form"
+                                    process="@this"
                                     update="@form"/>
                         </p:selectOneRadio>
                         <h:outputText
@@ -174,9 +178,9 @@
                                 ajax="false"
                                 icon="icon-chevron-right"
                                 iconPos="right"
-                                styleClass="btn btn-secondary margin-0"
-                                action="#{project.generate}" inline="">
-                        </p:commandButton>
+                                styleClass="#{project.generateDisabled ? 'btn btn-secondary margin-0 disabled-button' : 'btn btn-secondary margin-0'}"
+                                action="#{project.generate}"
+                                disabled="#{project.generateDisabled}"/>
                     </f:facet>
                 </p:panelGrid>
             </h:form>

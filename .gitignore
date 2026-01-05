@@ -94,3 +94,4 @@ jakartaee-cafe-test-data
 .vscode/settings.json
 
 artifact/
+/ui/.vscode
