@@ -39,7 +39,7 @@ public class Project implements Serializable {
     private static final String DEFAULT_GROUPID = "org.eclipse";
     private static final String DEFAULT_ARTIFACTID = "jakartaee-hello-world";
 
-    private static final String DEFAULT_ARCHETYPE_VERSION = "2.7.0";
+    private static final String DEFAULT_ARCHETYPE_VERSION = "2.8.0";
     private static final String ARCHETYPE_VERSION = (System.getenv("ARCHETYPE_VERSION") != null)
             ? System.getenv("ARCHETYPE_VERSION")
             : DEFAULT_ARCHETYPE_VERSION;
