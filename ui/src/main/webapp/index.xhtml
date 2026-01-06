@@ -29,10 +29,9 @@
                                     process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
-                        <h:outputText value="Selected version: #{project.jakartaVersion}"/>
                         <h:outputText
                                 styleClass="footnote"
-                                value="Jakarta EE 10 requires Java SE above 8."/>
+                                value="Jakarta EE 10 and above requires Java SE above 8."/>
                     </p:column>
 
                     <p:column>
@@ -95,7 +94,7 @@
                         </p:selectOneMenu>
                         <h:outputText
                                 styleClass="footnote"
-                                value="GlassFish requires Web Profile or the Jakarta EE Platform, WildFly and Payara require Jakarta EE 8 or 10, TomEE requires Web Profile."/>
+                                value="GlassFish requires Web Profile or Platform, WildFly and Payara require EE versions other than 9/9.1, TomEE requires Web Profile."/>
                     </p:column>
 
                     <p:column>
@@ -126,7 +125,7 @@
                                 value="Group/Artifact">
                             <span class="ui-outputlabel-rfi">*</span>
                         </p:outputLabel>
-                        <p:outputPanel class="input-container">
+                        <p:outputPanel styleClass="input-container">
                             <p:inputText
                                     id="groupIdInput"
                                     required="true"

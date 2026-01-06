@@ -1,14 +1,15 @@
 <ui:composition xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
                 xmlns="http://www.w3.org/1999/xhtml">
 <div class="info-cards container flex-center padding-top-60 padding-bottom-20">
 
-    <div class="info-card text-center ">
+    <div class="info-card text-center">
         <div class="info-card-icon-container">
             <div class="info-card-icon-wrapper">
-                <img class="info-card-icon" src="resources/icons/view-issues.svg" alt=""/>
+                <h:graphicImage library="icons" name="view-issues.svg" styleClass="info-card-icon" alt=""/>
             </div>
         </div>
-        <p class="info-card-heading big-text brand-secondary">Viuew the Issue Tracker</p>
+        <p class="info-card-heading big-text brand-secondary">View the Issue Tracker</p>
         <div class="info-card-body">
             <p>
                 Track bugs, request features, and contribute to the Jakarta EE Starter project.
@@ -24,7 +25,7 @@
     <div class="info-card text-center info-card-inverted">
         <div class="info-card-icon-container">
             <div class="info-card-icon-wrapper">
-                <img class="info-card-icon" src="resources/icons/learn.svg" alt=""/>
+                <h:graphicImage library="icons" name="learn.svg" styleClass="info-card-icon" alt=""/>
             </div>
         </div>
         <p class="info-card-heading big-text brand-secondary">Learn Jakarta EE</p>
@@ -40,10 +41,10 @@
         </div>
     </div>
 
-    <div class="info-card text-center ">
+    <div class="info-card text-center">
         <div class="info-card-icon-container">
             <div class="info-card-icon-wrapper">
-                <img class="info-card-icon" src="resources/icons/browse.svg" alt=""/>
+                <h:graphicImage library="icons" name="browse.svg" styleClass="info-card-icon" alt=""/>
             </div>
         </div>
         <p class="info-card-heading big-text brand-secondary">Browse Specs</p>
@@ -62,7 +63,7 @@
     <div class="info-card text-center info-card-inverted">
         <div class="info-card-icon-container">
             <div class="info-card-icon-wrapper">
-                <img class="info-card-icon" src="resources/icons/download.svg" alt=""/>
+                <h:graphicImage library="icons" name="download.svg" styleClass="info-card-icon" alt=""/>
             </div>
         </div>
         <p class="info-card-heading big-text brand-secondary">Download Compatible Products</p>

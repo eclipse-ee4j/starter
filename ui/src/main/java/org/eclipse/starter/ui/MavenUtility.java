@@ -19,15 +19,20 @@ public class MavenUtility {
                 "-DarchetypeArtifactId=" + archetypeArtifactId, "-DarchetypeVersion=" + archetypeVersion }));
         properties.forEach((k, v) -> options.add("-D" + k + "=" + v));
 
-        int result = new MavenCli().doMain(options.toArray(new String[0]), workingDirectory.getAbsolutePath(),
-            System.out, System.err);
+        int result = new MavenCli().doMain(
+            options.toArray(new String[0]),
+            workingDirectory.getAbsolutePath(),
+            System.out,
+            System.err
+        );
 
         if (result != 0) {
-            StringBuffer mavenCommand = new StringBuffer("mvn");
+            StringBuilder mavenCommand = new StringBuilder("mvn");
             options.forEach(o -> mavenCommand.append(" " + o));
 
             throw new RuntimeException(
-                    "Failed to invoke Maven Archetype command: " + mavenCommand.toString());
+                "Failed to invoke Maven Archetype command: " + mavenCommand
+            );
         }
     }
 }
