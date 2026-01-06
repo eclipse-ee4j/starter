@@ -29,7 +29,6 @@
                                     process="@this"
                                     update="@form"/>
                         </p:selectOneMenu>
-                        <h:outputText value="Selected version: #{project.jakartaVersion}"/>
                         <h:outputText
                                 styleClass="footnote"
                                 value="Jakarta EE 10 requires Java SE above 8."/>
@@ -126,7 +125,7 @@
                                 value="Group/Artifact">
                             <span class="ui-outputlabel-rfi">*</span>
                         </p:outputLabel>
-                        <p:outputPanel class="input-container">
+                        <p:outputPanel styleClass="input-container">
                             <p:inputText
                                     id="groupIdInput"
                                     required="true"
