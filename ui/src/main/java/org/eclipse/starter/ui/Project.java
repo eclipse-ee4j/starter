@@ -29,14 +29,15 @@ import jakarta.inject.Named;
 public class Project implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = Logger
-            .getLogger(MethodHandles.lookup().lookupClass().getName());
+        .getLogger(MethodHandles.lookup().lookupClass().getName());
 
     private static final Map<String, String> RUNTIMES = Map.ofEntries(
-            entry("glassfish", "GlassFish"),
-            entry("open-liberty", "Open Liberty"),
-            entry("payara", "Payara"),
-            entry("tomee", "TomEE"),
-            entry("wildfly", "WildFly"));
+        entry("glassfish", "GlassFish"),
+        entry("open-liberty", "Open Liberty"),
+        entry("payara", "Payara"),
+        entry("tomee", "TomEE"),
+        entry("wildfly", "WildFly")
+    );
     private static final String DEFAULT_GROUPID = "org.eclipse";
     private static final String DEFAULT_ARTIFACTID = "jakartaee-hello-world";
 
@@ -335,18 +336,20 @@ public class Project implements Serializable {
                 LOGGER.info("Executing Maven Archetype.");
                 Properties properties = new Properties();
                 properties.putAll(Map.ofEntries(
-                        entry("jakartaVersion",
-                            ((jakartaVersion % 1.0 != 0)
-                                ? String.format("%s", jakartaVersion)
-                                        : String.format("%.0f",
-                                jakartaVersion))),
-                        entry("profile", profile),
-                        entry("javaVersion", javaVersion),
-                        entry("docker", (docker ? "yes" : "no")),
-                        entry("runtime", runtime), 
-                        entry("groupId", groupId),
-                        entry("artifactId", artifactId),
-                        entry("package", groupId)));
+                    entry("jakartaVersion",
+                        ((jakartaVersion % 1.0 != 0)
+                            ? String.format("%s", jakartaVersion)
+                            : String.format("%.0f", jakartaVersion)
+                        )
+                    ),
+                    entry("profile", profile),
+                    entry("javaVersion", javaVersion),
+                    entry("docker", (docker ? "yes" : "no")),
+                    entry("runtime", runtime),
+                    entry("groupId", groupId),
+                    entry("artifactId", artifactId),
+                    entry("package", groupId)
+                ));
 
                 MavenUtility.invokeMavenArchetype("org.eclipse.starter",
                     "jakarta-starter", ARCHETYPE_VERSION,

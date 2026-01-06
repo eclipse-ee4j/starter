@@ -74,8 +74,8 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active {
 body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
     background-color: #f98200;
 }
- 
- 
+
+
 /* Jakarta EE style overrides */
 
 .starter .header-wrapper {
@@ -104,7 +104,7 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
     padding-top: 10rem;
 }
 
- 
+
 /** Starter styles */
 
 .starter .content {
