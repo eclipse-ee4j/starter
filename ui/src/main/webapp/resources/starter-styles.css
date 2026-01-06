@@ -1,8 +1,7 @@
-
 /* PrimeFaces overrides */
 
 body .ui-widget {
-    font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 14px;
 }
 
@@ -75,11 +74,13 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active {
 body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
     background-color: #f98200;
 }
+ 
+ 
 /* Jakarta EE style overrides */
 
 .starter .header-wrapper {
     background-position: -80px 0;
-    background-color:  #1b208b;
+    background-color: #1b208b;
 }
 
 .starter .header-wrapper .jumbotron .app-name {
@@ -103,6 +104,7 @@ body .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-icon-bullet {
     padding-top: 10rem;
 }
 
+ 
 /** Starter styles */
 
 .starter .content {
