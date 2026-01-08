@@ -28,8 +28,8 @@ named `jakartaee-hello-world`. The README.md file under that directory will cont
 If desired, you can easily use the Maven Archetype from a Maven capable IDE such 
 as [Eclipse](https://www.eclipse.org/ide). The generated starter code is simply Maven projects. You can easily load, explore and run the code in a Maven capable IDE such as [Eclipse](https://www.eclipse.org/ide).
 
-To run a specific version of the Archetype, including the locally installed development version, specify the `archetypeVersion` property.
+To run a specific version of the Archetype, including the locally installed development version, specify the `archetypeVersion` property. Note specifying the local catalog when running a locally installed Archetype.
 
 ```
-mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.8.0-SNAPSHOT"
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.8.0-SNAPSHOT" -DarchetypeCatalog="local"
 ```
