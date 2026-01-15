@@ -164,17 +164,12 @@
                     </container>
                 </configuration>
             </plugin>
-#elseif (${runtime} == 'tomee')
-            <!-- Execute 'mvn clean package tomee:run' to run the application. -->
+#elseif (${runtime} == 'open-liberty')
+            <!-- Execute 'mvn clean package liberty:run' to run the application.  -->
             <plugin>
-                <groupId>org.apache.tomee.maven</groupId>
-                <artifactId>tomee-maven-plugin</artifactId>
-                <version>${tomee.version}</version>
-                <configuration>
-                    <tomeeVersion>${tomee.version}</tomeeVersion>
-                    <tomeeClassifier>plume</tomeeClassifier>
-                    <removeDefaultWebapps>false</removeDefaultWebapps>
-                </configuration>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>${liberty-plugin.version}</version>
             </plugin>
 #elseif (${runtime} == 'payara')
     #if (${profile} != 'full')
@@ -218,6 +213,18 @@
                 </configuration>
             </plugin>
     #end
+#elseif (${runtime} == 'tomee')
+            <!-- Execute 'mvn clean package tomee:run' to run the application. -->
+            <plugin>
+                <groupId>org.apache.tomee.maven</groupId>
+                <artifactId>tomee-maven-plugin</artifactId>
+                <version>${tomee.version}</version>
+                <configuration>
+                    <tomeeVersion>${tomee.version}</tomeeVersion>
+                    <tomeeClassifier>plume</tomeeClassifier>
+                    <removeDefaultWebapps>false</removeDefaultWebapps>
+                </configuration>
+            </plugin>
 #elseif (${runtime} == 'wildfly')
             <!-- Execute 'mvn clean package wildfly:dev' to run the application. -->
             <plugin>
@@ -228,13 +235,6 @@
                     <version>${wildfly.version}</version>
                     <server-config>${wildflyConfiguration}.xml</server-config>
                 </configuration>
-            </plugin>
-#elseif (${runtime} == 'open-liberty')
-            <!-- Execute 'mvn clean package liberty:run' to run the application.  -->
-            <plugin>
-                <groupId>io.openliberty.tools</groupId>
-                <artifactId>liberty-maven-plugin</artifactId>
-                <version>${liberty-plugin.version}</version>
             </plugin>
 #end
         </plugins>

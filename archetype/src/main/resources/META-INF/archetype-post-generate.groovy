@@ -85,6 +85,12 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, Payara does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")
         }
+
+        // Payara 7 with EE 11 only supports SE 21 and above, not SE 17
+        if ((jakartaVersion == '11') && (javaVersion == '17')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, Payara 7 with Jakarta EE 11 only supports Java SE 21 and above")
+        }
     }
 
     if (runtime == 'tomee') {
