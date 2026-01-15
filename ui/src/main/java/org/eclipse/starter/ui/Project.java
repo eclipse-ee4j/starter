@@ -283,6 +283,9 @@ public class Project implements Serializable {
         if (jakartaVersion == 9 || jakartaVersion == 9.1) {
             // Payara does not offer a stable release for EE 9/9.1
             runtimes.get("payara").setDisabled(true);
+        } else if (jakartaVersion == 11) {
+            // Payara 7 with EE 11 only supports SE 21 and above
+            runtimes.get("payara").setDisabled(javaVersion < 21);
         } else {
             runtimes.get("payara").setDisabled(false);
         }
