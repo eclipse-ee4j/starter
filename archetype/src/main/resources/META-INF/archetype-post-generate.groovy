@@ -86,6 +86,12 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
             throw new RuntimeException("Failed, Payara does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")
         }
 
+        // Payara 5 does not support Java SE 21
+        if ((jakartaVersion == '8') && (javaVersion == '21')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, Payara 5 does not support Java SE 21")
+        }
+
         // Payara 7 with EE 11 only supports SE 21 and above, not SE 17
         if ((jakartaVersion == '11') && (javaVersion == '17')) {
             FileUtils.forceDelete(outputDirectory)
@@ -147,9 +153,21 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
             break
 
         case "tomee": println "Generating code for TomEE"
+            if (docker.equalsIgnoreCase("yes")) {
+                if (javaVersion == '21') {
+                    println "WARNING: TomEE does not support Docker for Java 21"
+                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                }
+            }
             break
 
         case "wildfly": println "Generating code for WildFly"
+            if (docker.equalsIgnoreCase("yes")) {
+                if ((jakartaVersion == '8') && (javaVersion == '21')) {
+                    println "WARNING: WildFly 26 does not support Docker for Java 21"
+                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                }
+            }
             break
 
         default: println "No runtime will be included in the sample"
