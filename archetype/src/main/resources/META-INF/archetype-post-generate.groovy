@@ -145,7 +145,7 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
                     println "WARNING: GlassFish only supports Docker for the full platform"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 } else if (javaVersion != '17') {
-                    println "WARNING: GlassFish only supports Docker for Java 17"
+                    println "WARNING: GlassFish only supports Docker for Java SE 17"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 }
             }
@@ -160,7 +160,7 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
         case "tomee": println "Generating code for TomEE"
             if (docker.equalsIgnoreCase("yes")) {
                 if (javaVersion == '21') {
-                    println "WARNING: TomEE does not support Docker for Java 21"
+                    println "WARNING: TomEE does not support Docker for Java SE 21"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 }
             }
@@ -169,7 +169,7 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
         case "wildfly": println "Generating code for WildFly"
             if (docker.equalsIgnoreCase("yes")) {
                 if ((jakartaVersion == '8') && (javaVersion == '21')) {
-                    println "WARNING: WildFly 26 does not support Docker for Java 21"
+                    println "WARNING: WildFly 26 does not support Docker for Java SE 21"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 }
             }
