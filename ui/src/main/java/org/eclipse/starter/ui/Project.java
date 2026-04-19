@@ -267,6 +267,9 @@ public class Project implements Serializable {
         } else if (jakartaVersion == 8 && javaVersion > 8) {
             // GlassFish 5 only supports Java SE 8
             runtimes.get("glassfish").setDisabled(true);
+        } else if ((jakartaVersion == 9 || jakartaVersion == 9.1) && javaVersion == 21) {
+            // GlassFish 6 does not support Java SE 21.
+            runtimes.get("glassfish").setDisabled(true);
         } else if (docker && !(jakartaVersion == 10 && profile.equals("full") && javaVersion == 17)) {
             // GlassFish with Docker only supported with EE 10 + platform + Java 17
             runtimes.get("glassfish").setDisabled(true);
@@ -280,7 +283,10 @@ public class Project implements Serializable {
             runtimes.get("open-liberty").setDisabled(false);
         }
 
-        if (jakartaVersion == 9 || jakartaVersion == 9.1) {
+        if (jakartaVersion == 8 && javaVersion == 21) {
+            // Payara 5 does not support Java SE 21.
+            runtimes.get("payara").setDisabled(true);
+        } else if (jakartaVersion == 9 || jakartaVersion == 9.1) {
             // Payara does not offer a stable release for EE 9/9.1
             runtimes.get("payara").setDisabled(true);
         } else if (jakartaVersion == 11) {
@@ -302,12 +308,18 @@ public class Project implements Serializable {
         } else if (jakartaVersion != 8 && javaVersion == 8) {
             // TomEE 9 does not support Java SE 8
             runtimes.get("tomee").setDisabled(true);
+        } else if (docker && javaVersion == 21) {
+            // TomEE does not support Docker for Java SE 21.
+            runtimes.get("tomee").setDisabled(true);
         } else {
             runtimes.get("tomee").setDisabled(false);
         }
 
         if (jakartaVersion == 9 || jakartaVersion == 9.1 || jakartaVersion == 11) {
             // No stable release for EE 9/9.1, doesn't support EE 11 yet
+            runtimes.get("wildfly").setDisabled(true);
+        } else if (docker && jakartaVersion == 8 && javaVersion == 21) {
+            // WildFly 26 does not support Docker for Java SE 21.
             runtimes.get("wildfly").setDisabled(true);
         } else {
             runtimes.get("wildfly").setDisabled(false);
