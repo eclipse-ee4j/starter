@@ -78,12 +78,23 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, GlassFish 5 only supports Java SE 8")
         }
+
+        if ((javaVersion == '21') && ((jakartaVersion == '9') || (jakartaVersion == '9.1'))) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, GlassFish 6 does not support Java SE 21")
+        }
     }
 
     if (runtime == 'payara') {
         if ((jakartaVersion == '9') || (jakartaVersion == '9.1')) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, Payara does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")
+        }
+
+        // Payara 5 does not support Java SE 21
+        if ((jakartaVersion == '8') && (javaVersion == '21')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, Payara 5 does not support Java SE 21")
         }
 
         // Payara 7 with EE 11 only supports SE 21 and above, not SE 17
@@ -134,7 +145,7 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
                     println "WARNING: GlassFish only supports Docker for the full platform"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 } else if (javaVersion != '17') {
-                    println "WARNING: GlassFish only supports Docker for Java 17"
+                    println "WARNING: GlassFish only supports Docker for Java SE 17"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 }
             }
@@ -147,9 +158,21 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
             break
 
         case "tomee": println "Generating code for TomEE"
+            if (docker.equalsIgnoreCase("yes")) {
+                if (javaVersion == '21') {
+                    println "WARNING: TomEE does not support Docker for Java SE 21"
+                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                }
+            }
             break
 
         case "wildfly": println "Generating code for WildFly"
+            if (docker.equalsIgnoreCase("yes")) {
+                if ((jakartaVersion == '8') && (javaVersion == '21')) {
+                    println "WARNING: WildFly 26 does not support Docker for Java SE 21"
+                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                }
+            }
             break
 
         default: println "No runtime will be included in the sample"
