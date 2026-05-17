@@ -44,15 +44,15 @@
 #elseif (${jakartaVersion} == '11')
     #if (${runtime} == 'payara')
         #if (${profile} == 'full')
-            #set ($baseImage = "payara/server-full:7.2025.2")
+            #set ($baseImage = "payara/server-full:7.2026.5")
         #else
-            #set ($baseImage = "payara/server-web:7.2025.2")
+            #set ($baseImage = "payara/server-web:7.2026.5")
         #end
         #set ($deployDirectory = "$DEPLOY_DIR")
     #end
 #else
     #if (${runtime} == 'glassfish')
-        #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.23")
+        #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.25")
         #set ($deployDirectory = "/opt/glassfish7/glassfish/domains/domain1/autodeploy")    
     #elseif (${runtime} == 'payara')
         #if (${javaVersion} == '21')
