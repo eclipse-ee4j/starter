@@ -277,7 +277,7 @@ public class Project implements Serializable {
             runtimes.get("glassfish").setDisabled(false);
         }
 
-        if (jakartaVersion == 11) {
+        if (jakartaVersion == 12) {
             runtimes.get("open-liberty").setDisabled(true);
         } else {
             runtimes.get("open-liberty").setDisabled(false);
