@@ -31,5 +31,5 @@ as [Eclipse](https://www.eclipse.org/ide). The generated starter code is simply 
 To run a specific version of the Archetype, including the locally installed development version, specify the `archetypeVersion` property. Note specifying the local catalog when running a locally installed Archetype.
 
 ```
-mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.8.0-SNAPSHOT" -DarchetypeCatalog="local"
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.9.0-SNAPSHOT" -DarchetypeCatalog="local"
 ```
