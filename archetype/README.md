@@ -19,7 +19,7 @@ In order to run the Maven Archetype and generate a sample Jakarta EE project, pl
 and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11, Java SE 17 and Java SE 21).
 
 ```
-mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter"
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.8.0" -DarchetypeCatalog="internal"
 ```
 
 If you use the defaults, this will generate the Jakarta EE project under a directory 

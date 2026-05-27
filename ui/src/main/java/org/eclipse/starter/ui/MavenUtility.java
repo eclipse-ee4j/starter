@@ -15,7 +15,8 @@ public class MavenUtility {
 
         List<String> options = new LinkedList<>();
         options.addAll(Arrays.asList(new String[] { "archetype:generate", "-DinteractiveMode=false",
-                "-DaskForDefaultPropertyValues=false", "-DarchetypeGroupId=" + archetypeGroupId,
+                "-DaskForDefaultPropertyValues=false", "-DarchetypeCatalog=internal",
+                "-DarchetypeGroupId=" + archetypeGroupId,
                 "-DarchetypeArtifactId=" + archetypeArtifactId, "-DarchetypeVersion=" + archetypeVersion }));
         properties.forEach((k, v) -> options.add("-D" + k + "=" + v));
 
