@@ -18,11 +18,17 @@
     #else
         <feature>webProfile-10.0</feature>
     #end
-#else
+#elseif (${jakartaVersion} == '11')
     #if (${profile} == 'full')
         <feature>jakartaee-11.0</feature>
     #else
         <feature>webProfile-11.0</feature>
+    #end
+#else
+    #if (${profile} == 'full')
+        <feature>jakartaee-12.0</feature>
+    #else
+        <feature>webProfile-12.0</feature>
     #end
 #end
     </featureManager>
