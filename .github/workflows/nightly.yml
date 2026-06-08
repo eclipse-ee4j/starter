@@ -922,7 +922,7 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=17 -Druntime=wildfly -DoutputDirectory=app/wildfly -Dgoals="clean package" | tee mvn_output.txt
 
                   MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-                  ERROR_MESSAGE="only Payara currently supports Jakarta EE 11 in a stable release"
+                  ERROR_MESSAGE="WildFly does not support Jakarta EE 11"
                   if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
                       echo "Maven build did not fail, or the expected error message was not found. Test failed."
                       exit 1

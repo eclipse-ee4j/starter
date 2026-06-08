@@ -46,13 +46,6 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         throw new RuntimeException("Failed, valid Docker options are yes and no")
     }
 
-    // For now, this catch-all will simplify the rest of the validation.
-    // It should be evolved once more runtimes properly suppport Jakarta EE 11.
-    if ((jakartaVersion == '11') && (runtime != 'none') && (runtime != 'payara')) {
-        FileUtils.forceDelete(outputDirectory)
-        throw new RuntimeException("Failed, only Payara currently supports Jakarta EE 11 in a stable release")
-    }
-
     if ((profile == 'core') && (Double.valueOf(jakartaVersion) < 10)) {
         FileUtils.forceDelete(outputDirectory)
         throw new RuntimeException("Failed, the Core Profile is only supported for Jakarta EE 10 and above")
@@ -69,6 +62,11 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     }
 
     if (runtime == 'glassfish') {
+        if ((jakartaVersion == '11')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, GlassFish does not support Jakarta EE 11")
+        }
+
         if (profile == 'core') {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, GlassFish does not support the Core Profile")
@@ -127,6 +125,11 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     }
 
     if (runtime == 'wildfly') {
+        if ((jakartaVersion == '11')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, WildFly does not support Jakarta EE 11")
+        }
+
         if ((jakartaVersion == '9') || (jakartaVersion == '9.1')) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, WildFly does not offer a stable release for Jakarta EE 9 or Jakarta EE 9.1")

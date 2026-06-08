@@ -277,11 +277,7 @@ public class Project implements Serializable {
             runtimes.get("glassfish").setDisabled(false);
         }
 
-        if (jakartaVersion == 12) {
-            runtimes.get("open-liberty").setDisabled(true);
-        } else {
-            runtimes.get("open-liberty").setDisabled(false);
-        }
+        runtimes.get("open-liberty").setDisabled(false);
 
         if (jakartaVersion == 8 && javaVersion == 21) {
             // Payara 5 does not support Java SE 21.
