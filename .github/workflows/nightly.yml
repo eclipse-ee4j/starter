@@ -803,21 +803,21 @@ jobs:
 
             - name: Run Archetype for EE 11, SE 17, Open Liberty, with Docker
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
                   docker build -t test-image app/open-liberty/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/open-liberty
 
             - name: Run Archetype for EE 11 Web Profile, SE 17, Open Liberty, with Docker
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
                   docker build -t test-image app/open-liberty/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/open-liberty
 
             - name: Run Archetype for EE 11 Core Profile, SE 17, Open Liberty, with Docker
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=17 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
                   docker build -t test-image app/open-liberty/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/open-liberty
@@ -1097,21 +1097,21 @@ jobs:
 
             - name: Run Archetype for EE 11, SE 21, Open Liberty, with Docker
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
                   docker build -t test-image app/open-liberty/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/open-liberty
 
             - name: Run Archetype for EE 11 Web Profile, SE 21, Open Liberty, with Docker
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
                   docker build -t test-image app/open-liberty/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/open-liberty
 
             - name: Run Archetype for EE 11 Core Profile, SE 21, Open Liberty, with Docker
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.8.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=21 -Druntime="open-liberty" -Ddocker=yes -DoutputDirectory=app/open-liberty -Dgoals="clean package"
                   docker build -t test-image app/open-liberty/jakartaee-hello-world
                   docker rmi test-image
                   rm -rf app/open-liberty
