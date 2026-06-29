@@ -44,9 +44,9 @@
 #elseif (${jakartaVersion} == '11')
     #if (${runtime} == 'payara')
         #if (${profile} == 'full')
-            #set ($baseImage = "payara/server-full:7.2026.5")
+            #set ($baseImage = "payara/server-full:7.2026.6")
         #else
-            #set ($baseImage = "payara/server-web:7.2026.5")
+            #set ($baseImage = "payara/server-web:7.2026.6")
         #end
         #set ($deployDirectory = "$DEPLOY_DIR")
     #end

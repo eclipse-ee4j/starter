@@ -18,7 +18,7 @@
         #set ($glassfishVersion = "8.0.0")
     #end
     #set ($glassfishContainerId = "glassfish8x")
-    #set ($payaraVersion = "7.2026.5")
+    #set ($payaraVersion = "7.2026.6")
 #elseif (${jakartaVersion} == '10')
     #set ($eeApiVersion = "10.0.0")
     #set ($glassfishVersion = "7.0.25")
