@@ -86,13 +86,11 @@
         #set ($deployDirectory = "/usr/local/tomee/webapps/")
     #elseif (${runtime} == 'wildfly')
         #if (${javaVersion} == '21')
-            #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk21")
+            #set ($baseImage = "quay.io/wildfly/wildfly:40.0.1.Final-jdk21")
         #elseif (${javaVersion} == '17')
-            #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk17")
-        #elseif (${javaVersion} == '11')
-            #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk11")
+            #set ($baseImage = "quay.io/wildfly/wildfly:40.0.1.Final-jdk17")
         #else
-            #set ($baseImage = "quay.io/wildfly/wildfly")
+            #set ($baseImage = "quay.io/wildfly/wildfly:34.0.1.Final-jdk11")
         #end
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
     #end
