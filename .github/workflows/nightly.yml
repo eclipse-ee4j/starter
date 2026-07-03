@@ -132,7 +132,7 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=8 -Dprofile=full -DjavaVersion=8 -Druntime=glassfish -Ddocker=yes -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
 
                   MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-                  WARN_MESSAGE="GlassFish only supports Docker for Jakarta EE 10"
+                  WARN_MESSAGE="GlassFish only supports Docker for Jakarta EE 10 and above"
                   if ! { [ $MAVEN_EXIT_CODE -eq 0 ] && [ ! -f app/glassfish/jakartaee-hello-world/Dockerfile ] && grep -q "$WARN_MESSAGE" mvn_output.txt;  }; then
                       echo "Maven build failed, a Dockerfile was found, or the expected warning was not found. Test failed."
                       exit 1
@@ -426,7 +426,7 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=11 -Druntime=glassfish -Ddocker=yes -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
 
                   MAVEN_EXIT_CODE=${PIPESTATUS[0]}
-                  WARN_MESSAGE="GlassFish only supports Docker for Java SE 17"
+                  WARN_MESSAGE="GlassFish 7 only supports Docker for Java SE 17 and above"
                   if ! { [ $MAVEN_EXIT_CODE -eq 0 ] && [ ! -f app/glassfish/jakartaee-hello-world/Dockerfile ] && grep -q "$WARN_MESSAGE" mvn_output.txt;  }; then
                       echo "Maven build failed, a Dockerfile was found, or the expected warning was not found. Test failed."
                       exit 1
@@ -691,6 +691,19 @@ jobs:
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=17 -DoutputDirectory=app -Dgoals="clean package"
                   rm -rf app
+
+            - name: Run Archetype for EE 11, SE 17, GlassFish
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=17 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package" | tee mvn_output.txt
+
+                  MAVEN_EXIT_CODE=${PIPESTATUS[0]}
+                  ERROR_MESSAGE="GlassFish 8 only supports Java SE 21 and above"
+                  if ! { [ $MAVEN_EXIT_CODE -ne 0 ] && grep -q "$ERROR_MESSAGE" mvn_output.txt; }; then
+                      echo "Maven build did not fail, or the expected error message was not found. Test failed."
+                      exit 1
+                  fi
+
+                  rm -f mvn_output.txt
 
             - name: Run Archetype for EE 9, SE 17, GlassFish
               run: |
@@ -996,6 +1009,18 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=21 -DoutputDirectory=app -Dgoals="clean package"
                   rm -rf app
 
+            - name: Run Archetype for EE 11, SE 21, GlassFish, with Docker
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=21 -Druntime=glassfish -Ddocker=yes -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                  docker build -t test-image app/glassfish/jakartaee-hello-world
+                  docker rmi test-image
+                  rm -rf app/glassfish
+
+            - name: Run Archetype for EE 11 Web Profile, SE 21, GlassFish
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=web -DjavaVersion=21 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                  rm -rf app/glassfish
+
             - name: Run Archetype for EE 12, SE 21
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=12 -Dprofile=full -DjavaVersion=21 -DoutputDirectory=app -Dgoals="clean package" | tee mvn_output.txt
@@ -1022,9 +1047,11 @@ jobs:
 
                   rm -f mvn_output.txt
 
-            - name: Run Archetype for EE 10, SE 21, GlassFish
+            - name: Run Archetype for EE 10, SE 21, GlassFish, with Docker
               run: |
-                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=21 -Druntime=glassfish -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=10 -Dprofile=full -DjavaVersion=21 -Druntime=glassfish -Ddocker=yes -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                  docker build -t test-image app/glassfish/jakartaee-hello-world
+                  docker rmi test-image
                   rm -rf app/glassfish
 
             - name: Run Archetype for EE 10 Web Profile, SE 21, GlassFish

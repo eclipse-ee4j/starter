@@ -62,11 +62,6 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
     }
 
     if (runtime == 'glassfish') {
-        if ((jakartaVersion == '11')) {
-            FileUtils.forceDelete(outputDirectory)
-            throw new RuntimeException("Failed, GlassFish does not support Jakarta EE 11")
-        }
-
         if (profile == 'core') {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, GlassFish does not support the Core Profile")
@@ -80,6 +75,11 @@ private validateInput(jakartaVersion, profile, javaVersion, runtime, docker, Fil
         if ((javaVersion == '21') && ((jakartaVersion == '9') || (jakartaVersion == '9.1'))) {
             FileUtils.forceDelete(outputDirectory)
             throw new RuntimeException("Failed, GlassFish 6 does not support Java SE 21")
+        }
+
+        if ((Integer.valueOf(javaVersion) < 21) && (jakartaVersion == '11')) {
+            FileUtils.forceDelete(outputDirectory)
+            throw new RuntimeException("Failed, GlassFish 8 only supports Java SE 21 and above")
         }
     }
 
@@ -141,14 +141,16 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
     switch (runtime) {
         case "glassfish": println "Generating code for GlassFish"
             if (docker.equalsIgnoreCase("yes")) {
-                if (Double.valueOf(jakartaVersion) != 10) {
-                    println "WARNING: GlassFish only supports Docker for Jakarta EE 10"
-                    FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
-                } else if (profile != 'full') {
+                if (profile != 'full') {
                     println "WARNING: GlassFish only supports Docker for the full platform"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
-                } else if (javaVersion != '17') {
-                    println "WARNING: GlassFish only supports Docker for Java SE 17"
+                } else if (jakartaVersion == '10') {
+                    if (Integer.valueOf(javaVersion) < 17) {
+                        println "WARNING: GlassFish 7 only supports Docker for Java SE 17 and above"
+                        FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
+                    }
+                } else if (jakartaVersion != '11') {
+                    println "WARNING: GlassFish only supports Docker for Jakarta EE 10 and above"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 }
             }

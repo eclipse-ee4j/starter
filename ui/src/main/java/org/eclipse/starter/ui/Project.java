@@ -258,10 +258,7 @@ public class Project implements Serializable {
     private void updateRuntimeEnabledStates() {
         runtimes.get("none").setDisabled(docker);
 
-        if (jakartaVersion == 11) {
-            // GlassFish does not support EE 11 yet
-            runtimes.get("glassfish").setDisabled(true);
-        } else if (profile.equals("core")) {
+        if (profile.equals("core")) {
             // GlassFish does not support Core Profile
             runtimes.get("glassfish").setDisabled(true);
         } else if (jakartaVersion == 8 && javaVersion > 8) {
@@ -270,8 +267,12 @@ public class Project implements Serializable {
         } else if ((jakartaVersion == 9 || jakartaVersion == 9.1) && javaVersion == 21) {
             // GlassFish 6 does not support Java SE 21.
             runtimes.get("glassfish").setDisabled(true);
-        } else if (docker && !(jakartaVersion == 10 && profile.equals("full") && javaVersion == 17)) {
-            // GlassFish with Docker only supported with EE 10 + platform + Java 17
+        } else if (jakartaVersion == 11 && javaVersion < 21) {
+            // GlassFish 8 only supports Java SE 21 and above
+            runtimes.get("glassfish").setDisabled(true);
+        } else if (docker && !(profile.equals("full")
+                && ((jakartaVersion == 10 && javaVersion >= 17) || jakartaVersion == 11))) {
+            // GlassFish with Docker only supported with EE 10 + full + Java 17+, or EE 11 + full
             runtimes.get("glassfish").setDisabled(true);
         } else {
             runtimes.get("glassfish").setDisabled(false);

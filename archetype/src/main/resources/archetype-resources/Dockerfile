@@ -42,17 +42,24 @@
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
     #end
 #elseif (${jakartaVersion} == '11')
-    #if (${runtime} == 'payara')
+    #if (${runtime} == 'glassfish')
+        #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:8.0.2")
+        #set ($deployDirectory = "/opt/gfinstall/glassfish/domains/domain1/autodeploy")
+    #elseif (${runtime} == 'payara')
         #if (${profile} == 'full')
-            #set ($baseImage = "payara/server-full:7.2026.5")
+            #set ($baseImage = "payara/server-full:7.2026.6")
         #else
-            #set ($baseImage = "payara/server-web:7.2026.5")
+            #set ($baseImage = "payara/server-web:7.2026.6")
         #end
         #set ($deployDirectory = "$DEPLOY_DIR")
     #end
 #else
     #if (${runtime} == 'glassfish')
-        #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.25")
+        #if (${javaVersion} == '21')
+            #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.1.0")
+        #else
+            #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.25")
+        #end
         #set ($deployDirectory = "/opt/glassfish7/glassfish/domains/domain1/autodeploy")    
     #elseif (${runtime} == 'payara')
         #if (${javaVersion} == '21')
@@ -86,13 +93,11 @@
         #set ($deployDirectory = "/usr/local/tomee/webapps/")
     #elseif (${runtime} == 'wildfly')
         #if (${javaVersion} == '21')
-            #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk21")
+            #set ($baseImage = "quay.io/wildfly/wildfly:40.0.1.Final-jdk21")
         #elseif (${javaVersion} == '17')
-            #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk17")
-        #elseif (${javaVersion} == '11')
-            #set ($baseImage = "quay.io/wildfly/wildfly:latest-jdk11")
+            #set ($baseImage = "quay.io/wildfly/wildfly:40.0.1.Final-jdk17")
         #else
-            #set ($baseImage = "quay.io/wildfly/wildfly")
+            #set ($baseImage = "quay.io/wildfly/wildfly:34.0.1.Final-jdk11")
         #end
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
     #end
