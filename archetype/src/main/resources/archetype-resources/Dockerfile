@@ -42,7 +42,10 @@
         #set ($deployDirectory = "/opt/jboss/wildfly/standalone/deployments/")
     #end
 #elseif (${jakartaVersion} == '11')
-    #if (${runtime} == 'payara')
+    #if (${runtime} == 'glassfish')
+        #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:8.0.2")
+        #set ($deployDirectory = "/opt/gfinstall/glassfish/domains/domain1/autodeploy")
+    #elseif (${runtime} == 'payara')
         #if (${profile} == 'full')
             #set ($baseImage = "payara/server-full:7.2026.6")
         #else

@@ -117,6 +117,13 @@ jobs:
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=core -DjavaVersion=21 -DoutputDirectory=app -Dgoals="clean package"
                   rm -rf app
 
+            - name: Run Archetype for EE 11, SE 21, GlassFish, with Docker
+              run: |
+                  mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=21 -Druntime=glassfish -Ddocker=yes -DoutputDirectory=app/glassfish -Dgoals="clean package"
+                  docker build -t test-image app/glassfish/jakartaee-hello-world
+                  docker rmi test-image
+                  rm -rf app/glassfish
+
             - name: Run Archetype for EE 11, SE 21, Payara, with Docker
               run: |
                   mvn archetype:generate -DinteractiveMode=false -DaskForDefaultPropertyValues=false -DarchetypeGroupId=org.eclipse.starter -DarchetypeArtifactId=jakarta-starter -DarchetypeVersion=2.9.0-SNAPSHOT -DjakartaVersion=11 -Dprofile=full -DjavaVersion=21 -Druntime=payara -Ddocker=yes -DoutputDirectory=app/payara -Dgoals="clean package"
