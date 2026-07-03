@@ -52,7 +52,11 @@
     #end
 #else
     #if (${runtime} == 'glassfish')
-        #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.25")
+        #if (${javaVersion} == '21')
+            #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.1.0")
+        #else
+            #set ($baseImage = "ghcr.io/eclipse-ee4j/glassfish:7.0.25")
+        #end
         #set ($deployDirectory = "/opt/glassfish7/glassfish/domains/domain1/autodeploy")    
     #elseif (${runtime} == 'payara')
         #if (${javaVersion} == '21')

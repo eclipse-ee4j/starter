@@ -21,7 +21,11 @@
     #set ($payaraVersion = "7.2026.6")
 #elseif (${jakartaVersion} == '10')
     #set ($eeApiVersion = "10.0.0")
-    #set ($glassfishVersion = "7.0.25")
+    #if (${javaVersion} == '11')
+        #set ($glassfishVersion = "7.0.25")
+    #else
+        #set ($glassfishVersion = "7.1.0")
+    #end
     #set ($glassfishContainerId = "glassfish7x")
     #set ($payaraVersion = "6.2025.11")
     #if (${javaVersion} == '11')

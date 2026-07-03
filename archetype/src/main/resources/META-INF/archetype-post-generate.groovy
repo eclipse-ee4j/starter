@@ -147,8 +147,8 @@ private generateRuntime(runtime, jakartaVersion, profile, javaVersion, docker, F
                 } else if (profile != 'full') {
                     println "WARNING: GlassFish only supports Docker for the full platform"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
-                } else if (javaVersion != '17') {
-                    println "WARNING: GlassFish only supports Docker for Java SE 17"
+                } else if (!(javaVersion in ['17', '21'])) {
+                    println "WARNING: GlassFish only supports Docker for Java SE 17 and 21"
                     FileUtils.forceDelete(new File(outputDirectory, "Dockerfile"))
                 }
             }

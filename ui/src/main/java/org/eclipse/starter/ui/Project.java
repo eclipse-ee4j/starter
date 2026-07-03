@@ -270,8 +270,8 @@ public class Project implements Serializable {
         } else if ((jakartaVersion == 9 || jakartaVersion == 9.1) && javaVersion == 21) {
             // GlassFish 6 does not support Java SE 21.
             runtimes.get("glassfish").setDisabled(true);
-        } else if (docker && !(jakartaVersion == 10 && profile.equals("full") && javaVersion == 17)) {
-            // GlassFish with Docker only supported with EE 10 + platform + Java 17
+        } else if (docker && !(jakartaVersion == 10 && profile.equals("full") && (javaVersion == 17 || javaVersion == 21))) {
+            // GlassFish with Docker only supported with EE 10 + platform + Java 17/21
             runtimes.get("glassfish").setDisabled(true);
         } else {
             runtimes.get("glassfish").setDisabled(false);
