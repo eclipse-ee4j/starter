@@ -89,6 +89,24 @@
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-embedder</artifactId>
             <version>3.9.12</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.maven</groupId>
+                    <artifactId>maven-slf4j-provider</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-slf4j-impl</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Dependencies for Embedded Maven -->
@@ -148,11 +166,6 @@
             <version>1.29</version>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-container-default</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>5.1.0</version>
@@ -161,7 +174,7 @@
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-servlet</artifactId>
             <version>5.1.0</version>
-        </dependency>        
+        </dependency>
     </dependencies>
 
     <build>
@@ -176,6 +189,44 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.5.1</version>
+            </plugin>
+
+            <!-- Check for duplicate classes in the WAR file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>enforce-ban-duplicate-classes</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <banDuplicateClasses>
+                                    <scopes>
+                                        <scope>compile</scope>
+                                        <scope>runtime</scope>
+                                    </scopes>
+                                    <findAllDuplicates>true</findAllDuplicates>
+                                    <ignoreWhenIdentical>true</ignoreWhenIdentical>
+                                    <ignoreClasses>
+                                        <ignoreClass>com.google.inject.*</ignoreClass>
+                                    </ignoreClasses>
+                                </banDuplicateClasses>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>extra-enforcer-rules</artifactId>
+                        <version>1.8.0</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <!-- Execute 'mvn clean package wildfly:dev' to run the application. -->
