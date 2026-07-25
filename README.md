@@ -1,5 +1,5 @@
-[![Alt text](https://img.shields.io/badge/release-UI%202.0.11-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/ui-2.0.11)
-[![Alt text](https://img.shields.io/badge/release-Archetypes%202.8.0-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/archetype-2.8.0)
+[![Alt text](https://img.shields.io/badge/release-UI%202.0.12-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/ui-2.0.12)
+[![Alt text](https://img.shields.io/badge/release-Archetypes%202.9.0-blue.svg)](https://github.com/eclipse-ee4j/starter/releases/tag/archetype-2.9.0)
 
 # Eclipse Starter for Jakarta EE
 
@@ -23,7 +23,7 @@ mvn clean install
 In order to run the latest Maven Archetype and generate a sample Jakarta EE project, please execute the following. Please ensure you have installed a [Java SE 8+ implementation](https://adoptium.net/?variant=openjdk8) and [Maven 3+](https://maven.apache.org/download.cgi) (we have tested with Java SE 8, Java SE 11, Java SE 17, and Java SE 21).
 
 ```
-mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.8.0" -DarchetypeCatalog="internal"
+mvn archetype:generate -DarchetypeGroupId="org.eclipse.starter" -DarchetypeArtifactId="jakarta-starter" -DarchetypeVersion="2.9.0" -DarchetypeCatalog="internal"
 ```
 
 If you use the defaults, this will generate the Jakarta EE project under a directory 
