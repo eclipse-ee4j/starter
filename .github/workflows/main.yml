@@ -34,7 +34,7 @@ jobs:
             - name: Build Archetype
               run: mvn clean install --file archetype/pom.xml
 
-            - name: Resolve archetype version from pom
+            - name: Resolve Archetype version from pom.xml
               run: |
                   echo "ARCHETYPE_VERSION=$(mvn -q -f archetype/pom.xml -Dexpression=project.version -DforceStdout help:evaluate)" >> "$GITHUB_ENV"
 
