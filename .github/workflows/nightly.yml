@@ -25,13 +25,13 @@ jobs:
 
             - name: Commit and push if changed
               run: |
-                  if git diff --quiet ui/src/main/webapp/site-branding/; then
+                  if git diff --quiet ui/src/main/resources/site-branding/; then
                       echo "No site branding changes."
                       exit 0
                   fi
                   git config user.name "github-actions[bot]"
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                  git add ui/src/main/webapp/site-branding/
+                  git add ui/src/main/resources/site-branding/
                   git commit -m "Sync site branding from jakarta.ee"
                   git push
 

@@ -2,7 +2,7 @@
 """Fetch the current jakarta.ee topbar and footer as plain HTML.
 
 Run this whenever jakarta.ee ships a redesign to keep the starter's site
-branding in sync. Writes ui/src/main/webapp/site-branding/{topbar,footer}.html.
+branding in sync. Writes ui/src/main/resources/site-branding/{topbar,footer}.html.
 
 Requires: html5lib, lxml. Example setup:
     python3 -m venv .venv && . .venv/bin/activate && pip install html5lib lxml
@@ -19,7 +19,7 @@ import html5lib
 from lxml import etree
 
 SOURCE_URL = "https://jakarta.ee/"
-OUT_DIR = pathlib.Path(__file__).resolve().parent.parent / "src" / "main" / "webapp" / "site-branding"
+OUT_DIR = pathlib.Path(__file__).resolve().parent.parent / "src" / "main" / "resources" / "site-branding"
 
 TOPBAR_MARKERS = ("toolbar-container-wrapper", "navbar-wrapper", "header-row", "Become a member")
 FOOTER_MARKERS = ("solstice-footer", "footer-eclipse-foundation", "footer-useful-links",
