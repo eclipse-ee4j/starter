@@ -8,7 +8,7 @@
     </context-param>
     <context-param>
         <param-name>jakarta.faces.FACELETS_BUFFER_SIZE</param-name>
-        <param-value>65535</param-value>
+        <param-value>1048576</param-value>
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
