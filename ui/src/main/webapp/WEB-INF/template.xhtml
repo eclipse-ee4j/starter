@@ -38,7 +38,7 @@
 </h:head>
 <h:body styleClass="starter">
     <f:view>
-        <ui:include src="./topbar.xhtml"/>
+        <h:outputText escape="false" value="#{siteBranding.topbar}"/>
         <header class="header-wrapper header-secondary-bg-img header-default-bg-img"
                 id="header-wrapper">
             <div class="jumbotron featured-jumbotron featured-jumbotron-default margin-bottom-0">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </main>
-        <ui:include src="./footer.xhtml"/>
+        <h:outputText escape="false" value="#{siteBranding.footer}"/>
         <script src="https://jakarta.ee/js/solstice.v2.js"></script>
     </f:view>
 </h:body>

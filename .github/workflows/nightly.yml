@@ -6,6 +6,35 @@ on:
     workflow_dispatch:
 
 jobs:
+    sync-site-branding:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/checkout@v5
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.x"
+
+            - name: Fetch site branding from jakarta.ee
+              run: |
+                  python3 -m pip install --quiet html5lib lxml
+                  python3 ui/scripts/fetch-site-branding.py
+
+            - name: Commit and push if changed
+              run: |
+                  if git diff --quiet ui/src/main/webapp/site-branding/; then
+                      echo "No site branding changes."
+                      exit 0
+                  fi
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add ui/src/main/webapp/site-branding/
+                  git commit -m "Sync site branding from jakarta.ee"
+                  git push
+
     build-archetype:
         runs-on: ubuntu-latest
         steps:
