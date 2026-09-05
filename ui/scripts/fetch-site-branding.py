@@ -19,6 +19,8 @@ import html5lib
 from lxml import etree
 
 SOURCE_URL = "https://jakarta.ee/"
+# jakarta.ee's CDN blocks the default Python-urllib User-Agent with 403.
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
 OUT_DIR = pathlib.Path(__file__).resolve().parent.parent / "src" / "main" / "resources" / "site-branding"
 
 TOPBAR_MARKERS = ("toolbar-container-wrapper", "navbar-wrapper", "header-row", "Become a member")
@@ -62,7 +64,8 @@ def verify(name: str, html: str, markers: tuple[str, ...]) -> None:
 
 def main() -> None:
     print(f"Fetching {SOURCE_URL} ...", file=sys.stderr)
-    with urllib.request.urlopen(SOURCE_URL) as response:
+    request = urllib.request.Request(SOURCE_URL, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(request) as response:
         source_html = response.read().decode("utf-8")
 
     topbar_html, footer_html = extract(source_html)
